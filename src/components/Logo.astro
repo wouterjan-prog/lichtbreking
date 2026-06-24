@@ -1,0 +1,55 @@
+---
+// Lichtbreking logo — inline SVG, schaalt scherp mee en is met CSS te kleuren.
+// Gebruik: <Logo /> of <Logo size={48} /> of <Logo text={false} /> (alleen beeldmerk)
+export interface Props {
+  size?: number;        // hoogte van het beeldmerk in px
+  text?: boolean;       // woordmerk "lichtbreking" tonen
+  class?: string;
+}
+const { size = 36, text = true, class: className = "" } = Astro.props;
+// uniek gradient-id zodat je 'm meerdere keren op één pagina kunt gebruiken
+const uid = "lb-" + Math.random().toString(36).slice(2, 8);
+const path =
+  "M46.01 18.93 L15.99 71.07 Q12 78 20 78 L80 78 Q88 78 84.01 71.07 L53.99 18.93 Q50 12 46.01 18.93 Z";
+---
+
+<span class:list={["lb-logo", className]} style={`--lb-size:${size}px`}>
+  <svg viewBox="0 0 100 90" aria-label="lichtbreking" role="img">
+    <defs>
+      <linearGradient id={uid} x1="0" y1="12" x2="0" y2="78" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#ff5a4d" />
+        <stop offset="0.17" stop-color="#ff9a2e" />
+        <stop offset="0.33" stop-color="#ffd23e" />
+        <stop offset="0.5" stop-color="#46c95f" />
+        <stop offset="0.66" stop-color="#19b9c4" />
+        <stop offset="0.82" stop-color="#2f7cf0" />
+        <stop offset="1" stop-color="#9b4ddb" />
+      </linearGradient>
+    </defs>
+    <path d={path} fill={`url(#${uid})`} />
+  </svg>
+  {text && <span class="lb-word">lichtbreking</span>}
+</span>
+
+<style>
+  .lb-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42em;
+    /* woordmerk-kleur erft van color → met CSS te sturen */
+    color: #f4f3ef;
+  }
+  .lb-logo svg {
+    height: var(--lb-size);
+    width: auto;
+    display: block;
+  }
+  .lb-word {
+    font-family: "Schibsted Grotesk", system-ui, sans-serif;
+    font-weight: 300;
+    font-size: calc(var(--lb-size) * 0.78);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: currentColor;
+  }
+</style>

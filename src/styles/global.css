@@ -19,7 +19,7 @@
 
   /* Type */
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --mono: "SF Mono", ui-monospace, "Roboto Mono", Menlo, Consolas, monospace;
+  --mono: "Space Mono", "SF Mono", ui-monospace, "Roboto Mono", Menlo, Consolas, monospace;
 
   /* Glas — generieke variabelen, per modus overschreven */
   --glass-blur: 22px;
