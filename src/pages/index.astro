@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro';
+import CourseTeaser from '../components/CourseTeaser.astro';
+import Footer from '../components/Footer.astro';
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.lichtbreking.nl/#website',
+      url: 'https://www.lichtbreking.nl/',
+      name: 'Lichtbreking',
+      description: 'Cinematische drone-, foto- en videobeelden, plus de cursus De Vluchtfilmer.',
+      inLanguage: 'nl-NL',
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.lichtbreking.nl/#person',
+      name: 'Lichtbreking',
+      url: 'https://www.lichtbreking.nl/',
+      jobTitle: 'Drone- en videomaker',
+      description: 'Cinematische drone-, foto- en videobeelden.',
+      knowsAbout: ['Dronefotografie', 'Videografie', 'Luchtfotografie', 'Reisfotografie'],
+      areaServed: 'Nederland',
+    },
+  ],
+};
+---
+<Base
+  title="Lichtbreking — cinematische drone, foto & film"
+  description="Cinematische drone-, foto- en videobeelden, plus de gratis cursus De Vluchtfilmer. Waar licht breekt."
+  path="/"
+  jsonld={jsonld}
+>
+  <Nav active="werk" />
+  <main>
+    <Hero />
+    <Gallery />
+    <CourseTeaser />
+  </main>
+  <Footer />
+</Base>

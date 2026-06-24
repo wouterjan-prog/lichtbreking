@@ -1,0 +1,63 @@
+---
+import Seo from '../components/Seo.astro';
+import '../styles/global.css';
+
+const {
+  title = 'Lichtbreking — drone, foto & film',
+  description = 'Cinematische drone-, foto- en videobeelden, plus de cursus De Vluchtfilmer.',
+  path = '',
+  image = '/img/og.jpg',
+  type = 'website',
+  jsonld = null,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#050608" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+
+  <Seo title={title} description={description} path={path} image={image} type={type} jsonld={jsonld} />
+
+  <!-- Thema vóór paint: voorkomt flits. Default donker (cinematisch), tenzij bezoeker licht koos. -->
+  <script is:inline>
+    (function () {
+      try {
+        var s = localStorage.getItem('lb-theme');
+        if (s === 'light' || s === 'dark') document.documentElement.setAttribute('data-theme', s);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <slot />
+
+  <!-- Scroll-reveal + nav-state -->
+  <script is:inline>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+      }
+      // Nav krijgt 'scrolled' na de hero
+      var nav = document.querySelector('[data-nav]');
+      if (nav) {
+        var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+    })();
+  </script>
+</body>
+</html>

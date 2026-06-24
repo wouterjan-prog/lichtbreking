@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+<Base
+  title="Over — Lichtbreking"
+  description="Het verhaal achter Lichtbreking: één idee dat lens, drone en glas verbindt — de breking van licht."
+  path="/over/"
+>
+  <Nav active="over" />
+
+  <main class="about">
+    <section class="wrap a-hero">
+      <p class="eyebrow reveal">Over</p>
+      <h1 class="display reveal" style="font-size:clamp(2.4rem,6vw,4.6rem)">
+        Scherp zien,<br><span class="refract">mooi vastleggen</span>.
+      </h1>
+    </section>
+
+    <section class="wrap a-body">
+      <div class="a-col reveal">
+        <p class="lead">
+          Lichtbreking komt voort uit twee werelden die dichter bij elkaar liggen dan ze lijken:
+          het scherp leren zien, en het mooi vastleggen. Beide draaien om hetzelfde — het sturen van licht.
+        </p>
+        <p>
+          Een lens buigt licht zodat het samenkomt in een scherp beeld. Een drone vangt datzelfde licht,
+          honderd meter hoger. En glas — het materiaal van deze site — breekt licht in al zijn kleuren.
+          Dat is geen toeval, dat is de rode draad. Vandaar de naam.
+        </p>
+        <p>
+          Wat je hier vindt is het werk dat daaruit ontstaat: cinematische beelden uit de lucht en op
+          ooghoogte. De portfolio groeit met elke reis; de cursus
+          <a href="/cursus/" class="lnk">De Vluchtfilmer</a> deelt alles wat nodig is om zelf
+          cinematisch te leren vliegen en filmen.
+        </p>
+      </div>
+      <aside class="a-side reveal">
+        <div class="a-card glass">
+          <h3>Gereedschap</h3>
+          <ul>
+            <li><b>Drone</b><span>DJI Mini 5 Pro · RC 2</span></li>
+            <li><b>Camera</b><span>Sony ZV-E10 II</span></li>
+            <li><b>Montage</b><span>DaVinci Resolve</span></li>
+            <li><b>Werk</b><span>Drone, foto &amp; film</span></li>
+          </ul>
+          <div class="a-shine" aria-hidden="true"></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .a-hero { padding-top: 9rem; padding-bottom: 1rem; }
+  .a-body { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(2rem, 5vw, 4rem); padding-top: 1rem; align-items: start; }
+  .a-col p { margin-bottom: 1.3rem; color: var(--ink-soft); }
+  .a-col .lead { color: var(--ink); margin-bottom: 1.6rem; }
+  .lnk { border-bottom: 1.5px solid; padding-bottom: 1px; }
+  .a-card { position: relative; overflow: hidden; padding: 2rem; border-radius: var(--r-lg); }
+  .a-card h3 { font-size: 1rem; margin-bottom: 1.2rem; color: var(--on-glass); }
+  .a-card ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .a-card li { display: flex; flex-direction: column; }
+  .a-card b { font-size: .76rem; text-transform: uppercase; letter-spacing: .12em; color: var(--on-glass-dim); font-weight: 600; }
+  .a-card span { color: var(--on-glass); font-size: 1.02rem; }
+  .a-shine { position: absolute; inset: auto -20% -40% auto; width: 70%; height: 100%; background: var(--spectrum); filter: blur(70px); opacity: .2; mix-blend-mode: screen; }
+  @media (max-width: 760px) { .a-body { grid-template-columns: 1fr; } }
+</style>

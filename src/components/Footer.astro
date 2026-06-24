@@ -1,0 +1,46 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="ft">
+  <div class="ft-line" aria-hidden="true"></div>
+  <div class="wrap ft-grid">
+    <div class="ft-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Lichtbreking</span>
+      <p class="ft-tag">Licht laten breken — drone, foto &amp; film.</p>
+    </div>
+    <nav class="ft-nav" aria-label="Voettekst">
+      <a href="/">Werk</a>
+      <a href="/cursus/">Cursus</a>
+      <a href="/over/">Over</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <div class="ft-meta">
+      <span>© {year} Lichtbreking</span>
+      <span>Drone &amp; videoproductie</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ft { margin-top: 4rem; }
+  .ft-line { height: 2px; background: var(--spectrum); opacity: .8; }
+  .ft-grid {
+    display: grid; gap: 2rem;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    padding-block: 3.5rem 4.5rem;
+    align-items: start;
+  }
+  .ft-brand { display: flex; flex-direction: column; gap: .5rem; font-weight: 600; }
+  .ft-brand > span:not(.brand-mark) { font-size: 1.1rem; }
+  .brand-mark { width: 24px; height: 24px; border-radius: 8px; background: var(--spectrum); background-size: 160% 160%; }
+  .ft-tag { font-weight: 400; color: var(--ink-dim); font-size: .92rem; margin-top: .2rem; }
+  .ft-nav { display: flex; flex-direction: column; gap: .6rem; }
+  .ft-nav a { color: var(--ink-soft); font-size: .95rem; width: fit-content; }
+  .ft-nav a:hover { color: var(--ink); }
+  .ft-meta { display: flex; flex-direction: column; gap: .6rem; color: var(--ink-dim); font-size: .9rem; }
+  @media (max-width: 640px) {
+    .ft-grid { grid-template-columns: 1fr 1fr; }
+    .ft-brand { grid-column: 1 / -1; }
+  }
+</style>

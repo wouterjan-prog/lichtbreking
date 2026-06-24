@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+<Base
+  title="Contact — Lichtbreking"
+  description="Neem contact op met Lichtbreking voor drone- en videowerk, samenwerkingen of vragen over de cursus."
+  path="/contact/"
+>
+  <Nav active="contact" />
+
+  <main class="contact">
+    <section class="wrap co-hero">
+      <div class="co-prism" aria-hidden="true"></div>
+      <p class="eyebrow reveal">Contact</p>
+      <h1 class="display reveal" style="font-size:clamp(2.4rem,6vw,4.6rem)">
+        Laten we iets<br><span class="refract">moois maken</span>.
+      </h1>
+      <p class="lead reveal">
+        Een opdracht, een samenwerking, of gewoon een vraag over de cursus? Stuur gerust een bericht.
+      </p>
+
+      <div class="co-actions reveal">
+        <a href="mailto:hallo@lichtbreking.nl" class="btn btn-primary">hallo@lichtbreking.nl</a>
+      </div>
+
+      <div class="co-cards">
+        <div class="co-card glass reveal">
+          <span class="co-k">E-mail</span>
+          <a href="mailto:hallo@lichtbreking.nl">hallo@lichtbreking.nl</a>
+        </div>
+        <div class="co-card glass reveal">
+          <span class="co-k">Instagram</span>
+          <a href="#" aria-label="Instagram (link later toevoegen)">@lichtbreking</a>
+        </div>
+        <div class="co-card glass reveal">
+          <span class="co-k">Werkgebied</span>
+          <span>Nederland &amp; op reis</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .co-hero { position: relative; padding-top: 9rem; overflow: hidden; }
+  .co-prism { position: absolute; top: -10%; left: -10%; width: 50%; height: 70%; background: var(--spectrum); filter: blur(100px); opacity: .18; border-radius: 50%; mix-blend-mode: screen; }
+  .co-hero .display { margin: 1.2rem 0 1.4rem; }
+  .co-actions { margin: 2rem 0 3rem; }
+  .co-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .co-card { padding: 1.5rem; border-radius: var(--r); display: flex; flex-direction: column; gap: .4rem; }
+  .co-k { font-size: .74rem; text-transform: uppercase; letter-spacing: .14em; color: var(--on-glass-dim); font-weight: 600; }
+  .co-card a, .co-card span:not(.co-k) { color: var(--on-glass); font-size: 1.05rem; }
+  .co-card a:hover { color: var(--ink); }
+  @media (max-width: 700px) { .co-cards { grid-template-columns: 1fr; } }
+</style>
