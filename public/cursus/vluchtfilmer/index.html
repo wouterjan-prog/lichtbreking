@@ -382,6 +382,34 @@
     .shot-photo figcaption .cap-k{color:var(--rust-deep) !important}
   }
 </style>
+
+<!-- ===== Lichtbreking — nieuwe huisstijl over de cursus (re-skin) ===== -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png" />
+<meta name="theme-color" content="#08080A" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style id="lb-skin">
+  :root{
+    --paper:#08080A; --paper2:#0E0F12; --card:#111114;
+    --ink:#F4F3EF; --ink-soft:#C9C8C2; --ink-dim:#9A9BA1;
+    --teal:#7FB4D6; --teal-deep:#9CC6E2;     /* accent -> sky */
+    --rust:#FF9A2E; --rust-deep:#FFB85C;      /* warm accent */
+    --green:#46C95F; --line:rgba(255,255,255,.12); --line-soft:rgba(255,255,255,.07);
+    --hero-ink:#F4EFE4;
+    --mono:"Space Mono", ui-monospace, "SF Mono", "Roboto Mono", monospace;
+    --serif:-apple-system,"SF Pro Display","Schibsted Grotesk",system-ui,sans-serif;
+  }
+  body{ background:#08080A !important; color:var(--ink-soft); }
+  .topbar{ background:rgba(16,17,20,.72) !important; border-bottom:1px solid rgba(255,255,255,.10) !important; }
+  .topbar .brand{ color:var(--rust); }
+  ::selection{ background:#FF9A2E; color:#08080A; }
+  .tbox.r{ background:#FF9A2E !important; color:#08080A !important; }
+  .progress-fill{ background:linear-gradient(90deg,#FF4D4D,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB) !important; }
+  a:focus-visible, button:focus-visible{ outline:2px solid #7FB4D6; outline-offset:3px; }
+</style>
 </head>
 <body>
 <header class="hero">
