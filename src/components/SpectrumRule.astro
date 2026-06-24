@@ -1,0 +1,8 @@
+---
+/* SpectrumRule.astro — de breeklijn. Props: width, thickness. */
+const { width = "100%", thickness = 2 } = Astro.props;
+---
+<div class="lb-spectrum-rule" style={`width:${width};height:${thickness}px`}></div>
+<style>
+  .lb-spectrum-rule { background: var(--lb-breakline); border-radius: 2px; }
+</style>

@@ -1,0 +1,129 @@
+---
+/* GlassNav.astro — zwevende glas-navigatie met thema-toggle, scroll-staat,
+   actieve link en mobiel menu. */
+import Logo from "./Logo.astro";
+const { active = "" } = Astro.props;
+const items = [
+  { label: "Werk", href: "/werk/", id: "werk" },
+  { label: "Cursus", href: "/cursussen/", id: "cursussen" },
+  { label: "Over", href: "/over/", id: "over" },
+  { label: "Contact", href: "/contact/", id: "contact" },
+];
+---
+<header class="lb-nav-shell" data-lb-nav>
+  <nav class="lb-glass lb-nav" aria-label="Hoofdnavigatie">
+    <a href="/" class="lb-nav__brand" aria-label="Lichtbreking — home"><Logo size={26} /></a>
+
+    <button class="lb-nav__burger" id="lb-burger" aria-label="Menu" aria-expanded="false" aria-controls="lb-nav-links">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="lb-nav__links" id="lb-nav-links">
+      {items.map((it) => (
+        <a href={it.href} class={active === it.id ? "on" : ""} aria-current={active === it.id ? "page" : undefined}>{it.label}</a>
+      ))}
+      <a class="lb-nav__cta" href="/showreel/">Showreel</a>
+      <button class="lb-nav__theme" id="lb-theme-toggle" aria-label="Wissel licht/donker" title="Licht / donker">
+        <svg class="ic-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .lb-nav-shell {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    padding: 18px var(--lb-gutter) 0; pointer-events: none;
+  }
+  .lb-nav {
+    pointer-events: auto; position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: var(--lb-maxw); margin: 0 auto;
+    border-radius: 20px; padding: 12px 14px 12px 20px;
+    color: #fff; /* boven de hero: wit */
+    transition: background var(--lb-dur) var(--lb-ease), box-shadow var(--lb-dur) var(--lb-ease), color var(--lb-dur) var(--lb-ease);
+  }
+  /* bij scroll: effen glas + thema-tekstkleur */
+  .lb-nav-shell.scrolled .lb-nav {
+    background: var(--lb-glass-solid);
+    border-color: var(--lb-glass-solid-border);
+    color: var(--lb-bone);
+    box-shadow: var(--lb-shadow-float);
+  }
+  .lb-nav__brand { display: inline-flex; align-items: center; }
+  .lb-nav__links { display: flex; align-items: center; gap: 24px; font-size: 15px; }
+  .lb-nav__links > a { color: inherit; opacity: .82; transition: opacity .3s var(--lb-ease); }
+  .lb-nav__links > a:hover, .lb-nav__links > a.on { opacity: 1; }
+  .lb-nav__cta {
+    background: rgba(255,255,255,.92); color: #16171b; font-weight: 500;
+    padding: 9px 18px; border-radius: var(--lb-r-pill); opacity: 1 !important;
+  }
+  .lb-nav__theme {
+    display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,.14); color: inherit; border: 1px solid rgba(255,255,255,.2); cursor: pointer;
+  }
+  .lb-nav-shell.scrolled .lb-nav__theme { background: rgba(127,127,140,.16); border-color: var(--lb-line); }
+  .ic-moon { display: none; }
+  :root[data-theme="dark"] .ic-sun { display: none; }
+  :root[data-theme="dark"] .ic-moon { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .ic-sun { display: none; }
+    :root:not([data-theme]) .ic-moon { display: block; }
+  }
+  /* burger */
+  .lb-nav__burger { display: none; flex-direction: column; gap: 4px; width: 38px; height: 36px;
+    background: none; border: 0; cursor: pointer; padding: 9px 8px; }
+  .lb-nav__burger span { height: 2px; width: 100%; background: currentColor; border-radius: 2px; transition: .3s var(--lb-ease); }
+  .lb-nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .lb-nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .lb-nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  @media (max-width: 720px) {
+    .lb-nav__burger { display: flex; }
+    .lb-nav__links {
+      position: absolute; top: calc(100% + 10px); right: 0; left: 0;
+      flex-direction: column; align-items: stretch; gap: 6px; padding: 14px;
+      border-radius: 18px; background: var(--lb-glass-solid);
+      border: 1px solid var(--lb-glass-solid-border); color: var(--lb-bone);
+      -webkit-backdrop-filter: var(--lb-glass-blur); backdrop-filter: var(--lb-glass-blur);
+      box-shadow: var(--lb-shadow-float);
+      opacity: 0; transform: translateY(-8px); pointer-events: none; transition: .3s var(--lb-ease);
+    }
+    .lb-nav__links.open { opacity: 1; transform: none; pointer-events: auto; }
+    .lb-nav__links > a { opacity: 1; padding: 10px 12px; border-radius: 10px; }
+    .lb-nav__links > a.on { background: rgba(127,127,140,.14); }
+    .lb-nav__cta { text-align: center; }
+    .lb-nav__theme { margin-top: 4px; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var shell = document.querySelector('[data-lb-nav]');
+    if (shell) {
+      var onScroll = function () { shell.classList.toggle('scrolled', window.scrollY > 40); };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+    var burger = document.getElementById('lb-burger');
+    var links = document.getElementById('lb-nav-links');
+    if (burger && links) {
+      burger.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+    var toggle = document.getElementById('lb-theme-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var root = document.documentElement;
+        var cur = root.getAttribute('data-theme');
+        if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('lb-theme', next); } catch (e) {}
+      });
+    }
+  })();
+</script>

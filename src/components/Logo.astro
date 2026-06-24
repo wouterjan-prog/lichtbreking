@@ -1,55 +1,28 @@
 ---
-// Lichtbreking logo — inline SVG, schaalt scherp mee en is met CSS te kleuren.
-// Gebruik: <Logo /> of <Logo size={48} /> of <Logo text={false} /> (alleen beeldmerk)
-export interface Props {
-  size?: number;        // hoogte van het beeldmerk in px
-  text?: boolean;       // woordmerk "lichtbreking" tonen
-  class?: string;
-}
-const { size = 36, text = true, class: className = "" } = Astro.props;
-// uniek gradient-id zodat je 'm meerdere keren op één pagina kunt gebruiken
+/* Logo.astro — prisma-beeldmerk (inline SVG) + woordmerk. Woordmerk erft `color`. */
+export interface Props { size?: number; text?: boolean; class?: string; }
+const { size = 30, text = true, class: className = "" } = Astro.props;
 const uid = "lb-" + Math.random().toString(36).slice(2, 8);
-const path =
-  "M46.01 18.93 L15.99 71.07 Q12 78 20 78 L80 78 Q88 78 84.01 71.07 L53.99 18.93 Q50 12 46.01 18.93 Z";
+const path = "M46.01 23.93 L15.99 76.07 Q12 83 20 83 L80 83 Q88 83 84.01 76.07 L53.99 23.93 Q50 17 46.01 23.93 Z";
+const stops = [["0","#FF4D4D"],["0.18","#FF9A2E"],["0.36","#FFD23E"],["0.54","#46C95F"],["0.7","#2FB8C4"],["0.85","#2F7CF0"],["1","#9B4DDB"]];
 ---
-
-<span class:list={["lb-logo", className]} style={`--lb-size:${size}px`}>
-  <svg viewBox="0 0 100 90" aria-label="lichtbreking" role="img">
+<span class:list={["lb-logo", className]} style={`--s:${size}px`}>
+  <svg viewBox="0 0 100 100" role="img" aria-label="lichtbreking">
     <defs>
-      <linearGradient id={uid} x1="0" y1="12" x2="0" y2="78" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#ff5a4d" />
-        <stop offset="0.17" stop-color="#ff9a2e" />
-        <stop offset="0.33" stop-color="#ffd23e" />
-        <stop offset="0.5" stop-color="#46c95f" />
-        <stop offset="0.66" stop-color="#19b9c4" />
-        <stop offset="0.82" stop-color="#2f7cf0" />
-        <stop offset="1" stop-color="#9b4ddb" />
+      <linearGradient id={uid} x1="0" y1="17" x2="0" y2="83" gradientUnits="userSpaceOnUse">
+        {stops.map(([o, c]) => <stop offset={o} stop-color={c} />)}
       </linearGradient>
     </defs>
     <path d={path} fill={`url(#${uid})`} />
   </svg>
   {text && <span class="lb-word">lichtbreking</span>}
 </span>
-
 <style>
-  .lb-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.42em;
-    /* woordmerk-kleur erft van color → met CSS te sturen */
-    color: #f4f3ef;
-  }
-  .lb-logo svg {
-    height: var(--lb-size);
-    width: auto;
-    display: block;
-  }
+  .lb-logo { display: inline-flex; align-items: center; gap: .42em; color: currentColor; }
+  .lb-logo svg { height: var(--s); width: auto; display: block; }
   .lb-word {
-    font-family: "Schibsted Grotesk", system-ui, sans-serif;
-    font-weight: 300;
-    font-size: calc(var(--lb-size) * 0.78);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    color: currentColor;
+    font-family: var(--lb-font-display, -apple-system, system-ui, sans-serif);
+    font-weight: 500; font-size: calc(var(--s) * 0.86);
+    letter-spacing: -.03em; line-height: 1; color: currentColor;
   }
 </style>

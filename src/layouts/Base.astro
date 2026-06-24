@@ -1,39 +1,15 @@
 ---
-import Seo from '../components/Seo.astro';
+import BaseHead from '../components/BaseHead.astro';
+import '../styles/tokens.css';
 import '../styles/global.css';
-
-const {
-  title = 'Lichtbreking — drone, foto & film',
-  description = 'Cinematische drone-, foto- en videobeelden, plus de cursus De Vluchtfilmer.',
-  path = '',
-  image = '/img/og.jpg',
-  type = 'website',
-  jsonld = null,
-} = Astro.props;
+const { title, description, path = '', image, type, jsonld } = Astro.props;
+const canonical = path ? new URL(path, 'https://www.lichtbreking.nl').href : undefined;
 ---
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#050608" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png" />
-  <meta name="generator" content={Astro.generator} />
-
-  <!-- Merk-typografie: woordmerk (Schibsted Grotesk) + mono-accenten (Space Mono) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@300;400;500&family=Space+Mono&display=swap"
-    rel="stylesheet"
-  />
-
-  <Seo title={title} description={description} path={path} image={image} type={type} jsonld={jsonld} />
-
-  <!-- Thema vóór paint: voorkomt flits. Default donker (cinematisch), tenzij bezoeker licht koos. -->
+  <BaseHead title={title} description={description} image={image} type={type} canonical={canonical} jsonld={jsonld} />
+  <!-- Thema vóór paint: voorkomt flits. Standaard donker, tenzij bezoeker licht koos. -->
   <script is:inline>
     (function () {
       try {
@@ -45,28 +21,21 @@ const {
 </head>
 <body>
   <slot />
-
-  <!-- Scroll-reveal + nav-state -->
+  <!-- Reveal-on-scroll -->
   <script is:inline>
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) {
-        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
-      } else {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-          });
-        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+      var els = document.querySelectorAll('.lb-reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
       }
-      // Nav krijgt 'scrolled' na de hero
-      var nav = document.querySelector('[data-nav]');
-      if (nav) {
-        var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
     })();
   </script>
 </body>

@@ -1,46 +1,50 @@
 ---
+import Logo from "./Logo.astro";
+import SpectrumRule from "./SpectrumRule.astro";
 const year = new Date().getFullYear();
+const cols = [
+  { h: "Site", links: [["Werk","/werk/"],["Cursussen","/cursussen/"],["Showreel","/showreel/"]] },
+  { h: "Meer", links: [["Over","/over/"],["Contact","/contact/"]] },
+];
 ---
-<footer class="ft">
-  <div class="ft-line" aria-hidden="true"></div>
-  <div class="wrap ft-grid">
-    <div class="ft-brand">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span>Lichtbreking</span>
-      <p class="ft-tag">Licht laten breken — drone, foto &amp; film.</p>
+<footer class="lb-foot">
+  <div class="lb-container">
+    <SpectrumRule />
+    <div class="lb-foot__top">
+      <div class="lb-foot__brand">
+        <a href="/" aria-label="Lichtbreking — home"><Logo size={30} /></a>
+        <p class="lb-muted">Waar licht breekt — cinematische drone, foto &amp; film.</p>
+        <a href="mailto:hallo@lichtbreking.nl" class="lb-foot__mail">hallo@lichtbreking.nl</a>
+      </div>
+      <nav class="lb-foot__cols" aria-label="Footer">
+        {cols.map((c) => (
+          <div class="lb-foot__col">
+            <span class="lb-label">{c.h}</span>
+            <ul>{c.links.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>
+          </div>
+        ))}
+      </nav>
     </div>
-    <nav class="ft-nav" aria-label="Voettekst">
-      <a href="/">Werk</a>
-      <a href="/cursus/">Cursus</a>
-      <a href="/over/">Over</a>
-      <a href="/contact/">Contact</a>
-    </nav>
-    <div class="ft-meta">
-      <span>© {year} Lichtbreking</span>
-      <span>Drone &amp; videoproductie</span>
+    <div class="lb-foot__bottom">
+      <span class="lb-label">© {year} Lichtbreking</span>
+      <span class="lb-label">Drone · foto · film · NL</span>
     </div>
   </div>
 </footer>
-
 <style>
-  .ft { margin-top: 4rem; }
-  .ft-line { height: 2px; background: var(--spectrum); opacity: .8; }
-  .ft-grid {
-    display: grid; gap: 2rem;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    padding-block: 3.5rem 4.5rem;
-    align-items: start;
-  }
-  .ft-brand { display: flex; flex-direction: column; gap: .5rem; font-weight: 600; }
-  .ft-brand > span:not(.brand-mark) { font-size: 1.1rem; }
-  .brand-mark { width: 24px; height: 24px; border-radius: 8px; background: var(--spectrum); background-size: 160% 160%; }
-  .ft-tag { font-weight: 400; color: var(--ink-dim); font-size: .92rem; margin-top: .2rem; }
-  .ft-nav { display: flex; flex-direction: column; gap: .6rem; }
-  .ft-nav a { color: var(--ink-soft); font-size: .95rem; width: fit-content; }
-  .ft-nav a:hover { color: var(--ink); }
-  .ft-meta { display: flex; flex-direction: column; gap: .6rem; color: var(--ink-dim); font-size: .9rem; }
-  @media (max-width: 640px) {
-    .ft-grid { grid-template-columns: 1fr 1fr; }
-    .ft-brand { grid-column: 1 / -1; }
+  .lb-foot { background: var(--lb-ink); border-top: 1px solid var(--lb-line); padding: clamp(48px,6vw,80px) 0 40px; margin-top: 0; }
+  .lb-foot .lb-container > :global(.lb-spectrum-rule) { margin-bottom: 40px; }
+  .lb-foot__top { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+  .lb-foot__brand p { margin: 16px 0 12px; max-width: 36ch; }
+  .lb-foot__mail { color: var(--lb-bone); border-bottom: 1.5px solid var(--lb-mist); padding-bottom: 2px; font-size: var(--lb-small); }
+  .lb-foot__cols { display: flex; gap: 56px; justify-content: flex-end; }
+  .lb-foot__col ul { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .lb-foot__col a { color: var(--lb-mist); font-size: var(--lb-small); transition: color .3s var(--lb-ease); }
+  .lb-foot__col a:hover { color: var(--lb-bone); }
+  .lb-foot__bottom { display: flex; justify-content: space-between; gap: 16px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--lb-line); }
+  @media (max-width: 720px) {
+    .lb-foot__top { grid-template-columns: 1fr; gap: 28px; }
+    .lb-foot__cols { justify-content: flex-start; gap: 40px; }
+    .lb-foot__bottom { flex-direction: column; gap: 8px; }
   }
 </style>
