@@ -4,6 +4,7 @@ import GlassNav from '../../../components/GlassNav.astro';
 import Footer from '../../../components/Footer.astro';
 import SpectrumRule from '../../../components/SpectrumRule.astro';
 import { courses, getLessons } from '../../../data/courses.js';
+import '../../../styles/course.css';
 
 export function getStaticPaths() {
   return courses.map((c) => ({ params: { slug: c.slug }, props: { course: c } }));
@@ -68,15 +69,17 @@ const jsonld = {
             ))}
           </div>
         ))}
-        {course.veldgids && (
+        {course.naslag && course.naslag.length > 0 && (
           <div class="part">
-            <div class="part-head"><span class="lb-label">Naslag</span><h2 class="lb-display-m">Veldgids</h2></div>
-            <a href={`/cursus/${course.slug}/les/veldgids/`} class="row" data-n="veldgids">
-              <span class="row-status" aria-hidden="true"></span>
-              <span class="row-num lb-label">★</span>
-              <span class="row-main"><span class="row-title">{course.veldgids.title}</span><span class="row-tag lb-label">Alle tabellen op één plek</span></span>
-              <span class="row-min lb-label">{course.veldgids.min} min</span>
-            </a>
+            <div class="part-head"><span class="lb-label">Naslag</span><h2 class="lb-display-m">Naslag &amp; veldgids</h2></div>
+            {course.naslag.map((r) => (
+              <a href={`/cursus/${course.slug}/les/${r.key}/`} class="row" data-n={r.key}>
+                <span class="row-status" aria-hidden="true"></span>
+                <span class="row-num lb-label">★</span>
+                <span class="row-main"><span class="row-title">{r.title}</span><span class="row-tag lb-label">Naslag om op te zoeken</span></span>
+                <span class="row-min lb-label">{r.min} min</span>
+              </a>
+            ))}
           </div>
         )}
       </div>
@@ -134,9 +137,9 @@ const jsonld = {
     rows.forEach(function (r) {
       var n = r.getAttribute('data-n');
       if (done.indexOf(n) !== -1) r.classList.add('done');
-      else if (!firstUndone && n !== 'veldgids') firstUndone = n;
+      else if (!firstUndone && /^\d+$/.test(n)) firstUndone = n;
     });
-    var moduleDone = done.filter(function (x) { return x !== 'veldgids'; }).length;
+    var moduleDone = done.filter(function (x) { return /^\d+$/.test(x); }).length;
     var pct = total ? Math.round(moduleDone / total * 100) : 0;
     var fill = document.getElementById('progFill'); if (fill) fill.style.width = pct + '%';
     var label = document.getElementById('progLabel'); if (label) label.textContent = moduleDone + ' / ' + total;

@@ -45,7 +45,7 @@ const isRef = les.kind === 'reference';
       <article class="lesson">
         <header class="les-head">
           <a href={`/cursus/${course.slug}/`} class="back-m lb-label">← {course.title}</a>
-          <span class="lb-label lb-label--sky">{isRef ? 'Naslag' : `Module ${les.n} / ${moduleTotal}`} · {les.tag}</span>
+          <span class="lb-label lb-label--sky">{isRef ? 'Naslaghoofdstuk' : `Module ${les.n} / ${moduleTotal} · ${les.tag}`}</span>
           <h1 class="lb-display-m" set:html={les.title} />
           <span class="lb-label les-min">{les.min} min lezen</span>
           <div class="hr"></div>
@@ -121,7 +121,7 @@ const isRef = les.kind === 'reference';
       document.querySelectorAll('.side-item').forEach(function (it) {
         it.classList.toggle('done', done.indexOf(it.getAttribute('data-n')) !== -1);
       });
-      var md = done.filter(function (x) { return x !== 'veldgids'; }).length;
+      var md = done.filter(function (x) { return /^\d+$/.test(x); }).length;
       var f = document.getElementById('sideFill'); if (f) f.style.width = (total ? Math.round(md / total * 100) : 0) + '%';
       var btn = document.getElementById('doneBtn');
       if (btn) {

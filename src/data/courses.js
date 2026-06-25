@@ -1,18 +1,17 @@
 import grondfilmer from './grondfilmer.json';
+import vluchtfilmer from './vluchtfilmer.json';
 
-// Cursussen die zijn omgezet naar de Curriculum/Les-structuur.
-export const courses = [grondfilmer];
+export const courses = [vluchtfilmer, grondfilmer];
 export const getCourse = (slug) => courses.find((c) => c.slug === slug);
 
-// Lessen = modules + (optioneel) de veldgids als naslagles.
+// Lessen = modules + naslaghoofdstukken (referentie).
 export function getLessons(course) {
   const lessons = course.modules.map((m) => ({ ...m, key: String(m.n), kind: 'module' }));
-  if (course.veldgids) {
+  (course.naslag || []).forEach((r, i) => {
     lessons.push({
-      key: 'veldgids', kind: 'reference', n: lessons.length + 1,
-      tag: 'Naslag', title: course.veldgids.title, min: course.veldgids.min,
-      part: 'Naslag', body: course.veldgids.body,
+      key: r.key, kind: 'reference', n: course.modules.length + i + 1,
+      tag: 'Naslaghoofdstuk', title: r.title, min: r.min, part: 'Naslag', body: r.body,
     });
-  }
+  });
   return lessons;
 }
