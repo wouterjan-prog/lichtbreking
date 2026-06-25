@@ -179,7 +179,7 @@
 .course-body .tnode{display:flex;flex-direction:column;align-items:center;gap:.35rem}
 .course-body .tbox{background:var(--paper);border:1.5px solid var(--line);border-radius:9px;padding:.6rem 1rem;font-size:.94rem;text-align:center;max-width:340px}
 .course-body .tbox.q{border-color:var(--teal);color:var(--teal-deep);font-weight:600}
-.course-body .tbox.a{background:#143b43;color:#eef7f9;border-color:#9CC6E2;font-family:var(--mono);font-size:.88rem}
+.course-body .tbox.a{background:#143b43;color:#eef7f9;border-color:var(--teal-deep);font-family:var(--mono);font-size:.88rem}
 .course-body .tbox.r{background:var(--rust);color:#fff;border-color:var(--rust);font-weight:700}
 .course-body .tarrow{color:var(--ink-dim);font-size:1.1rem;line-height:1}
 .course-body .tbranch{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;width:100%}
@@ -187,7 +187,7 @@
 .course-body .recipe{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--rust);border-radius:10px;padding:1.3rem 1.5rem;margin:1.1rem 0;break-inside:avoid}
 .course-body .recipe h5{font-family:var(--serif);font-size:1.3rem;color:var(--ink);font-weight:400;margin-bottom:.2rem}
 .course-body .recipe .r-diff{display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;border-radius:20px;font-weight:700;margin-bottom:.8rem}
-.course-body .r-diff.d1{background:rgba(70,201,95,.10);color:#6FD884}
+.course-body .r-diff.d1{background:rgba(70,201,95,.10);color:var(--green-deep)}
 .course-body .r-diff.d2{background:rgba(255,154,46,.10);color:#a04a20}
 .course-body .r-diff.d3{background:rgba(255,77,77,.12);color:#9a2f2f}
 .course-body .recipe .r-grid{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.93rem}
@@ -238,3 +238,15 @@
 .course-body .shot-photo .verdict{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.3rem .7rem;color:#fff}
 .course-body .shot-photo.good .verdict{background:var(--green)}
 .course-body .shot-photo.bad .verdict{background:var(--rust)}
+
+/* Lichte modus: donkerdere accent-tinten zodat tekst op lichte vlakken leesbaar blijft */
+:root[data-theme="light"] .course-body{
+  --teal-deep:#1d6285; --olive-deep:#1d6285; --rust-deep:#9a5512;
+  --amber-deep:#9a5512; --green-deep:#2f7a45;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme]) .course-body{
+    --teal-deep:#1d6285; --olive-deep:#1d6285; --rust-deep:#9a5512;
+    --amber-deep:#9a5512; --green-deep:#2f7a45;
+  }
+}
