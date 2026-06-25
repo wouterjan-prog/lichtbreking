@@ -11,7 +11,7 @@ const items = [
 ];
 ---
 <header class="lb-nav-shell" data-lb-nav>
-  <nav class="lb-glass lb-nav" aria-label="Hoofdnavigatie">
+  <nav class="lb-nav" aria-label="Hoofdnavigatie">
     <a href="/" class="lb-nav__brand" aria-label="Lichtbreking — home"><Logo size={26} /></a>
 
     <button class="lb-nav__burger" id="lb-burger" aria-label="Menu" aria-expanded="false" aria-controls="lb-nav-links">
@@ -38,30 +38,50 @@ const items = [
   }
   .lb-nav {
     pointer-events: auto; position: relative;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; flex-wrap: nowrap; gap: 18px;
     max-width: var(--lb-maxw); margin: 0 auto;
-    border-radius: 20px; padding: 12px 14px 12px 20px;
+    border-radius: 26px; padding: 11px 12px 11px 20px;
     color: #fff; /* boven de hero: wit */
+    background: rgba(255,255,255,.12);
+    -webkit-backdrop-filter: blur(18px) saturate(185%);
+    backdrop-filter: blur(18px) saturate(185%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 10px 34px rgba(0,0,0,.22);
     transition: background var(--lb-dur) var(--lb-ease), box-shadow var(--lb-dur) var(--lb-ease), color var(--lb-dur) var(--lb-ease);
   }
-  /* bij scroll: effen glas + thema-tekstkleur */
+  /* refractie: spectrum-prisma rand (licht breekt in het glas) */
+  .lb-nav::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
+    background: linear-gradient(90deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: .9; pointer-events: none;
+  }
+  /* bij scroll: dichter glas + thema-tekstkleur, rand iets gedimd */
   .lb-nav-shell.scrolled .lb-nav {
     background: var(--lb-glass-solid);
-    border-color: var(--lb-glass-solid-border);
     color: var(--lb-bone);
-    box-shadow: var(--lb-shadow-float);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 10px 34px rgba(0,0,0,.28);
   }
-  .lb-nav__brand { display: inline-flex; align-items: center; }
-  .lb-nav__links { display: flex; align-items: center; gap: 24px; font-size: 15px; }
-  .lb-nav__links > a { color: inherit; opacity: .82; transition: opacity .3s var(--lb-ease); }
+  .lb-nav-shell.scrolled .lb-nav::after { opacity: .65; }
+
+  .lb-nav__brand { display: inline-flex; align-items: center; flex: 0 0 auto; }
+  .lb-nav__links { display: flex; align-items: center; gap: 22px; font-size: 15px; margin-left: auto; min-width: 0; }
+  .lb-nav__links > a {
+    color: inherit; opacity: .9; white-space: nowrap; flex: 0 0 auto;
+    text-shadow: 0 1px 3px rgba(0,0,0,.28); transition: opacity .3s var(--lb-ease);
+  }
+  .lb-nav-shell.scrolled .lb-nav__links > a { text-shadow: none; }
   .lb-nav__links > a:hover, .lb-nav__links > a.on { opacity: 1; }
-  .lb-nav__cta {
-    background: rgba(255,255,255,.92); color: #16171b; font-weight: 500;
-    padding: 9px 18px; border-radius: var(--lb-r-pill); opacity: 1 !important;
+  /* CTA — altijd hoog contrast: bone-vlak + omgekeerde inkt-tekst */
+  .lb-nav .lb-nav__cta {
+    flex: 0 0 auto; white-space: nowrap; font-weight: 500;
+    background: var(--lb-bone); color: var(--lb-ink) !important;
+    padding: 9px 18px; border-radius: var(--lb-r-pill); opacity: 1; text-shadow: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
   }
   .lb-nav__theme {
-    display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
-    background: rgba(255,255,255,.14); color: inherit; border: 1px solid rgba(255,255,255,.2); cursor: pointer;
+    flex: 0 0 auto; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,.16); color: inherit; border: 1px solid rgba(255,255,255,.28); cursor: pointer;
   }
   .lb-nav-shell.scrolled .lb-nav__theme { background: rgba(127,127,140,.16); border-color: var(--lb-line); }
   .ic-moon { display: none; }
@@ -73,16 +93,16 @@ const items = [
   }
   /* burger */
   .lb-nav__burger { display: none; flex-direction: column; gap: 4px; width: 38px; height: 36px;
-    background: none; border: 0; cursor: pointer; padding: 9px 8px; }
+    margin-left: auto; background: none; border: 0; cursor: pointer; padding: 9px 8px; color: inherit; }
   .lb-nav__burger span { height: 2px; width: 100%; background: currentColor; border-radius: 2px; transition: .3s var(--lb-ease); }
   .lb-nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .lb-nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .lb-nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  @media (max-width: 720px) {
+  @media (max-width: 860px) {
     .lb-nav__burger { display: flex; }
     .lb-nav__links {
-      position: absolute; top: calc(100% + 10px); right: 0; left: 0;
+      position: absolute; top: calc(100% + 10px); right: 0; left: 0; margin-left: 0;
       flex-direction: column; align-items: stretch; gap: 6px; padding: 14px;
       border-radius: 18px; background: var(--lb-glass-solid);
       border: 1px solid var(--lb-glass-solid-border); color: var(--lb-bone);
