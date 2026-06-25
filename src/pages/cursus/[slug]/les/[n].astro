@@ -1,0 +1,144 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import GlassNav from '../../../../components/GlassNav.astro';
+import Footer from '../../../../components/Footer.astro';
+import { courses, getLessons } from '../../../../data/courses.js';
+import '../../../../styles/course.css';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const c of courses) {
+    const lessons = getLessons(c);
+    lessons.forEach((les, i) => {
+      paths.push({ params: { slug: c.slug, n: les.key }, props: { course: c, lessons, index: i } });
+    });
+  }
+  return paths;
+}
+const { course, lessons, index } = Astro.props;
+const les = lessons[index];
+const prev = index > 0 ? lessons[index - 1] : null;
+const next = index < lessons.length - 1 ? lessons[index + 1] : null;
+const moduleTotal = course.modules.length;
+const isRef = les.kind === 'reference';
+---
+<Base title={`${typeof les.title === 'string' ? les.title.replace(/<[^>]+>/g, '') : les.title} — ${course.title}`} description={course.lead} path={`/cursus/${course.slug}/les/${les.key}/`}>
+  <GlassNav active="cursussen" />
+  <main class="les" data-course={course.slug} data-key={course.storageKey} data-n={les.key} data-total={moduleTotal}>
+    <div class="les-wrap lb-container">
+      <!-- zijbalk -->
+      <aside class="side">
+        <a href={`/cursus/${course.slug}/`} class="side-top lb-label">← {course.title}</a>
+        <div class="side-prog"><div class="side-prog-fill" id="sideFill"></div></div>
+        <nav class="side-list">
+          {lessons.map((l) => (
+            <a href={`/cursus/${course.slug}/les/${l.key}/`} class:list={["side-item", { on: l.key === les.key }]} data-n={l.key}>
+              <span class="side-dot" aria-hidden="true"></span>
+              <span class="side-num lb-label">{l.kind === 'reference' ? '★' : String(l.n).padStart(2, '0')}</span>
+              <span class="side-title" set:html={l.title} />
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <!-- les -->
+      <article class="lesson">
+        <header class="les-head">
+          <a href={`/cursus/${course.slug}/`} class="back-m lb-label">← {course.title}</a>
+          <span class="lb-label lb-label--sky">{isRef ? 'Naslag' : `Module ${les.n} / ${moduleTotal}`} · {les.tag}</span>
+          <h1 class="lb-display-m" set:html={les.title} />
+          <span class="lb-label les-min">{les.min} min lezen</span>
+          <div class="hr"></div>
+        </header>
+
+        <div class="course-body" set:html={les.body} />
+
+        <div class="les-foot">
+          {!isRef && (
+            <button class="lb-btn done-btn" id="doneBtn">Markeer als afgerond</button>
+          )}
+          <div class="les-nav">
+            {prev ? <a href={`/cursus/${course.slug}/les/${prev.key}/`} class="ln ln-prev"><span class="lb-label">← Vorige</span><span set:html={prev.title} /></a> : <span />}
+            {next ? <a href={`/cursus/${course.slug}/les/${next.key}/`} class="ln ln-next"><span class="lb-label">Volgende →</span><span set:html={next.title} /></a>
+                  : <a href={`/cursus/${course.slug}/`} class="ln ln-next"><span class="lb-label">Klaar →</span><span>Terug naar overzicht</span></a>}
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .les-wrap { padding-top: 110px; padding-bottom: 90px; display: grid; grid-template-columns: 270px 1fr; gap: clamp(28px, 4vw, 60px); align-items: start; }
+  /* zijbalk */
+  .side { position: sticky; top: 96px; max-height: calc(100vh - 120px); overflow: auto; padding-right: 6px; }
+  .side-top { display: inline-block; color: var(--lb-mist); margin-bottom: 14px; }
+  .side-top:hover { color: var(--lb-bone); }
+  .side-prog { height: 4px; background: var(--lb-line); border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
+  .side-prog-fill { height: 100%; width: 0; background: var(--lb-spectrum); transition: width .5s var(--lb-ease); }
+  .side-list { display: flex; flex-direction: column; gap: 2px; }
+  .side-item { display: grid; grid-template-columns: 14px 24px 1fr; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 9px; color: var(--lb-mist); font-size: .9rem; transition: .2s var(--lb-ease); }
+  .side-item:hover { background: var(--lb-ink); color: var(--lb-bone); }
+  .side-item.on { background: var(--lb-ink); color: var(--lb-bone); }
+  .side-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--lb-line); }
+  .side-item.done .side-dot { background: var(--lb-green); border-color: var(--lb-green); }
+  .side-item.on .side-dot { border-color: var(--lb-sky); box-shadow: inset 0 0 0 3px var(--lb-sky); }
+  .side-num { color: inherit; opacity: .8; }
+  .side-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* les */
+  .lesson { max-width: 760px; min-width: 0; }
+  .back-m { display: none; color: var(--lb-mist); margin-bottom: 12px; }
+  .les-head h1 { margin: 10px 0 10px; }
+  .les-min { color: var(--lb-mist); }
+  .hr { height: 2px; background: var(--lb-breakline); margin: 22px 0 30px; max-width: 160px; }
+  .les-foot { margin-top: 50px; }
+  .done-btn.is-done { background: var(--lb-green); color: #062b12; }
+  .les-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--lb-line); }
+  .ln { display: flex; flex-direction: column; gap: 4px; color: var(--lb-bone); max-width: 46%; }
+  .ln-next { text-align: right; margin-left: auto; }
+  .ln span:last-child { color: var(--lb-mist); font-size: .95rem; }
+  .ln:hover span:last-child { color: var(--lb-bone); }
+
+  @media (max-width: 860px) {
+    .les-wrap { grid-template-columns: 1fr; }
+    .side { display: none; }
+    .back-m { display: inline-block; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var main = document.querySelector('.les'); if (!main) return;
+    var key = main.getAttribute('data-key');
+    var n = main.getAttribute('data-n');
+    var total = parseInt(main.getAttribute('data-total'), 10);
+    function get() { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { return []; } }
+    function set(a) { try { localStorage.setItem(key, JSON.stringify(a)); } catch (e) {} }
+    function render() {
+      var done = get();
+      document.querySelectorAll('.side-item').forEach(function (it) {
+        it.classList.toggle('done', done.indexOf(it.getAttribute('data-n')) !== -1);
+      });
+      var md = done.filter(function (x) { return x !== 'veldgids'; }).length;
+      var f = document.getElementById('sideFill'); if (f) f.style.width = (total ? Math.round(md / total * 100) : 0) + '%';
+      var btn = document.getElementById('doneBtn');
+      if (btn) {
+        var isDone = done.indexOf(n) !== -1;
+        btn.classList.toggle('is-done', isDone);
+        btn.textContent = isDone ? '✓ Afgerond' : 'Markeer als afgerond';
+      }
+    }
+    var btn = document.getElementById('doneBtn');
+    if (btn) btn.addEventListener('click', function () {
+      var done = get(); var i = done.indexOf(n);
+      if (i === -1) done.push(n); else done.splice(i, 1);
+      set(done); render();
+      if (done.indexOf(n) !== -1) {
+        var nx = document.querySelector('.ln-next'); if (nx && nx.getAttribute('href')) setTimeout(function () { window.location.href = nx.getAttribute('href'); }, 350);
+      }
+    });
+    render();
+  })();
+</script>

@@ -1,0 +1,155 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GlassNav from '../../../components/GlassNav.astro';
+import Footer from '../../../components/Footer.astro';
+import SpectrumRule from '../../../components/SpectrumRule.astro';
+import { courses, getLessons } from '../../../data/courses.js';
+
+export function getStaticPaths() {
+  return courses.map((c) => ({ params: { slug: c.slug }, props: { course: c } }));
+}
+const { course } = Astro.props;
+const lessons = getLessons(course);
+const total = course.modules.length;
+
+// groepeer modules per deel (in volgorde)
+const parts = [];
+for (const m of course.modules) {
+  let p = parts.find((x) => x.title === m.part);
+  if (!p) { p = { title: m.part, items: [] }; parts.push(p); }
+  p.items.push(m);
+}
+
+const jsonld = {
+  '@context': 'https://schema.org', '@type': 'Course', name: course.title, description: course.lead,
+  inLanguage: 'nl-NL', url: `https://www.lichtbreking.nl/cursus/${course.slug}/`,
+  provider: { '@type': 'Person', name: 'Lichtbreking', url: 'https://www.lichtbreking.nl/' }, isAccessibleForFree: true,
+};
+---
+<Base title={course.title} description={course.lead} path={`/cursus/${course.slug}/`} jsonld={jsonld}>
+  <GlassNav active="cursussen" />
+  <main class="cur" data-course={course.slug} data-key={course.storageKey} data-total={total}>
+    <section class="cur-hero lb-container">
+      <a href="/cursussen/" class="back lb-label">← Cursussen</a>
+      <span class="lb-label lb-label--sky">{course.kicker}</span>
+      <h1 class="lb-display-l">{course.title}</h1>
+      <p class="lb-lead">{course.lead}</p>
+      <div class="meta">
+        {course.meta.map(([k, v]) => <div class="meta__row"><span class="lb-label">{k}</span><span class="meta__v">{v}</span></div>)}
+      </div>
+      <div class="prog">
+        <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+        <span class="lb-label" id="progLabel">0 / {total}</span>
+        <button class="reset" id="resetBtn" hidden>Reset</button>
+      </div>
+      <div class="cur-cta">
+        <a href={`/cursus/${course.slug}/les/1/`} class="lb-btn" id="startBtn">Start de cursus</a>
+      </div>
+      <div class="rule"><SpectrumRule width="160px" thickness={3} /></div>
+    </section>
+
+    <section class="cur-body lb-container">
+      <div class="intro course-body" set:html={course.intro} />
+
+      <div class="modlist">
+        {parts.map((p, pi) => (
+          <div class="part">
+            <div class="part-head"><span class="lb-label">{`Deel 0${pi + 1}`}</span><h2 class="lb-display-m">{p.title}</h2></div>
+            {p.items.map((m) => (
+              <a href={`/cursus/${course.slug}/les/${m.n}/`} class="row" data-n={m.n}>
+                <span class="row-status" aria-hidden="true"></span>
+                <span class="row-num lb-label">{String(m.n).padStart(2, '0')}</span>
+                <span class="row-main">
+                  <span class="row-title" set:html={m.title} />
+                  <span class="row-tag lb-label">{m.tag}</span>
+                </span>
+                <span class="row-min lb-label">{m.min} min</span>
+              </a>
+            ))}
+          </div>
+        ))}
+        {course.veldgids && (
+          <div class="part">
+            <div class="part-head"><span class="lb-label">Naslag</span><h2 class="lb-display-m">Veldgids</h2></div>
+            <a href={`/cursus/${course.slug}/les/veldgids/`} class="row" data-n="veldgids">
+              <span class="row-status" aria-hidden="true"></span>
+              <span class="row-num lb-label">★</span>
+              <span class="row-main"><span class="row-title">{course.veldgids.title}</span><span class="row-tag lb-label">Alle tabellen op één plek</span></span>
+              <span class="row-min lb-label">{course.veldgids.min} min</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .cur-hero { padding-top: 120px; padding-bottom: 10px; }
+  .back { display: inline-block; color: var(--lb-mist); margin-bottom: 22px; }
+  .back:hover { color: var(--lb-bone); }
+  .cur-hero h1 { margin: 10px 0 16px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 14px 40px; margin: 26px 0 0; }
+  .meta__row { display: flex; flex-direction: column; gap: 4px; }
+  .meta__v { color: var(--lb-bone); }
+  .prog { display: flex; align-items: center; gap: 14px; margin: 30px 0 24px; max-width: 460px; }
+  .prog-track { flex: 1; height: 6px; background: var(--lb-line); border-radius: 6px; overflow: hidden; }
+  .prog-fill { height: 100%; width: 0; border-radius: 6px; background: var(--lb-spectrum); transition: width .5s var(--lb-ease); }
+  .reset { font-family: var(--lb-font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--lb-mist); background: none; border: 1px solid var(--lb-line); border-radius: 20px; padding: 5px 12px; cursor: pointer; }
+  .reset:hover { color: var(--lb-bone); }
+  .cur-cta { margin-bottom: 6px; }
+  .rule { margin-top: 30px; }
+
+  .cur-body { padding-top: 40px; padding-bottom: 100px; display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .intro { max-width: 70ch; margin-bottom: 30px; }
+  .modlist { display: flex; flex-direction: column; gap: 40px; }
+  .part-head { margin-bottom: 14px; }
+  .part-head h2 { margin-top: 6px; }
+  .row {
+    display: grid; grid-template-columns: 22px 34px 1fr auto; align-items: center; gap: 16px;
+    padding: 16px 4px; border-bottom: 1px solid var(--lb-line); transition: background .25s var(--lb-ease);
+  }
+  .row:hover { background: var(--lb-ink); }
+  .row-status { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--lb-line); }
+  .row.done .row-status { background: var(--lb-green); border-color: var(--lb-green); }
+  .row.current .row-status { border-color: var(--lb-sky); box-shadow: inset 0 0 0 3px var(--lb-sky); }
+  .row-num { color: var(--lb-mist); }
+  .row-main { display: flex; flex-direction: column; gap: 3px; }
+  .row-title { color: var(--lb-bone); font-size: 1.05rem; }
+  .row-tag { color: var(--lb-mist); }
+  .row-min { color: var(--lb-mist); white-space: nowrap; }
+  @media (max-width: 560px) { .row { grid-template-columns: 18px 28px 1fr; } .row-min { display: none; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var main = document.querySelector('.cur'); if (!main) return;
+    var key = main.getAttribute('data-key');
+    var total = parseInt(main.getAttribute('data-total'), 10);
+    var done = [];
+    try { done = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) {}
+    var rows = main.querySelectorAll('.row');
+    var firstUndone = null;
+    rows.forEach(function (r) {
+      var n = r.getAttribute('data-n');
+      if (done.indexOf(n) !== -1) r.classList.add('done');
+      else if (!firstUndone && n !== 'veldgids') firstUndone = n;
+    });
+    var moduleDone = done.filter(function (x) { return x !== 'veldgids'; }).length;
+    var pct = total ? Math.round(moduleDone / total * 100) : 0;
+    var fill = document.getElementById('progFill'); if (fill) fill.style.width = pct + '%';
+    var label = document.getElementById('progLabel'); if (label) label.textContent = moduleDone + ' / ' + total;
+    var start = document.getElementById('startBtn');
+    if (start) {
+      if (firstUndone && moduleDone > 0) { start.textContent = 'Hervat — les ' + firstUndone; start.href = start.href.replace(/les\/\d+\//, 'les/' + firstUndone + '/'); }
+      else if (moduleDone >= total) { start.textContent = 'Opnieuw bekijken'; }
+    }
+    if (moduleDone > 0) {
+      // markeer huidige (eerste onafgeronde)
+      if (firstUndone) { var cr = main.querySelector('.row[data-n="' + firstUndone + '"]'); if (cr) cr.classList.add('current'); }
+      var rb = document.getElementById('resetBtn');
+      if (rb) { rb.hidden = false; rb.addEventListener('click', function () { localStorage.removeItem(key); location.reload(); }); }
+    }
+  })();
+</script>
