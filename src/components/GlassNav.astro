@@ -2,19 +2,22 @@
 /* GlassNav.astro — zwevende glas-navigatie met thema-toggle, scroll-staat,
    actieve link en mobiel menu. */
 import Logo from "./Logo.astro";
-const { active = "" } = Astro.props;
+import { t, locUrl, switchUrl } from "../i18n/ui.js";
+const { active = "", lang = "nl", switchHref } = Astro.props;
+const L = t[lang] || t.nl;
 const items = [
-  { label: "Werk", href: "/werk/", id: "werk" },
-  { label: "Cursus", href: "/cursussen/", id: "cursussen" },
-  { label: "Over", href: "/over/", id: "over" },
-  { label: "Contact", href: "/contact/", id: "contact" },
+  { label: L.nav.werk, href: locUrl("/werk/", lang), id: "werk" },
+  { label: L.nav.cursus, href: locUrl("/cursussen/", lang), id: "cursussen" },
+  { label: L.nav.over, href: locUrl("/over/", lang), id: "over" },
+  { label: L.nav.contact, href: locUrl("/contact/", lang), id: "contact" },
 ];
+const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en" : "nl");
 ---
 <header class="lb-nav-shell" data-lb-nav>
   <nav class="lb-nav" aria-label="Hoofdnavigatie">
-    <a href="/" class="lb-nav__brand" aria-label="Lichtbreking — home"><Logo size={26} /></a>
+    <a href={locUrl("/", lang)} class="lb-nav__brand" aria-label={L.nav.home}><Logo size={26} /></a>
 
-    <button class="lb-nav__burger" id="lb-burger" aria-label="Menu" aria-expanded="false" aria-controls="lb-nav-links">
+    <button class="lb-nav__burger" id="lb-burger" aria-label={L.nav.menu} aria-expanded="false" aria-controls="lb-nav-links">
       <span></span><span></span><span></span>
     </button>
 
@@ -22,8 +25,9 @@ const items = [
       {items.map((it) => (
         <a href={it.href} class={active === it.id ? "on" : ""} aria-current={active === it.id ? "page" : undefined}>{it.label}</a>
       ))}
-      <a class="lb-nav__cta" href="/showreel/">Showreel</a>
-      <button class="lb-nav__theme" id="lb-theme-toggle" aria-label="Wissel licht/donker" title="Licht / donker">
+      <a class="lb-nav__cta" href={locUrl("/showreel/", lang)}>{L.nav.showreel}</a>
+      <a class="lb-nav__lang" href={langHref} aria-label={lang === "nl" ? "Switch to English" : "Schakel naar Nederlands"}>{L.otherName}</a>
+      <button class="lb-nav__theme" id="lb-theme-toggle" aria-label={L.nav.theme} title={L.nav.theme}>
         <svg class="ic-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19"/></svg>
         <svg class="ic-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z"/></svg>
       </button>
@@ -84,6 +88,13 @@ const items = [
     background: rgba(255,255,255,.16); color: inherit; border: 1px solid rgba(255,255,255,.28); cursor: pointer;
   }
   .lb-nav-shell.scrolled .lb-nav__theme { background: rgba(127,127,140,.16); border-color: var(--lb-line); }
+  .lb-nav__lang {
+    flex: 0 0 auto; font-family: var(--lb-font-mono); font-size: 12px; letter-spacing: .08em;
+    color: inherit; opacity: .82; padding: 6px 7px; border-radius: 8px; white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0,0,0,.28); transition: opacity .25s var(--lb-ease);
+  }
+  .lb-nav__lang:hover { opacity: 1; }
+  .lb-nav-shell.scrolled .lb-nav__lang { text-shadow: none; }
   .ic-moon { display: none; }
   :root[data-theme="dark"] .ic-sun { display: none; }
   :root[data-theme="dark"] .ic-moon { display: block; }

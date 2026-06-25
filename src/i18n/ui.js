@@ -1,0 +1,152 @@
+export const languages = ['nl', 'en'];
+export const defaultLang = 'nl';
+
+/* lang afleiden uit pad: /en/... => 'en', anders 'nl' */
+export function getLang(pathname) {
+  return pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'nl';
+}
+/* een nl-pad lokaliseren (path begint met '/') */
+export function locUrl(path, lang) {
+  if (lang !== 'en') return path;
+  return path === '/' ? '/en/' : '/en' + path;
+}
+/* huidige pad omzetten naar de andere taal */
+export function switchUrl(pathname, toLang) {
+  let base = pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+  if (!base.startsWith('/')) base = '/' + base;
+  return toLang === 'en' ? (base === '/' ? '/en/' : '/en' + base) : base;
+}
+
+export const t = {
+  nl: {
+    locale: 'nl_NL', htmlLang: 'nl', langName: 'NL', otherName: 'EN',
+    nav: { werk: 'Werk', cursus: 'Cursus', over: 'Over', contact: 'Contact', showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
+    foot: { tagline: 'Waar licht breekt — cinematische drone, foto & film.', site: 'Site', more: 'Meer', werk: 'Werk', cursussen: 'Cursussen', showreel: 'Showreel', over: 'Over', contact: 'Contact', rights: 'Drone · foto · film · NL' },
+    home: {
+      title: 'Lichtbreking — cinematische drone, foto & film',
+      desc: 'Cinematische drone-, foto- en videobeelden, plus de gratis cursus De Vluchtfilmer. Waar licht breekt.',
+      kicker: 'Drone · foto · film', h1a: 'Waar licht', h1b: 'breekt',
+      lead: 'Cinematische beelden uit de lucht en op ooghoogte — en de gratis cursus om het zelf te leren.',
+      ctaWork: 'Bekijk het werk', ctaReel: '▶ Showreel', scroll: 'Scroll ↓',
+      selKicker: 'Selectie', selTitle: 'Het werk', selAll: 'Alles bekijken →',
+      cFree: 'Gratis cursus', cTitle: 'Leer je drone filmen,<br>niet alleen vliegen.',
+      cSub: 'Vijftien modules van eerste opstart tot afgemonteerde film — shot-recepten, beslisbomen en een veldgids.', cBtn: 'Naar de cursussen →',
+    },
+    werk: {
+      title: 'Werk', desc: 'Een selectie cinematische drone-, foto- en filmbeelden van Lichtbreking.',
+      kicker: 'Selectie', h1: 'Het werk',
+      filters: { alles: 'Alles', drone: 'Drone', video: 'Film', photo: 'Foto' },
+    },
+    cursussen: {
+      title: 'Cursussen', desc: 'Gratis cinematische cursussen: De Vluchtfilmer (drone) en De Grondfilmer (camera). Leer filmen vanuit de lucht én op de grond.',
+      kicker: 'Leren', h1: 'Cursussen',
+      lead: 'Gratis, cinematisch en praktisch. Kies je toestel — of volg ze allebei en leer hoe drone en camera samen één film vormen.',
+      free: 'Gratis', soon: 'Binnenkort', open: 'Open de cursus →', soonBtn: 'Binnenkort',
+      c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '15 modules · ~6 uur', desc: 'Leer je drone filmen, niet alleen vliegen. Van eerste opstart tot afgemonteerde cinematische film — met shot-recepten, beslisbomen en een veldgids.' },
+      c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · veldgids', desc: 'De beelden op ooghoogte die je drone compleet maken. Cinematische gimbal-techniek en hoe je lucht en grond samensmelt tot één film.' },
+      c3: { kicker: 'Post · kleur', title: 'Kleur & grade', meta: 'In ontwikkeling', desc: 'Twee camera’s, één look. D-Log matchen, LUTs en een cinematische grade in Final Cut en DaVinci Resolve.' },
+    },
+    showreel: {
+      title: 'Showreel', desc: 'De showreel van Lichtbreking — een jaar cinematische drone- en filmbeelden in beeld.',
+      kicker: 'Een jaar in beeld', h1: 'Showreel', play: 'Speel showreel af',
+      lt: 'Lichtbreking — 2026', meta: 'DRONE · D-LOG M · 24FPS · 2:30',
+      chapters: 'Hoofdstukken', back: '← Terug naar het werk',
+      ch: [['00:00', 'Opening — gouden uur boven zee'], ['00:42', 'Kustlijn & ruige rotsen'], ['01:28', 'Tropisch — palmen en turquoise'], ['02:05', 'Aftiteling']],
+      alert: 'Showreel-video volgt — zet je eigen bestand op /public/video/showreel.mp4 of koppel een YouTube/Vimeo-embed.',
+    },
+    over: {
+      title: 'Over', desc: 'Het verhaal achter Lichtbreking: één idee dat lens, drone en glas verbindt — de breking van licht.',
+      kicker: 'Over', h1a: 'Scherp zien,', h1b: 'mooi vastleggen.',
+      p1: 'Lichtbreking komt voort uit twee werelden die dichter bij elkaar liggen dan ze lijken: het scherp leren zien, en het mooi vastleggen. Beide draaien om hetzelfde — het sturen van licht.',
+      p2: 'Een lens buigt licht zodat het samenkomt in een scherp beeld. Een drone vangt datzelfde licht, honderd meter hoger. En glas — het materiaal van deze site — breekt licht in al zijn kleuren. Dat is geen toeval, dat is de rode draad. Vandaar de naam.',
+      p3: 'Wat je hier vindt is het werk dat daaruit ontstaat: cinematische beelden uit de lucht en op ooghoogte. De portfolio groeit met elke reis; de gratis cursussen delen alles wat nodig is om zelf cinematisch te leren vliegen en filmen.',
+      gearTitle: 'Gereedschap',
+      gear: [['Drone', 'DJI Mini 5 Pro · RC 2'], ['Camera', 'DJI Osmo Pocket 4'], ['Montage', 'Final Cut · DaVinci Resolve'], ['Werk', 'Drone, foto & film']],
+    },
+    contact: {
+      title: 'Contact', desc: 'Neem contact op met Lichtbreking voor drone- en videowerk, samenwerkingen of vragen over de cursus.',
+      kicker: 'Contact', h1: 'Laten we iets moois maken.',
+      lead: 'Een opdracht, een samenwerking, of gewoon een vraag over de cursus? Stuur gerust een bericht.',
+      cards: [['E-mail', 'hallo@lichtbreking.nl', 'mailto:hallo@lichtbreking.nl'], ['Instagram', '@lichtbreking', '#'], ['Werkgebied', 'Nederland & op reis', null]],
+    },
+    work: {
+      'curacao-topdown': { title: 'Turquoise', place: 'Curaçao', cat: 'DRONE', alt: 'Drone-opname recht naar beneden boven turquoise zeewater bij Curaçao' },
+      'golden-coast': { title: 'Gouden uur', place: 'Boven open zee', cat: 'DRONE', alt: 'Luchtfoto van de oceaan tijdens het gouden uur met warm laag licht' },
+      'showreel': { title: 'Showreel', place: 'Een jaar in beeld', cat: 'DRONE', alt: 'Filmische kustlijn vanuit de lucht — still uit de showreel' },
+      'rugged-coast': { title: 'Ruige kust', place: 'Noordkust', cat: 'REIZEN', alt: 'Ruige rotskust met brekende golven tijdens het gouden uur' },
+      'palm-shadows': { title: 'Palmschaduwen', place: 'Tropisch strand', cat: 'REIZEN', alt: 'Tropisch strand met turquoise water en palmbomen van bovenaf' },
+    },
+    project: {
+      next: 'Volgend project', backDesc: 'Cinematisch werk van Lichtbreking.',
+      labels: { Locatie: 'Locatie', Jaar: 'Jaar', Categorie: 'Categorie', Gear: 'Gear', Profiel: 'Profiel' },
+      lead: ' — gevangen op het moment dat het licht het zachtst is. Een beeld dat de afstand tussen lucht en grond laat verdwijnen.',
+      body: 'Onderdeel van een doorlopende reeks waarin drone en camera samen \u00e9\u00e9n cinematische taal vormen: het epische overzicht van boven, het intieme detail op ooghoogte. Gefilmd in het gouden uur en gegraded naar \u00e9\u00e9n samenhangende look.',
+    },
+  },
+
+  en: {
+    locale: 'en_GB', htmlLang: 'en', langName: 'EN', otherName: 'NL',
+    nav: { werk: 'Work', cursus: 'Courses', over: 'About', contact: 'Contact', showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
+    foot: { tagline: 'Where light breaks — cinematic drone, photo & film.', site: 'Site', more: 'More', werk: 'Work', cursussen: 'Courses', showreel: 'Showreel', over: 'About', contact: 'Contact', rights: 'Drone · photo · film · NL' },
+    home: {
+      title: 'Lichtbreking — cinematic drone, photo & film',
+      desc: 'Cinematic drone, photo and video work, plus the free course The Flight Filmer. Where light breaks.',
+      kicker: 'Drone · photo · film', h1a: 'Where light', h1b: 'breaks',
+      lead: 'Cinematic imagery from the air and at eye level — plus the free course to learn it yourself.',
+      ctaWork: 'View the work', ctaReel: '▶ Showreel', scroll: 'Scroll ↓',
+      selKicker: 'Selection', selTitle: 'The work', selAll: 'View all →',
+      cFree: 'Free course', cTitle: 'Learn to film with your drone,<br>not just fly it.',
+      cSub: 'Fifteen modules from first power-on to a finished film — shot recipes, decision trees and a field guide.', cBtn: 'To the courses →',
+    },
+    werk: {
+      title: 'Work', desc: 'A selection of cinematic drone, photo and film work by Lichtbreking.',
+      kicker: 'Selection', h1: 'The work',
+      filters: { alles: 'All', drone: 'Drone', video: 'Film', photo: 'Photo' },
+    },
+    cursussen: {
+      title: 'Courses', desc: 'Free cinematic courses: The Flight Filmer (drone) and The Ground Filmer (camera). Learn to film from the air and on the ground.',
+      kicker: 'Learning', h1: 'Courses',
+      lead: 'Free, cinematic and practical. Pick your device — or follow both and learn how drone and camera form one film together.',
+      free: 'Free', soon: 'Coming soon', open: 'Open the course →', soonBtn: 'Coming soon',
+      c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '15 modules · ~6 hrs', desc: 'Learn to film with your drone, not just fly it. From first power-on to a finished cinematic film — with shot recipes, decision trees and a field guide.' },
+      c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · field guide', desc: 'The eye-level imagery that completes your drone. Cinematic gimbal technique and how to merge air and ground into one film.' },
+      c3: { kicker: 'Post · colour', title: 'Colour & grade', meta: 'In development', desc: 'Two cameras, one look. Matching D-Log, LUTs and a cinematic grade in Final Cut and DaVinci Resolve.' },
+    },
+    showreel: {
+      title: 'Showreel', desc: 'The Lichtbreking showreel — a year of cinematic drone and film imagery.',
+      kicker: 'A year in frames', h1: 'Showreel', play: 'Play showreel',
+      lt: 'Lichtbreking — 2026', meta: 'DRONE · D-LOG M · 24FPS · 2:30',
+      chapters: 'Chapters', back: '← Back to the work',
+      ch: [['00:00', 'Opening — golden hour over the sea'], ['00:42', 'Coastline & rugged rocks'], ['01:28', 'Tropical — palms and turquoise'], ['02:05', 'End titles']],
+      alert: 'Showreel video to follow — drop your own file at /public/video/showreel.mp4 or link a YouTube/Vimeo embed.',
+    },
+    over: {
+      title: 'About', desc: 'The story behind Lichtbreking: one idea connecting lens, drone and glass — the refraction of light.',
+      kicker: 'About', h1a: 'See sharply,', h1b: 'capture beautifully.',
+      p1: 'Lichtbreking grows from two worlds that sit closer together than they seem: learning to see sharply, and capturing beautifully. Both come down to the same thing — steering light.',
+      p2: 'A lens bends light so it converges into a sharp image. A drone catches that same light, a hundred metres higher. And glass — the material of this site — breaks light into all its colours. That is no coincidence; it is the thread. Hence the name.',
+      p3: 'What you find here is the work that comes from it: cinematic imagery from the air and at eye level. The portfolio grows with every trip; the free courses share everything you need to learn cinematic flying and filming yourself.',
+      gearTitle: 'Gear',
+      gear: [['Drone', 'DJI Mini 5 Pro · RC 2'], ['Camera', 'DJI Osmo Pocket 4'], ['Editing', 'Final Cut · DaVinci Resolve'], ['Work', 'Drone, photo & film']],
+    },
+    contact: {
+      title: 'Contact', desc: 'Get in touch with Lichtbreking for drone and video work, collaborations or course questions.',
+      kicker: 'Contact', h1: 'Let’s make something beautiful.',
+      lead: 'A commission, a collaboration, or just a question about the course? Feel free to send a message.',
+      cards: [['Email', 'hallo@lichtbreking.nl', 'mailto:hallo@lichtbreking.nl'], ['Instagram', '@lichtbreking', '#'], ['Service area', 'Netherlands & traveling', null]],
+    },
+    work: {
+      'curacao-topdown': { title: 'Turquoise', place: 'Curaçao', cat: 'DRONE', alt: 'Top-down drone shot over turquoise sea water near Curaçao' },
+      'golden-coast': { title: 'Golden hour', place: 'Over open sea', cat: 'DRONE', alt: 'Aerial of the ocean during golden hour with warm low light' },
+      'showreel': { title: 'Showreel', place: 'A year in frames', cat: 'DRONE', alt: 'Cinematic coastline from the air — still from the showreel' },
+      'rugged-coast': { title: 'Rugged coast', place: 'North coast', cat: 'TRAVEL', alt: 'Rugged rocky coast with breaking waves during golden hour' },
+      'palm-shadows': { title: 'Palm shadows', place: 'Tropical beach', cat: 'TRAVEL', alt: 'Tropical beach with turquoise water and palm trees from above' },
+    },
+    project: {
+      next: 'Next project', backDesc: 'Cinematic work by Lichtbreking.',
+      labels: { Locatie: 'Location', Jaar: 'Year', Categorie: 'Category', Gear: 'Gear', Profiel: 'Profile' },
+      lead: ' — caught at the moment the light is softest. An image that dissolves the distance between air and ground.',
+      body: 'Part of an ongoing series where drone and camera form one cinematic language: the epic overview from above, the intimate detail at eye level. Shot in golden hour and graded to one coherent look.',
+    },
+  },
+};

@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../GlassNav.astro';
+import Footer from '../Footer.astro';
+import SpectrumRule from '../SpectrumRule.astro';
+import { work, src, srcset } from '../../data/work.js';
+import { t, locUrl } from '../../i18n/ui.js';
+const { lang = 'nl', item } = Astro.props;
+const P = t[lang].project; const W = t[lang].work;
+const w = W[item.id];
+const idx = work.findIndex((x) => x.id === item.id);
+const next = work[(idx + 1) % work.length]; const nw = W[next.id];
+const meta = [
+  [P.labels.Locatie, w.place],
+  [P.labels.Jaar, item.year],
+  [P.labels.Categorie, w.cat],
+  [P.labels.Gear, 'DJI Mini 5 Pro'],
+  [P.labels.Profiel, item.type === 'video' ? 'D-Log M · 24fps' : 'RAW · 48MP'],
+];
+---
+<Base title={w.title} description={`${w.title} — ${w.place}, ${item.year}. ${P.backDesc}`} path={`/werk/${item.id}/`} lang={lang} image={src(item.photo, 1200)} type="article">
+  <GlassNav active="werk" lang={lang} />
+  <main>
+    <section class="opener">
+      <img class="opener__bg" src={src(item.photo, 2000)} srcset={srcset(item.photo)} sizes="100vw" alt={w.alt} fetchpriority="high" width="2000" height="1333" />
+      <div class="opener__scrim" aria-hidden="true"></div>
+      <div class="opener__inner lb-container">
+        <span class="lb-label lb-label--sky lb-reveal">{w.cat} · {item.year}</span>
+        <h1 class="lb-display-l lb-reveal">{w.title}</h1>
+      </div>
+    </section>
+    <section class="lb-section">
+      <div class="lb-container body">
+        <aside class="meta lb-reveal">
+          {meta.map(([k, v]) => <div class="meta__row"><span class="lb-label">{k}</span><span class="meta__v">{v}</span></div>)}
+        </aside>
+        <div class="story lb-reveal">
+          <p class="lb-lead">{w.place}{P.lead}</p>
+          <p class="lb-muted">{P.body}</p>
+          <SpectrumRule width="120px" />
+        </div>
+      </div>
+    </section>
+    <section class="next lb-section">
+      <div class="lb-container">
+        <span class="lb-label">{P.next}</span>
+        <a href={locUrl(`/werk/${next.id}/`, lang)} class="lb-media next__card lb-reveal" aria-label={nw.title}>
+          <img src={src(next.photo, 1600)} srcset={srcset(next.photo)} sizes="100vw" alt={nw.alt} loading="lazy" width="1600" height="900" />
+          <div class="next__meta"><h2 class="lb-display-m">{nw.title}</h2><span class="lb-label">{nw.place} · {next.year}</span></div>
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer lang={lang} />
+</Base>
+<style>
+  .opener { position: relative; min-height: 78svh; display: flex; align-items: flex-end; overflow: hidden; }
+  .opener__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .opener__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,8,10,.5) 0%, transparent 30%, rgba(8,8,10,.9) 100%); }
+  .opener__inner { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(40px,6vw,80px); }
+  .opener__inner h1 { color: #fff; margin-top: 12px; }
+  .body { display: grid; grid-template-columns: 280px 1fr; gap: clamp(28px,5vw,64px); align-items: start; }
+  .meta { display: flex; flex-direction: column; gap: 16px; border-top: 1px solid var(--lb-line); padding-top: 20px; }
+  .meta__row { display: flex; flex-direction: column; gap: 4px; }
+  .meta__v { color: var(--lb-bone); text-transform: capitalize; }
+  .story p { margin-bottom: 18px; }
+  .next__card { display: block; aspect-ratio: 16 / 9; margin-top: 18px; }
+  .next__card:hover img { transform: scale(1.03); }
+  .next__meta { position: absolute; left: 24px; bottom: 20px; z-index: 2; }
+  .next__meta h2 { color: #fff; }
+  .next__meta .lb-label { color: rgba(255,255,255,.8); }
+  @media (max-width: 720px) { .body { grid-template-columns: 1fr; } }
+</style>

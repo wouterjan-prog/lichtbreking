@@ -23,7 +23,7 @@ const moduleTotal = course.modules.length;
 const isRef = les.kind === 'reference';
 ---
 <Base title={`${typeof les.title === 'string' ? les.title.replace(/<[^>]+>/g, '') : les.title} — ${course.title}`} description={course.lead} path={`/cursus/${course.slug}/les/${les.key}/`}>
-  <GlassNav active="cursussen" />
+  <GlassNav active="cursussen" switchHref="/en/cursussen/" />
   <main class="les" data-course={course.slug} data-key={course.storageKey} data-n={les.key} data-total={moduleTotal}>
     <div class="les-wrap lb-container">
       <!-- zijbalk -->

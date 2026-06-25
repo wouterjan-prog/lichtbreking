@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../GlassNav.astro';
+import Footer from '../Footer.astro';
+import { work, src, srcset } from '../../data/work.js';
+import { t, locUrl } from '../../i18n/ui.js';
+const { lang = 'nl' } = Astro.props;
+const L = t[lang].werk; const W = t[lang].work;
+const filters = [['alles', L.filters.alles], ['drone', L.filters.drone], ['video', L.filters.video], ['photo', L.filters.photo]];
+---
+<Base title={L.title} description={L.desc} path="/werk/" lang={lang}>
+  <GlassNav active="werk" lang={lang} />
+  <main class="lb-container page">
+    <header class="page-head lb-reveal">
+      <span class="lb-label">{L.kicker}</span>
+      <h1 class="lb-display-l">{L.h1}</h1>
+      <div class="filters" role="tablist">
+        {filters.map(([id, label], i) => <button class:list={["filter", { on: i === 0 }]} data-filter={id}>{label}</button>)}
+      </div>
+    </header>
+    <div class="grid" id="work-grid">
+      {work.map((item, i) => {
+        const w = W[item.id];
+        return (
+          <a href={locUrl(`/werk/${item.id}/`, lang)} class="lb-media tile lb-reveal" data-cat={item.cat} data-type={item.type} aria-label={w.title}>
+            <img src={src(item.photo, 1024)} srcset={srcset(item.photo)} sizes="(max-width:720px) 100vw, 33vw" alt={w.alt} loading="lazy" decoding="async" width="1600" height="1066" />
+            {item.type === 'video' && <span class="tile__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>}
+            <div class="tile__meta">
+              <span class="lb-label lb-label--sky">{`0${i + 1}`} · {w.cat}</span>
+              <h3 class="tile__title">{w.title}</h3>
+              <span class="lb-label">{w.place} · {item.year}</span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </main>
+  <Footer lang={lang} />
+</Base>
+<style>
+  .page { padding-top: 130px; padding-bottom: 96px; }
+  .page-head { margin-bottom: 36px; }
+  .page-head h1 { margin: 10px 0 0; }
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .filter { font-family: var(--lb-font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--lb-mist); background: var(--lb-ink); border: 1px solid var(--lb-line); padding: 9px 16px; border-radius: var(--lb-r-pill); cursor: pointer; transition: .3s var(--lb-ease); }
+  .filter:hover { color: var(--lb-bone); }
+  .filter.on { color: var(--lb-night); background: var(--lb-bone); border-color: var(--lb-bone); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .tile { aspect-ratio: 4 / 3; display: block; }
+  .tile.hide { display: none; }
+  .tile:hover img { transform: scale(1.03); }
+  .tile__meta { position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 2; display: flex; flex-direction: column; gap: 5px; }
+  .tile__title { color: #fff; font-size: clamp(18px, 2vw, 24px); }
+  .tile__meta .lb-label { color: rgba(255,255,255,.82); }
+  .tile__play { position: absolute; inset: 0; margin: auto; z-index: 2; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } .tile { aspect-ratio: 3 / 2; } }
+</style>
+<script is:inline>
+  (function () {
+    var btns = document.querySelectorAll('.filter'); var tiles = document.querySelectorAll('#work-grid .tile');
+    btns.forEach(function (b) { b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.remove('on'); }); b.classList.add('on');
+      var f = b.getAttribute('data-filter');
+      tiles.forEach(function (t) { var show = f === 'alles' || t.getAttribute('data-cat') === f || t.getAttribute('data-type') === f; t.classList.toggle('hide', !show); });
+    }); });
+  })();
+</script>

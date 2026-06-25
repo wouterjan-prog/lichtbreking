@@ -1,14 +1,15 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import { t } from '../i18n/ui.js';
 import '../styles/tokens.css';
 import '../styles/global.css';
-const { title, description, path = '', image, type, jsonld } = Astro.props;
-const canonical = path ? new URL(path, 'https://www.lichtbreking.nl').href : undefined;
+const { title, description, path = '', image, type, jsonld, lang = 'nl' } = Astro.props;
+const L = t[lang] || t.nl;
 ---
 <!DOCTYPE html>
-<html lang="nl">
+<html lang={L.htmlLang}>
 <head>
-  <BaseHead title={title} description={description} image={image} type={type} canonical={canonical} jsonld={jsonld} />
+  <BaseHead title={title} description={description} image={image} type={type} path={path} lang={lang} jsonld={jsonld} />
   <!-- Thema vóór paint: voorkomt flits. Standaard donker, tenzij bezoeker licht koos. -->
   <script is:inline>
     (function () {
@@ -21,21 +22,18 @@ const canonical = path ? new URL(path, 'https://www.lichtbreking.nl').href : und
 </head>
 <body>
   <slot />
-  <!-- Reveal-on-scroll -->
+  <!-- Reveal-on-scroll (met vangnet zodat content nooit lang onzichtbaar blijft) -->
   <script is:inline>
     (function () {
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var els = document.querySelectorAll('.lb-reveal');
-      if (reduce || !('IntersectionObserver' in window)) {
-        els.forEach(function (el) { el.classList.add('in'); });
-        return;
-      }
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function showAll() { els.forEach(function (el) { el.classList.add('in'); }); }
+      if (reduce || !('IntersectionObserver' in window)) { showAll(); return; }
       var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.01, rootMargin: '0px 0px -5% 0px' });
       els.forEach(function (el) { io.observe(el); });
+      setTimeout(showAll, 1200);
     })();
   </script>
 </body>

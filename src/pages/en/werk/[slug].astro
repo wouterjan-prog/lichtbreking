@@ -1,0 +1,7 @@
+---
+import ProjectView from '../../../components/views/ProjectView.astro';
+import { work } from '../../../data/work.js';
+export function getStaticPaths() { return work.map((item) => ({ params: { slug: item.id }, props: { item } })); }
+const { item } = Astro.props;
+---
+<ProjectView lang="en" item={item} />
