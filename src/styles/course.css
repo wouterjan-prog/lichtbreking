@@ -356,6 +356,16 @@
 .lb-sim__verdict{ display:inline-block; font-family:var(--lb-font-mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; padding:5px 12px; border-radius:999px; background:rgba(70,201,95,.16); color:#7ED88f; }
 .lb-sim__verdict.warm{ background:rgba(255,154,46,.18); color:var(--lb-orange); }
 .lb-sim__verdict.cool{ background:rgba(127,180,214,.18); color:var(--lb-sky); }
+.lb-gh,.lb-comp{ background:var(--lb-ink); border:1px solid var(--lb-line); border-radius:14px; padding:1.3rem 1.4rem; margin:1.8em 0; }
+.lb-gh__lbl,.lb-comp__lbl{ display:block; font-family:var(--lb-font-mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--lb-sky); margin-bottom:1rem; }
+.lb-gh__prev{ height:120px; border-radius:10px; margin:0 0 1rem; border:1px solid rgba(127,127,140,.14); transition:background .25s; }
+.lb-gh__row{ display:flex; align-items:center; gap:12px; }
+.lb-gh__row input{ flex:1; accent-color:var(--lb-orange); }
+.lb-gh__phase{ font-family:var(--lb-font-mono); font-size:.92rem; color:var(--lb-orange); min-width:120px; text-align:right; }
+.lb-gh__tip{ margin-top:.7rem; font-size:.92rem; color:var(--lb-mist); }
+.lb-comp__svg{ display:block; width:100%; max-width:380px; margin:0 auto; touch-action:none; }
+.lb-comp__fb{ text-align:center; font-family:var(--lb-font-mono); font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; margin-top:.7rem; color:var(--lb-mist); }
+.lb-comp__fb.hit{ color:#5ED88f; }
 .lb-readbar{ position:fixed; top:0; left:0; right:0; height:3px; z-index:200; background:transparent; pointer-events:none; }
 .lb-readbar span{ display:block; height:100%; width:0; background:var(--lb-spectrum); transition:width .12s linear; }
 @media (prefers-reduced-motion:reduce){ .lb-readbar span{ transition:none; } }
@@ -365,7 +375,7 @@
   @page { margin: 14mm; }
   html, body { background:#fff !important; }
   .lb-nav-shell, .lb-readbar, .lb-foot, .side, .les-foot, .back-m, .les-min,
-  .les-head .lb-label, .les-head .hr, .lb-viz, .lb-gm, .lb-pocket, .lb-printbtn, .lb-todo, .lb-hotspot, .lb-sim { display:none !important; }
+  .les-head .lb-label, .les-head .hr, .lb-viz, .lb-gm, .lb-pocket, .lb-printbtn, .lb-todo, .lb-hotspot, .lb-sim, .lb-gh, .lb-comp { display:none !important; }
   .les-wrap { display:block !important; padding:0 !important; }
   .lesson { max-width:none !important; min-width:0 !important; }
   .les-head h1 { color:#15171c !important; }

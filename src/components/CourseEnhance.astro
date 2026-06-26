@@ -376,11 +376,64 @@
     }
     return { el: el, wire: wire };
   }
+  function hotspotDrone() {
+    var inner = '<ellipse cx="72" cy="64" rx="30" ry="11" fill="#1b2026" opacity=".5"/><ellipse cx="228" cy="64" rx="30" ry="11" fill="#1b2026" opacity=".5"/><ellipse cx="72" cy="184" rx="30" ry="11" fill="#1b2026" opacity=".5"/><ellipse cx="228" cy="184" rx="30" ry="11" fill="#1b2026" opacity=".5"/>'
+      + '<line x1="150" y1="124" x2="72" y2="64" stroke="#2b3038" stroke-width="9" stroke-linecap="round"/><line x1="150" y1="124" x2="228" y2="64" stroke="#2b3038" stroke-width="9" stroke-linecap="round"/><line x1="150" y1="124" x2="72" y2="184" stroke="#2b3038" stroke-width="9" stroke-linecap="round"/><line x1="150" y1="124" x2="228" y2="184" stroke="#2b3038" stroke-width="9" stroke-linecap="round"/>'
+      + '<circle cx="72" cy="64" r="8" fill="#0c0f14" stroke="#3a4047"/><circle cx="228" cy="64" r="8" fill="#0c0f14" stroke="#3a4047"/><circle cx="72" cy="184" r="8" fill="#0c0f14" stroke="#3a4047"/><circle cx="228" cy="184" r="8" fill="#0c0f14" stroke="#3a4047"/>'
+      + '<rect x="118" y="92" width="64" height="74" rx="16" fill="#1c2026" stroke="#33383f" stroke-width="1.5"/>'
+      + '<rect x="134" y="132" width="32" height="26" rx="5" fill="#13181d" stroke="#33383f"/>'
+      + '<rect x="139" y="74" width="22" height="24" rx="7" fill="#15181d" stroke="#33383f"/><circle cx="150" cy="86" r="7" fill="#05080a" stroke="#3a4047"/><circle cx="150" cy="86" r="4" fill="#15323a"/>'
+      + '<circle cx="206" cy="170" r="4" fill="#46c95f"/>'
+      + hsHit(150, 84, 14, 'Camera & gimbal', '3-assig gestabiliseerd — hier zit je beeld. Raak de lens nooit aan.')
+      + hsHit(72, 64, 16, 'Propeller & motor', 'Vouw de armen en propellers vóór de vlucht uit; raak ze nooit aan als ze draaien.')
+      + hsHit(150, 145, 16, 'Accu', 'Klik stevig vast tot je een klik hoort. Vlieg nooit door onder ~15%.')
+      + hsHit(150, 110, 12, 'Onderkant-sensoren', 'Neerwaartse en obstakelsensoren werken in Normal en Cine — niet in Sport.')
+      + hsHit(206, 170, 11, 'Status-LED', 'Groen = klaar om te vliegen. Knippert = wacht nog op een GPS-fix.');
+    return { vb: '0 0 300 240', inner: inner };
+  }
+  function goldenHour() {
+    var el = document.createElement('div'); el.className = 'lb-gh lb-cv in';
+    el.innerHTML = '<span class="lb-gh__lbl">Gouden-uur-planner — schuif door de dag</span><div class="lb-gh__prev"></div><div class="lb-gh__row"><input type="range" min="4" max="22" step="1" value="7"><span class="lb-gh__phase"></span></div><div class="lb-gh__tip"></div>';
+    function wire() {
+      var PH = [
+        { max: 5, n: 'Nacht', c: ['#05080f', '#0a1326'], t: 'Te donker om te vliegen — wacht op het eerste licht.' },
+        { max: 7, n: 'Blauwe uur', c: ['#13294d', '#3a4a6b'], t: 'Sfeervol, koel licht — prachtig voor water en steden. Tragere sluiter, WB ~4000K.' },
+        { max: 9, n: 'Gouden uur', c: ['#b25a2e', '#f0a64e'], t: 'Warm, zacht en gericht — het beste licht. Plan je belangrijkste shots nu.' },
+        { max: 17, n: 'Dag', c: ['#3f6e93', '#8fb4cf'], t: 'Hard licht, korte schaduwen. Top-down werkt; anders zoek schaduw of zijlicht.' },
+        { max: 19, n: 'Gouden uur', c: ['#c2632e', '#ffbf6a'], t: 'Tweede gouden uur — zelfde magie, nu richting zonsondergang.' },
+        { max: 21, n: 'Blauwe uur', c: ['#1a2c52', '#46587d'], t: 'De lucht kleurt diepblauw — ideaal voor stadslichten.' },
+        { max: 24, n: 'Nacht', c: ['#05080f', '#0a1326'], t: 'Vliegen mag niet meer — pak je laatste blauwe-uur-beelden.' }
+      ];
+      var prev = el.querySelector('.lb-gh__prev'), ph = el.querySelector('.lb-gh__phase'), tip = el.querySelector('.lb-gh__tip'), inp = el.querySelector('input');
+      function upd() { var h = +inp.value; var p = PH.find(function (x) { return h < x.max; }) || PH[PH.length - 1]; prev.style.background = 'linear-gradient(180deg,' + p.c[0] + ',' + p.c[1] + ')'; ph.textContent = p.n + ' · ' + h + ':00'; tip.textContent = p.t; }
+      inp.addEventListener('input', upd); upd();
+    }
+    return { el: el, wire: wire };
+  }
+  function compTrainer() {
+    var el = document.createElement('div'); el.className = 'lb-comp lb-cv in';
+    el.innerHTML = '<span class="lb-comp__lbl">Compositie-trainer — sleep je onderwerp</span>'
+      + '<svg class="lb-comp__svg" viewBox="0 0 300 180"><defs><linearGradient id="lbctg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a4a63"/><stop offset="1" stop-color="#c98a4e"/></linearGradient></defs><rect width="300" height="180" fill="url(#lbctg)"/><path d="M0 128 L70 104 L140 124 L210 100 L300 126 L300 180 L0 180 Z" fill="#12222b"/><g stroke="#fff" stroke-opacity=".34" stroke-width="1"><line x1="100" y1="0" x2="100" y2="180"/><line x1="200" y1="0" x2="200" y2="180"/><line x1="0" y1="60" x2="300" y2="60"/><line x1="0" y1="120" x2="300" y2="120"/></g><circle class="lb-comp__dot" cx="150" cy="90" r="11" fill="#FF9A2E" stroke="#fff" stroke-width="2" style="cursor:grab"/></svg>'
+      + '<div class="lb-comp__fb">Sleep de oranje stip naar een snijpunt van de lijnen</div>';
+    function wire() {
+      var svg = el.querySelector('.lb-comp__svg'), dot = el.querySelector('.lb-comp__dot'), fb = el.querySelector('.lb-comp__fb');
+      var pts = [[100, 60], [200, 60], [100, 120], [200, 120]], drag = false;
+      function pos(e) { var r = svg.getBoundingClientRect(); var cx = (e.touches ? e.touches[0].clientX : e.clientX), cy = (e.touches ? e.touches[0].clientY : e.clientY); return [Math.max(12, Math.min(288, (cx - r.left) / r.width * 300)), Math.max(12, Math.min(168, (cy - r.top) / r.height * 180))]; }
+      function move(e) { if (!drag) return; e.preventDefault(); var p = pos(e); dot.setAttribute('cx', p[0]); dot.setAttribute('cy', p[1]); var near = pts.some(function (q) { return Math.hypot(q[0] - p[0], q[1] - p[1]) < 16; }); fb.textContent = near ? 'Op een snijpunt — sterke compositie!' : 'Sleep naar een snijpunt van de lijnen'; fb.className = 'lb-comp__fb' + (near ? ' hit' : ''); }
+      dot.addEventListener('mousedown', function () { drag = true; dot.style.cursor = 'grabbing'; });
+      dot.addEventListener('touchstart', function () { drag = true; });
+      window.addEventListener('mousemove', move); window.addEventListener('touchmove', move, { passive: false });
+      window.addEventListener('mouseup', function () { drag = false; dot.style.cursor = 'grab'; });
+      window.addEventListener('touchend', function () { drag = false; });
+    }
+    return { el: el, wire: wire };
+  }
   (function () {
     var le = document.querySelector('.les'); if (!le) return;
     var course = le.getAttribute('data-course'), n = le.getAttribute('data-n');
     var cb = document.querySelector('.course-body'); if (!cb) return;
     function anchor(node) { var h = cb.querySelector('h4, h3'); if (h) h.parentNode.insertBefore(node, h); else cb.appendChild(node); }
+    function anchorBy(needle, node) { var t = null; cb.querySelectorAll('h4, h3').forEach(function (h) { if (!t && h.textContent.trim().toLowerCase().indexOf(needle) === 0) t = h; }); if (t) t.parentNode.insertBefore(node, t); else anchor(node); }
     function hsBlock(label, hs) {
       var d = document.createElement('div'); d.className = 'lb-hotspot lb-cv in';
       d.innerHTML = '<span class="lb-hotspot__lbl">' + label + '</span><svg class="lb-hotspot__svg" viewBox="' + hs.vb + '" aria-hidden="true">' + hs.inner + '</svg><div class="lb-hotspot__cap">Tik op een gemarkeerd punt om te zien wat het doet.</div>';
@@ -398,6 +451,9 @@
     if (course === 'grondfilmer' && n === '1') anchor(hsBlock('Tik op het scherm — de vier veegrichtingen', hotspotPocket()));
     var sims = { vluchtfilmer: ['4', '5'], grondfilmer: ['3'] };
     if (sims[course] && sims[course].indexOf(n) !== -1) { var s = buildSim(); anchor(s.el); s.wire(); }
+    if (course === 'vluchtfilmer' && n === '1') anchorBy('de drone', hsBlock('Tik op de drone — onderdelen van de Mini 5 Pro', hotspotDrone()));
+    if (course === 'vluchtfilmer' && n === '9') { var g = goldenHour(); anchorBy('de vier lichtmomenten', g.el); g.wire(); }
+    if (course === 'vluchtfilmer' && n === '10') { var c = compTrainer(); anchorBy('de fundamenten', c.el); c.wire(); }
   })();
 
   /* ---------- leesvoortgangsbalk ---------- */
