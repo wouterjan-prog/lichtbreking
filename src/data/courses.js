@@ -13,5 +13,12 @@ export function getLessons(course) {
       tag: 'Naslaghoofdstuk', title: r.title, min: r.min, part: 'Naslag', body: r.body,
     });
   });
+  const offset = course.modules.length + (course.naslag || []).length;
+  (course.casestudy || []).forEach((r, i) => {
+    lessons.push({
+      key: r.key, kind: 'case', n: offset + i + 1,
+      tag: 'Praktijkcase · Curaçao', title: r.title, min: r.min, part: 'Praktijkcase', body: r.body,
+    });
+  });
   return lessons;
 }

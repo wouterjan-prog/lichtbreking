@@ -71,6 +71,19 @@ const jsonld = {
             ))}
           </div>
         ))}
+        {course.casestudy && course.casestudy.length > 0 && (
+          <div class="part part--case">
+            <div class="part-head"><span class="lb-label">Praktijkcase</span><h2 class="lb-display-m">Praktijkcase: Curaçao</h2><p class="part-intro">Een complete reis als voorbeeld — optioneel, los van de algemene cursus.</p></div>
+            {course.casestudy.map((r) => (
+              <a href={`/cursus/${course.slug}/les/${r.key}/`} class="row" data-n={r.key}>
+                <span class="row-status" aria-hidden="true"></span>
+                <span class="row-num lb-label">◆</span>
+                <span class="row-main"><span class="row-title">{r.title}</span><span class="row-tag lb-label">De reis als voorbeeld</span></span>
+                <span class="row-min lb-label">{r.min} min</span>
+              </a>
+            ))}
+          </div>
+        )}
         {course.naslag && course.naslag.length > 0 && (
           <div class="part">
             <div class="part-head"><span class="lb-label">Naslag</span><h2 class="lb-display-m">Naslag &amp; veldgids</h2></div>
@@ -111,6 +124,7 @@ const jsonld = {
   .modlist { display: flex; flex-direction: column; gap: 40px; }
   .part-head { margin-bottom: 14px; }
   .part-head h2 { margin-top: 6px; }
+  .part-intro { color: var(--lb-mist); margin-top: 8px; max-width: 60ch; }
   .row {
     display: grid; grid-template-columns: 22px 34px 1fr auto; align-items: center; gap: 16px;
     padding: 16px 4px; border-bottom: 1px solid var(--lb-line); transition: background .25s var(--lb-ease);

@@ -21,7 +21,7 @@ const les = lessons[index];
 const prev = index > 0 ? lessons[index - 1] : null;
 const next = index < lessons.length - 1 ? lessons[index + 1] : null;
 const moduleTotal = course.modules.length;
-const isRef = les.kind === 'reference';
+const isModule = les.kind === 'module';
 ---
 <Base title={`${typeof les.title === 'string' ? les.title.replace(/<[^>]+>/g, '') : les.title} — ${course.title}`} description={course.lead} path={`/cursus/${course.slug}/les/${les.key}/`}>
   <GlassNav active="cursussen" switchHref="/en/cursussen/" />
@@ -35,7 +35,7 @@ const isRef = les.kind === 'reference';
           {lessons.map((l) => (
             <a href={`/cursus/${course.slug}/les/${l.key}/`} class:list={["side-item", { on: l.key === les.key }]} data-n={l.key}>
               <span class="side-dot" aria-hidden="true"></span>
-              <span class="side-num lb-label">{l.kind === 'reference' ? '★' : String(l.n).padStart(2, '0')}</span>
+              <span class="side-num lb-label">{l.kind === 'module' ? String(l.n).padStart(2, '0') : (l.kind === 'case' ? '◆' : '★')}</span>
               <span class="side-title" set:html={l.title} />
             </a>
           ))}
@@ -46,7 +46,7 @@ const isRef = les.kind === 'reference';
       <article class="lesson">
         <header class="les-head">
           <a href={`/cursus/${course.slug}/`} class="back-m lb-label">← {course.title}</a>
-          <span class="lb-label lb-label--sky">{isRef ? 'Naslaghoofdstuk' : `Module ${les.n} / ${moduleTotal} · ${les.tag}`}</span>
+          <span class="lb-label lb-label--sky">{isModule ? `Module ${les.n} / ${moduleTotal} · ${les.tag}` : les.tag}</span>
           <h1 class="lb-display-m" set:html={les.title} />
           <span class="lb-label les-min">{les.min} min lezen</span>
           <div class="hr"></div>
@@ -55,7 +55,7 @@ const isRef = les.kind === 'reference';
         <div class="course-body" set:html={les.body} />
 
         <div class="les-foot">
-          {!isRef && (
+          {isModule && (
             <button class="lb-btn done-btn" id="doneBtn">Markeer als afgerond</button>
           )}
           <div class="les-nav">
