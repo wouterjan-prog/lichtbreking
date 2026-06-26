@@ -52,7 +52,34 @@ const isModule = les.kind === 'module';
           <div class="hr"></div>
         </header>
 
+        {isModule && les.kort && les.kort.length > 0 && (
+          <div class="lb-kort lb-reveal">
+            <span class="lb-kort__lbl">In het kort</span>
+            <ul>
+              {les.kort.map((p) => (
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+            {les.actie && <div class="lb-kort__act"><b>Belangrijkste actie</b>{les.actie}</div>}
+          </div>
+        )}
+
         <div class="course-body" set:html={les.body} />
+
+        {isModule && les.todo && les.todo.length > 0 && (
+          <div class="lb-todo lb-reveal" data-todokey={`${course.storageKey}:todo:${les.key}`}>
+            <span class="lb-todo__lbl">Doe dit nu</span>
+            <div class="lb-todo__list">
+              {les.todo.map((s, i) => (
+                <label class="lb-todo__item"><input type="checkbox" data-i={i} /><span>{s}</span></label>
+              ))}
+            </div>
+            <div class="lb-todo__prog"><span class="lb-todo__n">0</span> / {les.todo.length} gedaan</div>
+          </div>
+        )}
 
         <div class="les-foot">
           {isModule && (
@@ -142,5 +169,35 @@ const isModule = les.kind === 'module';
       }
     });
     render();
+  })();
+</script>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('.lb-todo').forEach(function (box) {
+      var key = box.getAttribute('data-todokey');
+      var n = box.querySelector('.lb-todo__n');
+      function load() { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { return []; } }
+      function save(a) { try { localStorage.setItem(key, JSON.stringify(a)); } catch (e) {} }
+      var done = load();
+      function render() {
+        var c = 0;
+        box.querySelectorAll('.lb-todo__item').forEach(function (it) {
+          var inp = it.querySelector('input');
+          var on = done.indexOf(inp.getAttribute('data-i')) !== -1;
+          inp.checked = on; it.classList.toggle('done', on); if (on) c++;
+        });
+        if (n) n.textContent = c;
+      }
+      box.querySelectorAll('.lb-todo__item input').forEach(function (inp) {
+        inp.addEventListener('change', function () {
+          var i = inp.getAttribute('data-i'), idx = done.indexOf(i);
+          if (inp.checked && idx === -1) done.push(i);
+          else if (!inp.checked && idx !== -1) done.splice(idx, 1);
+          save(done); render();
+        });
+      });
+      render();
+    });
   })();
 </script>
