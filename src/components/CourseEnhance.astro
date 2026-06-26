@@ -53,6 +53,23 @@
     return '<svg viewBox="0 0 360 192" role="img" aria-label="DJI RC 2 — stickbeweging">' + defs + body + gate(72, SKY, 'ahl', left.dir) + gate(288, OR, 'ahr', right.dir) + '</svg>';
   }
 
+  function stickOv(dir, c) {
+    var mid = 'm' + Math.random().toString(36).slice(2, 7);
+    var def = '<defs><marker id="' + mid + '" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="' + c + '"/></marker></defs>';
+    var ring = '<circle cx="32" cy="32" r="26" fill="rgba(8,10,14,.45)" stroke="' + c + '" stroke-width="2"/>';
+    if (dir.rot) { var arc = '<path d="M 48 18 A 18 18 0 1 1 22 16" fill="none" stroke="' + c + '" stroke-width="3" stroke-linecap="round" marker-end="url(#' + mid + ')"/>'; var k = '<g class="lb-stick-rotor" style="transform-origin:32px 32px"><circle cx="32" cy="14" r="6" fill="#f4f3ef"/></g>'; return '<svg viewBox="0 0 64 64">' + def + ring + arc + k + '</svg>'; }
+    if (dir.none) return '<svg viewBox="0 0 64 64">' + ring + '<circle cx="32" cy="32" r="6" fill="#cfd2d6"/></svg>';
+    var ex = 32 + dir.x * 22, ey = 32 + dir.y * 22;
+    var arrow = '<line x1="32" y1="32" x2="' + ex + '" y2="' + ey + '" stroke="' + c + '" stroke-width="3" stroke-linecap="round" marker-end="url(#' + mid + ')"/>';
+    var k = '<g class="lb-stick-knob" style="--tx:' + (dir.x * 16) + 'px;--ty:' + (dir.y * 16) + 'px"><circle cx="32" cy="32" r="7" fill="#f4f3ef"/><circle cx="32" cy="32" r="7" fill="none" stroke="' + c + '" stroke-width="2"/></g>';
+    return '<svg viewBox="0 0 64 64">' + def + ring + arrow + k + '</svg>';
+  }
+  function photoRC2(L, R) {
+    return '<div class="lb-rc2__ph"><img src="/img/rc2.jpg" alt="DJI RC 2"/>'
+      + '<div class="lb-rc2__ov" style="left:24%;top:42%">' + stickOv(L.dir, SKY) + '</div>'
+      + '<div class="lb-rc2__ov" style="left:76%;top:42%">' + stickOv(R.dir, OR) + '</div></div>';
+  }
+
   /* ---------- drone-scène per move ---------- */
   function sky(id) { return '<defs><radialGradient id="' + id + '" cx="50%" cy="26%" r="95%"><stop offset="0%" stop-color="#27606e"/><stop offset="62%" stop-color="#143038"/><stop offset="100%" stop-color="#0a1418"/></radialGradient></defs>'; }
   function dd() { return '<circle r="5.5" fill="' + BONE + '"/><circle r="5.5" fill="none" stroke="#7fe0ec" stroke-width="1.5"/><circle r="9" fill="none" stroke="#7fe0ec" stroke-width="1" opacity=".4"/>'; }
@@ -87,21 +104,41 @@
     var sl = mc.querySelectorAll('.stick-label');
     if (!ms || sl.length < 2) { if (!ms) mc.classList.add('lb-mc-solo'); return; }
     var L = parse(sl[0].textContent), R = parse(sl[1].textContent);
-    ms.innerHTML = '<div class="lb-rc2">' + rc2(L, R) + '<div class="lb-rc2__labels">' + lab('l', 'Links', L.word) + lab('r', 'Rechts', R.word) + '</div></div>';
+    var labels = '<div class="lb-rc2__labels">' + lab('l', 'Links', L.word) + lab('r', 'Rechts', R.word) + '</div>';
+    ms.innerHTML = '<div class="lb-rc2">' + rc2(L, R) + labels + '</div>';
+    (function (box, l, r, lb2) { var im = new Image(); im.onload = function () { box.innerHTML = '<div class="lb-rc2">' + photoRC2(l, r) + lb2 + '</div>'; }; im.src = '/img/rc2.jpg'; })(ms, L, R, labels);
     var af = mc.querySelector('.anim-frame');
     if (af) af.innerHTML = droneScene(sceneType(L, R));
   });
 
   /* ---------- Pocket 4 swipe-visual (Grondfilmer) ---------- */
   function pocket4() {
-    var defs = '<defs><linearGradient id="pb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22262c"/><stop offset="1" stop-color="#0e1014"/></linearGradient><radialGradient id="psc" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#2f5f6e"/><stop offset="60%" stop-color="#15262e"/><stop offset="100%" stop-color="#0a0f14"/></radialGradient><marker id="sa" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#7FB4D6"/></marker></defs>';
-    var dev = '<rect x="150" y="70" width="60" height="150" rx="16" fill="url(#pb)" stroke="#30353d" stroke-width="1.5"/>'
-      + '<rect x="156" y="150" width="48" height="62" rx="8" fill="url(#psc)" stroke="#2b3038"/>'
-      + '<rect x="150" y="40" width="60" height="40" rx="14" fill="#171a1f" stroke="#30353d" stroke-width="1.5"/>'
-      + '<circle cx="180" cy="58" r="11" fill="#0a0d11" stroke="#3a3f47" stroke-width="1.5"/><circle cx="180" cy="58" r="5" fill="#12333a"/><circle cx="177" cy="55" r="2" fill="rgba(255,255,255,.5)"/>';
-    function sw(x1, y1, x2, y2, delay) { return '<g class="lb-sw" style="animation-delay:' + delay + 's"><line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#7FB4D6" stroke-width="3" stroke-linecap="round" marker-end="url(#sa)"/></g>'; }
-    var arrows = sw(180, 150, 180, 120, 0) + sw(156, 181, 120, 181, .5) + sw(180, 212, 180, 244, 1) + sw(204, 181, 240, 181, 1.5);
-    return '<svg viewBox="0 0 360 280" role="img" aria-label="DJI Osmo Pocket 4 — swipe-bediening">' + defs + arrows + dev + '</svg>';
+    var defs = '<defs>'
+      + '<linearGradient id="pbody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0c0e12"/><stop offset=".18" stop-color="#23272e"/><stop offset=".5" stop-color="#1a1d23"/><stop offset=".82" stop-color="#262a31"/><stop offset="1" stop-color="#0c0e12"/></linearGradient>'
+      + '<linearGradient id="pscreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a6f7d"/><stop offset=".45" stop-color="#1b3640"/><stop offset="1" stop-color="#0b1418"/></linearGradient>'
+      + '<linearGradient id="pgim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2e35"/><stop offset="1" stop-color="#14171c"/></linearGradient>'
+      + '<radialGradient id="plens" cx="42%" cy="36%" r="70%"><stop offset="0" stop-color="#2a4f5a"/><stop offset="55%" stop-color="#0c1c22"/><stop offset="100%" stop-color="#05090c"/></radialGradient>'
+      + '<linearGradient id="psheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.22)"/><stop offset="35%" stop-color="rgba(255,255,255,0)"/></linearGradient>'
+      + '<marker id="sa" markerWidth="8" markerHeight="8" refX="5.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#cfe6ef"/></marker></defs>';
+    var gimbal = '<rect x="138" y="60" width="44" height="16" rx="7" fill="url(#pgim)" stroke="#33383f" stroke-width="1.2"/>'
+      + '<rect x="150" y="34" width="40" height="34" rx="11" fill="url(#pgim)" stroke="#33383f" stroke-width="1.4" transform="rotate(-6 170 51)"/>'
+      + '<circle cx="170" cy="50" r="12" fill="#05080a" stroke="#3a4047" stroke-width="2"/>'
+      + '<circle cx="170" cy="50" r="8.5" fill="url(#plens)"/>'
+      + '<circle cx="170" cy="50" r="8.5" fill="none" stroke="#4a8590" stroke-width="1" opacity=".6"/>'
+      + '<circle cx="166" cy="46" r="2.4" fill="rgba(255,255,255,.6)"/>';
+    var body = '<rect x="139" y="74" width="62" height="150" rx="15" fill="url(#pbody)" stroke="#33383f" stroke-width="1.5"/>'
+      + '<rect x="139" y="74" width="20" height="150" rx="15" fill="url(#psheen)" opacity=".5"/>'
+      + '<rect x="146" y="88" width="48" height="120" rx="8" fill="url(#pscreen)" stroke="#0a1014" stroke-width="1.5"/>'
+      + '<rect x="146" y="88" width="48" height="46" rx="8" fill="url(#psheen)" opacity=".35"/>'
+      + '<circle cx="152" cy="96" r="2" fill="#e0584d"/>'
+      + '<rect x="158" y="150" width="24" height="2.4" rx="1" fill="#4a8590" opacity=".5"/>'
+      + '<circle cx="170" cy="146" r="4.5" fill="#ffcf8a" opacity=".85"/>'
+      + '<rect x="201" y="120" width="3" height="26" rx="1.5" fill="#e0584d" opacity=".9"/>'
+      + '<rect x="136" y="120" width="3" height="16" rx="1.5" fill="#33383f"/>'
+      + '<rect x="162" y="216" width="16" height="3" rx="1.5" fill="#0a0d11"/>';
+    function sw(x1, y1, x2, y2, d) { return '<g class="lb-sw" style="animation-delay:' + d + 's"><line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#cfe6ef" stroke-width="3.4" stroke-linecap="round" marker-end="url(#sa)"/></g>'; }
+    var arrows = sw(170, 150, 170, 108, 0) + sw(150, 178, 108, 178, .5) + sw(170, 206, 170, 250, 1) + sw(190, 178, 232, 178, 1.5);
+    return '<svg viewBox="0 0 340 290" role="img" aria-label="DJI Osmo Pocket 4 — swipe-bediening">' + defs + arrows + gimbal + body + '</svg>';
   }
   var lesEl = document.querySelector('.les');
   if (lesEl && lesEl.getAttribute('data-course') === 'grondfilmer') {
