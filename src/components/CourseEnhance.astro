@@ -1,70 +1,130 @@
 ---
-/* CourseEnhance — bouwt de RC 2-stickvisualisatie en zet reveal-animaties aan op lespagina's. */
+/* CourseEnhance — bouwt de RC 2-stickvisualisatie, accurate drone-scènes per move,
+   de Pocket 4-swipe-visual (Grondfilmer) en reveal-animaties. Client-side. */
 ---
 <script is:inline>
 (function () {
-  var SKY = '#7FB4D6', OR = '#FF9A2E';
+  var SKY = '#7FB4D6', OR = '#FF9A2E', BONE = '#f4efe4';
   var DIR = {
-    'vooruit': { x: 0, y: -1 }, 'achteruit': { x: 0, y: 1 }, 'zij': { x: 1, y: 0 }, 'zijwaarts': { x: 1, y: 0 },
-    'schuif': { x: 1, y: .25 }, 'omhoog': { x: 0, y: -1 }, 'omlaag': { x: 0, y: 1 },
-    'links': { x: -1, y: 0 }, 'rechts': { x: 1, y: 0 }, 'draai': { rot: true }, '—': { none: true }, '': { none: true }
+    vooruit: { x: 0, y: -1 }, achteruit: { x: 0, y: 1 }, zij: { x: 1, y: 0 }, zijwaarts: { x: 1, y: 0 },
+    schuif: { x: 1, y: .25 }, omhoog: { x: 0, y: -1 }, omlaag: { x: 0, y: 1 },
+    links: { x: -1, y: 0 }, rechts: { x: 1, y: 0 }, draai: { rot: true }, '—': { none: true }, '': { none: true }
   };
-  function parse(txt) {
-    var p = txt.split('·'); var word = (p.length > 1 ? p[1] : p[0]).trim().toLowerCase();
-    return { word: word, dir: DIR[word] || { none: true } };
-  }
-  function marker(id, c) { return '<marker id="' + id + '" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="' + c + '"/></marker>'; }
-  function gate(cx, c, mk, dir) {
-    var r = 24, mag = 13;
-    var ring = '<circle cx="' + cx + '" cy="80" r="' + r + '" fill="#0c0f14" stroke="#262a31" stroke-width="2"/>'
-      + '<circle cx="' + cx + '" cy="80" r="' + (r - 4) + '" fill="none" stroke="rgba(255,255,255,.05)"/>';
+  function parse(txt) { var p = txt.split('·'); var word = (p.length > 1 ? p[1] : p[0]).trim().toLowerCase(); return { word: word, dir: DIR[word] || { none: true } }; }
+  function mk(id, c) { return '<marker id="' + id + '" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="' + c + '"/></marker>'; }
+
+  /* ---------- RC 2 ---------- */
+  function gate(cx, c, m, dir) {
+    var r = 23, mag = 12;
+    var ring = '<circle cx="' + cx + '" cy="82" r="' + (r + 3) + '" fill="#070a0e"/><circle cx="' + cx + '" cy="82" r="' + r + '" fill="#0c0f14" stroke="#2b3038" stroke-width="2"/><circle cx="' + cx + '" cy="82" r="' + (r - 3) + '" fill="none" stroke="rgba(255,255,255,.05)"/><circle cx="' + (cx - 7) + '" cy="75" r="9" fill="rgba(255,255,255,.04)"/>';
     if (dir.rot) {
-      var arc = '<path d="M ' + (cx + 15) + ' 66 A 16 16 0 1 1 ' + (cx - 8) + ' 64" fill="none" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round" marker-end="url(#' + mk + ')"/>';
-      var k = '<g class="lb-stick-rotor" style="transform-origin:' + cx + 'px 80px"><g transform="translate(' + cx + ',66)"><circle r="7.5" fill="#f4f3ef"/><circle r="7.5" fill="none" stroke="' + c + '" stroke-width="2"/></g></g>';
+      var arc = '<path d="M ' + (cx + 15) + ' 68 A 16 16 0 1 1 ' + (cx - 8) + ' 66" fill="none" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round" marker-end="url(#' + m + ')"/>';
+      var k = '<g class="lb-stick-rotor" style="transform-origin:' + cx + 'px 82px"><g transform="translate(' + cx + ',68)"><circle r="8" fill="url(#knob)"/><circle r="8" fill="none" stroke="' + c + '" stroke-width="2"/><circle r="2.4" fill="' + c + '"/></g></g>';
       return ring + arc + k;
     }
-    if (dir.none) {
-      return ring + '<circle cx="' + cx + '" cy="80" r="8.5" fill="#262a31"/><circle cx="' + cx + '" cy="80" r="8.5" fill="none" stroke="#3a3f47" stroke-width="1.5"/><circle cx="' + cx + '" cy="80" r="2.6" fill="#5a6068"/>';
-    }
-    var ex = cx + dir.x * (r - 2), ey = 80 + dir.y * (r - 2);
-    var arrow = '<line x1="' + cx + '" y1="80" x2="' + ex + '" y2="' + ey + '" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round" marker-end="url(#' + mk + ')" opacity=".5"/>';
-    var k = '<g class="lb-stick-knob" style="--tx:' + (dir.x * mag).toFixed(1) + 'px;--ty:' + (dir.y * mag).toFixed(1) + 'px"><circle cx="' + cx + '" cy="80" r="9" fill="#f4f3ef"/><circle cx="' + cx + '" cy="80" r="9" fill="none" stroke="' + c + '" stroke-width="2"/><circle cx="' + cx + '" cy="80" r="2.6" fill="' + c + '"/></g>';
+    if (dir.none) return ring + '<circle cx="' + cx + '" cy="82" r="9" fill="url(#knob)"/><circle cx="' + cx + '" cy="82" r="9" fill="none" stroke="#3a3f47" stroke-width="1.5"/><circle cx="' + cx + '" cy="82" r="2.4" fill="#5a6068"/>';
+    var ex = cx + dir.x * (r - 1), ey = 82 + dir.y * (r - 1);
+    var arrow = '<line x1="' + cx + '" y1="82" x2="' + ex + '" y2="' + ey + '" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round" marker-end="url(#' + m + ')" opacity=".55"/>';
+    var k = '<g class="lb-stick-knob" style="--tx:' + (dir.x * mag).toFixed(1) + 'px;--ty:' + (dir.y * mag).toFixed(1) + 'px"><circle cx="' + cx + '" cy="82" r="9.5" fill="url(#knob)"/><circle cx="' + cx + '" cy="82" r="9.5" fill="none" stroke="' + c + '" stroke-width="2"/><circle cx="' + cx + '" cy="82" r="2.4" fill="' + c + '"/></g>';
     return ring + arrow + k;
   }
   function rc2(left, right) {
-    var defs = '<defs>' + marker('ahl', SKY) + marker('ahr', OR)
-      + '<linearGradient id="rcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1e23"/><stop offset="1" stop-color="#101216"/></linearGradient>'
-      + '<radialGradient id="rcs" cx="50%" cy="36%" r="85%"><stop offset="0" stop-color="#2a5563"/><stop offset="58%" stop-color="#13242c"/><stop offset="100%" stop-color="#0a0f14"/></radialGradient></defs>';
-    var body = '<rect x="56" y="10" width="4" height="36" rx="2" fill="#262a31" transform="rotate(-13 58 28)"/>'
-      + '<rect x="300" y="10" width="4" height="36" rx="2" fill="#262a31" transform="rotate(13 302 28)"/>'
-      + '<rect x="16" y="40" width="328" height="134" rx="27" fill="url(#rcb)" stroke="#2c313a" stroke-width="1.5"/>'
-      + '<rect x="22" y="118" width="42" height="52" rx="19" fill="#0c0e12" opacity=".55"/>'
-      + '<rect x="296" y="118" width="42" height="52" rx="19" fill="#0c0e12" opacity=".55"/>'
-      + '<rect x="116" y="54" width="128" height="96" rx="10" fill="url(#rcs)" stroke="#262a31" stroke-width="1.5"/>'
-      + '<line x1="126" y1="116" x2="234" y2="116" stroke="#3f7a85" stroke-width="1" opacity=".5"/>'
-      + '<circle class="lb-rc2__beam" cx="180" cy="104" r="7" fill="#ffcf8a"/>'
-      + '<rect x="150" y="158" width="60" height="4" rx="2" fill="#23262c"/>';
-    return '<svg viewBox="0 0 360 190" role="img" aria-label="DJI RC 2 — stickbeweging">' + defs + body + gate(70, SKY, 'ahl', left.dir) + gate(290, OR, 'ahr', right.dir) + '</svg>';
+    var defs = '<defs>' + mk('ahl', SKY) + mk('ahr', OR)
+      + '<linearGradient id="rcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22262c"/><stop offset=".5" stop-color="#171a1f"/><stop offset="1" stop-color="#0d0f13"/></linearGradient>'
+      + '<radialGradient id="knob" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#fbfaf7"/><stop offset="100%" stop-color="#c9c7c0"/></radialGradient>'
+      + '<radialGradient id="rcs" cx="50%" cy="34%" r="88%"><stop offset="0" stop-color="#2f5f6e"/><stop offset="55%" stop-color="#15262e"/><stop offset="100%" stop-color="#0a0f14"/></radialGradient>'
+      + '<linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.18)"/><stop offset="40%" stop-color="rgba(255,255,255,0)"/></linearGradient></defs>';
+    var body = '<rect x="58" y="8" width="3.5" height="34" rx="2" fill="#2b3038" transform="rotate(-13 60 26)"/>'
+      + '<rect x="300" y="8" width="3.5" height="34" rx="2" fill="#2b3038" transform="rotate(13 302 26)"/>'
+      + '<rect x="48" y="30" width="48" height="20" rx="8" fill="#15181d" stroke="#2b3038" stroke-width="1.2"/>'
+      + '<rect x="264" y="30" width="48" height="20" rx="8" fill="#15181d" stroke="#2b3038" stroke-width="1.2"/>'
+      + '<circle cx="72" cy="40" r="6" fill="#0c0f13" stroke="#3a3f47"/><circle cx="288" cy="40" r="6" fill="#0c0f13" stroke="#3a3f47"/>'
+      + '<rect x="14" y="42" width="332" height="134" rx="28" fill="url(#rcb)" stroke="#30353d" stroke-width="1.5"/>'
+      + '<rect x="14" y="42" width="332" height="60" rx="28" fill="url(#sheen)" opacity=".5"/>'
+      + '<rect x="20" y="116" width="46" height="56" rx="20" fill="#0b0d11" opacity=".55"/>'
+      + '<rect x="294" y="116" width="46" height="56" rx="20" fill="#0b0d11" opacity=".55"/>'
+      + '<rect x="116" y="56" width="128" height="98" rx="11" fill="url(#rcs)" stroke="#2b3038" stroke-width="1.5"/>'
+      + '<rect x="116" y="56" width="128" height="44" rx="11" fill="url(#sheen)" opacity=".4"/>'
+      + '<circle class="lb-rc2__beam" cx="180" cy="108" r="7" fill="#ffcf8a"/>'
+      + '<line x1="126" y1="120" x2="234" y2="120" stroke="#4a8590" stroke-width="1" opacity=".5"/>'
+      + '<circle cx="129" cy="65" r="2.4" fill="#e0584d"/><rect x="222" y="62" width="14" height="6" rx="2" fill="none" stroke="#5a6068" stroke-width="1"/>'
+      + '<circle cx="92" cy="150" r="5" fill="#e0584d" opacity=".9"/><circle cx="268" cy="150" r="5" fill="#15181d" stroke="#3a3f47"/>'
+      + '<rect x="150" y="162" width="60" height="4" rx="2" fill="#262a31"/>';
+    return '<svg viewBox="0 0 360 192" role="img" aria-label="DJI RC 2 — stickbeweging">' + defs + body + gate(72, SKY, 'ahl', left.dir) + gate(288, OR, 'ahr', right.dir) + '</svg>';
   }
-  function lab(side, name, word) {
-    var w = (!word || word === '—') ? 'neutraal' : word;
-    return '<div class="lb-rc2__lab ' + side + '"><span>' + name + '</span><b>' + w + '</b></div>';
+
+  /* ---------- drone-scène per move ---------- */
+  function sky(id) { return '<defs><radialGradient id="' + id + '" cx="50%" cy="26%" r="95%"><stop offset="0%" stop-color="#27606e"/><stop offset="62%" stop-color="#143038"/><stop offset="100%" stop-color="#0a1418"/></radialGradient></defs>'; }
+  function dd() { return '<circle r="5.5" fill="' + BONE + '"/><circle r="5.5" fill="none" stroke="#7fe0ec" stroke-width="1.5"/><circle r="9" fill="none" stroke="#7fe0ec" stroke-width="1" opacity=".4"/>'; }
+  function subj(x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="7" fill="' + OR + '"/><circle cx="' + x + '" cy="' + y + '" r="7" fill="none" stroke="#ffd9a8" stroke-width="1.5"/>'; }
+  function pth(d) { return '<path d="' + d + '" fill="none" stroke="' + SKY + '" stroke-width="1.5" stroke-dasharray="4 5" opacity=".55"/>'; }
+  function mv(d, dur) { return '<g>' + dd() + '<animateMotion dur="' + (dur || 4) + 's" path="' + d + '" repeatCount="indefinite"/></g>'; }
+  function scn(inner) { return '<svg viewBox="0 0 260 180" aria-hidden="true">' + sky('sg') + '<rect width="260" height="180" fill="url(#sg)"/>' + inner + '</svg>'; }
+  function droneScene(t) {
+    if (t === 'pushin') { var d = 'M 36 96 H 188'; return scn(subj(212, 96) + '<line x1="212" y1="96" x2="120" y2="70" stroke="#2f6470" stroke-width="1" opacity=".5"/><line x1="212" y1="96" x2="120" y2="122" stroke="#2f6470" stroke-width="1" opacity=".5"/>' + pth(d) + mv(d, 4)); }
+    if (t === 'pullup') { var d = 'M 200 120 Q 130 110 44 50'; return scn(subj(214, 128) + pth(d) + mv(d, 4.5)); }
+    if (t === 'tracking') { var d = 'M 28 150 H 232'; return scn(subj(130, 70) + '<line x1="130" y1="70" x2="130" y2="150" stroke="#2f6470" stroke-width="1" opacity=".4" stroke-dasharray="3 4"/>' + pth(d) + mv(d, 5)); }
+    if (t === 'reveal') { var d = 'M 60 150 Q 70 96 150 60'; return scn('<path d="M 0 150 Q 70 120 120 150 T 260 150 L 260 180 L 0 180 Z" fill="#0c1d22" opacity=".9"/>' + subj(196, 72) + pth(d) + mv(d, 4.5)); }
+    if (t === 'topdown') { return scn(subj(130, 96) + '<circle cx="130" cy="96" r="40" fill="none" stroke="#2f6470" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/><g><polygon points="130,52 122,40 138,40" fill="' + BONE + '"/><circle cx="130" cy="44" r="6" fill="none" stroke="#7fe0ec" stroke-width="1.5"/><animateTransform attributeName="transform" type="translate" values="0 0; 0 6; 0 0" dur="3s" repeatCount="indefinite"/></g><line x1="130" y1="50" x2="130" y2="90" stroke="#7fe0ec" stroke-width="1" opacity=".5"/>'); }
+    if (t === 'orbit') { var d = 'M 130 56 A 52 40 0 1 1 129.9 56'; return scn(subj(130, 96) + '<ellipse cx="130" cy="96" rx="52" ry="40" fill="none" stroke="' + SKY + '" stroke-width="1.5" stroke-dasharray="4 5" opacity=".5"/>' + mv(d, 6)); }
+    if (t === 'rocket') { var d = 'M 150 150 V 40'; return scn(subj(150, 156) + '<g>' + dd() + '<animateMotion dur="4s" path="' + d + '" repeatCount="indefinite"/></g><line x1="150" y1="80" x2="150" y2="150" stroke="#7fe0ec" stroke-width="1" opacity=".4" stroke-dasharray="3 4"/>'); }
+    var dd2 = 'M 36 96 H 188'; return scn(subj(212, 96) + pth(dd2) + mv(dd2, 4));
   }
+  function sceneType(L, R) {
+    if (L.word === 'draai') return 'orbit';
+    if (R.word === 'schuif') return 'topdown';
+    if (R.word === 'zij' || R.word === 'zijwaarts') return 'tracking';
+    if (R.word === 'vooruit' && L.word === 'omhoog') return 'reveal';
+    if (R.word === 'achteruit') return 'pullup';
+    if (L.word === 'omhoog' && R.dir.none) return 'rocket';
+    if (R.word === 'vooruit') return 'pushin';
+    return 'pushin';
+  }
+  function lab(s, n, w) { var x = (!w || w === '—') ? 'neutraal' : w; return '<div class="lb-rc2__lab ' + s + '"><span>' + n + '</span><b>' + x + '</b></div>'; }
+
   document.querySelectorAll('.movecard').forEach(function (mc) {
     var ms = mc.querySelector('.move-sticks');
-    var units = mc.querySelectorAll('.stick-label');
-    if (!ms || units.length < 2) { if (!ms) mc.classList.add('lb-mc-solo'); return; }
-    var left = parse(units[0].textContent), right = parse(units[1].textContent);
-    ms.innerHTML = '<div class="lb-rc2">' + rc2(left, right) + '<div class="lb-rc2__labels">' + lab('l', 'Links', left.word) + lab('r', 'Rechts', right.word) + '</div></div>';
+    var sl = mc.querySelectorAll('.stick-label');
+    if (!ms || sl.length < 2) { if (!ms) mc.classList.add('lb-mc-solo'); return; }
+    var L = parse(sl[0].textContent), R = parse(sl[1].textContent);
+    ms.innerHTML = '<div class="lb-rc2">' + rc2(L, R) + '<div class="lb-rc2__labels">' + lab('l', 'Links', L.word) + lab('r', 'Rechts', R.word) + '</div></div>';
+    var af = mc.querySelector('.anim-frame');
+    if (af) af.innerHTML = droneScene(sceneType(L, R));
   });
 
-  // reveal van cursusblokken
+  /* ---------- Pocket 4 swipe-visual (Grondfilmer) ---------- */
+  function pocket4() {
+    var defs = '<defs><linearGradient id="pb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22262c"/><stop offset="1" stop-color="#0e1014"/></linearGradient><radialGradient id="psc" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#2f5f6e"/><stop offset="60%" stop-color="#15262e"/><stop offset="100%" stop-color="#0a0f14"/></radialGradient><marker id="sa" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#7FB4D6"/></marker></defs>';
+    var dev = '<rect x="150" y="70" width="60" height="150" rx="16" fill="url(#pb)" stroke="#30353d" stroke-width="1.5"/>'
+      + '<rect x="156" y="150" width="48" height="62" rx="8" fill="url(#psc)" stroke="#2b3038"/>'
+      + '<rect x="150" y="40" width="60" height="40" rx="14" fill="#171a1f" stroke="#30353d" stroke-width="1.5"/>'
+      + '<circle cx="180" cy="58" r="11" fill="#0a0d11" stroke="#3a3f47" stroke-width="1.5"/><circle cx="180" cy="58" r="5" fill="#12333a"/><circle cx="177" cy="55" r="2" fill="rgba(255,255,255,.5)"/>';
+    function sw(x1, y1, x2, y2, delay) { return '<g class="lb-sw" style="animation-delay:' + delay + 's"><line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#7FB4D6" stroke-width="3" stroke-linecap="round" marker-end="url(#sa)"/></g>'; }
+    var arrows = sw(180, 150, 180, 120, 0) + sw(156, 181, 120, 181, .5) + sw(180, 212, 180, 244, 1) + sw(204, 181, 240, 181, 1.5);
+    return '<svg viewBox="0 0 360 280" role="img" aria-label="DJI Osmo Pocket 4 — swipe-bediening">' + defs + arrows + dev + '</svg>';
+  }
+  var lesEl = document.querySelector('.les');
+  if (lesEl && lesEl.getAttribute('data-course') === 'grondfilmer') {
+    var vegen = null;
+    document.querySelectorAll('.qm-t').forEach(function (t) { if (!vegen && t.textContent.trim().toLowerCase() === 'vegen') vegen = t; });
+    if (vegen) {
+      var block = vegen.closest('.qref-block');
+      if (block) {
+        var wrap = document.createElement('div');
+        wrap.className = 'lb-pocket lb-cv in';
+        wrap.innerHTML = '<div class="lb-pocket__cap">Vier vegen, vier richtingen</div>' + pocket4();
+        block.parentNode.insertBefore(wrap, block);
+      }
+    }
+  }
+
+  /* ---------- reveal ---------- */
   var sel = '.course-body .recap, .course-body .exercise, .course-body .qref-block, .course-body .movecard, .course-body .recipe, .course-body .tree, .course-body .dayblock, .course-body .field-table, .course-body .callout, .course-body .warn, .course-body .spec, .course-body .sheet, .course-body .pcard, .course-body .spot, .course-body .protip';
   var els = document.querySelectorAll(sel);
   els.forEach(function (el) { el.classList.add('lb-cv'); });
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
-  var io = new IntersectionObserver(function (ents) { ents.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
   els.forEach(function (el) { io.observe(el); });
   setTimeout(function () { els.forEach(function (el) { el.classList.add('in'); }); }, 1400);
 })();

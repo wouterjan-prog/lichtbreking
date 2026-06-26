@@ -289,3 +289,11 @@
   .lb-stick-knob,.lb-stick-rotor,.lb-rc2__beam{ animation:none; }
   .course-body .lb-cv{ opacity:1; transform:none; }
 }
+
+/* Pocket 4 swipe-visual + drone-scène-frame */
+.course-body .lb-pocket{ display:flex; flex-direction:column; align-items:center; gap:.7rem; margin:1.8em 0; padding:1.4rem; background:var(--lb-ink); border:1px solid var(--lb-line); border-radius:16px; }
+.course-body .lb-pocket svg{ width:100%; max-width:210px; height:auto; }
+.course-body .lb-pocket__cap{ font-family:var(--lb-font-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--lb-sky); }
+.lb-sw{ animation:lb-swipe 2.6s ease-in-out infinite; }
+@keyframes lb-swipe{ 0%,100%{opacity:0} 28%,52%{opacity:1} 70%{opacity:0} }
+@media (prefers-reduced-motion:reduce){ .lb-sw{ animation:none; opacity:.9; } }
