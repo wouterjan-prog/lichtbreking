@@ -140,6 +140,21 @@
     var arrows = sw(170, 150, 170, 108, 0) + sw(150, 178, 108, 178, .5) + sw(170, 206, 170, 250, 1) + sw(190, 178, 232, 178, 1.5);
     return '<svg viewBox="0 0 340 290" role="img" aria-label="DJI Osmo Pocket 4 — swipe-bediening">' + defs + arrows + gimbal + body + '</svg>';
   }
+  function gmCam() { return '<rect x="-13" y="-8" width="26" height="16" rx="4" fill="#1b1f25" stroke="#3a4047" stroke-width="1.2"/><circle cx="0" cy="0" r="4.5" fill="#0a0d11" stroke="#4a8590" stroke-width="1.2"/><circle cx="-1.5" cy="-1.5" r="1.4" fill="rgba(255,255,255,.6)"/>'; }
+  function gmPanel(x, title, sub, inner) {
+    return '<g transform="translate(' + x + ',0)"><rect x="0" y="0" width="110" height="100" rx="12" fill="#0c0f14" stroke="#23262c" stroke-width="1.2"/>' + inner
+      + '<text x="55" y="118" text-anchor="middle" font-family="monospace" font-size="9.5" letter-spacing="1.5" fill="#7FB4D6">' + title + '</text>'
+      + '<text x="55" y="130" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#9A9BA1">' + sub + '</text></g>';
+  }
+  function gimbalModes() {
+    var follow = '<line x1="14" y1="54" x2="96" y2="54" stroke="#3f7a85" stroke-width="1.5" opacity=".7"/>'
+      + '<g transform="translate(55,46)">' + gmCam() + '<animateTransform attributeName="transform" type="translate" values="55 42;55 50;55 42" dur="2.6s" repeatCount="indefinite"/></g>'
+      + '<path d="M 30 70 q 25 -10 50 0" fill="none" stroke="#2f6470" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>';
+    var fpv = '<g><line x1="16" y1="54" x2="94" y2="54" stroke="#3f7a85" stroke-width="1.5" opacity=".7"/><g transform="translate(55,46)">' + gmCam() + '</g><animateTransform attributeName="transform" type="rotate" values="-12 55 54;12 55 54;-12 55 54" dur="3s" repeatCount="indefinite"/></g>';
+    var spot = '<ellipse cx="55" cy="52" rx="34" ry="20" fill="none" stroke="#2f6470" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/><circle cx="55" cy="52" r="6" fill="#FF9A2E"/><circle cx="55" cy="52" r="6" fill="none" stroke="#ffd9a8" stroke-width="1.2"/><g><line x1="55" y1="22" x2="55" y2="52" stroke="#7fe0ec" stroke-width="1.2" opacity=".55"/><g transform="translate(55,22)">' + gmCam() + '</g><animateTransform attributeName="transform" type="rotate" values="0 55 52;360 55 52" dur="7s" repeatCount="indefinite"/></g>';
+    return '<svg viewBox="0 0 384 140" role="img" aria-label="Gimbal-modi: Follow, FPV, Spotlight">' + gmPanel(8, 'FOLLOW', 'recht &amp; soepel', follow) + gmPanel(137, 'FPV', 'kantelt mee', fpv) + gmPanel(266, 'SPOTLIGHT', 'blijft gericht', spot) + '</svg>';
+  }
+
   var lesEl = document.querySelector('.les');
   if (lesEl && lesEl.getAttribute('data-course') === 'grondfilmer') {
     var vegen = null;
@@ -153,7 +168,18 @@
         block.parentNode.insertBefore(wrap, block);
       }
     }
+    var fh = null;
+    document.querySelectorAll('.course-body h4').forEach(function (h) { if (!fh && /^follow/i.test(h.textContent.trim())) fh = h; });
+    if (fh) { var g = document.createElement('div'); g.className = 'lb-gm lb-cv in'; g.innerHTML = '<span class="lb-gm__cap">De drie gimbal-modi</span>' + gimbalModes(); fh.parentNode.insertBefore(g, fh); }
   }
+
+  /* ---------- leesvoortgangsbalk ---------- */
+  (function () {
+    var bar = document.createElement('div'); bar.className = 'lb-readbar'; bar.innerHTML = '<span></span>'; document.body.appendChild(bar);
+    var rf = bar.firstChild;
+    function rupd() { var a = document.querySelector('.lesson'); if (!a) return; var t = a.offsetHeight - window.innerHeight; var sc = Math.min(Math.max(-a.getBoundingClientRect().top, 0), t > 0 ? t : 1); rf.style.width = (t > 0 ? (sc / t * 100) : 0) + '%'; }
+    window.addEventListener('scroll', rupd, { passive: true }); window.addEventListener('resize', rupd); rupd();
+  })();
 
   /* ---------- reveal ---------- */
   var sel = '.course-body .recap, .course-body .exercise, .course-body .qref-block, .course-body .movecard, .course-body .recipe, .course-body .tree, .course-body .dayblock, .course-body .field-table, .course-body .callout, .course-body .warn, .course-body .spec, .course-body .sheet, .course-body .pcard, .course-body .spot, .course-body .protip';
