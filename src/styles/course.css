@@ -301,7 +301,7 @@
 /* RC 2 als echte foto (indien /img/rc2.jpg aanwezig) met overlay */
 .course-body .lb-rc2__ph{ position:relative; width:100%; max-width:360px; border-radius:14px; overflow:hidden; border:1px solid var(--lb-line); box-shadow:0 10px 30px rgba(0,0,0,.4); }
 .course-body .lb-rc2__ph img{ display:block; width:100%; height:auto; }
-.course-body .lb-rc2__ov{ position:absolute; width:64px; height:64px; transform:translate(-50%,-50%); }
+.course-body .lb-rc2__ov{ position:absolute; width:20%; aspect-ratio:1; transform:translate(-50%,-50%); }
 .course-body .lb-rc2__ov svg{ width:100%; height:100%; overflow:visible; }
 
 /* Gimbal-modi-blok (Grondfilmer) + leesvoortgangsbalk */
