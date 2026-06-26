@@ -37,6 +37,16 @@ const courses = [
         </a>
       ))}
     </div>
+    {lang === 'nl' && (
+      <a href="/shotlist/" class="tool-cta lb-reveal">
+        <div class="tool-cta__txt">
+          <span class="lb-label lb-label--sky">Gratis tool</span>
+          <h2 class="tool-cta__title">Shotlist-planner</h2>
+          <p class="tool-cta__desc">Plan per locatie je shots — wide, medium, detail, drone of grond — en neem de lijst mee of print 'm.</p>
+        </div>
+        <span class="course__cta">Open de planner →</span>
+      </a>
+    )}
   </main>
   <Footer lang={lang} />
 </Base>
@@ -56,5 +66,9 @@ const courses = [
   .course__title { margin: 4px 0 2px; }
   .course__desc { color: var(--lb-mist); font-size: var(--lb-small); margin: 8px 0 16px; flex: 1; }
   .course__cta { color: var(--lb-bone); font-weight: 500; font-size: var(--lb-small); }
+  .tool-cta { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 22px; padding: 26px 28px; background: var(--lb-ink); border: 1px solid var(--lb-line); border-radius: var(--lb-r-lg); transition: border-color var(--lb-dur) var(--lb-ease), transform var(--lb-dur) var(--lb-ease); }
+  .tool-cta:hover { border-color: var(--lb-mist); transform: translateY(-2px); }
+  .tool-cta__title { margin: 6px 0 4px; }
+  .tool-cta__desc { color: var(--lb-mist); font-size: var(--lb-small); max-width: 60ch; margin: 0; }
   @media (max-width: 860px) { .courses { grid-template-columns: 1fr; } }
 </style>

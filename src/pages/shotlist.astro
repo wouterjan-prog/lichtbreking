@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import GlassNav from '../components/GlassNav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="Shotlist-planner" description="Plan per locatie je shots — wide, medium, detail, drone of grond — en neem de lijst mee of print 'm." path="/shotlist/">
+  <GlassNav active="cursussen" switchHref="/en/cursussen/" />
+  <main class="lb-container sl-page">
+    <header class="sl-head lb-reveal">
+      <span class="lb-label lb-label--sky">Gratis tool</span>
+      <h1 class="lb-display-l">Shotlist-planner</h1>
+      <p class="lb-lead">Plan vooraf welke shots je per locatie wilt maken. Denk in dekking — wide, medium en detail — en wissel lucht en grond af. Je lijst blijft bewaard op dit apparaat; print 'm of kopieer 'm voor onderweg.</p>
+    </header>
+
+    <div class="sl-grid">
+      <section class="sl-card lb-reveal">
+        <span class="sl-cap">Nieuwe shot</span>
+        <div class="sl-form">
+          <input type="text" id="slLoc" placeholder="Locatie of onderwerp (bv. de vuurtoren)" />
+          <div class="sl-selects">
+            <label>Type
+              <select id="slType"><option>wide</option><option>medium</option><option>detail</option></select>
+            </label>
+            <label>Camera
+              <select id="slCam"><option value="drone">drone</option><option value="grond">grond</option></select>
+            </label>
+          </div>
+          <button class="lb-btn" id="slAdd">Shot toevoegen</button>
+        </div>
+        <p class="sl-hint">Tip: mik per locatie op minstens één wide, één medium en één detail.</p>
+      </section>
+
+      <section class="sl-card lb-reveal" id="slListCard">
+        <div class="sl-listhead">
+          <span class="sl-cap" style="margin:0">Jouw shotlist</span>
+          <span class="sl-count" id="slCount">0 shots</span>
+        </div>
+        <div id="slList"></div>
+        <div class="sl-actions">
+          <button class="lb-btn lb-btn--ghost" id="slCopy">Kopieer lijst</button>
+          <button class="lb-btn lb-btn--ghost" id="slPrint">Print</button>
+          <button class="sl-clear" id="slClear">Wis alles</button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .sl-page { padding-top: 130px; padding-bottom: 96px; }
+  .sl-head { max-width: 64ch; margin-bottom: 40px; }
+  .sl-head h1 { margin: 10px 0 16px; }
+  .sl-grid { display: grid; grid-template-columns: 360px 1fr; gap: 22px; align-items: start; }
+  .sl-card { background: var(--lb-ink); border: 1px solid var(--lb-line); border-radius: 16px; padding: 1.5rem 1.6rem; }
+  .sl-cap { display: block; font-family: var(--lb-font-mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--lb-sky); margin-bottom: 1.1rem; }
+  .sl-form { display: flex; flex-direction: column; gap: 12px; }
+  .sl-form input, .sl-form select { background: var(--lb-surface); border: 1px solid var(--lb-line); color: var(--lb-bone); border-radius: 10px; padding: .7rem .8rem; font-size: .95rem; font-family: var(--lb-font-text); width: 100%; }
+  .sl-selects { display: flex; gap: 12px; }
+  .sl-selects label { flex: 1; display: flex; flex-direction: column; gap: 6px; font-family: var(--lb-font-mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--lb-mist); }
+  .sl-hint { color: var(--lb-mist); font-size: .85rem; margin: 1rem 0 0; }
+  .sl-listhead { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; }
+  .sl-count { font-family: var(--lb-font-mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--lb-mist); }
+  .sl-item { display: flex; align-items: center; gap: 12px; background: var(--lb-surface); border: 1px solid var(--lb-line-soft, rgba(127,127,140,.13)); border-radius: 10px; padding: .65rem .85rem; margin: .45rem 0; font-size: .95rem; }
+  .sl-pill { font-family: var(--lb-font-mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+  .sl-pill.drone { background: rgba(127,180,214,.16); color: var(--lb-sky); }
+  .sl-pill.grond { background: rgba(255,154,46,.16); color: var(--lb-orange); }
+  .sl-type { font-family: var(--lb-font-mono); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; color: var(--lb-mist); }
+  .sl-loc { flex: 1; }
+  .sl-x { margin-left: auto; cursor: pointer; color: var(--lb-mist); background: none; border: 0; font-size: 1.2rem; line-height: 1; padding: 0 4px; }
+  .sl-x:hover { color: var(--lb-bone); }
+  .sl-empty { color: var(--lb-mist); font-size: .9rem; padding: .4rem 0; }
+  .sl-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px solid var(--lb-line); }
+  .sl-clear { margin-left: auto; background: none; border: 0; color: var(--lb-mist); font-family: var(--lb-font-mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+  .sl-clear:hover { color: var(--lb-orange); }
+  @media (max-width: 760px) { .sl-grid { grid-template-columns: 1fr; } }
+  @media print {
+    .lb-nav-shell, .lb-foot, .sl-card .sl-form, .sl-hint, .sl-actions, #slListCard .sl-cap { display: none !important; }
+    .sl-page { padding-top: 0; }
+    body { background: #fff !important; }
+    .sl-card { border: none; background: #fff !important; }
+    .sl-item { color: #15171c; border-color: #ddd; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .sl-head h1, .sl-head .lb-lead { color: #15171c !important; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var KEY = 'lb-shotlist';
+    var list = document.getElementById('slList'), cnt = document.getElementById('slCount');
+    function load() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; } }
+    function save(a) { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} }
+    var shots = load();
+    function render() {
+      list.innerHTML = '';
+      if (!shots.length) { list.innerHTML = '<div class="sl-empty">Nog geen shots — voeg je eerste toe.</div>'; }
+      shots.forEach(function (s, i) {
+        var el = document.createElement('div'); el.className = 'sl-item';
+        var pill = document.createElement('span'); pill.className = 'sl-pill ' + s.cam; pill.textContent = s.cam;
+        var type = document.createElement('span'); type.className = 'sl-type'; type.textContent = s.type;
+        var loc = document.createElement('span'); loc.className = 'sl-loc'; loc.textContent = s.loc;
+        var x = document.createElement('button'); x.className = 'sl-x'; x.setAttribute('aria-label', 'verwijder'); x.textContent = '×';
+        x.addEventListener('click', function () { shots.splice(i, 1); save(shots); render(); });
+        el.appendChild(pill); el.appendChild(type); el.appendChild(loc); el.appendChild(x);
+        list.appendChild(el);
+      });
+      cnt.textContent = shots.length + ' shot' + (shots.length === 1 ? '' : 's');
+    }
+    document.getElementById('slAdd').addEventListener('click', function () {
+      var loc = (document.getElementById('slLoc').value || '').trim() || '(naamloos)';
+      shots.push({ loc: loc, type: document.getElementById('slType').value, cam: document.getElementById('slCam').value });
+      save(shots); document.getElementById('slLoc').value = ''; render(); document.getElementById('slLoc').focus();
+    });
+    document.getElementById('slLoc').addEventListener('keydown', function (e) { if (e.key === 'Enter') document.getElementById('slAdd').click(); });
+    document.getElementById('slCopy').addEventListener('click', function () {
+      var t = shots.map(function (s) { return '- [' + s.cam + '] ' + s.type + ' — ' + s.loc; }).join('\n');
+      var b = this;
+      if (navigator.clipboard && t) navigator.clipboard.writeText(t);
+      b.textContent = shots.length ? 'Gekopieerd ✓' : 'Lijst is leeg'; setTimeout(function () { b.textContent = 'Kopieer lijst'; }, 1400);
+    });
+    document.getElementById('slPrint').addEventListener('click', function () { window.print(); });
+    document.getElementById('slClear').addEventListener('click', function () { if (confirm('Hele shotlist wissen?')) { shots = []; save(shots); render(); } });
+    render();
+  })();
+</script>
