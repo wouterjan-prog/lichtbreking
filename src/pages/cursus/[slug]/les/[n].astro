@@ -4,6 +4,7 @@ import GlassNav from '../../../../components/GlassNav.astro';
 import Footer from '../../../../components/Footer.astro';
 import { courses, getLessons } from '../../../../data/courses.js';
 import '../../../../styles/course.css';
+import CourseEnhance from '../../../../components/CourseEnhance.astro';
 
 export function getStaticPaths() {
   const paths = [];
@@ -66,6 +67,7 @@ const isRef = les.kind === 'reference';
       </article>
     </div>
   </main>
+  <CourseEnhance />
   <Footer />
 </Base>
 

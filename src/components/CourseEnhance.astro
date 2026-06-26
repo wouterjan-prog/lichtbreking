@@ -1,0 +1,74 @@
+---
+/* CourseEnhance — bouwt de RC 2-stickvisualisatie en zet reveal-animaties aan op lespagina's. */
+---
+<script is:inline>
+(function () {
+  var SKY = '#7FB4D6', OR = '#FF9A2E';
+  var DIR = {
+    'vooruit': { x: 0, y: -1 }, 'achteruit': { x: 0, y: 1 }, 'zij': { x: 1, y: 0 }, 'zijwaarts': { x: 1, y: 0 },
+    'schuif': { x: 1, y: .25 }, 'omhoog': { x: 0, y: -1 }, 'omlaag': { x: 0, y: 1 },
+    'links': { x: -1, y: 0 }, 'rechts': { x: 1, y: 0 }, 'draai': { rot: true }, '—': { none: true }, '': { none: true }
+  };
+  function parse(txt) {
+    var p = txt.split('·'); var word = (p.length > 1 ? p[1] : p[0]).trim().toLowerCase();
+    return { word: word, dir: DIR[word] || { none: true } };
+  }
+  function marker(id, c) { return '<marker id="' + id + '" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="' + c + '"/></marker>'; }
+  function gate(cx, c, mk, dir) {
+    var r = 24, mag = 13;
+    var ring = '<circle cx="' + cx + '" cy="80" r="' + r + '" fill="#0c0f14" stroke="#262a31" stroke-width="2"/>'
+      + '<circle cx="' + cx + '" cy="80" r="' + (r - 4) + '" fill="none" stroke="rgba(255,255,255,.05)"/>';
+    if (dir.rot) {
+      var arc = '<path d="M ' + (cx + 15) + ' 66 A 16 16 0 1 1 ' + (cx - 8) + ' 64" fill="none" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round" marker-end="url(#' + mk + ')"/>';
+      var k = '<g class="lb-stick-rotor" style="transform-origin:' + cx + 'px 80px"><g transform="translate(' + cx + ',66)"><circle r="7.5" fill="#f4f3ef"/><circle r="7.5" fill="none" stroke="' + c + '" stroke-width="2"/></g></g>';
+      return ring + arc + k;
+    }
+    if (dir.none) {
+      return ring + '<circle cx="' + cx + '" cy="80" r="8.5" fill="#262a31"/><circle cx="' + cx + '" cy="80" r="8.5" fill="none" stroke="#3a3f47" stroke-width="1.5"/><circle cx="' + cx + '" cy="80" r="2.6" fill="#5a6068"/>';
+    }
+    var ex = cx + dir.x * (r - 2), ey = 80 + dir.y * (r - 2);
+    var arrow = '<line x1="' + cx + '" y1="80" x2="' + ex + '" y2="' + ey + '" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round" marker-end="url(#' + mk + ')" opacity=".5"/>';
+    var k = '<g class="lb-stick-knob" style="--tx:' + (dir.x * mag).toFixed(1) + 'px;--ty:' + (dir.y * mag).toFixed(1) + 'px"><circle cx="' + cx + '" cy="80" r="9" fill="#f4f3ef"/><circle cx="' + cx + '" cy="80" r="9" fill="none" stroke="' + c + '" stroke-width="2"/><circle cx="' + cx + '" cy="80" r="2.6" fill="' + c + '"/></g>';
+    return ring + arrow + k;
+  }
+  function rc2(left, right) {
+    var defs = '<defs>' + marker('ahl', SKY) + marker('ahr', OR)
+      + '<linearGradient id="rcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1e23"/><stop offset="1" stop-color="#101216"/></linearGradient>'
+      + '<radialGradient id="rcs" cx="50%" cy="36%" r="85%"><stop offset="0" stop-color="#2a5563"/><stop offset="58%" stop-color="#13242c"/><stop offset="100%" stop-color="#0a0f14"/></radialGradient></defs>';
+    var body = '<rect x="56" y="10" width="4" height="36" rx="2" fill="#262a31" transform="rotate(-13 58 28)"/>'
+      + '<rect x="300" y="10" width="4" height="36" rx="2" fill="#262a31" transform="rotate(13 302 28)"/>'
+      + '<rect x="16" y="40" width="328" height="134" rx="27" fill="url(#rcb)" stroke="#2c313a" stroke-width="1.5"/>'
+      + '<rect x="22" y="118" width="42" height="52" rx="19" fill="#0c0e12" opacity=".55"/>'
+      + '<rect x="296" y="118" width="42" height="52" rx="19" fill="#0c0e12" opacity=".55"/>'
+      + '<rect x="116" y="54" width="128" height="96" rx="10" fill="url(#rcs)" stroke="#262a31" stroke-width="1.5"/>'
+      + '<line x1="126" y1="116" x2="234" y2="116" stroke="#3f7a85" stroke-width="1" opacity=".5"/>'
+      + '<circle class="lb-rc2__beam" cx="180" cy="104" r="7" fill="#ffcf8a"/>'
+      + '<rect x="150" y="158" width="60" height="4" rx="2" fill="#23262c"/>';
+    return '<svg viewBox="0 0 360 190" role="img" aria-label="DJI RC 2 — stickbeweging">' + defs + body + gate(70, SKY, 'ahl', left.dir) + gate(290, OR, 'ahr', right.dir) + '</svg>';
+  }
+  function lab(side, name, word) {
+    var w = (!word || word === '—') ? 'neutraal' : word;
+    return '<div class="lb-rc2__lab ' + side + '"><span>' + name + '</span><b>' + w + '</b></div>';
+  }
+  document.querySelectorAll('.movecard').forEach(function (mc) {
+    var ms = mc.querySelector('.move-sticks');
+    var units = mc.querySelectorAll('.stick-label');
+    if (!ms || units.length < 2) { if (!ms) mc.classList.add('lb-mc-solo'); return; }
+    var left = parse(units[0].textContent), right = parse(units[1].textContent);
+    ms.innerHTML = '<div class="lb-rc2">' + rc2(left, right) + '<div class="lb-rc2__labels">' + lab('l', 'Links', left.word) + lab('r', 'Rechts', right.word) + '</div></div>';
+  });
+
+  // reveal van cursusblokken
+  var sel = '.course-body .recap, .course-body .exercise, .course-body .qref-block, .course-body .movecard, .course-body .recipe, .course-body .tree, .course-body .dayblock, .course-body .field-table, .course-body .callout, .course-body .warn, .course-body .spec, .course-body .sheet, .course-body .pcard, .course-body .spot, .course-body .protip';
+  var els = document.querySelectorAll(sel);
+  els.forEach(function (el) { el.classList.add('lb-cv'); });
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (ents) { ents.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+  els.forEach(function (el) { io.observe(el); });
+  setTimeout(function () { els.forEach(function (el) { el.classList.add('in'); }); }, 1400);
+})();
+</script>
+<style>
+  .course-body .movecard.lb-mc-solo { grid-template-columns: 1fr; }
+</style>

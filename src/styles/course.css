@@ -250,3 +250,42 @@
     --amber-deep:#9a5512; --green-deep:#2f7a45;
   }
 }
+
+/* ============================================================
+   Sterkere cursus-visuals: RC 2-stickvisualisatie, movecards,
+   reveal-animaties. (course-enhance.js bouwt de RC 2-SVG.)
+   ============================================================ */
+.course-body .movecard{
+  background:var(--lb-ink) !important; border:1px solid var(--lb-line) !important; border-radius:16px;
+  padding:1.5rem 1.6rem; margin:1.8em 0; display:grid; grid-template-columns:1.05fr .95fr;
+  gap:1.6rem; align-items:center; box-shadow:0 1px 0 rgba(255,255,255,.03) inset;
+}
+.course-body .move-anim{ display:flex; flex-direction:column; gap:.7rem; }
+.course-body .anim-frame{ border-radius:12px; overflow:hidden; border:1px solid var(--lb-line); background:#0a0d10; box-shadow:0 8px 24px rgba(0,0,0,.35); aspect-ratio:13/9; }
+.course-body .anim-frame svg{ display:block; width:100%; height:100%; }
+.course-body .move-cap{ font-family:var(--lb-font-mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--lb-sky); }
+.course-body .move-sticks{ display:flex; justify-content:center; }
+
+/* RC 2 */
+.lb-rc2{ width:100%; display:flex; flex-direction:column; align-items:center; gap:.9rem; }
+.lb-rc2 svg{ width:100%; max-width:340px; height:auto; display:block; }
+.lb-rc2__labels{ display:flex; gap:1.6rem; justify-content:center; }
+.lb-rc2__lab{ font-family:var(--lb-font-mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; text-align:center; line-height:1.5; }
+.lb-rc2__lab b{ display:block; color:var(--lb-bone); font-weight:700; }
+.lb-rc2__lab.l span{ color:var(--lb-sky); } .lb-rc2__lab.r span{ color:var(--lb-orange); }
+.lb-stick-knob{ animation:lb-stickmove 3.2s cubic-bezier(.5,.05,.3,1) infinite; }
+.lb-stick-rotor{ animation:lb-stickrot 4.5s linear infinite; transform-origin:center; }
+.lb-rc2__beam{ animation:lb-beam 3.2s ease-in-out infinite; transform-origin:center; }
+@keyframes lb-stickmove{ 0%,14%{transform:translate(0,0)} 46%,64%{transform:translate(var(--tx,0),var(--ty,0))} 100%{transform:translate(0,0)} }
+@keyframes lb-stickrot{ to{transform:rotate(360deg)} }
+@keyframes lb-beam{ 0%,100%{opacity:.25} 50%{opacity:.9} }
+
+/* reveal van cursusblokken */
+.course-body .lb-cv{ opacity:0; transform:translateY(16px); transition:opacity .7s var(--lb-ease), transform .7s var(--lb-ease); }
+.course-body .lb-cv.in{ opacity:1; transform:none; }
+
+@media (max-width:680px){ .course-body .movecard{ grid-template-columns:1fr; } }
+@media (prefers-reduced-motion:reduce){
+  .lb-stick-knob,.lb-stick-rotor,.lb-rc2__beam{ animation:none; }
+  .course-body .lb-cv{ opacity:1; transform:none; }
+}
