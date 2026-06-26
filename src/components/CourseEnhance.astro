@@ -204,6 +204,38 @@
     return _vsvg('0 0 320 110', chip(6, '24 FPS', 'framerate', '#cfe6ef') + '<text x="120" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#7FB4D6">×2</text>' + disc + '<text x="202" y="60" text-anchor="middle" font-family="monospace" font-size="15" fill="#7FB4D6">→</text>' + chip(220, '1/50 s', 'sluitertijd', '#FF9A2E'));
   }
 
+  function kelvinViz() {
+    var d = '<defs><linearGradient id="cvkv" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff7a2e"/><stop offset=".28" stop-color="#ffcaa0"/><stop offset=".5" stop-color="#fff6ec"/><stop offset=".72" stop-color="#cfe0f2"/><stop offset="1" stop-color="#9fc0e8"/></linearGradient></defs>';
+    var cap = '<text x="160" y="24" text-anchor="middle" font-family="monospace" font-size="8.5" letter-spacing="1" fill="#7FB4D6">WARM &#8226; &#8592; KELVIN &#8594; &#8226; KOEL</text>';
+    var bar = '<rect x="20" y="40" width="280" height="26" rx="8" fill="url(#cvkv)" stroke="#23262c" stroke-width="1"/>';
+    function tick(p, k, t) { var x = 20 + 280 * p; return '<line x1="' + x + '" y1="40" x2="' + x + '" y2="66" stroke="#0c0f14" stroke-width="1" opacity=".35"/><text x="' + x + '" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#cfd2d6">' + k + '</text><text x="' + x + '" y="93" text-anchor="middle" font-family="monospace" font-size="7" fill="#9A9BA1">' + t + '</text>'; }
+    var ticks = tick(.06, '2000', 'kaars') + tick(.26, '3000', 'lamp') + tick(.5, '5500', 'daglicht') + tick(.72, '6500', 'bewolkt') + tick(.92, '7500', 'schaduw');
+    var ptr = '<g><polygon points="0,-7 -5,-16 5,-16" fill="' + OR + '"/><animateTransform attributeName="transform" type="translate" values="40 40;160 40;280 40;160 40;40 40" dur="8s" repeatCount="indefinite"/></g>';
+    return _vsvg('0 0 320 104', d + cap + bar + ptr + ticks);
+  }
+  function ndViz() {
+    function cell(x, nm, cond, stops, dark) {
+      return '<circle cx="' + (x + 34) + '" cy="44" r="26" fill="#ffd27a"/><circle cx="' + (x + 34) + '" cy="44" r="26" fill="#06080b" opacity="' + dark + '"/><circle cx="' + (x + 34) + '" cy="44" r="26" fill="none" stroke="#3a4047" stroke-width="1.5"/><circle cx="' + (x + 26) + '" cy="36" r="5" fill="#fff" opacity="' + (0.5 * (1 - dark)) + '"/>'
+        + '<text x="' + (x + 34) + '" y="86" text-anchor="middle" font-family="monospace" font-size="11" fill="#FF9A2E">' + nm + '</text>'
+        + '<text x="' + (x + 34) + '" y="98" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#cfd2d6">' + cond + '</text>'
+        + '<text x="' + (x + 34) + '" y="108" text-anchor="middle" font-family="monospace" font-size="7" fill="#9A9BA1">' + stops + '</text>';
+    }
+    var cap = '<text x="170" y="14" text-anchor="middle" font-family="monospace" font-size="8.5" letter-spacing="1" fill="#7FB4D6">MEER LICHT &#8594; STERKER FILTER</text>';
+    return _vsvg('0 0 340 116', cap + cell(8, 'ND8', 'bewolkt', '-3 stops', .34) + cell(90, 'ND16', 'zonnig', '-4 stops', .5) + cell(172, 'ND32', 'fel', '-5 stops', .66) + cell(254, 'ND64', 'water/sneeuw', '-6 stops', .8));
+  }
+  function hyperViz() {
+    var d = '<defs><linearGradient id="cvhg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2f6470"/><stop offset="1" stop-color="#7FB4D6"/></linearGradient></defs>';
+    var top = '<text x="20" y="26" font-family="monospace" font-size="8" fill="#9A9BA1">OPNAME &#183; 10 min</text>';
+    var line1 = '<line x1="20" y1="40" x2="300" y2="40" stroke="#2f6470" stroke-width="2"/>';
+    var ticks = ''; for (var i = 0; i < 15; i++) { var x = 20 + i * 20; ticks += '<line x1="' + x + '" y1="33" x2="' + x + '" y2="47" stroke="' + SKY + '" stroke-width="2"/>'; }
+    var cam = '<g><circle cx="20" cy="40" r="5" fill="' + OR + '"/><animateMotion dur="4s" path="M 0 0 H 280" repeatCount="indefinite"/></g>';
+    var arrow = '<text x="160" y="68" text-anchor="middle" font-family="monospace" font-size="9" fill="#7FB4D6">&#8595; samengeperst in de tijd &#8595;</text>';
+    var bot = '<text x="20" y="88" font-family="monospace" font-size="8" fill="#9A9BA1">CLIP &#183; 10 sec</text>';
+    var line2 = '<rect x="20" y="96" width="120" height="10" rx="5" fill="url(#cvhg)"/><rect x="20" y="96" width="280" height="10" rx="5" fill="none" stroke="#23262c" stroke-width="1"/>';
+    var ph = '<g><rect x="18" y="92" width="4" height="18" rx="2" fill="' + OR + '"><animate attributeName="x" values="18;296;18" dur="3s" repeatCount="indefinite"/></rect></g>';
+    return _vsvg('0 0 320 118', d + top + line1 + ticks + cam + arrow + bot + line2 + ph);
+  }
+
   /* injecteer visuals vóór de juiste kop */
   (function () {
     var cb = document.querySelector('.course-body'); if (!cb) return;
@@ -216,7 +248,11 @@
       { c: 'grondfilmer',  n: 'hoe je het aanzet',       b: activeTrackViz, cap: 'ActiveTrack — de camera volgt je onderwerp' },
       { c: 'grondfilmer',  n: 'de vier basisbewegingen', b: groundMovesViz, cap: 'Vier bewegingen — jij beweegt, niet de zoom' },
       { c: 'vluchtfilmer', n: 'video',                   b: shutterRuleViz, cap: 'De 180&deg;-regel — sluitertijd &asymp; 2&times; je framerate' },
-      { c: 'grondfilmer',  n: 'iso',                     b: shutterRuleViz, cap: 'De 180&deg;-regel — sluitertijd &asymp; 2&times; je framerate' }
+      { c: 'grondfilmer',  n: 'iso',                     b: shutterRuleViz, cap: 'De 180&deg;-regel — sluitertijd &asymp; 2&times; je framerate' },
+      { c: 'vluchtfilmer', n: 'witbalans',               b: kelvinViz,      cap: 'Witbalans in Kelvin — van warm naar koel' },
+      { c: 'grondfilmer',  n: 'witbalans vastzetten',    b: kelvinViz,      cap: 'Witbalans in Kelvin — van warm naar koel' },
+      { c: 'vluchtfilmer', n: 'nd-filters',              b: ndViz,          cap: 'ND-filterkeuze — hoe feller het licht, hoe sterker' },
+      { c: 'vluchtfilmer', n: 'hyperlapse',              b: hyperViz,       cap: 'Hyperlapse — lange opname, korte vloeiende clip' }
     ];
     var heads = cb.querySelectorAll('h4, h3');
     M.forEach(function (m) {
@@ -228,6 +264,25 @@
         box.innerHTML = '<span class="lb-viz__cap">' + m.cap + '</span>' + m.b();
         target.parentNode.insertBefore(box, target);
       }
+    });
+  })();
+
+  /* ---------- printvriendelijke kaarten: huisstijl + logo ---------- */
+  (function () {
+    var cards = document.querySelectorAll('.course-body .pcard');
+    if (!cards.length) return;
+    var le = document.querySelector('.les');
+    var course = le ? le.getAttribute('data-course') : '';
+    var label = course === 'grondfilmer' ? 'De Grondfilmer' : 'De Vluchtfilmer';
+    function iris(uid) {
+      return '<svg viewBox="0 0 100 100" class="lb-iris" aria-hidden="true"><defs><linearGradient id="' + uid + '" x1="20" y1="14" x2="80" y2="86" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5147"/><stop offset=".22" stop-color="#FF9A2E"/><stop offset=".42" stop-color="#FFD23E"/><stop offset=".6" stop-color="#46C95F"/><stop offset=".8" stop-color="#2F7CF0"/><stop offset="1" stop-color="#9B4DDB"/></linearGradient></defs><polygon points="50,12 82.9,31 82.9,69 50,88 17.1,69 17.1,31" fill="none" stroke="url(#' + uid + ')" stroke-width="6" stroke-linejoin="round"/><polygon points="60,32.7 70,50 60,67.3 40,67.3 30,50 40,32.7" fill="none" stroke="currentColor" stroke-opacity=".9" stroke-width="2.4" stroke-linejoin="round"/></svg>';
+    }
+    cards.forEach(function (card, i) {
+      if (card.querySelector('.pcard-brand')) return;
+      var b = document.createElement('div');
+      b.className = 'pcard-brand';
+      b.innerHTML = iris('pci' + i) + '<span class="pcard-brand__name">lichtbreking</span><span class="pcard-brand__sub">' + label + ' &middot; veldkaart</span><span class="pcard-brand__url">lichtbreking.nl</span>';
+      card.insertBefore(b, card.firstChild);
     });
   })();
 

@@ -204,6 +204,11 @@
 .course-body .pcard-h{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--rust);padding-bottom:.7rem;margin-bottom:1.1rem}
 .course-body .pcard-h h4{font-family:var(--serif);font-size:1.5rem;color:var(--ink);font-weight:400;margin:0;border:none;padding:0;letter-spacing:0;text-transform:none}
 .course-body .pcard-h .pc-tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust-deep);font-weight:700}
+.course-body .pcard-brand{display:flex;align-items:center;gap:.55rem;margin-bottom:1.1rem;padding-bottom:.85rem;border-bottom:1px solid var(--line)}
+.course-body .pcard-brand .lb-iris{width:22px;height:22px;color:var(--ink);flex:0 0 auto}
+.course-body .pcard-brand__name{font-family:var(--serif);font-weight:500;letter-spacing:-.02em;color:var(--ink);font-size:1.02rem}
+.course-body .pcard-brand__sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.course-body .pcard-brand__url{margin-left:auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--rust-deep)}
 .course-body .protip{background:rgba(255,154,46,.10);border-left:4px solid var(--rust);border-radius:0 9px 9px 0;padding:1rem 1.3rem;margin:1.3rem 0}
 .course-body .protip .pt-h{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust-deep);font-weight:700;margin-bottom:.35rem}
 .course-body .chap-hero{background:linear-gradient(135deg,#0f2c33,#143b43);border-radius:16px;padding:2.4rem 2rem;margin:1.6rem 0 2rem;color:#eef7f9}
@@ -314,3 +319,36 @@
 .lb-readbar{ position:fixed; top:0; left:0; right:0; height:3px; z-index:200; background:transparent; pointer-events:none; }
 .lb-readbar span{ display:block; height:100%; width:0; background:var(--lb-spectrum); transition:width .12s linear; }
 @media (prefers-reduced-motion:reduce){ .lb-readbar span{ transition:none; } }
+
+/* ----- Printvriendelijke veldkaarten: huisstijl op wit papier ----- */
+@media print {
+  @page { margin: 14mm; }
+  html, body { background:#fff !important; }
+  .lb-nav-shell, .lb-readbar, .lb-foot, .side, .les-foot, .back-m, .les-min,
+  .les-head .lb-label, .les-head .hr, .lb-viz, .lb-gm, .lb-pocket { display:none !important; }
+  .les-wrap { display:block !important; padding:0 !important; }
+  .lesson { max-width:none !important; min-width:0 !important; }
+  .les-head h1 { color:#15171c !important; }
+  .course-body { color:#15171c !important; font-size:11.5pt; }
+  .course-body .chap-hero { background:#fff !important; color:#15171c !important; border:1px solid #d8d3c7; border-radius:12px; }
+  .course-body .chap-hero h3 { color:#15171c !important; }
+  .course-body .chap-hero p, .course-body .chap-hero .ch-kicker { color:#5a5e52 !important; }
+  /* elke veldkaart op een eigen pagina */
+  .course-body .pcard { break-before:page; page-break-before:always; break-inside:avoid;
+    background:#fff !important; border:1.5px solid #15171c !important; border-radius:14px;
+    box-shadow:none !important; padding:1.4rem 1.6rem; }
+  .course-body .pcard, .course-body .pcard * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .course-body .pcard-h { border-bottom-color:#FF9A2E !important; }
+  .course-body .pcard-h h4 { color:#15171c !important; }
+  .course-body .pcard-h .pc-tag { color:#c2620f !important; }
+  .course-body .pcard-brand { border-bottom-color:#ddd8cc !important; }
+  .course-body .pcard-brand .lb-iris { color:#15171c !important; }
+  .course-body .pcard-brand__name { color:#15171c !important; }
+  .course-body .pcard-brand__sub { color:#6b6f63 !important; }
+  .course-body .pcard-brand__url { color:#c2620f !important; }
+  .course-body .qref-mini { background:#f5f2ea !important; border:1px solid #e7e2d6; }
+  .course-body .qref-mini .qm-t { color:#c2620f !important; }
+  .course-body .qref-mini .qm-r { color:#15171c !important; border-bottom-color:#e3ddcf !important; }
+  .course-body .qref-mini .qm-r span { color:#3a3d35 !important; }
+  .course-body .qref-mini .qm-r b { color:#15536b !important; }
+}
