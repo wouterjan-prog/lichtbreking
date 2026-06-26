@@ -12,6 +12,7 @@ export function getStaticPaths() {
 const { course } = Astro.props;
 const lessons = getLessons(course);
 const total = course.modules.length;
+const hasCards = (course.naslag || []).some((r) => r.key === 'printkaarten');
 
 // groepeer modules per deel (in volgorde)
 const parts = [];
@@ -45,6 +46,7 @@ const jsonld = {
       </div>
       <div class="cur-cta">
         <a href={`/cursus/${course.slug}/les/1/`} class="lb-btn" id="startBtn">Start de cursus</a>
+        {hasCards && <a href={`/cursus/${course.slug}/les/printkaarten/`} class="lb-btn lb-btn--ghost">Print de veldkaarten</a>}
       </div>
       <div class="rule"><SpectrumRule width="160px" thickness={3} /></div>
     </section>
@@ -101,7 +103,7 @@ const jsonld = {
   .prog-fill { height: 100%; width: 0; border-radius: 6px; background: var(--lb-spectrum); transition: width .5s var(--lb-ease); }
   .reset { font-family: var(--lb-font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--lb-mist); background: none; border: 1px solid var(--lb-line); border-radius: 20px; padding: 5px 12px; cursor: pointer; }
   .reset:hover { color: var(--lb-bone); }
-  .cur-cta { margin-bottom: 6px; }
+  .cur-cta { margin-bottom: 6px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .rule { margin-top: 30px; }
 
   .cur-body { padding-top: 40px; padding-bottom: 100px; display: grid; grid-template-columns: 1fr; gap: 10px; }
