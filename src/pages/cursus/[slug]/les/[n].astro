@@ -81,6 +81,22 @@ const isModule = les.kind === 'module';
           </div>
         )}
 
+        {isModule && les.quiz && les.quiz.length > 0 && (
+          <div class="lb-quiz lb-reveal" data-quiz>
+            <span class="lb-quiz__lbl">Kennischeck</span>
+            {les.quiz.map((q, qi) => (
+              <div class="lb-quiz__q" data-correct={q.c}>
+                <div class="lb-quiz__t">{qi + 1}. {q.q}</div>
+                <div class="lb-quiz__opts">
+                  {q.o.map((opt, oi) => <button class="lb-quiz__opt" data-i={oi}>{opt}</button>)}
+                </div>
+                <div class="lb-quiz__fb" data-u={q.u}></div>
+              </div>
+            ))}
+            <div class="lb-quiz__done">✓ Kennischeck behaald — deze module telt mee voor je diploma.</div>
+          </div>
+        )}
+
         <div class="les-foot">
           {isModule && (
             <button class="lb-btn done-btn" id="doneBtn">Markeer als afgerond</button>
@@ -168,6 +184,29 @@ const isModule = les.kind === 'module';
         var nx = document.querySelector('.ln-next'); if (nx && nx.getAttribute('href')) setTimeout(function () { window.location.href = nx.getAttribute('href'); }, 350);
       }
     });
+    var quiz = document.querySelector('[data-quiz]');
+    if (quiz) {
+      var qs = quiz.querySelectorAll('.lb-quiz__q'), answered = 0;
+      qs.forEach(function (q) {
+        var correct = parseInt(q.getAttribute('data-correct'), 10);
+        q.querySelectorAll('.lb-quiz__opt').forEach(function (b) {
+          b.addEventListener('click', function () {
+            if (q.getAttribute('data-done')) return;
+            q.setAttribute('data-done', '1'); answered++;
+            var oi = parseInt(b.getAttribute('data-i'), 10);
+            q.querySelectorAll('.lb-quiz__opt').forEach(function (x, xi) { x.disabled = true; if (xi === correct) x.classList.add('good'); });
+            if (oi !== correct) b.classList.add('bad');
+            var fb = q.querySelector('.lb-quiz__fb');
+            fb.textContent = (oi === correct ? 'Klopt! ' : 'Net niet. ') + fb.getAttribute('data-u');
+            fb.classList.add('show');
+            if (answered === qs.length) {
+              quiz.querySelector('.lb-quiz__done').classList.add('show');
+              var done = get(); if (done.indexOf(n) === -1) { done.push(n); set(done); render(); }
+            }
+          });
+        });
+      });
+    }
     render();
   })();
 </script>

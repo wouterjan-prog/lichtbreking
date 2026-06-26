@@ -43,6 +43,28 @@
 "Benoem elke knop op de RC 2 zonder te kijken",
 "Zet C2 op een functie die jij vaak gebruikt",
 "Doe de lenskap erop voor transport"
+],
+"quiz": [
+{
+"q": "Waarmee bestuur je hoogte en draaien?",
+"o": [
+"Linkerstick",
+"Rechterstick",
+"C1-knop"
+],
+"c": 0,
+"u": "Linkerstick = hoogte & draaien; rechter = richting."
+},
+{
+"q": "Heb je een telefoon nodig om met de RC 2 te vliegen?",
+"o": [
+"Ja, altijd",
+"Nee, de RC 2 heeft een eigen scherm",
+"Alleen bij opstijgen"
+],
+"c": 1,
+"u": "De RC 2 heeft een ingebouwd scherm."
+}
 ]
 },
 {
@@ -62,6 +84,28 @@
 "Doe de pre-flight check",
 "Stijg naar 10 m en hover 5 seconden",
 "Oefen zacht sticken in Cine-modus"
+],
+"quiz": [
+{
+"q": "Wat doe je altijd vóór het opstijgen?",
+"o": [
+"Wachten op een GPS-fix",
+"Sport-modus aanzetten",
+"Sensoren uitzetten"
+],
+"c": 0,
+"u": "Wacht altijd op de GPS-fix."
+},
+{
+"q": "Wat gebeurt er als je beide sticks loslaat?",
+"o": [
+"De drone landt",
+"De drone hangt stil",
+"De drone keert terug"
+],
+"c": 1,
+"u": "Sticks loslaten = stil hangen (hover)."
+}
 ]
 },
 {
@@ -81,6 +125,28 @@
 "Stel RTH-hoogte hoger dan de omgeving in",
 "Zet Advanced RTH op Optimal",
 "Stel Dynamic Home Point in als je beweegt"
+],
+"quiz": [
+{
+"q": "Hoe stel je de RTH-hoogte in?",
+"o": [
+"Lager dan obstakels",
+"Hoger dan het hoogste object in de buurt",
+"Maakt niet uit"
+],
+"c": 1,
+"u": "Hoger dan het hoogste object voorkomt botsingen bij thuiskomst."
+},
+{
+"q": "Wat doe je bij signaalverlies boven open veld?",
+"o": [
+"Laten hangen",
+"RTH laten activeren",
+"Sport-modus"
+],
+"c": 1,
+"u": "In open veld laat je Return-to-Home zijn werk doen."
+}
 ]
 },
 {
@@ -100,6 +166,28 @@
 "Zet 4K op 25 fps",
 "Sluiter op 1/50 + ND-filter",
 "Witbalans handmatig vastzetten, scherpte −1"
+],
+"quiz": [
+{
+"q": "Welke sluitertijd hoort bij 25 fps?",
+"o": [
+"1/25",
+"1/50",
+"1/200"
+],
+"c": 1,
+"u": "Sluiter = 2× framerate; 25 → 1/50."
+},
+{
+"q": "Waarvoor gebruik je een ND-filter?",
+"o": [
+"Meer licht binnenlaten",
+"Licht tegenhouden zodat je trage sluiter haalt",
+"Scherper beeld"
+],
+"c": 1,
+"u": "ND-filter houdt licht tegen → trage sluiter haalbaar overdag."
+}
 ]
 },
 {
@@ -119,6 +207,28 @@
 "Kies D-Log M of HLG",
 "Gebruik de AE-Lock-truc",
 "Vergrendel de focus vóór je opname"
+],
+"quiz": [
+{
+"q": "Welk profiel geeft de meeste ruimte om te kleuren?",
+"o": [
+"Normal",
+"D-Log M / HLG",
+"Vivid"
+],
+"c": 1,
+"u": "D-Log M of HLG bewaren de meeste informatie voor grading."
+},
+{
+"q": "Waarom vergrendel je de focus?",
+"o": [
+"Tegen autofocus-hunting",
+"Voor meer zoom",
+"Voor stabilisatie"
+],
+"c": 0,
+"u": "Voorkomt dat de autofocus midden in je shot gaat zoeken."
+}
 ]
 },
 {
@@ -138,6 +248,28 @@
 "Film push-in, orbit en reveal apart",
 "Begin te bewegen vóór je opname",
 "Zoek een voorgrond voor parallax"
+],
+"quiz": [
+{
+"q": "Hoeveel bewegingen maak je idealiter per shot?",
+"o": [
+"Eén",
+"Twee tot drie",
+"Zoveel mogelijk"
+],
+"c": 0,
+"u": "Eén beweging per shot; niet stapelen."
+},
+{
+"q": "Wat maakt het verschil tussen mooi en wow?",
+"o": [
+"Hoge ISO",
+"Een voorgrond (parallax)",
+"Sport-modus"
+],
+"c": 1,
+"u": "Een voorgrondelement geeft parallax en diepte."
+}
 ]
 },
 {
@@ -157,6 +289,28 @@
 "Maak een QuickShot (bv. Dronie of Helix)",
 "Test Spotlight op een onderwerp",
 "Combineer Spotlight + Cruise Control"
+],
+"quiz": [
+{
+"q": "De makkelijkste weg naar een pro-shot voor een beginner?",
+"o": [
+"QuickShots",
+"Handmatig orbiten",
+"Sport-modus"
+],
+"c": 0,
+"u": "QuickShots vliegen automatisch een pro-beweging."
+},
+{
+"q": "Wat doet Spotlight?",
+"o": [
+"Houdt onderwerp gekaderd terwijl jij vrij vliegt",
+"Volgt je gezicht",
+"Maakt foto's"
+],
+"c": 0,
+"u": "Spotlight houdt het onderwerp in beeld; jij vliegt vrij."
+}
 ]
 },
 {
@@ -176,6 +330,28 @@
 "Film tijdens het blauwe uur, niet 's nachts",
 "Zet hyperlapse op manual exposure",
 "Kies interval 3-4 s (bewegend) of 4-5 s (wolken)"
+],
+"quiz": [
+{
+"q": "Wanneer maak je 'nachtbeelden'?",
+"o": [
+"Diep in de nacht",
+"Tijdens het blauwe uur / schemering",
+"Alleen overdag"
+],
+"c": 1,
+"u": "Nachtvliegen mag niet; gebruik het blauwe uur."
+},
+{
+"q": "Welke belichting gebruik je bij een hyperlapse?",
+"o": [
+"Automatisch",
+"Handmatig",
+"Sport"
+],
+"c": 1,
+"u": "Hyperlapse altijd handmatig tegen flikkering."
+}
 ]
 },
 {
@@ -195,6 +371,28 @@
 "Check zonsop-/ondergang in een zon-app",
 "Plan een shot in het gouden uur",
 "Gebruik zijlicht voor diepte"
+],
+"quiz": [
+{
+"q": "Welk moment geeft het mooiste, zachtste licht?",
+"o": [
+"Middag",
+"Gouden uur",
+"Nacht"
+],
+"c": 1,
+"u": "Gouden uur = warm en zacht, het beste licht."
+},
+{
+"q": "Wat geeft de mooiste vorm en schaduw?",
+"o": [
+"Tegenlicht",
+"Zijlicht",
+"Vlak licht"
+],
+"c": 1,
+"u": "Zijlicht modelleert vorm en geeft schaduw."
+}
 ]
 },
 {
@@ -214,6 +412,28 @@
 "Zet de horizon op een derde",
 "Zoek leidende lijnen naar je onderwerp",
 "Bouw een voorgrond-laag in"
+],
+"quiz": [
+{
+"q": "Waar plaats je de horizon volgens de regel van derden?",
+"o": [
+"In het midden",
+"Op een derde",
+"Helemaal bovenaan"
+],
+"c": 1,
+"u": "Horizon op een derde, niet in het midden."
+},
+{
+"q": "Wat geeft diepte aan je beeld?",
+"o": [
+"Lagen (voor/midden/achter)",
+"Hoge ISO",
+"Sport-modus"
+],
+"c": 0,
+"u": "Voor-, midden- en achtergrond samen geven diepte."
+}
 ]
 },
 {
@@ -233,6 +453,28 @@
 "Maak wide, medium en detail van één plek",
 "Varieer je hoogte en hoek",
 "Film meer dan je denkt nodig te hebben"
+],
+"quiz": [
+{
+"q": "Wat betekent 'denken in dekking'?",
+"o": [
+"Alles vanuit één hoek",
+"Wide, medium én detail filmen",
+"Alleen wide shots"
+],
+"c": 1,
+"u": "Film van elke plek een wide, medium en detail."
+},
+{
+"q": "Hoe vertel je een mini-verhaal?",
+"o": [
+"Aankomst → midden → vertrek",
+"Alleen het hoogtepunt",
+"Willekeurig"
+],
+"c": 0,
+"u": "Een boog van aankomst naar vertrek."
+}
 ]
 },
 {
@@ -252,6 +494,28 @@
 "Oefen 'sticks loslaten' als reflex",
 "Lees de neus-pijl als je oriëntatie kwijt bent",
 "Vertrouw op Smart RTH bij lage accu"
+],
+"quiz": [
+{
+"q": "Wat doe je bij twijfel in de lucht?",
+"o": [
+"Sticks loslaten zodat de drone stil hangt",
+"Sport-modus",
+"Snel dalen"
+],
+"c": 0,
+"u": "Sticks loslaten → de drone hangt stil, je wint rust."
+},
+{
+"q": "Wat doe je bij een lage accu?",
+"o": [
+"Doorvliegen",
+"Smart RTH zijn werk laten doen",
+"Motoren uitzetten"
+],
+"c": 1,
+"u": "Laat Smart Return-to-Home de drone veilig thuisbrengen."
+}
 ]
 },
 {
@@ -271,6 +535,28 @@
 "Kies je editor (DaVinci of LightCut)",
 "Zet markers op de beat (M-toets)",
 "Knip in- en uitloop strak"
+],
+"quiz": [
+{
+"q": "Welke gratis editor wordt aangeraden op Mac?",
+"o": [
+"DaVinci Resolve",
+"Photoshop",
+"Excel"
+],
+"c": 0,
+"u": "DaVinci Resolve is gratis en krachtig op Mac."
+},
+{
+"q": "Waarmee monteer je strak op de beat?",
+"o": [
+"Markers (M-toets)",
+"Hogere ISO",
+"ND-filter"
+],
+"c": 0,
+"u": "Zet markers op de beat en knip daarop."
+}
 ]
 },
 {
@@ -290,6 +576,28 @@
 "Converteer D-Log M (LUT of CST)",
 "Corrigeer witbalans en contrast",
 "Leg je look-LUT op ~60% sterkte"
+],
+"quiz": [
+{
+"q": "Wat doe je eerst bij het kleuren?",
+"o": [
+"Een creatieve look opleggen",
+"Corrigeren (witbalans/contrast)",
+"Exporteren"
+],
+"c": 1,
+"u": "Eerst neutraal corrigeren, dan de creatieve look."
+},
+{
+"q": "Op welke sterkte leg je een LUT meestal?",
+"o": [
+"~60%",
+"100%",
+"10%"
+],
+"c": 0,
+"u": "Een LUT op ~60% oogt natuurlijker dan vol."
+}
 ]
 }
 ],

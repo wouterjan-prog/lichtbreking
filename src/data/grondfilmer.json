@@ -60,6 +60,28 @@
 "Oefen de vier veegrichtingen",
 "Zet de custom-knop op jouw favoriete functie",
 "Vergrendel de gimbal vóór transport"
+],
+"quiz": [
+{
+"q": "Hoe zet je het scherm aan?",
+"o": [
+"Met de klok mee draaien",
+"Tegen de klok in draaien",
+"Erop tikken"
+],
+"c": 0,
+"u": "Met de klok mee = aan; tegen de klok in = uit."
+},
+{
+"q": "Wat doet 'veeg omlaag'?",
+"o": [
+"Opname-parameters",
+"Gimbal-modi",
+"Playback"
+],
+"c": 1,
+"u": "Omhoog=opname, links=beeld/kleur, omlaag=gimbal, rechts=playback."
+}
 ]
 },
 {
@@ -79,6 +101,28 @@
 "Activeer via DJI Mimo",
 "Oefen modus wisselen en recentreren",
 "Loop één bewuste clip met begin en eind"
+],
+"quiz": [
+{
+"q": "Hoe activeer je de Pocket 4 de eerste keer?",
+"o": [
+"Via de DJI Mimo-app",
+"Via de website",
+"Hoeft niet"
+],
+"c": 0,
+"u": "Eerste activatie loopt via de DJI Mimo-app."
+},
+{
+"q": "Hoe loop je voor stabiele beelden?",
+"o": [
+"Met gestrekte benen",
+"Met zachte knieën, vanuit je heupen",
+"Zo snel mogelijk"
+],
+"c": 1,
+"u": "Zachte knieën absorberen schokken."
+}
 ]
 },
 {
@@ -98,6 +142,28 @@
 "Zet 4K op 24/25 fps (gelijk aan drone)",
 "Kies één kleurprofiel (D-Log of Normal)",
 "Sluiter ~1/50 + ND tegen overbelichting"
+],
+"quiz": [
+{
+"q": "Waarmee match je je framerate?",
+"o": [
+"Met je drone",
+"Met het weer",
+"Met je accu"
+],
+"c": 0,
+"u": "Match je framerate met je drone (meestal 24 fps)."
+},
+{
+"q": "Wat is de 180°-regel?",
+"o": [
+"Sluiter ≈ 2× framerate",
+"ISO × 2",
+"Dubbele zoom"
+],
+"c": 0,
+"u": "Sluitertijd ongeveer 2× je framerate (24 → 1/50)."
+}
 ]
 },
 {
@@ -117,6 +183,28 @@
 "Test Follow, FPV en Spotlight",
 "Zet de custom-knop op modus-wisselen",
 "Maak een orbit in Spotlight"
+],
+"quiz": [
+{
+"q": "Welke gimbal-modus gebruik je voor ~80% van je shots?",
+"o": [
+"Follow",
+"FPV",
+"Spotlight"
+],
+"c": 0,
+"u": "Follow is je standaard: recht en soepel."
+},
+{
+"q": "Welke modus is ideaal voor een orbit?",
+"o": [
+"FPV",
+"Spotlight",
+"Follow"
+],
+"c": 1,
+"u": "Spotlight blijft op één punt gericht."
+}
 ]
 },
 {
@@ -136,6 +224,28 @@
 "Tik een onderwerp aan om te vergrendelen",
 "Wissel met Subject Lock",
 "Combineer met je eigen beweging"
+],
+"quiz": [
+{
+"q": "Hoe start je ActiveTrack?",
+"o": [
+"Tik of teken een kader om een onderwerp",
+"Schud het toestel",
+"Dubbeltik de sluiter"
+],
+"c": 0,
+"u": "Tik/teken een kader; de camera vergrendelt."
+},
+{
+"q": "Wanneer is ActiveTrack op z'n mooist?",
+"o": [
+"Stilstaand",
+"Gecombineerd met je eigen beweging",
+"In het donker"
+],
+"c": 1,
+"u": "Combineer met je eigen beweging eromheen."
+}
 ]
 },
 {
@@ -155,6 +265,28 @@
 "Oefen push-in, reveal, orbit en tracking",
 "Film één shot vlak boven de grond",
 "Houd SpinShot op max 1-2× per film"
+],
+"quiz": [
+{
+"q": "De unieke kracht van de grondcamera t.o.v. de drone?",
+"o": [
+"Hoger vliegen",
+"Laag en dichtbij",
+"Sneller"
+],
+"c": 1,
+"u": "Laag en dichtbij is wat de drone niet kan."
+},
+{
+"q": "Hoe snel beweeg je voor cinematische beelden?",
+"o": [
+"Sneller dan voelt",
+"Langzamer dan voelt",
+"Maakt niet uit"
+],
+"c": 1,
+"u": "Beweeg altijd langzamer dan nodig voelt."
+}
 ]
 },
 {
@@ -174,6 +306,28 @@
 "Componeer met derden + voorgrond",
 "Plan een shot in het gouden uur",
 "Zet witbalans handmatig (bv. 5200K)"
+],
+"quiz": [
+{
+"q": "Wat is je beste vriend qua licht?",
+"o": [
+"Volle middag",
+"Gouden uur",
+"Nacht"
+],
+"c": 1,
+"u": "Gouden uur; plan belangrijke shots erin."
+},
+{
+"q": "Waarom zet je de witbalans handmatig vast?",
+"o": [
+"Tegen kleurschommelingen",
+"Voor meer zoom",
+"Voor stabilisatie"
+],
+"c": 0,
+"u": "Vaste witbalans voorkomt verspringende kleuren."
+}
 ]
 },
 {
@@ -193,6 +347,28 @@
 "Neem 30 sec wild sound per locatie op",
 "Gebruik een plopkap tegen wind",
 "Leg sfeergeluid onder je stille dronebeelden"
+],
+"quiz": [
+{
+"q": "Wat is de grootste vijand van je audio?",
+"o": [
+"Wind",
+"Licht",
+"Zoom"
+],
+"c": 0,
+"u": "Wind; gebruik een plopkap of vervang het geluid."
+},
+{
+"q": "Wat neem je op elke locatie op?",
+"o": [
+"30 sec puur sfeergeluid",
+"Niets",
+"Alleen muziek"
+],
+"c": 0,
+"u": "Neem 30 sec wild sound op."
+}
 ]
 },
 {
@@ -212,6 +388,28 @@
 "Film elk dronebeeld + bijpassend grondbeeld",
 "Plan twee match-cuts",
 "Houd hetzelfde licht voor lucht en grond"
+],
+"quiz": [
+{
+"q": "Hoe open en sluit je idealiter je film?",
+"o": [
+"Met de lucht",
+"Met de grond",
+"Met tekst"
+],
+"c": 0,
+"u": "Open met de lucht, daal af, sluit met de lucht."
+},
+{
+"q": "Wat verbindt een match-cut?",
+"o": [
+"Beweging, onderwerp of richting",
+"Kleur",
+"Geluid"
+],
+"c": 0,
+"u": "Match-cuts verbinden via beweging, onderwerp of richting."
+}
 ]
 },
 {
@@ -231,6 +429,28 @@
 "Zet foto op DNG of JPEG+DNG",
 "Maak een panorama van een breed landschap",
 "Test slow shutter op stromend water"
+],
+"quiz": [
+{
+"q": "Welk formaat kies je voor bewerkbare foto's?",
+"o": [
+"JPEG",
+"DNG (of JPEG+DNG)",
+"GIF"
+],
+"c": 1,
+"u": "DNG bewaart de meeste informatie."
+},
+{
+"q": "Wat maakt slow shutter met stromend water?",
+"o": [
+"Zijdezacht",
+"Bevroren",
+"Donker"
+],
+"c": 0,
+"u": "Slow shutter maakt water zijdezacht — stilhouden."
+}
 ]
 },
 {
@@ -250,6 +470,28 @@
 "Converteer elke clip met de juiste LUT",
 "Match de twee camera's",
 "Leg de gedeelde look als laatste op"
+],
+"quiz": [
+{
+"q": "In welk profiel staan je twee camera's?",
+"o": [
+"Beide Normal",
+"Drone D-Log M, Pocket D-Log",
+"Beide HLG"
+],
+"c": 1,
+"u": "Apart naar dezelfde basis brengen met de juiste LUT."
+},
+{
+"q": "Wanneer leg je de gezamenlijke look op?",
+"o": [
+"Als eerste",
+"Als laatste",
+"Nooit"
+],
+"c": 1,
+"u": "Eerst matchen, dan pas de gedeelde look."
+}
 ]
 },
 {
@@ -269,6 +511,28 @@
 "Neem een powerbank mee",
 "Zet elke avond je beelden over (backup)",
 "Vergrendel gimbal, maak de lens schoon"
+],
+"quiz": [
+{
+"q": "Hoe ga je met opslag om?",
+"o": [
+"Alles op één kaart laten",
+"Elke avond overzetten (backup)",
+"Nooit formatteren"
+],
+"c": 1,
+"u": "Zet elke avond je beelden over."
+},
+{
+"q": "Waar let je op bij onderhoud onderweg?",
+"o": [
+"Gimbal vergrendelen, lens schoon, zand/zout",
+"Niets",
+"Alleen opladen"
+],
+"c": 0,
+"u": "Niet waterdicht — gimbal vergrendelen, lens schoon."
+}
 ]
 }
 ],
