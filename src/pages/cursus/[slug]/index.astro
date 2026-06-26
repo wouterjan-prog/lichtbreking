@@ -28,7 +28,7 @@ const jsonld = {
   provider: { '@type': 'Person', name: 'Lichtbreking', url: 'https://www.lichtbreking.nl/' }, isAccessibleForFree: true,
 };
 ---
-<Base title={course.title} description={course.lead} path={`/cursus/${course.slug}/`} jsonld={jsonld}>
+<Base title={course.title} description={course.lead} path={`/cursus/${course.slug}/`} image={`/img/og-${course.slug}.png`} jsonld={jsonld}>
   <GlassNav active="cursussen" switchHref="/en/cursussen/" />
   <main class="cur" data-course={course.slug} data-key={course.storageKey} data-total={total}>
     <section class="cur-hero lb-container">

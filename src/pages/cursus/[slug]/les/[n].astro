@@ -22,8 +22,17 @@ const prev = index > 0 ? lessons[index - 1] : null;
 const next = index < lessons.length - 1 ? lessons[index + 1] : null;
 const moduleTotal = course.modules.length;
 const isModule = les.kind === 'module';
+const cleanTitle = typeof les.title === 'string' ? les.title.replace(/<[^>]+>/g, '') : les.title;
+const lessonUrl = `https://www.lichtbreking.nl/cursus/${course.slug}/les/${les.key}/`;
+const lessonLd = {
+  '@context': 'https://schema.org', '@type': 'LearningResource',
+  name: cleanTitle, description: course.lead, inLanguage: 'nl-NL', url: lessonUrl,
+  learningResourceType: isModule ? `Module ${les.n}` : (les.kind === 'case' ? 'Praktijkcase' : 'Naslag'),
+  isPartOf: { '@type': 'Course', name: course.title, url: `https://www.lichtbreking.nl/cursus/${course.slug}/` },
+  provider: { '@type': 'Person', name: 'Lichtbreking', url: 'https://www.lichtbreking.nl/' }, isAccessibleForFree: true,
+};
 ---
-<Base title={`${typeof les.title === 'string' ? les.title.replace(/<[^>]+>/g, '') : les.title} — ${course.title}`} description={course.lead} path={`/cursus/${course.slug}/les/${les.key}/`}>
+<Base title={`${cleanTitle} — ${course.title}`} description={course.lead} path={`/cursus/${course.slug}/les/${les.key}/`} image={`/img/og-${course.slug}.png`} jsonld={lessonLd}>
   <GlassNav active="cursussen" switchHref="/en/cursussen/" />
   <main class="les" data-course={course.slug} data-key={course.storageKey} data-n={les.key} data-total={moduleTotal}>
     <div class="les-wrap lb-container">
