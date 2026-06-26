@@ -308,6 +308,9 @@
 .course-body .lb-gm{ margin:1.8em 0; padding:1.4rem; background:var(--lb-ink); border:1px solid var(--lb-line); border-radius:16px; }
 .course-body .lb-gm__cap{ font-family:var(--lb-font-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--lb-sky); margin-bottom:1rem; display:block; }
 .course-body .lb-gm svg{ width:100%; height:auto; }
+.course-body .lb-viz{ margin:1.8em 0; padding:1.3rem 1.3rem 1.5rem; background:var(--lb-ink); border:1px solid var(--lb-line); border-radius:16px; }
+.course-body .lb-viz__cap{ font-family:var(--lb-font-mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--lb-sky); margin-bottom:1rem; display:block; }
+.course-body .lb-viz svg{ display:block; width:100%; max-width:460px; margin:0 auto; height:auto; }
 .lb-readbar{ position:fixed; top:0; left:0; right:0; height:3px; z-index:200; background:transparent; pointer-events:none; }
 .lb-readbar span{ display:block; height:100%; width:0; background:var(--lb-spectrum); transition:width .12s linear; }
 @media (prefers-reduced-motion:reduce){ .lb-readbar span{ transition:none; } }

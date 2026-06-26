@@ -155,6 +155,82 @@
     return '<svg viewBox="0 0 384 140" role="img" aria-label="Gimbal-modi: Follow, FPV, Spotlight">' + gmPanel(8, 'FOLLOW', 'recht &amp; soepel', follow) + gmPanel(137, 'FPV', 'kantelt mee', fpv) + gmPanel(266, 'SPOTLIGHT', 'blijft gericht', spot) + '</svg>';
   }
 
+  /* ---------- extra cursus-visuals ---------- */
+  function _vsvg(vb, inner) { return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + vb + '" aria-hidden="true">' + inner + '</svg>'; }
+  function compositionViz() {
+    var d = '<defs><linearGradient id="cvsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a4a63"/><stop offset="1" stop-color="#c98a4e"/></linearGradient></defs>';
+    var bg = '<rect width="300" height="180" fill="url(#cvsky)"/>';
+    var mtn = '<path d="M0 130 L60 96 L110 122 L160 92 L210 120 L260 100 L300 126 L300 180 L0 180 Z" fill="#12222b"/>';
+    var lead = '<path d="M 40 178 L 200 60" stroke="' + SKY + '" stroke-width="1.4" stroke-dasharray="5 5" opacity=".55"/>';
+    var sun = '<circle cx="200" cy="60" r="13" fill="#ffd9a0" opacity=".9"><animate attributeName="r" values="13;15;13" dur="3s" repeatCount="indefinite"/></circle>';
+    var grid = '<g stroke="#ffffff" stroke-opacity=".3" stroke-width="1"><line x1="100" y1="0" x2="100" y2="180"/><line x1="200" y1="0" x2="200" y2="180"/><line x1="0" y1="60" x2="300" y2="60"/><line x1="0" y1="120" x2="300" y2="120"/></g><circle cx="200" cy="60" r="5" fill="none" stroke="#fff" stroke-width="1.5"/>';
+    return _vsvg('0 0 300 180', d + bg + mtn + lead + sun + grid);
+  }
+  function sunArcViz() {
+    var d = '<defs><linearGradient id="cvsa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a52"/><stop offset="1" stop-color="#0c1820"/></linearGradient><linearGradient id="cvgold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a2e" stop-opacity="0"/><stop offset="1" stop-color="#ff9a2e" stop-opacity=".35"/></linearGradient></defs>';
+    var bg = '<rect width="300" height="150" fill="url(#cvsa)"/><rect x="0" y="92" width="300" height="26" fill="url(#cvgold)"/>';
+    var horizon = '<line x1="0" y1="118" x2="300" y2="118" stroke="#3f7a85" stroke-width="1.5" opacity=".7"/>';
+    var arc = '<path d="M 22 118 Q 150 6 278 118" fill="none" stroke="#cfe6ef" stroke-width="1.2" stroke-dasharray="4 5" opacity=".5"/>';
+    var sun = '<g><circle r="9" fill="#ffcf6a"/><circle r="13" fill="none" stroke="#ffcf6a" stroke-width="1" opacity=".5"/><animateMotion dur="7s" path="M 22 118 Q 150 6 278 118" repeatCount="indefinite"/></g>';
+    var labs = '<text x="40" y="135" font-family="monospace" font-size="8" fill="#7FB4D6">blauw uur</text><text x="120" y="108" font-family="monospace" font-size="8" fill="#ffb86a">gouden uur</text><text x="135" y="26" font-family="monospace" font-size="8" fill="#9A9BA1">middag</text>';
+    return _vsvg('0 0 300 150', d + bg + horizon + arc + sun + labs);
+  }
+  function activeTrackViz() {
+    var d = '<defs><linearGradient id="cvat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#27606e"/><stop offset="1" stop-color="#10222a"/></linearGradient></defs>';
+    var p = 'M 36 120 C 110 96 200 134 268 104';
+    var bg = '<rect width="300" height="170" fill="url(#cvat)"/>';
+    var trail = '<path d="' + p + '" fill="none" stroke="#2f6470" stroke-width="1.2" stroke-dasharray="3 4" opacity=".5"/>';
+    var sj = '<g><circle r="6" fill="#fff"/><circle r="6" fill="none" stroke="#7fe0ec" stroke-width="1.5"/><animateMotion dur="6s" path="' + p + '" repeatCount="indefinite"/></g>';
+    var br = 'M-16,-16 h8 M-16,-16 v8 M16,-16 h-8 M16,-16 v8 M-16,16 h8 M-16,16 v-8 M16,16 h-8 M16,16 v-8';
+    var box = '<g><path d="' + br + '" stroke="' + OR + '" stroke-width="2.4" fill="none" stroke-linecap="round"/><animateMotion dur="6s" path="' + p + '" repeatCount="indefinite"/></g>';
+    var lbl = '<text x="150" y="158" text-anchor="middle" font-family="monospace" font-size="8" letter-spacing="1.5" fill="#FF9A2E">SUBJECT LOCK · VOLGT VANZELF</text>';
+    return _vsvg('0 0 300 170', d + bg + trail + sj + box + lbl);
+  }
+  function groundMovesViz() {
+    function op() { return '<polygon points="0,-7 -6,5 6,5" fill="' + BONE + '"/>'; }
+    function sj(x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="5" fill="' + OR + '"/>'; }
+    function mvg(p, dur) { return '<g>' + op() + '<animateMotion dur="' + dur + 's" path="' + p + '" repeatCount="indefinite"/></g>'; }
+    function dash(p) { return '<path d="' + p + '" fill="none" stroke="' + SKY + '" stroke-width="1.2" stroke-dasharray="3 4" opacity=".5"/>'; }
+    function panel(x, t, inner) { return '<g transform="translate(' + x + ',0)"><rect x="0" y="0" width="86" height="92" rx="11" fill="#0c0f14" stroke="#23262c" stroke-width="1.2"/>' + inner + '<text x="43" y="110" text-anchor="middle" font-family="monospace" font-size="8.5" letter-spacing="1" fill="#7FB4D6">' + t + '</text></g>'; }
+    var push = sj(43, 28) + dash('M 43 74 V 36') + mvg('M 43 74 V 36', 3.5);
+    var reveal = '<rect x="6" y="56" width="74" height="30" rx="4" fill="#13242c"/>' + sj(58, 30) + dash('M 26 78 Q 30 50 58 36') + mvg('M 26 78 Q 30 50 58 36', 4);
+    var orbit = sj(43, 48) + '<ellipse cx="43" cy="48" rx="26" ry="18" fill="none" stroke="' + SKY + '" stroke-width="1.2" stroke-dasharray="3 4" opacity=".5"/><g>' + op() + '<animateMotion dur="6s" path="M 43 26 A 26 18 0 1 1 42.9 26" repeatCount="indefinite"/></g>';
+    var track = sj(43, 40) + dash('M 12 70 H 74') + mvg('M 12 70 H 74', 4.5);
+    return _vsvg('0 0 372 120', panel(6, 'PUSH-IN', push) + panel(98, 'REVEAL', reveal) + panel(190, 'ORBIT', orbit) + panel(282, 'TRACKING', track));
+  }
+  function shutterRuleViz() {
+    function chip(x, t, sub, c) { return '<g transform="translate(' + x + ',0)"><rect x="0" y="28" width="94" height="52" rx="12" fill="#0c0f14" stroke="#23262c" stroke-width="1.2"/><text x="47" y="54" text-anchor="middle" font-family="monospace" font-size="18" fill="' + c + '">' + t + '</text><text x="47" y="70" text-anchor="middle" font-family="monospace" font-size="8" fill="#9A9BA1">' + sub + '</text></g>'; }
+    var disc = '<g transform="translate(160,54)"><circle r="27" fill="#0c0f14" stroke="#23262c" stroke-width="1.2"/><g><path d="M0 0 L0 -27 A 27 27 0 0 1 0 27 Z" fill="#FF9A2E" opacity=".82"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2.4s" repeatCount="indefinite"/></g><circle r="3.4" fill="#0c0f14"/><circle r="27" fill="none" stroke="#3a4047" stroke-width="1"/></g>';
+    return _vsvg('0 0 320 110', chip(6, '24 FPS', 'framerate', '#cfe6ef') + '<text x="120" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#7FB4D6">×2</text>' + disc + '<text x="202" y="60" text-anchor="middle" font-family="monospace" font-size="15" fill="#7FB4D6">→</text>' + chip(220, '1/50 s', 'sluitertijd', '#FF9A2E'));
+  }
+
+  /* injecteer visuals vóór de juiste kop */
+  (function () {
+    var cb = document.querySelector('.course-body'); if (!cb) return;
+    var le0 = document.querySelector('.les'); var course = le0 ? le0.getAttribute('data-course') : '';
+    var M = [
+      { c: 'vluchtfilmer', n: 'de fundamenten',          b: compositionViz, cap: 'Regel van derden, lagen &amp; leidende lijnen' },
+      { c: 'grondfilmer',  n: 'compositie',              b: compositionViz, cap: 'Regel van derden, lagen &amp; leidende lijnen' },
+      { c: 'vluchtfilmer', n: 'de vier lichtmomenten',   b: sunArcViz,      cap: 'De zon door de dag — plan je licht' },
+      { c: 'grondfilmer',  n: 'licht',                   b: sunArcViz,      cap: 'De zon door de dag — plan je licht' },
+      { c: 'grondfilmer',  n: 'hoe je het aanzet',       b: activeTrackViz, cap: 'ActiveTrack — de camera volgt je onderwerp' },
+      { c: 'grondfilmer',  n: 'de vier basisbewegingen', b: groundMovesViz, cap: 'Vier bewegingen — jij beweegt, niet de zoom' },
+      { c: 'vluchtfilmer', n: 'video',                   b: shutterRuleViz, cap: 'De 180&deg;-regel — sluitertijd &asymp; 2&times; je framerate' },
+      { c: 'grondfilmer',  n: 'iso',                     b: shutterRuleViz, cap: 'De 180&deg;-regel — sluitertijd &asymp; 2&times; je framerate' }
+    ];
+    var heads = cb.querySelectorAll('h4, h3');
+    M.forEach(function (m) {
+      if (m.c && m.c !== course) return;
+      var target = null;
+      heads.forEach(function (h) { if (!target && h.textContent.trim().toLowerCase().indexOf(m.n) === 0) target = h; });
+      if (target) {
+        var box = document.createElement('div'); box.className = 'lb-viz lb-cv in';
+        box.innerHTML = '<span class="lb-viz__cap">' + m.cap + '</span>' + m.b();
+        target.parentNode.insertBefore(box, target);
+      }
+    });
+  })();
+
   var lesEl = document.querySelector('.les');
   if (lesEl && lesEl.getAttribute('data-course') === 'grondfilmer') {
     var vegen = null;
