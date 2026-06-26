@@ -65,7 +65,7 @@
     return '<svg viewBox="0 0 64 64">' + def + ring + arrow + k + '</svg>';
   }
   function photoRC2(L, R) {
-    return '<div class="lb-rc2__ph"><img src="/img/rc2.jpg" alt="DJI RC 2"/>'
+    return '<div class="lb-rc2__ph"><img src="/img/rc2.webp" alt="DJI RC 2"/>'
       + '<div class="lb-rc2__ov" style="left:20.6%;top:26.3%">' + stickOv(L.dir, SKY) + '</div>'
       + '<div class="lb-rc2__ov" style="left:78.7%;top:26.3%">' + stickOv(R.dir, OR) + '</div></div>';
   }
@@ -106,7 +106,7 @@
     var L = parse(sl[0].textContent), R = parse(sl[1].textContent);
     var labels = '<div class="lb-rc2__labels">' + lab('l', 'Links', L.word) + lab('r', 'Rechts', R.word) + '</div>';
     ms.innerHTML = '<div class="lb-rc2">' + rc2(L, R) + labels + '</div>';
-    (function (box, l, r, lb2) { var im = new Image(); im.onload = function () { box.innerHTML = '<div class="lb-rc2">' + photoRC2(l, r) + lb2 + '</div>'; }; im.src = '/img/rc2.jpg'; })(ms, L, R, labels);
+    (function (box, l, r, lb2) { var im = new Image(); im.onload = function () { box.innerHTML = '<div class="lb-rc2">' + photoRC2(l, r) + lb2 + '</div>'; }; im.src = '/img/rc2.webp'; })(ms, L, R, labels);
     var af = mc.querySelector('.anim-frame');
     if (af) af.innerHTML = droneScene(sceneType(L, R));
   });
