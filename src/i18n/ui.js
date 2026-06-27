@@ -20,8 +20,8 @@ export function switchUrl(pathname, toLang) {
 export const t = {
   nl: {
     locale: 'nl_NL', htmlLang: 'nl', langName: 'NL', otherName: 'EN',
-    nav: { werk: 'Werk', cursus: 'Cursus', tools: 'Gereedschap', nd: 'ND-calculator', golden: 'Gouden-uur-planner', over: 'Over', contact: 'Contact', showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
-    foot: { tagline: 'Waar licht breekt — cinematische drone, foto & film.', site: 'Site', more: 'Meer', werk: 'Werk', cursussen: 'Cursussen', showreel: 'Showreel', over: 'Over', contact: 'Contact', rights: 'Drone · foto · film · NL' },
+    nav: { werk: 'Werk', cursus: 'Cursus', tools: 'Gereedschap', nd: 'ND-calculator', golden: 'Gouden-uur-planner', over: 'Over', contact: 'Contact', news: 'Wat is nieuw', showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
+    foot: { tagline: 'Waar licht breekt — cinematische drone, foto & film.', site: 'Site', more: 'Meer', werk: 'Werk', cursussen: 'Cursussen', showreel: 'Showreel', over: 'Over', contact: 'Contact', news: 'Wat is nieuw', rights: 'Drone · foto · film · NL' },
     home: {
       title: 'Lichtbreking — cinematische drone, foto & film',
       desc: 'Cinematische drone-, foto- en videobeelden, plus de gratis cursus De Vluchtfilmer. Waar licht breekt.',
@@ -88,8 +88,8 @@ export const t = {
 
   en: {
     locale: 'en_GB', htmlLang: 'en', langName: 'EN', otherName: 'NL',
-    nav: { werk: 'Work', cursus: 'Courses', tools: 'Tools', nd: 'ND calculator', golden: 'Golden hour planner', over: 'About', contact: 'Contact', showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
-    foot: { tagline: 'Where light breaks — cinematic drone, photo & film.', site: 'Site', more: 'More', werk: 'Work', cursussen: 'Courses', showreel: 'Showreel', over: 'About', contact: 'Contact', rights: 'Drone · photo · film · NL' },
+    nav: { werk: 'Work', cursus: 'Courses', tools: 'Tools', nd: 'ND calculator', golden: 'Golden hour planner', over: 'About', contact: 'Contact', news: "What's new", showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
+    foot: { tagline: 'Where light breaks — cinematic drone, photo & film.', site: 'Site', more: 'More', werk: 'Work', cursussen: 'Courses', showreel: 'Showreel', over: 'About', contact: 'Contact', news: "What's new", rights: 'Drone · photo · film · NL' },
     home: {
       title: 'Lichtbreking — cinematic drone, photo & film',
       desc: 'Cinematic drone, photo and video work, plus the free course The Flight Filmer. Where light breaks.',
