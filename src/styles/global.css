@@ -38,6 +38,10 @@ img, video { display: block; max-width: 100%; }
 ul { margin: 0; padding: 0; list-style: none; }
 
 :focus-visible { outline: 2px solid var(--lb-sky); outline-offset: 3px; border-radius: 3px; }
+/* skip-to-content: onzichtbaar tot focus (toetsenbord/schermlezer) */
+.lb-skip { position: fixed; left: 16px; top: -64px; z-index: 200; background: var(--lb-bone); color: var(--lb-night); padding: 11px 18px; border-radius: 12px; font-weight: 500; box-shadow: var(--lb-shadow-float, 0 10px 34px rgba(0,0,0,.3)); transition: top .2s var(--lb-ease, ease); }
+.lb-skip:focus { top: 16px; outline: 2px solid var(--lb-night); outline-offset: 2px; }
+[id="hoofdinhoud"]:focus { outline: none; }
 
 /* — Display-helpers — */
 .lb-display-xl { font-family: var(--lb-font-display); font-weight: 300; letter-spacing: -.03em; line-height: 1.0; font-size: var(--lb-display-xl); }

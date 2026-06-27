@@ -20,7 +20,7 @@ const meta = [
 ---
 <Base title={w.title} description={`${w.title} — ${w.place}, ${item.year}. ${P.backDesc}`} path={`/werk/${item.id}/`} lang={lang} image={src(item.photo, 1200)} type="article">
   <GlassNav active="werk" lang={lang} />
-  <main>
+  <main id="hoofdinhoud" tabindex="-1">
     <section class="opener">
       <img class="opener__bg" src={src(item.photo, 2000)} srcset={srcset(item.photo)} sizes="100vw" alt={w.alt} fetchpriority="high" width="2000" height="1333" />
       <div class="opener__scrim" aria-hidden="true"></div>

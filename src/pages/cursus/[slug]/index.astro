@@ -31,7 +31,7 @@ const jsonld = {
 ---
 <Base title={course.title} description={course.lead} path={`/cursus/${course.slug}/`} image={`/img/og-${course.slug}.png`} jsonld={jsonld}>
   <GlassNav active="cursussen" switchHref="/en/cursussen/" />
-  <main class="cur" data-course={course.slug} data-key={course.storageKey} data-total={total}>
+  <main id="hoofdinhoud" tabindex="-1" class="cur" data-course={course.slug} data-key={course.storageKey} data-total={total}>
     <section class="cur-hero lb-container">
       <a href="/cursussen/" class="back lb-label">← Cursussen</a>
       <span class="lb-label lb-label--sky">{course.kicker}</span>

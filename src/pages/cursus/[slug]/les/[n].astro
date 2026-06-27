@@ -34,7 +34,7 @@ const lessonLd = {
 ---
 <Base title={`${cleanTitle} — ${course.title}`} description={course.lead} path={`/cursus/${course.slug}/les/${les.key}/`} image={`/img/og-${course.slug}.png`} jsonld={lessonLd}>
   <GlassNav active="cursussen" switchHref="/en/cursussen/" />
-  <main class="les" data-course={course.slug} data-key={course.storageKey} data-n={les.key} data-total={moduleTotal}>
+  <main id="hoofdinhoud" tabindex="-1" class="les" data-course={course.slug} data-key={course.storageKey} data-n={les.key} data-total={moduleTotal}>
     <div class="les-wrap lb-container">
       <!-- zijbalk -->
       <aside class="side">

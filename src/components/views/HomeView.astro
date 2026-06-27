@@ -12,7 +12,7 @@ const jsonld = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'htt
 ---
 <Base title={L.home.title} description={L.home.desc} path="/" lang={lang} jsonld={jsonld}>
   <GlassNav active="" lang={lang} />
-  <main>
+  <main id="hoofdinhoud" tabindex="-1">
     <section class="hero">
       <img class="hero__bg" src={src(heroId, 2000)} srcset={srcset(heroId)} sizes="100vw" alt={L.work['golden-coast'].alt} fetchpriority="high" width="2000" height="1125" />
       <div class="hero__scrim" aria-hidden="true"></div>
