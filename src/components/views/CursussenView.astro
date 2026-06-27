@@ -14,6 +14,7 @@ const courses = [
 ---
 <Base title={L.title} description={L.desc} path="/cursussen/" lang={lang}>
   <GlassNav active="cursussen" lang={lang} />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
   <main class="lb-container page">
     <header class="page-head lb-reveal">
       <span class="lb-label">{L.kicker}</span>
@@ -66,8 +67,9 @@ const courses = [
   .page-head { margin-bottom: 44px; }
   .page-head h1 { margin: 10px 0 18px; }
   .courses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .course { display: flex; flex-direction: column; background: var(--lb-surface); border: 1px solid var(--lb-line); border-radius: var(--lb-r-lg); overflow: hidden; transition: transform var(--lb-dur) var(--lb-ease), border-color var(--lb-dur) var(--lb-ease); }
-  .course:hover { transform: translateY(-3px); border-color: var(--lb-mist); }
+  .course { position: relative; display: flex; flex-direction: column; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); border-radius: var(--lb-r-lg); overflow: hidden; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 16px 44px rgba(0,0,0,.28); transition: transform var(--lb-dur) var(--lb-ease); }
+  .course::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; z-index: 2; }
+  .course:hover { transform: translateY(-3px); }
   .course.soon { opacity: .72; pointer-events: none; }
   .course__img { aspect-ratio: 16 / 10; border-radius: 0; }
   .course__img::after { background: linear-gradient(180deg, transparent 55%, rgba(8,8,10,.5)); }

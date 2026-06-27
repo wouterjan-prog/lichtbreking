@@ -111,14 +111,13 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
   .lb-nav__droptop:hover, .lb-nav__droptop.on { opacity: 1; }
   .lb-nav__caret { transition: transform .25s var(--lb-ease); }
   .lb-nav__drop:hover .lb-nav__caret, .lb-nav__drop:focus-within .lb-nav__caret { transform: rotate(180deg); }
-  .lb-nav__menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 210px;
-    background: var(--lb-glass-solid); -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid var(--lb-glass-solid-border); border-radius: 14px; padding: 8px; box-shadow: var(--lb-shadow-float);
-    display: flex; flex-direction: column; gap: 2px; opacity: 0; pointer-events: none; transition: opacity .25s var(--lb-ease), transform .25s var(--lb-ease); }
-  .lb-nav__menu::before { content: ""; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
+  .lb-nav__menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 216px;
+    background: var(--lb-surface); border: 1px solid var(--lb-line); border-radius: 14px; padding: 6px; box-shadow: var(--lb-shadow-float);
+    display: flex; flex-direction: column; gap: 2px; opacity: 0; pointer-events: none; transition: opacity .22s var(--lb-ease), transform .22s var(--lb-ease); }
+  .lb-nav__menu::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
   .lb-nav__drop:hover .lb-nav__menu, .lb-nav__drop:focus-within .lb-nav__menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-  .lb-nav__menu a { color: var(--lb-bone); padding: 10px 12px; border-radius: 9px; white-space: nowrap; font-size: 14px; text-shadow: none; opacity: .92; }
-  .lb-nav__menu a:hover { background: rgba(127,127,140,.18); opacity: 1; }
+  .lb-nav__menu a { color: var(--lb-bone); padding: 11px 14px; border-radius: 10px; white-space: nowrap; font-size: 15px; text-shadow: none; opacity: 1; transition: background .2s var(--lb-ease); }
+  .lb-nav__menu a:hover { background: var(--lb-ink); }
   .lb-nav-shell.scrolled .lb-nav__lang { text-shadow: none; }
   .ic-moon { display: none; }
   :root[data-theme="dark"] .ic-sun { display: none; }

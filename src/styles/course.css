@@ -323,14 +323,14 @@
 .course-body .lb-viz svg{ display:block; width:100%; max-width:460px; margin:0 auto; height:auto; }
 
 /* "In het kort"-blok + "Doe dit nu"-actiekaart */
-.lb-kort{ background:var(--lb-ink); border:1px solid var(--lb-line); border-radius:14px; padding:1.3rem 1.4rem; margin:0 0 1.8rem; }
+.lb-kort{ position:relative; background:var(--lb-glass-card-bg); -webkit-backdrop-filter:blur(16px) saturate(170%); backdrop-filter:blur(16px) saturate(170%); border-radius:16px; padding:1.3rem 1.4rem; margin:0 0 1.8rem; box-shadow:inset 0 1px 0 var(--lb-glass-hi), 0 12px 34px rgba(0,0,0,.22); }
 .lb-kort__lbl{ display:block; font-family:var(--lb-font-mono); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--lb-sky); margin-bottom:.9rem; }
 .lb-kort ul{ list-style:none; margin:0; padding:0; display:grid; gap:.55rem; }
 .lb-kort li{ display:flex; gap:.65rem; align-items:flex-start; font-size:1rem; color:var(--lb-bone); line-height:1.5; }
 .lb-kort li svg{ width:18px; height:18px; flex:0 0 auto; margin-top:3px; color:var(--lb-sky); }
 .lb-kort__act{ margin-top:1rem; padding:.7rem .9rem; border-left:3px solid var(--lb-orange); background:rgba(255,154,46,.08); border-radius:0 8px 8px 0; font-size:.96rem; color:var(--lb-bone); }
 .lb-kort__act b{ display:block; font-family:var(--lb-font-mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--lb-orange-ink); margin-bottom:2px; font-weight:700; }
-.lb-todo{ background:var(--lb-ink); border:1px solid var(--lb-line); border-radius:14px; padding:1.3rem 1.4rem; margin:2.2rem 0 0; }
+.lb-todo{ position:relative; background:var(--lb-glass-card-bg); -webkit-backdrop-filter:blur(16px) saturate(170%); backdrop-filter:blur(16px) saturate(170%); border-radius:16px; padding:1.3rem 1.4rem; margin:2.2rem 0 0; box-shadow:inset 0 1px 0 var(--lb-glass-hi), 0 12px 34px rgba(0,0,0,.22); }
 .lb-todo__lbl{ display:block; font-family:var(--lb-font-mono); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--lb-orange-ink); margin-bottom:1rem; }
 .lb-todo__list{ display:grid; gap:.5rem; }
 .lb-todo__item{ display:flex; gap:.7rem; align-items:center; background:var(--lb-surface); border:1px solid rgba(127,127,140,.14); border-radius:10px; padding:.7rem .9rem; cursor:pointer; font-size:.97rem; color:var(--lb-bone); transition:opacity .2s; }
@@ -368,7 +368,10 @@
 .lb-comp__svg{ display:block; width:100%; max-width:380px; margin:0 auto; touch-action:none; }
 .lb-comp__fb{ text-align:center; font-family:var(--lb-font-mono); font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; margin-top:.7rem; color:var(--lb-mist); }
 .lb-comp__fb.hit{ color:var(--lb-green-ink); }
-.lb-quiz{ background:var(--lb-ink); border:1px solid var(--lb-line); border-radius:14px; padding:1.3rem 1.4rem; margin:2.2rem 0 0; }
+.lb-quiz{ position:relative; background:var(--lb-glass-card-bg); -webkit-backdrop-filter:blur(16px) saturate(170%); backdrop-filter:blur(16px) saturate(170%); border-radius:16px; padding:1.3rem 1.4rem; margin:2.2rem 0 0; box-shadow:inset 0 1px 0 var(--lb-glass-hi), 0 12px 34px rgba(0,0,0,.22); }
+/* spectrum-refractierand op de glas-blokken */
+.lb-kort::after,.lb-todo::after,.lb-quiz::after{ content:""; position:absolute; inset:0; border-radius:inherit; padding:1.3px; background:linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:.4; pointer-events:none; }
+.lb-kort>*,.lb-todo>*,.lb-quiz>*{ position:relative; z-index:1; }
 .lb-quiz__lbl{ display:block; font-family:var(--lb-font-mono); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--lb-sky); margin-bottom:1rem; }
 .lb-quiz__q{ margin-bottom:1.3rem; }
 .lb-quiz__q:last-of-type{ margin-bottom:0; }

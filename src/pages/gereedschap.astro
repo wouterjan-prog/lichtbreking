@@ -96,7 +96,7 @@ import Footer from '../components/Footer.astro';
   .gw-link__sub { color: var(--lb-mist); font-size: var(--lb-small); }
   .gw-link__arrow { color: var(--lb-sky); font-size: 1.2rem; }
   .gw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
-  .gw-card { position: relative; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(22px) saturate(180%); backdrop-filter: blur(22px) saturate(180%); border-radius: 18px; padding: 1.5rem 1.6rem; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 16px 44px rgba(0,0,0,.28); }
+  .gw-card { position: relative; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); border-radius: 18px; padding: 1.5rem 1.6rem; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 16px 44px rgba(0,0,0,.28); }
   .gw-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; }
   .gw-card > * { position: relative; z-index: 1; }
   .gw-card--wide { grid-column: 1 / -1; }
