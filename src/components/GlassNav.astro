@@ -10,6 +10,7 @@ const items = [
   { label: L.nav.cursus, href: locUrl("/cursussen/", lang), id: "cursussen" },
   { label: L.nav.over, href: locUrl("/over/", lang), id: "over" },
   { label: L.nav.contact, href: locUrl("/contact/", lang), id: "contact" },
+  { label: L.nav.articles, href: "/artikelen/", id: "artikelen" },
   { label: L.nav.news, href: "/wat-is-nieuw/", id: "nieuw" },
 ];
 const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en" : "nl");

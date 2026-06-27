@@ -1,4 +1,5 @@
 import { courses, getLessons } from '../data/courses.js';
+import { articles } from '../data/articles.js';
 
 const SITE = 'https://www.lichtbreking.nl';
 
@@ -6,7 +7,8 @@ export async function GET() {
   const urls = [];
   const add = (p, pr) => urls.push({ loc: SITE + p, pr });
 
-  ['/', '/werk/', '/cursussen/', '/showreel/', '/over/', '/contact/', '/shotlist/', '/gereedschap/', '/gouden-uur/', '/wat-is-nieuw/'].forEach((p) => add(p, p === '/' ? '1.0' : '0.7'));
+  ['/', '/werk/', '/cursussen/', '/showreel/', '/over/', '/contact/', '/shotlist/', '/gereedschap/', '/gouden-uur/', '/wat-is-nieuw/', '/artikelen/'].forEach((p) => add(p, p === '/' ? '1.0' : '0.7'));
+  for (const a of articles) add(`/artikelen/${a.slug}/`, '0.6');
   ['/en/', '/en/werk/', '/en/cursussen/', '/en/showreel/', '/en/over/', '/en/contact/'].forEach((p) => add(p, '0.5'));
 
   for (const c of courses) {
