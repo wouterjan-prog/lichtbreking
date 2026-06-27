@@ -3,7 +3,7 @@
    actieve link en mobiel menu. */
 import Logo from "./Logo.astro";
 import { t, locUrl, switchUrl } from "../i18n/ui.js";
-const { active = "", lang = "nl", switchHref } = Astro.props;
+const { active = "", lang = "nl", switchHref, hero = false } = Astro.props;
 const L = t[lang] || t.nl;
 const items = [
   { label: L.nav.werk, href: locUrl("/werk/", lang), id: "werk" },
@@ -14,7 +14,7 @@ const items = [
 ];
 const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en" : "nl");
 ---
-<header class="lb-nav-shell" data-lb-nav>
+<header class:list={["lb-nav-shell", { "lb-nav-shell--hero": hero }]} data-lb-nav>
   <nav class="lb-nav" aria-label="Hoofdnavigatie">
     <a href={locUrl("/", lang)} class="lb-nav__brand" aria-label={L.nav.home}><Logo size={26} /></a>
 
@@ -56,11 +56,12 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
     display: flex; align-items: center; flex-wrap: nowrap; gap: 18px;
     max-width: var(--lb-maxw); margin: 0 auto;
     border-radius: 26px; padding: 11px 12px 11px 20px;
-    color: #fff; /* boven de hero: wit */
-    background: rgba(255,255,255,.12);
-    -webkit-backdrop-filter: blur(18px) saturate(185%);
-    backdrop-filter: blur(18px) saturate(185%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 10px 34px rgba(0,0,0,.22);
+    /* standaard: leesbaar matglas (iOS liquid glass) met thema-tekstkleur — werkt op lichte én donkere pagina's */
+    color: var(--lb-bone);
+    background: var(--lb-glass-solid);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+    box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 10px 34px rgba(0,0,0,.18);
     transition: background var(--lb-dur) var(--lb-ease), box-shadow var(--lb-dur) var(--lb-ease), color var(--lb-dur) var(--lb-ease);
   }
   /* refractie: spectrum-prisma rand (licht breekt in het glas) */
@@ -69,23 +70,26 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
     background: linear-gradient(90deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: .9; pointer-events: none;
+    opacity: .6; pointer-events: none;
   }
-  /* bij scroll: dichter glas + thema-tekstkleur, rand iets gedimd */
-  .lb-nav-shell.scrolled .lb-nav {
-    background: var(--lb-glass-solid);
-    color: var(--lb-bone);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 10px 34px rgba(0,0,0,.28);
+  /* alleen op een hero-pagina (donker beeld achter de nav), vóór scrollen: wit op translucent glas */
+  .lb-nav-shell--hero:not(.scrolled) .lb-nav {
+    color: #fff;
+    background: rgba(255,255,255,.12);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 10px 34px rgba(0,0,0,.22);
   }
-  .lb-nav-shell.scrolled .lb-nav::after { opacity: .65; }
+  .lb-nav-shell--hero:not(.scrolled) .lb-nav::after { opacity: .9; }
 
   .lb-nav__brand { display: inline-flex; align-items: center; flex: 0 0 auto; }
   .lb-nav__links { display: flex; align-items: center; gap: 22px; font-size: 15px; margin-left: auto; min-width: 0; }
   .lb-nav__links > a {
     color: inherit; opacity: .9; white-space: nowrap; flex: 0 0 auto;
-    text-shadow: 0 1px 3px rgba(0,0,0,.28); transition: opacity .3s var(--lb-ease);
+    transition: opacity .3s var(--lb-ease);
   }
-  .lb-nav-shell.scrolled .lb-nav__links > a { text-shadow: none; }
+  /* witte tekst leesbaar houden over de hero-afbeelding */
+  .lb-nav-shell--hero:not(.scrolled) .lb-nav__links > a,
+  .lb-nav-shell--hero:not(.scrolled) .lb-nav__droptop,
+  .lb-nav-shell--hero:not(.scrolled) .lb-nav__lang { text-shadow: 0 1px 3px rgba(0,0,0,.28); }
   .lb-nav__links > a:hover, .lb-nav__links > a.on { opacity: 1; }
   /* CTA — altijd hoog contrast: bone-vlak + omgekeerde inkt-tekst */
   .lb-nav .lb-nav__cta {
@@ -96,19 +100,18 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
   }
   .lb-nav__theme {
     flex: 0 0 auto; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
-    background: rgba(255,255,255,.16); color: inherit; border: 1px solid rgba(255,255,255,.28); cursor: pointer;
+    background: rgba(127,127,140,.16); color: inherit; border: 1px solid var(--lb-line); cursor: pointer;
   }
-  .lb-nav-shell.scrolled .lb-nav__theme { background: rgba(127,127,140,.16); border-color: var(--lb-line); }
+  .lb-nav-shell--hero:not(.scrolled) .lb-nav__theme { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.28); }
   .lb-nav__lang {
     flex: 0 0 auto; font-family: var(--lb-font-mono); font-size: 12px; letter-spacing: .08em;
     color: inherit; opacity: .82; padding: 6px 7px; border-radius: 8px; white-space: nowrap;
-    text-shadow: 0 1px 3px rgba(0,0,0,.28); transition: opacity .25s var(--lb-ease);
+    transition: opacity .25s var(--lb-ease);
   }
   .lb-nav__lang:hover { opacity: 1; }
   /* Gereedschap-dropdown */
   .lb-nav__drop { position: relative; flex: 0 0 auto; }
-  .lb-nav__droptop { display: inline-flex; align-items: center; gap: 4px; color: inherit; opacity: .9; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.28); transition: opacity .3s var(--lb-ease); cursor: pointer; }
-  .lb-nav-shell.scrolled .lb-nav__droptop { text-shadow: none; }
+  .lb-nav__droptop { display: inline-flex; align-items: center; gap: 4px; color: inherit; opacity: .9; white-space: nowrap; transition: opacity .3s var(--lb-ease); cursor: pointer; }
   .lb-nav__droptop:hover, .lb-nav__droptop.on { opacity: 1; }
   .lb-nav__caret { transition: transform .25s var(--lb-ease); }
   .lb-nav__drop:hover .lb-nav__caret, .lb-nav__drop:focus-within .lb-nav__caret { transform: rotate(180deg); }
@@ -122,7 +125,6 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
   .lb-nav__drop:hover .lb-nav__menu, .lb-nav__drop:focus-within .lb-nav__menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
   .lb-nav__menu a { position: relative; z-index: 1; color: var(--lb-bone); padding: 11px 14px; border-radius: 10px; white-space: nowrap; font-size: 15px; text-shadow: none; opacity: 1; transition: background .2s var(--lb-ease); }
   .lb-nav__menu a:hover { background: var(--lb-ink); }
-  .lb-nav-shell.scrolled .lb-nav__lang { text-shadow: none; }
   .ic-moon { display: none; }
   :root[data-theme="dark"] .ic-sun { display: none; }
   :root[data-theme="dark"] .ic-moon { display: block; }

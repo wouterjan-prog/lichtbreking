@@ -118,7 +118,7 @@ import Footer from '../components/Footer.astro';
       if (navigator.clipboard && t) navigator.clipboard.writeText(t);
       b.textContent = shots.length ? 'Gekopieerd ✓' : 'Lijst is leeg'; setTimeout(function () { b.textContent = 'Kopieer lijst'; }, 1400);
     });
-    document.getElementById('slPrint').addEventListener('click', function () { window.print(); });
+    document.getElementById('slPrint').addEventListener('click', function () { if (window.va) window.va('event', { name: 'print_shotlist' }); window.print(); });
     document.getElementById('slClear').addEventListener('click', function () { if (confirm('Hele shotlist wissen?')) { shots = []; save(shots); render(); } });
     render();
   })();

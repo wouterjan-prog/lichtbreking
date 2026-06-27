@@ -23,6 +23,11 @@ const L = t[lang] || t.nl;
 <body>
   <a class="lb-skip" href="#hoofdinhoud">{lang === 'en' ? 'Skip to content' : 'Naar de inhoud'}</a>
   <slot />
+  <!-- Vercel Web Analytics (privacyvriendelijk, geen cookies). Levert pas data zodra Analytics aanstaat in het Vercel-dashboard. -->
+  <script is:inline>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script is:inline defer src="/_vercel/insights/script.js"></script>
   <!-- Reveal-on-scroll (met vangnet zodat content nooit lang onzichtbaar blijft) -->
   <script is:inline>
     (function () {
