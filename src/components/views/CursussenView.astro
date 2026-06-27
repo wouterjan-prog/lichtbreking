@@ -47,6 +47,7 @@ const courses = [
         <span class="course__cta">Open de planner →</span>
       </a>
     )}
+    <p class="cursussen-note lb-muted lb-reveal">{L.note}</p>
   </main>
   <Footer lang={lang} />
 </Base>
@@ -70,5 +71,6 @@ const courses = [
   .tool-cta:hover { border-color: var(--lb-mist); transform: translateY(-2px); }
   .tool-cta__title { margin: 6px 0 4px; }
   .tool-cta__desc { color: var(--lb-mist); font-size: var(--lb-small); max-width: 60ch; margin: 0; }
+  .cursussen-note { margin-top: 40px; max-width: 70ch; font-size: var(--lb-small); line-height: 1.7; }
   @media (max-width: 860px) { .courses { grid-template-columns: 1fr; } }
 </style>
