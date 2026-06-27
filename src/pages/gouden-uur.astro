@@ -54,10 +54,13 @@ import Footer from '../components/Footer.astro';
   .gh-wind { position: relative; margin-top: 16px; padding: 1.1rem 1.3rem; border-radius: 16px; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 14px 40px rgba(0,0,0,.22); }
   .gh-wind::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px; background: linear-gradient(135deg,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; }
   .gh-wind__lbl { font-family: var(--lb-font-mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--lb-sky); display: block; margin-bottom: 10px; }
-  .gh-wind__row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 9px 0; border-top: 1px solid var(--lb-line); }
-  .gh-wind__row:first-of-type { border-top: 0; }
-  .gh-wind__when { color: var(--lb-bone); font-size: .92rem; min-width: 200px; flex: 1; }
-  .gh-wind__data { color: var(--lb-mist); font-size: .88rem; font-variant-numeric: tabular-nums; }
+  .gh-wx { padding: 12px 0; border-top: 1px solid var(--lb-line); }
+  .gh-wx:first-of-type { border-top: 0; }
+  .gh-wx__top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .gh-wx__name { color: var(--lb-bone); font-size: .94rem; flex: 1; min-width: 180px; }
+  .gh-wx__chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+  .gh-chip { font-size: .8rem; color: var(--lb-mist); background: rgba(127,127,140,.13); border-radius: 8px; padding: 4px 9px; font-variant-numeric: tabular-nums; }
+  .gh-chip b { color: var(--lb-bone); font-weight: 500; }
   .gh-pill { font-family: var(--lb-font-mono); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
   .gh-pill.go { color: var(--lb-green-ink); background: rgba(70,201,95,.14); }
   .gh-pill.care { color: var(--lb-orange-ink); background: rgba(255,154,46,.14); }
@@ -123,6 +126,15 @@ import Footer from '../components/Footer.astro';
       return { label: 'No-go', cls: 'no' };
     }
     function compass(d) { if (d == null || isNaN(d)) return '?'; return ['N', 'NO', 'O', 'ZO', 'Z', 'ZW', 'W', 'NW'][Math.round(d / 45) % 8]; }
+    function cloudWord(c) { return c < 30 ? 'helder' : c < 70 ? 'halfbewolkt' : 'bewolkt'; }
+    function nlnum(v) { return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
+    // Vlieg-oordeel: wind (stoten) + regen
+    function flightVerdict(g, precip, prob) {
+      if (precip >= 0.3 || prob >= 70) return { label: 'No-go', cls: 'no' };
+      var w = windVerdict(g);
+      if (prob >= 40 && w.cls === 'go') return { label: 'Voorzichtig', cls: 'care' };
+      return w;
+    }
     var windReq = 0;
     function fetchWind(t) {
       var ghW = document.getElementById('ghWind');
@@ -130,13 +142,13 @@ import Footer from '../components/Footer.astro';
       var ds = dateEl.value, myReq = ++windReq;
       ghW.hidden = false;
       ghW.innerHTML = '<span class="gh-wind__lbl">Wind op de gouden uren</span><span class="gh-wind__load">Windvoorspelling laden…</span>';
-      var lbl = '<span class="gh-wind__lbl">Windvoorspelling per venster</span>';
-      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + cur.lat + '&longitude=' + cur.lng + '&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kmh&timezone=auto&start_date=' + ds + '&end_date=' + ds;
+      var lbl = '<span class="gh-wind__lbl">Weer per venster</span>';
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + cur.lat + '&longitude=' + cur.lng + '&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m,cloud_cover,precipitation_probability,precipitation,temperature_2m&wind_speed_unit=kmh&timezone=auto&start_date=' + ds + '&end_date=' + ds;
       fetch(url).then(function (r) { return r.json(); }).then(function (j) {
         if (myReq !== windReq) return;
-        if (!j.hourly || !j.hourly.time) { ghW.innerHTML = lbl + '<span class="gh-wind__load">Geen windvoorspelling voor deze datum — die reikt ongeveer 16 dagen vooruit.</span>'; return; }
+        if (!j.hourly || !j.hourly.time) { ghW.innerHTML = lbl + '<span class="gh-wind__load">Geen weersvoorspelling voor deze datum — die reikt ongeveer 16 dagen vooruit.</span>'; return; }
         function mid(a, b) { return (a && b && !isNaN(a) && !isNaN(b)) ? new Date((a.getTime() + b.getTime()) / 2) : (a || b); }
-        var rows = [
+        var H = j.hourly, rows = [
           { n: 'Blauwe uur · ochtend', when: mid(t.dawn, t.sunrise) },
           { n: 'Gouden uur · ochtend', when: mid(t.sunrise, t.goldEnd) },
           { n: 'Gouden uur · avond', when: mid(t.goldStart, t.sunset) },
@@ -146,21 +158,32 @@ import Footer from '../components/Footer.astro';
         rows.forEach(function (row) {
           if (!row.when || isNaN(row.when)) return;
           var key = tzHourKey(row.when, cur.tz);
-          var idx = j.hourly.time.findIndex(function (s) { return s.slice(0, 13) === key; });
+          var idx = H.time.findIndex(function (s) { return s.slice(0, 13) === key; });
           if (idx < 0) return;
-          res.push({ n: row.n, when: row.when, ws: Math.round(j.hourly.wind_speed_10m[idx]), wg: Math.round(j.hourly.wind_gusts_10m[idx]), dir: compass(j.hourly.wind_direction_10m[idx]) });
+          res.push({
+            n: row.n, when: row.when,
+            ws: Math.round(H.wind_speed_10m[idx]), wg: Math.round(H.wind_gusts_10m[idx]), dir: compass(H.wind_direction_10m[idx]),
+            cloud: Math.round(H.cloud_cover[idx] || 0), prob: Math.round(H.precipitation_probability[idx] || 0),
+            precip: H.precipitation[idx] || 0, temp: Math.round(H.temperature_2m[idx])
+          });
         });
         if (!res.length) { ghW.innerHTML = lbl + '<span class="gh-wind__load">Geen uurdata gevonden voor deze tijden.</span>'; return; }
         var calm = res.reduce(function (a, b) { return b.wg < a.wg ? b : a; });
         var html = lbl;
         res.forEach(function (r2) {
-          var v = windVerdict(r2.wg);
+          var v = flightVerdict(r2.wg, r2.precip, r2.prob);
           var tag = (r2 === calm && res.length > 1) ? '<span class="gh-wind__calm">rustigst</span>' : '';
-          html += '<div class="gh-wind__row"><span class="gh-wind__when">' + r2.n + ' · ' + fmt(r2.when) + '</span><span class="gh-wind__data">' + r2.ws + ' km/h · stoten ' + r2.wg + ' · uit ' + r2.dir + '</span><span class="gh-pill ' + v.cls + '">' + v.label + '</span>' + tag + '</div>';
+          html += '<div class="gh-wx"><div class="gh-wx__top"><span class="gh-wx__name">' + r2.n + ' · ' + fmt(r2.when) + '</span><span class="gh-pill ' + v.cls + '">' + v.label + '</span>' + tag + '</div>'
+            + '<div class="gh-wx__chips">'
+            + '<span class="gh-chip"><b>' + r2.ws + '</b> km/h · stoten <b>' + r2.wg + '</b> · uit ' + r2.dir + '</span>'
+            + '<span class="gh-chip">Bewolking <b>' + r2.cloud + '%</b> · ' + cloudWord(r2.cloud) + '</span>'
+            + '<span class="gh-chip">Regen <b>' + r2.prob + '%</b>' + (r2.precip > 0 ? ' · ' + nlnum(r2.precip) + ' mm' : '') + '</span>'
+            + '<span class="gh-chip"><b>' + r2.temp + '°</b></span>'
+            + '</div></div>';
         });
-        html += '<p class="gh-wind__fine">Oordeel op windstoten (DJI Mini 5 Pro, windbestendigheid ± niveau 5). Vlieg met de neus tegen de wind — de richting is waar de wind vandaan komt. Een voorspelling: check vlak voor vertrek opnieuw en houd zicht (VLOS).</p>';
+        html += '<p class="gh-wind__fine">Oordeel op windstoten én regen (DJI Mini 5 Pro). Bewolking bepaalt vooral je licht — "helder" geeft het mooiste gouden uur. Vlieg met de neus tegen de wind. Een voorspelling: check vlak voor vertrek en houd zicht (VLOS).</p>';
         ghW.innerHTML = html;
-      }).catch(function () { if (myReq === windReq) ghW.innerHTML = lbl + '<span class="gh-wind__load">Windvoorspelling kon niet laden.</span>'; });
+      }).catch(function () { if (myReq === windReq) ghW.innerHTML = lbl + '<span class="gh-wind__load">Weersvoorspelling kon niet laden.</span>'; });
     }
     function render() {
       if (!cur) return;
