@@ -23,6 +23,8 @@
   --lb-blue:   #2F7CF0;
   --lb-violet: #9B4DDB;
   --lb-sky:    #7FB4D6;  /* rustige label-accentkleur */
+  --lb-orange-ink: #FF9A2E; /* oranje als TEKST — leesbaar op donker */
+  --lb-green-ink:  #7ED88F; /* groen als TEKST — leesbaar op donker */
 
   /* Verlopen */
   --lb-spectrum: linear-gradient(90deg,#FF4D4D,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
@@ -85,6 +87,8 @@
   --lb-bone:    #16171B;  /* primaire tekst + primaire knop (donker) */
   --lb-white:   #FFFFFF;  /* tekst op beeld blijft wit (donkere overlay) */
   --lb-sky:     #22618F;  /* donkerder accent zodat labels leesbaar zijn op papier/wit */
+  --lb-orange-ink: #A65200; /* oranje tekst — donkerder zodat het leesbaar is op papier */
+  --lb-green-ink:  #1D7A3F; /* groene tekst — donkerder voor leesbaarheid op papier */
 
   --lb-shadow-card: 0 10px 30px rgba(20,22,30,.12);
   --lb-shadow-float: 0 24px 60px rgba(20,22,30,.18);
@@ -107,6 +111,8 @@
     --lb-bone:    #16171B;
     --lb-white:   #FFFFFF;
     --lb-sky:     #22618F;
+    --lb-orange-ink: #A65200;
+    --lb-green-ink:  #1D7A3F;
     --lb-shadow-card: 0 10px 30px rgba(20,22,30,.12);
     --lb-shadow-float: 0 24px 60px rgba(20,22,30,.18);
     --lb-glass-bg: rgba(255,255,255,.16);

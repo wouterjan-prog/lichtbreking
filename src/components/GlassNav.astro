@@ -114,16 +114,16 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
     .lb-nav__burger { display: flex; }
     .lb-nav__links {
       position: absolute; top: calc(100% + 10px); right: 0; left: 0; margin-left: 0;
-      flex-direction: column; align-items: stretch; gap: 6px; padding: 14px;
-      border-radius: 18px; background: var(--lb-glass-solid);
-      border: 1px solid var(--lb-glass-solid-border); color: var(--lb-bone);
-      -webkit-backdrop-filter: var(--lb-glass-blur); backdrop-filter: var(--lb-glass-blur);
+      flex-direction: column; align-items: stretch; gap: 4px; padding: 12px;
+      border-radius: 18px; background: var(--lb-surface);
+      border: 1px solid var(--lb-line); color: var(--lb-bone);
       box-shadow: var(--lb-shadow-float);
       opacity: 0; transform: translateY(-8px); pointer-events: none; transition: .3s var(--lb-ease);
     }
     .lb-nav__links.open { opacity: 1; transform: none; pointer-events: auto; }
-    .lb-nav__links > a { opacity: 1; padding: 10px 12px; border-radius: 10px; }
-    .lb-nav__links > a.on { background: rgba(127,127,140,.14); }
+    .lb-nav__links > a { opacity: 1; color: var(--lb-bone); text-shadow: none; padding: 11px 12px; border-radius: 10px; }
+    .lb-nav__links > a:hover, .lb-nav__links > a.on { background: var(--lb-ink); }
+    .lb-nav__lang { color: var(--lb-bone); text-shadow: none; }
     .lb-nav__cta { text-align: center; }
     .lb-nav__theme { margin-top: 4px; }
   }
