@@ -111,12 +111,15 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
   .lb-nav__droptop:hover, .lb-nav__droptop.on { opacity: 1; }
   .lb-nav__caret { transition: transform .25s var(--lb-ease); }
   .lb-nav__drop:hover .lb-nav__caret, .lb-nav__drop:focus-within .lb-nav__caret { transform: rotate(180deg); }
-  .lb-nav__menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 216px;
-    background: var(--lb-surface); border: 1px solid var(--lb-line); border-radius: 14px; padding: 6px; box-shadow: var(--lb-shadow-float);
+  .lb-nav__menu { position: absolute; top: calc(100% + 22px); left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 216px; z-index: 60;
+    background: var(--lb-surface); border-radius: 16px; padding: 6px; box-shadow: 0 20px 54px rgba(0,0,0,.42), inset 0 1px 0 var(--lb-glass-hi);
     display: flex; flex-direction: column; gap: 2px; opacity: 0; pointer-events: none; transition: opacity .22s var(--lb-ease), transform .22s var(--lb-ease); }
-  .lb-nav__menu::before { content: ""; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+  /* spectrum-refractierand op het paneel */
+  .lb-nav__menu::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .55; pointer-events: none; }
+  /* onzichtbare brug zodat hover niet wegvalt over de tussenruimte */
+  .lb-nav__menu::before { content: ""; position: absolute; top: -22px; left: 0; right: 0; height: 22px; }
   .lb-nav__drop:hover .lb-nav__menu, .lb-nav__drop:focus-within .lb-nav__menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-  .lb-nav__menu a { color: var(--lb-bone); padding: 11px 14px; border-radius: 10px; white-space: nowrap; font-size: 15px; text-shadow: none; opacity: 1; transition: background .2s var(--lb-ease); }
+  .lb-nav__menu a { position: relative; z-index: 1; color: var(--lb-bone); padding: 11px 14px; border-radius: 10px; white-space: nowrap; font-size: 15px; text-shadow: none; opacity: 1; transition: background .2s var(--lb-ease); }
   .lb-nav__menu a:hover { background: var(--lb-ink); }
   .lb-nav-shell.scrolled .lb-nav__lang { text-shadow: none; }
   .ic-moon { display: none; }
@@ -154,10 +157,12 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
     .lb-nav__drop { width: 100%; }
     .lb-nav__droptop { color: var(--lb-bone); text-shadow: none; padding: 11px 12px; border-radius: 10px; opacity: 1; }
     .lb-nav__caret { display: none; }
-    .lb-nav__menu { position: static; transform: none; opacity: 1; pointer-events: auto; min-width: 0; padding: 0 0 6px 14px;
+    .lb-nav__menu { position: static; transform: none; opacity: 1; pointer-events: auto; min-width: 0; padding: 2px 0 6px 10px;
       background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-    .lb-nav__menu::before { display: none; }
-    .lb-nav__menu a { padding: 9px 12px; opacity: 1; }
+    /* desktop-hover-transform mag hier niet lekken (anders schuift de tekst weg) */
+    .lb-nav__drop:hover .lb-nav__menu, .lb-nav__drop:focus-within .lb-nav__menu { transform: none; }
+    .lb-nav__menu::before, .lb-nav__menu::after { display: none; }
+    .lb-nav__menu a { padding: 10px 12px; border-radius: 10px; opacity: 1; }
     .lb-nav__menu a:hover { background: var(--lb-ink); }
   }
 </style>
