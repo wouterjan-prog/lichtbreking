@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+import GlassNav from '../components/GlassNav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="Gouden-uur-planner" description="Bereken het gouden uur, blauwe uur en zonsop-/ondergang voor jouw locatie en datum. Plan je cinematische drone- en filmshoot op het mooiste licht." path="/gouden-uur/">
+  <GlassNav active="cursussen" switchHref="/en/cursussen/" />
+  <main class="lb-container gh-page">
+    <header class="gh-head lb-reveal">
+      <span class="lb-label lb-label--sky">Gratis tool</span>
+      <h1 class="lb-display-l">Gouden-uur-planner</h1>
+      <p class="lb-lead">Het mooiste licht duurt kort. Kies je locatie en datum, en zie precies wanneer het gouden uur, blauwe uur en zonsop-/ondergang vallen — zodat je op het juiste moment in de lucht bent.</p>
+    </header>
+
+    <div class="gh-controls lb-reveal">
+      <button class="lb-btn" id="ghGeo">Gebruik mijn locatie</button>
+      <select id="ghPreset" aria-label="Kies een plaats">
+        <option value="">Of kies een plaats…</option>
+        <option value="52.3676,4.9041">Amsterdam</option>
+        <option value="51.9244,4.4777">Rotterdam</option>
+        <option value="52.0907,5.1214">Utrecht</option>
+        <option value="52.0705,4.3007">Den Haag</option>
+        <option value="51.4416,5.4697">Eindhoven</option>
+        <option value="53.2194,6.5665">Groningen</option>
+        <option value="50.8514,5.6910">Maastricht</option>
+        <option value="53.1753,5.7969">Leeuwarden</option>
+      </select>
+      <input type="date" id="ghDate" aria-label="Datum">
+    </div>
+    <p class="gh-loc lb-muted lb-reveal" id="ghLoc">Stel hierboven je locatie in om de tijden te zien.</p>
+
+    <div class="gh-next lb-reveal" id="ghNext" hidden></div>
+
+    <div class="gh-grid lb-reveal" id="ghGrid" hidden></div>
+
+    <p class="gh-fine lb-muted lb-reveal">Tijden in jouw apparaat-tijdzone. De zonberekening gebeurt volledig op je toestel — er wordt niets opgeslagen of verstuurd.</p>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .gh-page { padding-top: 130px; padding-bottom: 96px; }
+  .gh-head { max-width: 64ch; margin-bottom: 32px; }
+  .gh-head h1 { margin: 10px 0 16px; }
+  .gh-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .gh-controls select, .gh-controls input[type=date] { background: var(--lb-ink); border: 1px solid var(--lb-line); color: var(--lb-bone); border-radius: 10px; padding: .7rem .8rem; font-size: .95rem; font-family: var(--lb-font-text); }
+  .gh-loc { margin: 14px 0 0; font-size: var(--lb-small); }
+  .gh-next { margin-top: 26px; padding: 1.1rem 1.3rem; border-radius: 14px; border-left: 3px solid var(--lb-orange); background: rgba(255,154,46,.08); }
+  .gh-next__lbl { font-family: var(--lb-font-mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--lb-orange-ink); display: block; margin-bottom: 4px; }
+  .gh-next__txt { font-size: 1.05rem; color: var(--lb-bone); }
+  .gh-next__txt b { color: var(--lb-orange-ink); }
+  .gh-grid { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .gh-card { background: var(--lb-ink); border: 1px solid var(--lb-line); border-radius: 14px; padding: 1.2rem 1.3rem; }
+  .gh-card__ph { font-family: var(--lb-font-mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--lb-sky); }
+  .gh-card__time { font-size: 1.5rem; color: var(--lb-bone); margin: 8px 0 2px; font-variant-numeric: tabular-nums; }
+  .gh-card__sub { font-size: .85rem; color: var(--lb-mist); }
+  .gh-card.warm { border-color: rgba(255,154,46,.4); }
+  .gh-card.warm .gh-card__ph { color: var(--lb-orange-ink); }
+  .gh-fine { margin-top: 22px; font-size: .8rem; opacity: .85; }
+  @media (max-width: 560px) { .gh-controls { flex-direction: column; align-items: stretch; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var rad = Math.PI / 180, dayMs = 864e5, J1970 = 2440588, J2000 = 2451545, e = rad * 23.4397;
+    function toJulian(d) { return d.valueOf() / dayMs - 0.5 + J1970; }
+    function fromJulian(j) { return new Date((j + 0.5 - J1970) * dayMs); }
+    function toDays(d) { return toJulian(d) - J2000; }
+    function decl(l, b) { return Math.asin(Math.sin(b) * Math.cos(e) + Math.cos(b) * Math.sin(e) * Math.sin(l)); }
+    function sma(d) { return rad * (357.5291 + 0.98560028 * d); }
+    function eclLon(M) { var C = rad * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M)); return M + C + rad * 102.9372 + Math.PI; }
+    var J0 = 0.0009;
+    function julianCycle(d, lw) { return Math.round(d - J0 - lw / (2 * Math.PI)); }
+    function approxTransit(Ht, lw, n) { return J0 + (Ht + lw) / (2 * Math.PI) + n; }
+    function solarTransitJ(ds, M, L) { return J2000 + ds + 0.0053 * Math.sin(M) - 0.0069 * Math.sin(2 * L); }
+    function hourAngle(h, phi, d) { return Math.acos((Math.sin(h) - Math.sin(phi) * Math.sin(d)) / (Math.cos(phi) * Math.cos(d))); }
+    function getTimes(date, lat, lng) {
+      var lw = rad * -lng, phi = rad * lat, d = toDays(date), n = julianCycle(d, lw),
+        ds = approxTransit(0, lw, n), M = sma(ds), L = eclLon(M), dec = decl(L, 0), Jnoon = solarTransitJ(ds, M, L);
+      function ang(h) {
+        var w = hourAngle(h * rad, phi, dec), a = approxTransit(w, lw, n), Jset = solarTransitJ(a, M, L), Jrise = Jnoon - (Jset - Jnoon);
+        return { rise: fromJulian(Jrise), set: fromJulian(Jset) };
+      }
+      var s = ang(-0.833), g = ang(6), c = ang(-6);
+      return { dawn: c.rise, sunrise: s.rise, goldEnd: g.rise, noon: fromJulian(Jnoon), goldStart: g.set, sunset: s.set, dusk: c.set };
+    }
+    var dateEl = document.getElementById('ghDate');
+    var today = new Date(); dateEl.value = today.toISOString().slice(0, 10);
+    var cur = null; // {lat,lng,name}
+    function fmt(d) { if (!d || isNaN(d.getTime())) return '—'; return d.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }); }
+    function dur(a, b) { if (!a || !b || isNaN(a) || isNaN(b)) return ''; var m = Math.round((b - a) / 60000); return m > 0 ? '· ' + m + ' min' : ''; }
+    function render() {
+      if (!cur) return;
+      var d = new Date(dateEl.value + 'T12:00:00');
+      var t = getTimes(d, cur.lat, cur.lng);
+      document.getElementById('ghLoc').textContent = cur.name + '  ·  ' + d.toLocaleDateString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long' });
+      var phases = [
+        { ph: 'Blauwe uur · ochtend', a: t.dawn, b: t.sunrise, sub: 'Koel, sfeervol — water & steden', warm: false },
+        { ph: 'Zonsopkomst', a: t.sunrise, b: null, sub: 'De zon komt op', warm: true },
+        { ph: 'Gouden uur · ochtend', a: t.sunrise, b: t.goldEnd, sub: 'Warm, zacht, het beste licht', warm: true },
+        { ph: 'Gouden uur · avond', a: t.goldStart, b: t.sunset, sub: 'Warm, zacht, het beste licht', warm: true },
+        { ph: 'Zonsondergang', a: t.sunset, b: null, sub: 'De zon gaat onder', warm: true },
+        { ph: 'Blauwe uur · avond', a: t.sunset, b: t.dusk, sub: 'Koel, sfeervol — stadslichten', warm: false }
+      ];
+      var grid = document.getElementById('ghGrid'); grid.innerHTML = '';
+      phases.forEach(function (p) {
+        var time = p.b ? (fmt(p.a) + ' – ' + fmt(p.b)) : fmt(p.a);
+        var el = document.createElement('div'); el.className = 'gh-card' + (p.warm ? ' warm' : '');
+        el.innerHTML = '<span class="gh-card__ph">' + p.ph + '</span><div class="gh-card__time">' + time + '</div><span class="gh-card__sub">' + p.sub + ' ' + (p.b ? dur(p.a, p.b) : '') + '</span>';
+        grid.appendChild(el);
+      });
+      grid.hidden = false;
+      // eerstvolgende venster
+      var now = new Date();
+      var windows = [
+        { n: 'het ochtend-blauwe uur', a: t.dawn, b: t.sunrise },
+        { n: 'het ochtend-gouden uur', a: t.sunrise, b: t.goldEnd },
+        { n: 'het avond-gouden uur', a: t.goldStart, b: t.sunset },
+        { n: 'het avond-blauwe uur', a: t.sunset, b: t.dusk }
+      ];
+      var nx = document.getElementById('ghNext');
+      var sameDay = dateEl.value === new Date().toISOString().slice(0, 10);
+      if (sameDay) {
+        var active = windows.find(function (w) { return now >= w.a && now <= w.b; });
+        var up = windows.find(function (w) { return w.a > now; });
+        if (active) { nx.innerHTML = '<span class="gh-next__lbl">Nu</span><span class="gh-next__txt">Je zit middenin <b>' + active.n + '</b> — nog ' + Math.round((active.b - now) / 60000) + ' min. Vliegen maar.</span>'; nx.hidden = false; }
+        else if (up) { var mins = Math.round((up.a - now) / 60000); var h = Math.floor(mins / 60), m = mins % 60; nx.innerHTML = '<span class="gh-next__lbl">Straks</span><span class="gh-next__txt"><b>' + up.n.charAt(0).toUpperCase() + up.n.slice(1) + '</b> begint om ' + fmt(up.a) + ' — over ' + (h ? h + ' u ' : '') + m + ' min.</span>'; nx.hidden = false; }
+        else { nx.hidden = true; }
+      } else { nx.hidden = true; }
+    }
+    function setLoc(lat, lng, name) { cur = { lat: lat, lng: lng, name: name }; render(); }
+    document.getElementById('ghPreset').addEventListener('change', function () {
+      if (!this.value) return; var p = this.value.split(','); setLoc(+p[0], +p[1], this.options[this.selectedIndex].text);
+    });
+    dateEl.addEventListener('change', render);
+    document.getElementById('ghGeo').addEventListener('click', function () {
+      var btn = this; if (!navigator.geolocation) { document.getElementById('ghLoc').textContent = 'Locatie niet beschikbaar — kies een plaats.'; return; }
+      btn.textContent = 'Locatie ophalen…';
+      navigator.geolocation.getCurrentPosition(
+        function (pos) { btn.textContent = 'Gebruik mijn locatie'; setLoc(pos.coords.latitude, pos.coords.longitude, 'Mijn locatie'); },
+        function () { btn.textContent = 'Gebruik mijn locatie'; document.getElementById('ghLoc').textContent = 'Geen toestemming voor locatie — kies een plaats hierboven.'; }
+      );
+    });
+  })();
+</script>

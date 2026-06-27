@@ -9,8 +9,17 @@ import Footer from '../components/Footer.astro';
     <header class="gw-head lb-reveal">
       <span class="lb-label lb-label--sky">Gratis tools</span>
       <h1 class="lb-display-l">Gereedschap</h1>
-      <p class="lb-lead">Drie snelle hulpmiddelen voor in het veld: bereken je ND-filter, check of het veilig vliegen is, en loop je pre-flight af. Werkt op je telefoon, niets in te loggen.</p>
+      <p class="lb-lead">Snelle hulpmiddelen voor in het veld: bereken je ND-filter, check of het veilig vliegen is, en loop je pre-flight af. Werkt op je telefoon, niets in te loggen.</p>
     </header>
+
+    <a href="/gouden-uur/" class="gw-link lb-reveal">
+      <div>
+        <span class="lb-label lb-label--sky">Ook handig</span>
+        <strong>Gouden-uur-planner</strong>
+        <span class="gw-link__sub">Zie precies wanneer het gouden &amp; blauwe uur vallen op jouw locatie.</span>
+      </div>
+      <span class="gw-link__arrow">→</span>
+    </a>
 
     <div class="gw-grid">
       <!-- ND-calculator -->
@@ -19,11 +28,19 @@ import Footer from '../components/Footer.astro';
         <div class="gw-row">
           <label>Framerate</label>
           <select id="ndFps">
-            <option value="50">24 fps</option>
-            <option value="50" selected>25 fps</option>
-            <option value="60">30 fps</option>
-            <option value="100">50 fps</option>
-            <option value="120">60 fps</option>
+            <option value="24">24 fps</option>
+            <option value="25" selected>25 fps</option>
+            <option value="30">30 fps</option>
+            <option value="50">50 fps</option>
+            <option value="60">60 fps</option>
+          </select>
+        </div>
+        <div class="gw-row">
+          <label>Sluiterhoek</label>
+          <select id="ndAngle">
+            <option value="180" selected>180° (cinematisch)</option>
+            <option value="90">90° (scherper)</option>
+            <option value="360">360° (vloeiend)</option>
           </select>
         </div>
         <div class="gw-row">
@@ -36,7 +53,7 @@ import Footer from '../components/Footer.astro';
           </select>
         </div>
         <div class="gw-out" id="ndOut"></div>
-        <p class="gw-note">180°-regel: sluitertijd ≈ 2× je framerate. Het ND-filter houdt het licht tegen zodat je die trage sluiter haalt — zonder overbelichting.</p>
+        <p class="gw-note">Sluitertijd volgt uit je framerate en sluiterhoek (180° = 2× je framerate). Het ND-filter houdt het licht tegen zodat je die trage sluiter haalt — zonder overbelichting.</p>
       </section>
 
       <!-- Wind go/no-go -->
@@ -71,6 +88,11 @@ import Footer from '../components/Footer.astro';
   .gw-page { padding-top: 130px; padding-bottom: 96px; }
   .gw-head { max-width: 64ch; margin-bottom: 40px; }
   .gw-head h1 { margin: 10px 0 16px; }
+  .gw-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 24px; padding: 16px 20px; background: var(--lb-ink); border: 1px solid var(--lb-line); border-radius: 14px; transition: border-color var(--lb-dur) var(--lb-ease), transform var(--lb-dur) var(--lb-ease); }
+  .gw-link:hover { border-color: var(--lb-mist); transform: translateY(-1px); }
+  .gw-link strong { display: block; color: var(--lb-bone); margin: 4px 0 2px; }
+  .gw-link__sub { color: var(--lb-mist); font-size: var(--lb-small); }
+  .gw-link__arrow { color: var(--lb-sky); font-size: 1.2rem; }
   .gw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
   .gw-card { background: var(--lb-ink); border: 1px solid var(--lb-line); border-radius: 16px; padding: 1.5rem 1.6rem; }
   .gw-card--wide { grid-column: 1 / -1; }
@@ -106,19 +128,18 @@ import Footer from '../components/Footer.astro';
 
 <script is:inline>
   (function () {
-    var fpsLabel = { '50': '1/50', '60': '1/60', '100': '1/100', '120': '1/120' };
     var ndCond = { '8': 'bewolkt licht', '16': 'zonnig', '32': 'felle middagzon', '64': 'water of sneeuw' };
-    var ndStops = { '8': '−3 stops', '16': '−4 stops', '32': '−5 stops', '64': '−6 stops' };
-    var fpsName = { '24 fps': 1 };
+    var ndStops = { '8': 3, '16': 4, '32': 5, '64': 6 };
     function nd() {
-      var fSel = document.getElementById('ndFps');
-      var fpsTxt = fSel.options[fSel.selectedIndex].text;
-      var sh = fpsLabel[fSel.value] || '1/50';
+      var fps = +document.getElementById('ndFps').value;
+      var angle = +document.getElementById('ndAngle').value;
+      var denom = Math.round(fps * 360 / angle);
       var L = document.getElementById('ndLight').value;
       document.getElementById('ndOut').innerHTML =
-        '<b>' + fpsTxt + '</b> → richt op sluiter <b>' + sh + '</b>.<br>Licht <b>' + ndCond[L] + '</b> → gebruik <b>ND' + L + '</b> (' + ndStops[L] + ').';
+        '<b>' + fps + ' fps</b> bij <b>' + angle + '°</b> → richt op sluiter <b>1/' + denom + '</b>.<br>Licht <b>' + ndCond[L] + '</b> → gebruik <b>ND' + L + '</b> (−' + ndStops[L] + ' stops).';
     }
     document.getElementById('ndFps').addEventListener('change', nd);
+    document.getElementById('ndAngle').addEventListener('change', nd);
     document.getElementById('ndLight').addEventListener('change', nd);
     nd();
 

@@ -6,7 +6,7 @@ export async function GET() {
   const urls = [];
   const add = (p, pr) => urls.push({ loc: SITE + p, pr });
 
-  ['/', '/werk/', '/cursussen/', '/showreel/', '/over/', '/contact/', '/shotlist/', '/gereedschap/'].forEach((p) => add(p, p === '/' ? '1.0' : '0.7'));
+  ['/', '/werk/', '/cursussen/', '/showreel/', '/over/', '/contact/', '/shotlist/', '/gereedschap/', '/gouden-uur/'].forEach((p) => add(p, p === '/' ? '1.0' : '0.7'));
   ['/en/', '/en/werk/', '/en/cursussen/', '/en/showreel/', '/en/over/', '/en/contact/'].forEach((p) => add(p, '0.5'));
 
   for (const c of courses) {
