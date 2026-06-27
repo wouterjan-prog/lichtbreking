@@ -25,6 +25,16 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
       {items.map((it) => (
         <a href={it.href} class={active === it.id ? "on" : ""} aria-current={active === it.id ? "page" : undefined}>{it.label}</a>
       ))}
+      <div class="lb-nav__drop">
+        <a href="/gereedschap/" class:list={["lb-nav__droptop", { on: active === "gereedschap" }]} aria-current={active === "gereedschap" ? "page" : undefined}>
+          {L.nav.tools}
+          <svg class="lb-nav__caret" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="lb-nav__menu">
+          <a href="/gereedschap/">{L.nav.nd}</a>
+          <a href="/gouden-uur/">{L.nav.golden}</a>
+        </div>
+      </div>
       <a class="lb-nav__cta" href={locUrl("/showreel/", lang)}>{L.nav.showreel}</a>
       <a class="lb-nav__lang" href={langHref} aria-label={lang === "nl" ? "Switch to English" : "Schakel naar Nederlands"}>{L.otherName}</a>
       <button class="lb-nav__theme" id="lb-theme-toggle" aria-label={L.nav.theme} title={L.nav.theme}>
@@ -94,6 +104,21 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
     text-shadow: 0 1px 3px rgba(0,0,0,.28); transition: opacity .25s var(--lb-ease);
   }
   .lb-nav__lang:hover { opacity: 1; }
+  /* Gereedschap-dropdown */
+  .lb-nav__drop { position: relative; flex: 0 0 auto; }
+  .lb-nav__droptop { display: inline-flex; align-items: center; gap: 4px; color: inherit; opacity: .9; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.28); transition: opacity .3s var(--lb-ease); cursor: pointer; }
+  .lb-nav-shell.scrolled .lb-nav__droptop { text-shadow: none; }
+  .lb-nav__droptop:hover, .lb-nav__droptop.on { opacity: 1; }
+  .lb-nav__caret { transition: transform .25s var(--lb-ease); }
+  .lb-nav__drop:hover .lb-nav__caret, .lb-nav__drop:focus-within .lb-nav__caret { transform: rotate(180deg); }
+  .lb-nav__menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 210px;
+    background: var(--lb-glass-solid); -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--lb-glass-solid-border); border-radius: 14px; padding: 8px; box-shadow: var(--lb-shadow-float);
+    display: flex; flex-direction: column; gap: 2px; opacity: 0; pointer-events: none; transition: opacity .25s var(--lb-ease), transform .25s var(--lb-ease); }
+  .lb-nav__menu::before { content: ""; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
+  .lb-nav__drop:hover .lb-nav__menu, .lb-nav__drop:focus-within .lb-nav__menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .lb-nav__menu a { color: var(--lb-bone); padding: 10px 12px; border-radius: 9px; white-space: nowrap; font-size: 14px; text-shadow: none; opacity: .92; }
+  .lb-nav__menu a:hover { background: rgba(127,127,140,.18); opacity: 1; }
   .lb-nav-shell.scrolled .lb-nav__lang { text-shadow: none; }
   .ic-moon { display: none; }
   :root[data-theme="dark"] .ic-sun { display: none; }
@@ -110,7 +135,7 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
   .lb-nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .lb-nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     .lb-nav__burger { display: flex; }
     .lb-nav__links {
       position: absolute; top: calc(100% + 10px); right: 0; left: 0; margin-left: 0;
@@ -126,6 +151,15 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
     .lb-nav__lang { color: var(--lb-bone); text-shadow: none; }
     .lb-nav__cta { text-align: center; }
     .lb-nav__theme { margin-top: 4px; }
+    /* dropdown wordt platte lijst in het flyout-menu */
+    .lb-nav__drop { width: 100%; }
+    .lb-nav__droptop { color: var(--lb-bone); text-shadow: none; padding: 11px 12px; border-radius: 10px; opacity: 1; }
+    .lb-nav__caret { display: none; }
+    .lb-nav__menu { position: static; transform: none; opacity: 1; pointer-events: auto; min-width: 0; padding: 0 0 6px 14px;
+      background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .lb-nav__menu::before { display: none; }
+    .lb-nav__menu a { padding: 9px 12px; opacity: 1; }
+    .lb-nav__menu a:hover { background: var(--lb-ink); }
   }
 </style>
 

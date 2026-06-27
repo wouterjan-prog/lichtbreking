@@ -66,6 +66,8 @@
   /* glas voor de nav wanneer die op een effen doek staat (na de hero) */
   --lb-glass-solid: rgba(16,17,20,.72);
   --lb-glass-solid-border: rgba(255,255,255,.10);
+  --lb-glass-card-bg: rgba(20,22,28,.5);
+  --lb-glass-hi: rgba(255,255,255,.22);
 
   /* — Motion — */
   --lb-ease: cubic-bezier(.22,.61,.36,1);
@@ -96,6 +98,8 @@
   --lb-glass-border: rgba(255,255,255,.5);
   --lb-glass-solid: rgba(255,255,255,.82);
   --lb-glass-solid-border: rgba(20,22,30,.10);
+  --lb-glass-card-bg: rgba(255,255,255,.6);
+  --lb-glass-hi: rgba(255,255,255,.6);
 
   color-scheme: light;
 }
@@ -119,6 +123,8 @@
     --lb-glass-border: rgba(255,255,255,.5);
     --lb-glass-solid: rgba(255,255,255,.82);
     --lb-glass-solid-border: rgba(20,22,30,.10);
+    --lb-glass-card-bg: rgba(255,255,255,.6);
+    --lb-glass-hi: rgba(255,255,255,.6);
     color-scheme: light;
   }
 }

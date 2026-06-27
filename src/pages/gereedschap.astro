@@ -4,7 +4,8 @@ import GlassNav from '../components/GlassNav.astro';
 import Footer from '../components/Footer.astro';
 ---
 <Base title="Gereedschap" description="Gratis drone-tools: ND-filter-calculator, wind go/no-go-checker en een pre-flight checklist. Snel, praktisch, voor onderweg." path="/gereedschap/">
-  <GlassNav active="cursussen" switchHref="/en/cursussen/" />
+  <GlassNav active="gereedschap" switchHref="/en/cursussen/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
   <main class="lb-container gw-page">
     <header class="gw-head lb-reveal">
       <span class="lb-label lb-label--sky">Gratis tools</span>
@@ -88,13 +89,16 @@ import Footer from '../components/Footer.astro';
   .gw-page { padding-top: 130px; padding-bottom: 96px; }
   .gw-head { max-width: 64ch; margin-bottom: 40px; }
   .gw-head h1 { margin: 10px 0 16px; }
-  .gw-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 24px; padding: 16px 20px; background: var(--lb-ink); border: 1px solid var(--lb-line); border-radius: 14px; transition: border-color var(--lb-dur) var(--lb-ease), transform var(--lb-dur) var(--lb-ease); }
-  .gw-link:hover { border-color: var(--lb-mist); transform: translateY(-1px); }
+  .gw-link { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 24px; padding: 16px 20px; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); border-radius: 16px; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 12px 36px rgba(0,0,0,.24); transition: transform var(--lb-dur) var(--lb-ease); }
+  .gw-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .5; pointer-events: none; }
+  .gw-link:hover { transform: translateY(-2px); }
   .gw-link strong { display: block; color: var(--lb-bone); margin: 4px 0 2px; }
   .gw-link__sub { color: var(--lb-mist); font-size: var(--lb-small); }
   .gw-link__arrow { color: var(--lb-sky); font-size: 1.2rem; }
   .gw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
-  .gw-card { background: var(--lb-ink); border: 1px solid var(--lb-line); border-radius: 16px; padding: 1.5rem 1.6rem; }
+  .gw-card { position: relative; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(22px) saturate(180%); backdrop-filter: blur(22px) saturate(180%); border-radius: 18px; padding: 1.5rem 1.6rem; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 16px 44px rgba(0,0,0,.28); }
+  .gw-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; }
+  .gw-card > * { position: relative; z-index: 1; }
   .gw-card--wide { grid-column: 1 / -1; }
   .gw-cap { display: block; font-family: var(--lb-font-mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--lb-sky); margin-bottom: 1.1rem; }
   .gw-row { display: flex; align-items: center; gap: 12px; margin: .6rem 0; }
