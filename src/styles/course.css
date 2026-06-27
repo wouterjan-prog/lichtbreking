@@ -212,6 +212,8 @@
 .course-body .lb-printbtn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lb-font-text);font-weight:500;font-size:.95rem;padding:.65rem 1.2rem;border-radius:var(--lb-r-pill);background:var(--lb-bone);color:var(--lb-ink);border:0;cursor:pointer;margin:.2rem 0 1.8rem;transition:transform var(--lb-dur) var(--lb-ease)}
 .course-body .lb-printbtn svg{width:16px;height:16px}
 .course-body .lb-printbtn:hover{transform:translateY(-1px)}
+.course-body .lb-printbtn--ghost{background:transparent;color:var(--lb-bone);border:1px solid var(--lb-line);margin-left:10px;text-decoration:none}
+.course-body .lb-printbtn--ghost:hover{border-color:var(--lb-bone)}
 .course-body .protip{background:rgba(255,154,46,.10);border-left:4px solid var(--rust);border-radius:0 9px 9px 0;padding:1rem 1.3rem;margin:1.3rem 0}
 .course-body .protip .pt-h{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust-deep);font-weight:700;margin-bottom:.35rem}
 .course-body .chap-hero{background:linear-gradient(135deg,#0f2c33,#143b43);border-radius:16px;padding:2.4rem 2rem;margin:1.6rem 0 2rem;color:#eef7f9}
