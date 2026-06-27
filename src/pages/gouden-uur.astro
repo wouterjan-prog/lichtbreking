@@ -64,6 +64,7 @@ import Footer from '../components/Footer.astro';
   .gh-pill.no { color: #FF6B5E; background: rgba(255,80,71,.14); }
   :root[data-theme="light"] .gh-pill.no { color: #C42B21; background: rgba(196,43,33,.10); }
   @media (prefers-color-scheme: light) { :root:not([data-theme]) .gh-pill.no { color: #C42B21; background: rgba(196,43,33,.10); } }
+  .gh-wind__calm { font-family: var(--lb-font-mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: var(--lb-sky); opacity: .9; }
   .gh-wind__load { color: var(--lb-mist); font-size: .9rem; }
   .gh-wind__fine { color: var(--lb-mist); font-size: .78rem; margin: 10px 0 0; opacity: .9; }
   .gh-grid { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
@@ -121,6 +122,7 @@ import Footer from '../components/Footer.astro';
       if (g < 40) return { label: 'Alleen ervaren', cls: 'no' };
       return { label: 'No-go', cls: 'no' };
     }
+    function compass(d) { if (d == null || isNaN(d)) return '?'; return ['N', 'NO', 'O', 'ZO', 'Z', 'ZW', 'W', 'NW'][Math.round(d / 45) % 8]; }
     var windReq = 0;
     function fetchWind(t) {
       var ghW = document.getElementById('ghWind');
@@ -128,26 +130,37 @@ import Footer from '../components/Footer.astro';
       var ds = dateEl.value, myReq = ++windReq;
       ghW.hidden = false;
       ghW.innerHTML = '<span class="gh-wind__lbl">Wind op de gouden uren</span><span class="gh-wind__load">Windvoorspelling laden…</span>';
-      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + cur.lat + '&longitude=' + cur.lng + '&hourly=wind_speed_10m,wind_gusts_10m&wind_speed_unit=kmh&timezone=auto&start_date=' + ds + '&end_date=' + ds;
+      var lbl = '<span class="gh-wind__lbl">Windvoorspelling per venster</span>';
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + cur.lat + '&longitude=' + cur.lng + '&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kmh&timezone=auto&start_date=' + ds + '&end_date=' + ds;
       fetch(url).then(function (r) { return r.json(); }).then(function (j) {
         if (myReq !== windReq) return;
-        if (!j.hourly || !j.hourly.time) { ghW.innerHTML = '<span class="gh-wind__lbl">Wind op de gouden uren</span><span class="gh-wind__load">Geen windvoorspelling voor deze datum — die reikt ongeveer 16 dagen vooruit.</span>'; return; }
-        var rows = [{ n: 'Ochtend · gouden uur', when: t.sunrise }, { n: 'Avond · gouden uur', when: t.sunset }];
-        var html = '<span class="gh-wind__lbl">Wind op de gouden uren</span>', any = false;
+        if (!j.hourly || !j.hourly.time) { ghW.innerHTML = lbl + '<span class="gh-wind__load">Geen windvoorspelling voor deze datum — die reikt ongeveer 16 dagen vooruit.</span>'; return; }
+        function mid(a, b) { return (a && b && !isNaN(a) && !isNaN(b)) ? new Date((a.getTime() + b.getTime()) / 2) : (a || b); }
+        var rows = [
+          { n: 'Blauwe uur · ochtend', when: mid(t.dawn, t.sunrise) },
+          { n: 'Gouden uur · ochtend', when: mid(t.sunrise, t.goldEnd) },
+          { n: 'Gouden uur · avond', when: mid(t.goldStart, t.sunset) },
+          { n: 'Blauwe uur · avond', when: mid(t.sunset, t.dusk) }
+        ];
+        var res = [];
         rows.forEach(function (row) {
           if (!row.when || isNaN(row.when)) return;
           var key = tzHourKey(row.when, cur.tz);
           var idx = j.hourly.time.findIndex(function (s) { return s.slice(0, 13) === key; });
           if (idx < 0) return;
-          any = true;
-          var ws = Math.round(j.hourly.wind_speed_10m[idx]), wg = Math.round(j.hourly.wind_gusts_10m[idx]), v = windVerdict(wg);
-          html += '<div class="gh-wind__row"><span class="gh-wind__when">' + row.n + ' · ' + fmt(row.when) + '</span><span class="gh-wind__data">' + ws + ' km/h · stoten ' + wg + '</span><span class="gh-pill ' + v.cls + '">' + v.label + '</span></div>';
+          res.push({ n: row.n, when: row.when, ws: Math.round(j.hourly.wind_speed_10m[idx]), wg: Math.round(j.hourly.wind_gusts_10m[idx]), dir: compass(j.hourly.wind_direction_10m[idx]) });
         });
-        html += any
-          ? '<p class="gh-wind__fine">Oordeel op basis van windstoten, afgestemd op de DJI Mini 5 Pro (windbestendigheid ± niveau 5). Een voorspelling — check vlak voor vertrek opnieuw, en houd altijd zicht (VLOS).</p>'
-          : '<span class="gh-wind__load">Geen uurdata gevonden voor deze tijden.</span>';
+        if (!res.length) { ghW.innerHTML = lbl + '<span class="gh-wind__load">Geen uurdata gevonden voor deze tijden.</span>'; return; }
+        var calm = res.reduce(function (a, b) { return b.wg < a.wg ? b : a; });
+        var html = lbl;
+        res.forEach(function (r2) {
+          var v = windVerdict(r2.wg);
+          var tag = (r2 === calm && res.length > 1) ? '<span class="gh-wind__calm">rustigst</span>' : '';
+          html += '<div class="gh-wind__row"><span class="gh-wind__when">' + r2.n + ' · ' + fmt(r2.when) + '</span><span class="gh-wind__data">' + r2.ws + ' km/h · stoten ' + r2.wg + ' · uit ' + r2.dir + '</span><span class="gh-pill ' + v.cls + '">' + v.label + '</span>' + tag + '</div>';
+        });
+        html += '<p class="gh-wind__fine">Oordeel op windstoten (DJI Mini 5 Pro, windbestendigheid ± niveau 5). Vlieg met de neus tegen de wind — de richting is waar de wind vandaan komt. Een voorspelling: check vlak voor vertrek opnieuw en houd zicht (VLOS).</p>';
         ghW.innerHTML = html;
-      }).catch(function () { if (myReq === windReq) ghW.innerHTML = '<span class="gh-wind__lbl">Wind op de gouden uren</span><span class="gh-wind__load">Windvoorspelling kon niet laden.</span>'; });
+      }).catch(function () { if (myReq === windReq) ghW.innerHTML = lbl + '<span class="gh-wind__load">Windvoorspelling kon niet laden.</span>'; });
     }
     function render() {
       if (!cur) return;
