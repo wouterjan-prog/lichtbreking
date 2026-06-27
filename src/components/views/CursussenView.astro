@@ -47,6 +47,16 @@ const courses = [
         <span class="course__cta">Open de planner →</span>
       </a>
     )}
+    {lang === 'nl' && (
+      <a href="/gereedschap/" class="tool-cta lb-reveal">
+        <div class="tool-cta__txt">
+          <span class="lb-label lb-label--sky">Gratis tools</span>
+          <h2 class="tool-cta__title">Gereedschap</h2>
+          <p class="tool-cta__desc">ND-filter-calculator, wind go/no-go-checker en een pre-flight checklist — snel en praktisch voor onderweg.</p>
+        </div>
+        <span class="course__cta">Open het gereedschap →</span>
+      </a>
+    )}
     <p class="cursussen-note lb-muted lb-reveal">{L.note}</p>
   </main>
   <Footer lang={lang} />
