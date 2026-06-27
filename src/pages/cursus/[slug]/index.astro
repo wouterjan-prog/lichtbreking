@@ -13,6 +13,7 @@ const { course } = Astro.props;
 const lessons = getLessons(course);
 const total = course.modules.length;
 const hasCards = (course.naslag || []).some((r) => r.key === 'printkaarten');
+const quickStart = (course.naslag || []).find((r) => r.key === 'starthier');
 
 // groepeer modules per deel (in volgorde)
 const parts = [];
@@ -39,6 +40,13 @@ const jsonld = {
       <div class="meta">
         {course.meta.map(([k, v]) => <div class="meta__row"><span class="lb-label">{k}</span><span class="meta__v">{v}</span></div>)}
       </div>
+      {quickStart && (
+        <a href={`/cursus/${course.slug}/les/${quickStart.key}/`} class="quick-cta">
+          <span class="quick-cta__tag">Weinig tijd?</span>
+          <span class="quick-cta__txt">Begin hier — binnen 30 minuten je eerste shot</span>
+          <span class="quick-cta__arrow">→</span>
+        </a>
+      )}
       <div class="prog">
         <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
         <span class="lb-label" id="progLabel">0 / {total}</span>
@@ -122,6 +130,12 @@ const jsonld = {
   .meta { display: flex; flex-wrap: wrap; gap: 14px 40px; margin: 26px 0 0; }
   .meta__row { display: flex; flex-direction: column; gap: 4px; }
   .meta__v { color: var(--lb-bone); }
+  .quick-cta { display: inline-flex; align-items: center; gap: 12px; margin: 26px 0 4px; padding: 12px 18px; border-radius: var(--lb-r-pill); border: 1px solid var(--lb-sky); background: rgba(127,180,214,.08); color: var(--lb-bone); transition: background var(--lb-dur) var(--lb-ease), transform var(--lb-dur) var(--lb-ease); }
+  .quick-cta:hover { background: rgba(127,180,214,.16); transform: translateY(-1px); }
+  .quick-cta__tag { font-family: var(--lb-font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--lb-sky); }
+  .quick-cta__txt { font-size: .95rem; }
+  .quick-cta__arrow { color: var(--lb-sky); }
+  @media (max-width: 560px) { .quick-cta { flex-wrap: wrap; } }
   .prog { display: flex; align-items: center; gap: 14px; margin: 30px 0 24px; max-width: 460px; }
   .prog-track { flex: 1; height: 6px; background: var(--lb-line); border-radius: 6px; overflow: hidden; }
   .prog-fill { height: 100%; width: 0; border-radius: 6px; background: var(--lb-spectrum); transition: width .5s var(--lb-ease); }

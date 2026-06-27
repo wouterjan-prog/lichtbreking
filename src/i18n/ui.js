@@ -40,9 +40,9 @@ export const t = {
     cursussen: {
       title: 'Cursussen', desc: 'Gratis cinematische cursussen: De Vluchtfilmer (drone) en De Grondfilmer (camera). Leer filmen vanuit de lucht én op de grond.',
       kicker: 'Leren', h1: 'Cursussen',
-      lead: 'Gratis, cinematisch en praktisch. Kies je toestel — of volg ze allebei en leer hoe drone en camera samen één film vormen.',
+      lead: 'Tutorials zat gekeken en je beeld blijft vlak? Dat ligt niet aan jou — losse video’s geven fragmenten, geen systeem. Hier leer je het hele plaatje: van locatie en licht tot beweging, montage en kleur. Gratis en praktisch — kies je toestel, of volg ze allebei.',
       free: 'Gratis', soon: 'Binnenkort', open: 'Open de cursus →', soonBtn: 'Binnenkort',
-      c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '15 modules · ~6 uur', desc: 'Leer je drone filmen, niet alleen vliegen. Van eerste opstart tot afgemonteerde cinematische film — met shot-recepten, beslisbomen en een veldgids.' },
+      c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '14 modules · ~6 uur', desc: 'Leer je drone filmen, niet alleen vliegen. Van eerste opstart tot afgemonteerde cinematische film — met shot-recepten, beslisbomen en een veldgids.' },
       c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · veldgids', desc: 'De beelden op ooghoogte die je drone compleet maken. Cinematische gimbal-techniek en hoe je lucht en grond samensmelt tot één film.' },
       c3: { kicker: 'Post · kleur', title: 'Kleur & grade', meta: 'In ontwikkeling', desc: 'Twee camera’s, één look. D-Log matchen, LUTs en een cinematische grade in Final Cut en DaVinci Resolve.' },
     },
@@ -106,9 +106,9 @@ export const t = {
     cursussen: {
       title: 'Courses', desc: 'Free cinematic courses: The Flight Filmer (drone) and The Ground Filmer (camera). Learn to film from the air and on the ground.',
       kicker: 'Learning', h1: 'Courses',
-      lead: 'Free, cinematic and practical. Pick your device — or follow both and learn how drone and camera form one film together.',
+      lead: 'Watched plenty of tutorials and your footage still looks flat? That’s not on you — loose videos give fragments, not a system. Here you learn the whole picture: from location and light to the move, the edit and the colour. Free and practical — pick your device, or follow both.',
       free: 'Free', soon: 'Coming soon', open: 'Open the course →', soonBtn: 'Coming soon',
-      c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '15 modules · ~6 hrs', desc: 'Learn to film with your drone, not just fly it. From first power-on to a finished cinematic film — with shot recipes, decision trees and a field guide.' },
+      c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '14 modules · ~6 hrs', desc: 'Learn to film with your drone, not just fly it. From first power-on to a finished cinematic film — with shot recipes, decision trees and a field guide.' },
       c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · field guide', desc: 'The eye-level imagery that completes your drone. Cinematic gimbal technique and how to merge air and ground into one film.' },
       c3: { kicker: 'Post · colour', title: 'Colour & grade', meta: 'In development', desc: 'Two cameras, one look. Matching D-Log, LUTs and a cinematic grade in Final Cut and DaVinci Resolve.' },
     },
