@@ -69,6 +69,7 @@ import Footer from '../components/Footer.astro';
         <div class="gw-verdictwrap"><span class="gw-verdict" id="windVerdict"></span></div>
         <p class="gw-note" id="windNote"></p>
         <p class="gw-fine">Richtlijn voor de DJI Mini 5 Pro (windbestendigheid ± niveau 5). Houd altijd zicht (VLOS) en check no-fly-zones.</p>
+        <a class="gw-windlink" href="/gouden-uur/">📍 Wind voor een échte locatie &amp; datum? De gouden-uur-planner haalt de voorspelling op →</a>
       </section>
 
       <!-- Pre-flight checklist -->
@@ -95,6 +96,8 @@ import Footer from '../components/Footer.astro';
   .gw-link strong { display: block; color: var(--lb-bone); margin: 4px 0 2px; }
   .gw-link__sub { color: var(--lb-mist); font-size: var(--lb-small); }
   .gw-link__arrow { color: var(--lb-sky); font-size: 1.2rem; }
+  .gw-windlink { display: block; margin-top: 12px; color: var(--lb-sky); font-size: var(--lb-small); line-height: 1.5; transition: opacity .2s var(--lb-ease); }
+  .gw-windlink:hover { opacity: .8; }
   .gw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
   .gw-card { position: relative; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); border-radius: 18px; padding: 1.5rem 1.6rem; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 16px 44px rgba(0,0,0,.28); }
   .gw-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; }
