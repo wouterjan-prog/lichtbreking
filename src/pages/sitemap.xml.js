@@ -7,7 +7,7 @@ export async function GET() {
   const urls = [];
   const add = (p, pr) => urls.push({ loc: SITE + p, pr });
 
-  ['/', '/werk/', '/cursussen/', '/showreel/', '/over/', '/contact/', '/shotlist/', '/gereedschap/', '/gouden-uur/', '/curacao/', '/wat-is-nieuw/', '/artikelen/'].forEach((p) => add(p, p === '/' ? '1.0' : '0.7'));
+  ['/', '/werk/', '/cursussen/', '/showreel/', '/over/', '/contact/', '/shotlist/', '/gereedschap/', '/gouden-uur/', '/curacao/', '/aruba/', '/wat-is-nieuw/', '/artikelen/'].forEach((p) => add(p, p === '/' ? '1.0' : '0.7'));
   for (const a of articles) add(`/artikelen/${a.slug}/`, '0.6');
   ['/en/', '/en/werk/', '/en/cursussen/', '/en/showreel/', '/en/over/', '/en/contact/', '/en/pro-settings/'].forEach((p) => add(p, '0.5'));
 

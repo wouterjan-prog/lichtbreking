@@ -214,5 +214,56 @@ export const articles = [
 
 <p>Welke instellingen je vervolgens kiest, lees je in <a href="/artikelen/pro-instellingen-uitgelegd/">Alle Pro-instellingen uitgelegd</a>. En je leert alles stap voor stap in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a> — beide gratis.</p>
 `
+  },
+  {
+    slug: 'drone-regels-nederland-eu',
+    cat: 'Regels',
+    ph: 'r',
+    title: 'Drone-regels in Nederland & de EU — begrijpelijk uitgelegd',
+    excerpt: 'Registratie, vliegbewijs en de categorieën A1, A2 en A3 zonder ambtelijk jargon. Wat geldt voor jouw drone, en waar je wel en niet mag vliegen.',
+    date: '2026-06-27',
+    readMin: 9,
+    body: `
+<p>Dronevliegen in Nederland en de rest van de EU volgt sinds 2021 dezelfde Europese regels. Ze klinken ingewikkeld, maar voor de meeste mensen komt het neer op een paar simpele stappen. Hier lees je wat er voor jouw drone geldt — in gewone taal.</p>
+
+<div class="callout tip"><div class="c-label">Belangrijk</div><p>Regels en bedragen kunnen wijzigen. Gebruik dit als overzicht en bevestig de actuele eisen altijd bij de officiële bron: <a href="https://www.rijksoverheid.nl/onderwerpen/drone" rel="nofollow">rijksoverheid.nl/drone</a> en de <a href="https://www.rdw.nl" rel="nofollow">RDW</a>.</p></div>
+
+<h2>De basis: de "open categorie"</h2>
+<p>Vrijwel iedereen die recreatief of voor mooie beelden vliegt, valt in de <strong>open categorie</strong>. De kernregels zijn altijd hetzelfde:</p>
+<ul>
+<li>Je houdt je drone <strong>altijd in zicht</strong> (VLOS).</li>
+<li>Je vliegt <strong>maximaal 120 meter</strong> hoog.</li>
+<li>Je drone weegt <strong>minder dan 25 kg</strong>.</li>
+<li>Je vliegt <strong>niet boven mensenmenigtes</strong> en niet in verboden luchtruim.</li>
+</ul>
+
+<h2>Stap 1 — Registreren bij de RDW</h2>
+<p>Heb je een drone van <strong>250 gram of zwaarder</strong>, óf een drone <strong>met een camera</strong> (ook lichter dan 250 gram), dan moet je je als exploitant registreren bij de RDW. Je krijgt een <strong>exploitantnummer</strong> dat je op je drone(s) plakt. De kosten liggen rond de €23 voor de eerste registratie en €13 per jaar voor verlenging. Een drone onder de 250 gram <em>zonder</em> camera hoef je niet te registreren.</p>
+
+<h2>Stap 2 — Het vliegbewijs (als je drone ≥ 250 g is)</h2>
+<p>Voor drones van 250 gram of zwaarder heb je het <strong>EU-dronebewijs A1/A3</strong> nodig. Je legt een online theorie-examen af via een erkende route; na het slagen vraag je het certificaat aan bij de RDW. Het is <strong>vijf jaar</strong> geldig. Voor een lichte drone onder de 250 gram heb je dit bewijs niet nodig — wél de registratie als er een camera op zit.</p>
+
+<h2>De subcategorieën: A1, A2 en A3</h2>
+<p>Binnen de open categorie bepaalt het gewicht (en de CE-klasse) hoe dicht je bij mensen mag komen:</p>
+<ul>
+<li><strong>A1 — dicht bij mensen, lichte drones.</strong> Drones onder 250 gram (klasse C0) en lichte drones tot 900 gram (C1). Je mag relatief dicht bij mensen vliegen, maar nooit boven mensenmenigtes.</li>
+<li><strong>A2 — middenklasse, met extra bewijs.</strong> Drones tot ongeveer 4 kg (klasse C2). Hiervoor heb je naast het basisbewijs een <strong>A2-vaardigheidsbewijs</strong> nodig, en je houdt ruime afstand tot omstanders (richtlijn: minimaal 30 meter, of dichterbij alleen in de langzame-vliegmodus volgens de EU-regels).</li>
+<li><strong>A3 — zwaarder, ver van alles.</strong> Drones tot 25 kg. Je vliegt ver van mensen en op flinke afstand (orde van 150 meter) van woon-, bedrijfs- en recreatiegebieden.</li>
+</ul>
+<p>De meeste hobbyisten en reizigers kiezen bewust een drone <strong>onder de 250 gram</strong>: die valt in de lichtste klasse, met de soepelste regels en de laagste drempel.</p>
+
+<h2>Waar mag je niet vliegen?</h2>
+<p>Ook met alle papieren op orde zijn er plekken waar je niet mag: rond luchthavens (controlezones), boven mensenmenigtes en evenementen, en in veel natuurgebieden. Check vóór elke vlucht een actuele no-fly-kaart — de overheid verwijst naar de officiële drone-kaart/app. Bij twijfel: niet vliegen.</p>
+
+<h2>Verzekering</h2>
+<p>Een aansprakelijkheidsverzekering (WA) die dronevliegen dekt, is sterk aan te raden en in sommige situaties verplicht. Controleer of je particuliere aansprakelijkheidsverzekering drones dekt, of sluit een aparte dronedekking af — ook voor vluchten in het buitenland.</p>
+
+<h2>En in het buitenland?</h2>
+<p>Binnen de EU gelden dezelfde categorieën, dus je RDW-registratie en EU-dronebewijs werken in de hele EU. Buiten de EU (zoals op Curaçao) gelden eigen, lokale regels — daar moet je je vaak apart registreren. Lees daarvoor de <a href="/curacao/">Curaçao-gids</a> met de specifieke eisen voor dat eiland.</p>
+
+<div class="callout tip"><div class="c-label">In het kort</div><p>Registreer je (≥250 g of camera), haal je A1/A3-bewijs als je drone 250 gram of meer weegt, blijf onder 120 m en in zicht, en check de no-fly-kaart. Een lichte drone onder 250 gram scheelt je de meeste regels.</p></div>
+
+<p>Klaar om te vliegen? Plan je shoot op het mooiste licht met de <a href="/gouden-uur/">gouden-uur-planner</a> en loop je <a href="/gereedschap/">pre-flight checklist</a> af.</p>
+`
   }
 ];
