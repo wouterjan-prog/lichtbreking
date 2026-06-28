@@ -1,0 +1,39 @@
+---
+import { proSettings } from '../data/prosettings.js';
+const { cams = ['mini', 'pocket'] } = Astro.props;
+const list = proSettings.filter((s) => cams.includes(s.cam));
+---
+<div class="pcs">
+  {list.map((s) => (
+    <div class="pcs__card lb-glass">
+      <div class="pcs__head">
+        <span class="pcs__kind">{s.kind}</span>
+        <h3 class="pcs__name">{s.name}</h3>
+      </div>
+      <dl class="pcs__rows">
+        {s.rows.map((r) => (
+          <div class="pcs__row">
+            <div class="pcs__line"><dt class="pcs__k">{r.k}</dt><dd class="pcs__v">{r.v}</dd></div>
+            <p class="pcs__why">{r.why}</p>
+          </div>
+        ))}
+      </dl>
+    </div>
+  ))}
+</div>
+
+<style>
+  .pcs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pcs__card { border-radius: 18px; padding: 20px 20px 8px; }
+  .pcs__head { margin-bottom: 8px; }
+  .pcs__kind { font-family: var(--lb-font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--lb-sky); }
+  .pcs__name { font-size: 1.25rem; margin: 4px 0 0; }
+  .pcs__rows { margin: 0; }
+  .pcs__row { padding: 11px 0; border-bottom: 1px solid var(--lb-line, rgba(127,127,140,.18)); }
+  .pcs__row:last-child { border-bottom: 0; }
+  .pcs__line { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .pcs__k { font-weight: 500; font-size: .98rem; }
+  .pcs__v { margin: 0; font-family: var(--lb-font-mono); font-size: .95rem; font-weight: 600; color: var(--lb-sky); white-space: nowrap; text-align: right; }
+  .pcs__why { margin: 3px 0 0; font-size: .82rem; line-height: 1.45; color: var(--lb-mist); max-width: 52ch; }
+  @media (max-width: 760px) { .pcs { grid-template-columns: 1fr; } }
+</style>

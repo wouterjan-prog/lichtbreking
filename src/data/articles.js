@@ -34,6 +34,70 @@ export const articles = [
 `
   },
   {
+    slug: 'pro-instellingen-uitgelegd',
+    cat: 'Techniek',
+    ph: 't',
+    title: 'Alle Pro-instellingen uitgelegd — wat, welke waarde en waarom',
+    excerpt: 'Framerate en ISO zijn maar het begin. Witbalans, kleurprofiel, sluiterhoek en scherpte bepalen net zo goed of je beeld er filmisch uitziet. Hier staat elke handmatige instelling, met de waarde én de reden.',
+    date: '2026-06-28',
+    readMin: 9,
+    body: `
+<p>De meeste mensen zetten hun camera op Pro, kiezen 4K en een framerate, en laten de rest op auto staan. Jammer, want juist die andere instellingen — witbalans, kleurprofiel, sluiterhoek, scherpte — maken het verschil tussen "een filmpje" en een beeld dat filmisch oogt. Hieronder loop je ze allemaal langs: wat het doet, welke waarde je kiest en waaróm.</p>
+
+<h2>Begin bij de 180°-regel</h2>
+<p>Alles draait om één principe: je <strong>sluitertijd</strong> hoort ongeveer twee keer je framerate te zijn (de "180°-regel"). Film je op 25 fps, dan zet je de sluiter op 1/50 s. Dat geeft natuurlijke bewegingsonscherpte — beweging voelt vloeiend in plaats van schokkerig of juist te strak. Een te snelle sluiter maakt beeld "stroboscopisch", een te trage maakt het wazig.</p>
+<p>Het probleem: buiten in fel licht is 1/50 s veel te traag, je beeld wordt spierwit. Daarom film je met een <strong>ND-filter</strong> (een grijsfilter), zodat je die trage sluiter kunt houden zonder te overbelichten. ND lost geen scherpte op — het regelt alleen hoeveel licht er binnenkomt.</p>
+
+<h2>Resolutie & framerate</h2>
+<ul>
+<li><strong>Resolutie 4K</strong> — scherp en future-proof, en je houdt ruimte over om bij te snijden of te stabiliseren.</li>
+<li><strong>Framerate 24 of 25 fps</strong> — de klassieke bioscoop-look. Kies 50 of 60 fps alleen als je de beelden later wilt vertragen (50% slow-motion wordt dan boterzacht).</li>
+</ul>
+
+<h2>ISO — zo laag mogelijk</h2>
+<p>ISO bepaalt hoe gevoelig de sensor is. Hoger ISO = helderder beeld, maar ook meer ruis (korrel). Houd ISO daarom zo laag mogelijk, <strong>100</strong> als het kan. Is het te donker? Regel dan eerst het licht of je ND, en verhoog ISO pas als laatste redmiddel. Verhoog ISO nóóit om een verkeerde belichting te "redden" — daar is je ND of de tijd van de dag voor.</p>
+
+<h2>Witbalans — handmatig vastzetten</h2>
+<p>Witbalans bepaalt of je beeld warm (geel) of koel (blauw) oogt, gemeten in Kelvin. De grote valkuil is <strong>auto-witbalans</strong>: die past zich tijdens een shot aan, dus midden in een draai verspringt de kleur ineens. Dat ziet er onrustig uit en is in de montage lastig te repareren.</p>
+<ul>
+<li><strong>Zet de witbalans handmatig vast.</strong> Buiten bij daglicht zit je rond <strong>5500 K</strong>.</li>
+<li><strong>Kunstlicht binnen</strong> (winkels, lampen) is warmer — daar kies je rond <strong>3200 K</strong>.</li>
+<li>Hogere Kelvin = koeler beeld, lagere Kelvin = warmer. Kies wat bij het licht past en laat het staan.</li>
+</ul>
+
+<h2>Kleurprofiel — Normal of D-Log</h2>
+<p>Het kleurprofiel bepaalt hoeveel kleur en contrast de camera al "inbakt".</p>
+<ul>
+<li><strong>Normal (10-bit)</strong> — het beeld is meteen mooi en bruikbaar zonder bewerken. Voor de meeste mensen de beste keuze.</li>
+<li><strong>D-Log / D-Log M</strong> — een vlak, grijzig profiel dat veel meer detail in lichte en donkere delen bewaart. Het geeft je meer ruimte om te kleuren, maar het is verplicht om het achteraf te bewerken (color grading). Kies dit alléén als je echt gaat nabewerken.</li>
+</ul>
+
+<h2>Scherpte & ruisreductie</h2>
+<ul>
+<li><strong>Scherpte −1</strong> — de standaardscherpte van camera's is vaak te hard en oogt "video-achtig". Iets zachter is filmischer, en scherpte voeg je later makkelijk toe; te veel scherpte krijg je er nooit meer uit.</li>
+<li><strong>Ruisreductie 0</strong> — agressieve ruisonderdrukking veegt fijne details weg en geeft een "plastic" look. Liever laag houden.</li>
+</ul>
+
+<h2>De ND-filter, kort</h2>
+<p>Kies je ND op het licht van dat moment, zodat je op 1/50 s blijft:</p>
+<ul>
+<li><strong>ND8</strong> — bewolkt</li>
+<li><strong>ND16</strong> — zonnig</li>
+<li><strong>ND32</strong> — felle middagzon</li>
+<li><strong>ND64</strong> — wit zand of spiegelend water</li>
+</ul>
+<p>Twijfel je? De <a href="/gereedschap/">ND-calculator</a> rekent het voor je uit op basis van je framerate en het licht.</p>
+
+<h2>Snelle waarden om te onthouden</h2>
+<p><strong>DJI Mini 5 Pro (drone):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast · kleurprofiel Normal · scherpte −1 · ruis 0 · ND volgens licht.</p>
+<p><strong>DJI Osmo Pocket 4 (handheld):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast (3200 K binnen) · Normal of D-Log M · scherpte −1 · gimbal aan · ND buiten bij zon.</p>
+
+<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Zet vóór elke shoot bewust vier dingen vast: sluiter (1/50), ISO (100), witbalans (5500 K) en je ND. Die vier samen bepalen 90% van de "filmische" look — de rest is licht en beweging.</p></div>
+
+<p>De complete cheatsheet met álle waarden naast elkaar staat op de <a href="/gereedschap/">gereedschap-pagina</a>. En je leert ze stap voor stap toepassen in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a> — beide gratis.</p>
+`
+  },
+  {
     slug: 'nd-filters-uitgelegd',
     cat: 'Techniek',
     ph: 't',

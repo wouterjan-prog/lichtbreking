@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import GlassNav from '../components/GlassNav.astro';
 import Footer from '../components/Footer.astro';
+import ProCheatsheet from '../components/ProCheatsheet.astro';
 ---
 <Base title="Gereedschap" description="Gratis drone-tools: ND-filter-calculator, wind go/no-go-checker en een pre-flight checklist. Snel, praktisch, voor onderweg." path="/gereedschap/">
   <GlassNav active="gereedschap" switchHref="/en/cursussen/" />
@@ -82,12 +83,25 @@ import Footer from '../components/Footer.astro';
         <button class="sl-clear gw-reset" id="pfReset">Reset</button>
       </section>
     </div>
+
+    <section class="gw-cheat lb-reveal">
+      <span class="lb-label lb-label--sky">Cheatsheet</span>
+      <h2 class="lb-display-m">Pro-instellingen — compleet</h2>
+      <p class="lb-lead">Niet alleen framerate en ISO: hier staan álle handmatige instellingen op een rij, mét waaróm. De ND-calculator hierboven vult het sluiter- en ND-deel in; deze kaart doet de rest.</p>
+      <ProCheatsheet />
+      <p class="gw-fine">Witbalans, scherpte en kleurprofiel leer je in detail in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a>. Volledige uitleg per instelling: <a href="/artikelen/pro-instellingen-uitgelegd/">het Pro-instellingen-artikel</a>.</p>
+    </section>
   </main>
   <Footer />
 </Base>
 
 <style is:global>
   .gw-page { padding-top: 130px; padding-bottom: 96px; }
+  .gw-cheat { margin-top: 52px; }
+  .gw-cheat h2 { margin: 8px 0 12px; }
+  .gw-cheat .lb-lead { margin-bottom: 22px; }
+  .gw-cheat .gw-fine { margin-top: 18px; }
+  .gw-cheat a { color: var(--lb-sky); }
   .gw-head { max-width: 64ch; margin-bottom: 40px; }
   .gw-head h1 { margin: 10px 0 16px; }
   .gw-link { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 24px; padding: 16px 20px; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); border-radius: 16px; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 12px 36px rgba(0,0,0,.24); transition: transform var(--lb-dur) var(--lb-ease); }
