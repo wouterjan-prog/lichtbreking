@@ -1,10 +1,10 @@
 ---
-// A4 print-/PDF-veldkaart van de Aruba-gids — alle spots, coördinaten, type, beste move & licht.
-import { arubaSpots } from '../../data/arubaspots.js';
+// A4 print-/PDF-veldkaart van de Heerde-gids — alle plekken, coördinaten, type, beste move & licht.
+import { heerdeSpots } from '../../data/heerdespots.js';
 const groups = [
-  { t: 'fly', label: 'Drone-top — go (met DCAA-toestemming)', color: '#1f8a3b' },
-  { t: 'care', label: 'Met beleid', color: '#b86a12' },
-  { t: 'no', label: 'No-fly — film met de Pocket', color: '#c0392b' },
+  { t: 'fly', label: 'Mag — met de gewone regels', color: '#1f8a3b' },
+  { t: 'care', label: 'Met beleid — check Natura 2000', color: '#b86a12' },
+  { t: 'no', label: 'Niet — Natura 2000 / beschermd', color: '#c0392b' },
   { t: 'pocket', label: 'Pocket 4 — vanaf de grond', color: '#6b32a8' },
 ];
 const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
@@ -14,7 +14,7 @@ const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aruba — veldkaart (A4 / PDF)</title>
+<title>Heerde & omstreken — veldkaart (A4 / PDF)</title>
 <meta name="robots" content="noindex" />
 <style is:global>
   :root{ --ink:#13171c; --mut:#5c636b; --line:#d9dde2; --gold:#9a6b12; --spectrum:linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
@@ -28,7 +28,7 @@ const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
   .sheet{ width:210mm; min-height:297mm; margin:22px auto; background:#fff; padding:16mm 15mm; box-shadow:0 18px 50px rgba(0,0,0,.25); }
   .top{ display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid var(--ink); padding-bottom:10px; }
   .kick{ font-family:var(--mono); letter-spacing:.18em; text-transform:uppercase; font-size:10px; color:var(--gold); }
-  h1{ font-size:30px; font-weight:800; text-transform:uppercase; margin:4px 0 0; letter-spacing:-.01em; }
+  h1{ font-size:28px; font-weight:800; text-transform:uppercase; margin:4px 0 0; letter-spacing:-.01em; }
   .top .meta{ text-align:right; font-size:11px; color:var(--mut); }
   .rule{ height:3px; background:var(--spectrum); border-radius:2px; margin:0 0 14px; }
   .settings{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0 18px; }
@@ -43,7 +43,7 @@ const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
   table{ width:100%; border-collapse:collapse; font-size:11.5px; }
   th{ text-align:left; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--mut); border-bottom:1px solid var(--line); padding:4px 6px; }
   td{ padding:5px 6px; border-bottom:1px solid #eef1f3; vertical-align:top; }
-  td.nm{ font-weight:600; width:30%; }
+  td.nm{ font-weight:600; width:32%; }
   td.co{ font-family:var(--mono); color:var(--mut); white-space:nowrap; }
   .foot{ margin-top:18px; padding-top:10px; border-top:1px solid var(--line); font-size:10px; color:var(--mut); }
   .foot b{ color:var(--ink); }
@@ -57,25 +57,25 @@ const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
 </head>
 <body>
   <div class="bar">
-    <p>Print of bewaar als PDF (A4) om mee te nemen — coördinaten, type en de beste move per spot.</p>
+    <p>Print of bewaar als PDF (A4) om mee te nemen — coördinaten, type en de beste move per plek.</p>
     <button class="btn" id="dl">Download als PDF</button>
-    <a class="btn ghost" href="/aruba/">← Terug naar de gids</a>
+    <a class="btn ghost" href="/heerde/">← Terug naar de gids</a>
   </div>
 
   <div class="sheet">
     <div class="top">
-      <div><span class="kick">lichtbreking · veldkaart</span><h1>Drone op Aruba</h1></div>
-      <div class="meta">{arubaSpots.length} spots · lichtbreking.nl/aruba</div>
+      <div><span class="kick">lichtbreking · veldkaart</span><h1>Drone rond Heerde</h1></div>
+      <div class="meta">{heerdeSpots.length} plekken · lichtbreking.nl/heerde</div>
     </div>
     <div class="rule"></div>
 
     <div class="settings">
       <div class="box">
         <h2>ND-filter (houd 1/50 s)</h2>
-        <div class="nd"><span>Bewolkt</span><b>ND8</b></div>
+        <div class="nd"><span>Bewolkt / Hollandse lucht</span><b>ND8</b></div>
         <div class="nd"><span>Zonnig</span><b>ND16</b></div>
         <div class="nd"><span>Felle middagzon</span><b>ND32</b></div>
-        <div class="nd"><span>Wit zand / spiegelend water</span><b>ND64</b></div>
+        <div class="nd"><span>Sneeuw / spiegelend water</span><b>ND64</b></div>
       </div>
       <div class="box">
         <h2>Pro-instellingen</h2>
@@ -90,9 +90,9 @@ const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
       <div class="grp">
         <h2><i style={`background:${g.color}`}></i>{g.label}</h2>
         <table>
-          <thead><tr><th>Spot</th><th>Coördinaten</th><th>Beste move</th><th>Beste licht</th></tr></thead>
+          <thead><tr><th>Plek</th><th>Coördinaten</th><th>Beste move</th><th>Beste licht</th></tr></thead>
           <tbody>
-            {arubaSpots.filter((s) => s.t === g.t).map((s) => (
+            {heerdeSpots.filter((s) => s.t === g.t).map((s) => (
               <tr><td class="nm">{s.n}</td><td class="co">{coord(s.ll)}</td><td>{s.move}</td><td>{s.light}</td></tr>
             ))}
           </tbody>
@@ -101,13 +101,13 @@ const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
     ))}
 
     <div class="foot">
-      <b>Regels:</b> vraag vooraf DCAA-toestemming (e-mail, minstens 1 dag eerder) · lokaal mobiel nummer · max 120 m · zicht (VLOS) · niet bij luchthaven, cruise-haven Oranjestad of Arikok National Park. Regelgeving kan wijzigen — bevestig altijd bij de DCAA. Coördinaten zijn benaderingen. © lichtbreking.nl
+      <b>Regels:</b> registreren (RDW) bij ≥250 g of camera · EU-vliegbewijs A1/A3 · max 120 m · zicht (VLOS) · 50 m van mensen · <b>niet boven Natura 2000</b> (Veluwe &amp; IJssel-uiterwaarden) · check de no-fly-kaart en militaire laagvliegroutes. Grenzen kunnen wijzigen — bevestig vooraf. Coördinaten zijn benaderingen. © lichtbreking.nl
     </div>
   </div>
 
   <script is:inline>
     document.getElementById('dl').addEventListener('click', function(){
-      try{ if(window.va) window.va('event',{name:'print_veldkaart',page:'aruba'}); }catch(e){}
+      try{ if(window.va) window.va('event',{name:'print_veldkaart',page:'heerde'}); }catch(e){}
       window.print();
     });
   </script>
