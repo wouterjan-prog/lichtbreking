@@ -260,6 +260,22 @@
     --amber-deep:#9a5512; --green-deep:#2f7a45;
   }
 }
+/* Lichte modus: donkere accent-blokken (recap "onthoud" + donkere tabel-cel) laten meekleuren,
+   zodat ze geen donker eiland op een lichte pagina vormen. Schermpjes/animatie-kaders blijven bewust donker. */
+:root[data-theme="light"] .course-body .recap{ background:linear-gradient(135deg,#eaf5f7,#dcedf0); box-shadow:0 8px 22px rgba(20,60,70,.10); }
+:root[data-theme="light"] .course-body .recap *{ color:#173a42 !important; }
+:root[data-theme="light"] .course-body .recap .recap-h{ color:#185a7e !important; }
+:root[data-theme="light"] .course-body .recap li{ border-bottom-color:rgba(20,60,70,.16) !important; }
+:root[data-theme="light"] .course-body .recap li::before{ color:#9a5512 !important; }
+:root[data-theme="light"] .course-body .tbox.a{ background:#eaf5f7; color:#173a42; border-color:#9cc3d4; }
+@media (prefers-color-scheme: light){
+  :root:not([data-theme]) .course-body .recap{ background:linear-gradient(135deg,#eaf5f7,#dcedf0); box-shadow:0 8px 22px rgba(20,60,70,.10); }
+  :root:not([data-theme]) .course-body .recap *{ color:#173a42 !important; }
+  :root:not([data-theme]) .course-body .recap .recap-h{ color:#185a7e !important; }
+  :root:not([data-theme]) .course-body .recap li{ border-bottom-color:rgba(20,60,70,.16) !important; }
+  :root:not([data-theme]) .course-body .recap li::before{ color:#9a5512 !important; }
+  :root:not([data-theme]) .course-body .tbox.a{ background:#eaf5f7; color:#173a42; border-color:#9cc3d4; }
+}
 
 /* ============================================================
    Sterkere cursus-visuals: RC 2-stickvisualisatie, movecards,
