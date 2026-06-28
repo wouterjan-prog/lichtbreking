@@ -11,7 +11,6 @@ const items = [
   { label: L.nav.over, href: locUrl("/over/", lang), id: "over" },
   { label: L.nav.contact, href: locUrl("/contact/", lang), id: "contact" },
   { label: L.nav.articles, href: "/artikelen/", id: "artikelen" },
-  { label: L.nav.news, href: "/wat-is-nieuw/", id: "nieuw" },
 ];
 const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en" : "nl");
 ---
@@ -27,6 +26,17 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
       {items.map((it) => (
         <a href={it.href} class={active === it.id ? "on" : ""} aria-current={active === it.id ? "page" : undefined}>{it.label}</a>
       ))}
+      <div class="lb-nav__drop">
+        <a href="/dronespots/" class:list={["lb-nav__droptop", { on: active === "spots" }]} aria-current={active === "spots" ? "page" : undefined}>
+          {L.nav.spots}
+          <svg class="lb-nav__caret" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="lb-nav__menu">
+          <a href="/dronespots/">Alle bestemmingen</a>
+          <a href="/curacao/">Curaçao</a>
+          <a href="/heerde/">Heerde &amp; Veluwe</a>
+        </div>
+      </div>
       <div class="lb-nav__drop">
         <a href="/gereedschap/" class:list={["lb-nav__droptop", { on: active === "gereedschap" }]} aria-current={active === "gereedschap" ? "page" : undefined}>
           {L.nav.tools}

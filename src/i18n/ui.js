@@ -20,7 +20,7 @@ export function switchUrl(pathname, toLang) {
 export const t = {
   nl: {
     locale: 'nl_NL', htmlLang: 'nl', langName: 'NL', otherName: 'EN',
-    nav: { werk: 'Werk', cursus: 'Cursus', tools: 'Gereedschap', nd: 'ND-calculator', golden: 'Gouden-uur-planner', over: 'Over', contact: 'Contact', articles: 'Artikelen', news: 'Wat is nieuw', showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
+    nav: { werk: 'Werk', cursus: 'Cursus', tools: 'Gereedschap', nd: 'ND-calculator', golden: 'Gouden-uur-planner', spots: 'Dronespots', over: 'Over', contact: 'Contact', articles: 'Artikelen', news: 'Wat is nieuw', showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
     foot: { tagline: 'Waar licht breekt — cinematische drone, foto & film.', site: 'Site', more: 'Meer', werk: 'Werk', cursussen: 'Cursussen', showreel: 'Showreel', over: 'Over', contact: 'Contact', articles: 'Artikelen', news: 'Wat is nieuw', rights: 'Drone · foto · film · NL' },
     home: {
       title: 'Lichtbreking — cinematische drone, foto & film',
@@ -88,7 +88,7 @@ export const t = {
 
   en: {
     locale: 'en_GB', htmlLang: 'en', langName: 'EN', otherName: 'NL',
-    nav: { werk: 'Work', cursus: 'Courses', tools: 'Tools', nd: 'ND calculator', golden: 'Golden hour planner', over: 'About', contact: 'Contact', articles: 'Articles', news: "What's new", showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
+    nav: { werk: 'Work', cursus: 'Courses', tools: 'Tools', nd: 'ND calculator', golden: 'Golden hour planner', spots: 'Drone spots', over: 'About', contact: 'Contact', articles: 'Articles', news: "What's new", showreel: 'Showreel', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
     foot: { tagline: 'Where light breaks — cinematic drone, photo & film.', site: 'Site', more: 'More', werk: 'Work', cursussen: 'Courses', showreel: 'Showreel', over: 'About', contact: 'Contact', articles: 'Articles', news: "What's new", rights: 'Drone · photo · film · NL' },
     home: {
       title: 'Lichtbreking — cinematic drone, photo & film',
