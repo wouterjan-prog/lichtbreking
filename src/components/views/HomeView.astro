@@ -54,6 +54,33 @@ const jsonld = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'htt
       </div>
     </section>
 
+    <section class="lb-section spots-teaser">
+      <div class="lb-container">
+        <header class="sec-head lb-reveal">
+          <div><span class="lb-label">{L.home.sKicker}</span><h2 class="lb-display-m">{L.home.sTitle}</h2></div>
+          <a href="/dronespots/" class="sec-head__link">{L.home.sAll}</a>
+        </header>
+        <div class="spots-grid lb-reveal">
+          <a href="/curacao/" class="lb-media lb-card" aria-label="Curaçao">
+            <img src={src('1753618282728-f05ecfc5c9d6', 1024)} srcset={srcset('1753618282728-f05ecfc5c9d6')} sizes="(max-width:720px) 100vw, 50vw" alt="" loading="lazy" width="1600" height="1066" />
+            <div class="lb-card__meta">
+              <span class="lb-label lb-label--sky">Caribbean</span>
+              <h3 class="lb-card__title">Curaçao</h3>
+              <span class="lb-card__sub lb-label">{L.home.sCur}</span>
+            </div>
+          </a>
+          <a href="/heerde/" class="lb-media lb-card" aria-label="Heerde en de Veluwe">
+            <img src={src('1704217392934-0fd66d250056', 1024)} srcset={srcset('1704217392934-0fd66d250056')} sizes="(max-width:720px) 100vw, 50vw" alt="" loading="lazy" width="1600" height="1066" />
+            <div class="lb-card__meta">
+              <span class="lb-label lb-label--sky">Nederland</span>
+              <h3 class="lb-card__title">Heerde &amp; de Veluwe</h3>
+              <span class="lb-card__sub lb-label">{L.home.sHee}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section class="lb-section course-teaser">
       <div class="lb-container">
         <a href={locUrl('/cursussen/', lang)} class="lb-media ct lb-reveal" aria-label={L.cursussen.c1.title}>
@@ -94,6 +121,9 @@ const jsonld = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'htt
   .lb-card__sub { color: rgba(255,255,255,.8); }
   .lb-card__play { position: absolute; inset: 0; margin: auto; z-index: 2; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   @media (max-width: 720px) { .work-grid { grid-template-columns: 1fr; } .lb-card.big { grid-row: auto; } .lb-card, .lb-card.big { aspect-ratio: 3 / 2; } }
+  .spots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .spots-grid .lb-card { aspect-ratio: 16 / 10; }
+  @media (max-width: 720px) { .spots-grid { grid-template-columns: 1fr; } .spots-grid .lb-card { aspect-ratio: 3 / 2; } }
   .ct { display: block; aspect-ratio: 21 / 9; }
   .ct__inner { position: absolute; z-index: 2; left: clamp(24px,4vw,56px); right: clamp(24px,4vw,56px); bottom: clamp(24px,4vw,48px); max-width: 60ch; }
   .ct__inner h2 { color: #fff; margin: 10px 0 0; }

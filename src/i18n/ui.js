@@ -31,6 +31,8 @@ export const t = {
       selKicker: 'Selectie', selTitle: 'Het werk', selAll: 'Alles bekijken →',
       cFree: 'Gratis cursus', cTitle: 'Leer je drone filmen,<br>niet alleen vliegen.',
       cSub: 'Vijftien modules van eerste opstart tot afgemonteerde film — shot-recepten, beslisbomen en een veldgids.', cBtn: 'Naar de cursussen →',
+      sKicker: 'Dronespots', sTitle: 'Waar vlieg & film je?', sAll: 'Alle bestemmingen →',
+      sCur: 'Caribbean · 34 spots, exacte kaart & deelbare gids', sHee: 'Veluwe & IJssel · waar het wél en niet mag',
     },
     werk: {
       title: 'Werk', desc: 'Een selectie cinematische drone-, foto- en filmbeelden van Lichtbreking.',
@@ -99,6 +101,8 @@ export const t = {
       selKicker: 'Selection', selTitle: 'The work', selAll: 'View all →',
       cFree: 'Free course', cTitle: 'Learn to film with your drone,<br>not just fly it.',
       cSub: 'Fifteen modules from first power-on to a finished film — shot recipes, decision trees and a field guide.', cBtn: 'To the courses →',
+      sKicker: 'Drone spots', sTitle: 'Where to fly & film', sAll: 'All destinations →',
+      sCur: 'Caribbean · 34 spots, exact map & shareable guide', sHee: 'Veluwe & IJssel · where you can and can’t fly',
     },
     werk: {
       title: 'Work', desc: 'A selection of cinematic drone, photo and film work by Lichtbreking.',
