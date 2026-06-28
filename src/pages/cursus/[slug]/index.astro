@@ -7,12 +7,11 @@ import ProCheatsheet from '../../../components/ProCheatsheet.astro';
 import { courses, getLessons } from '../../../data/courses.js';
 import '../../../styles/course.css';
 
-const cam = course?.slug === 'grondfilmer' ? 'pocket' : 'mini';
-
 export function getStaticPaths() {
   return courses.map((c) => ({ params: { slug: c.slug }, props: { course: c } }));
 }
 const { course } = Astro.props;
+const cam = course.slug === 'grondfilmer' ? 'pocket' : 'mini';
 const lessons = getLessons(course);
 const total = course.modules.length;
 const hasCards = (course.naslag || []).some((r) => r.key === 'printkaarten');
