@@ -1,20 +1,22 @@
 ---
 import { proSettings } from '../data/prosettings.js';
-const { cams = ['mini', 'pocket'] } = Astro.props;
+const { cams = ['mini', 'pocket'], lang = 'nl' } = Astro.props;
 const list = proSettings.filter((s) => cams.includes(s.cam));
+// helper: een veld kan een string zijn of een {nl,en}-object
+const tr = (val) => (val && typeof val === 'object' ? (val[lang] ?? val.nl) : val);
 ---
 <div class="pcs">
   {list.map((s) => (
     <div class="pcs__card lb-glass">
       <div class="pcs__head">
-        <span class="pcs__kind">{s.kind}</span>
+        <span class="pcs__kind">{tr(s.kind)}</span>
         <h3 class="pcs__name">{s.name}</h3>
       </div>
       <dl class="pcs__rows">
         {s.rows.map((r) => (
           <div class="pcs__row">
-            <div class="pcs__line"><dt class="pcs__k">{r.k}</dt><dd class="pcs__v">{r.v}</dd></div>
-            <p class="pcs__why">{r.why}</p>
+            <div class="pcs__line"><dt class="pcs__k">{tr(r.k)}</dt><dd class="pcs__v">{tr(r.v)}</dd></div>
+            <p class="pcs__why">{tr(r.why)}</p>
           </div>
         ))}
       </dl>

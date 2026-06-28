@@ -84,12 +84,34 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
       </section>
     </div>
 
+    <section class="gw-sim lb-reveal">
+      <span class="lb-label lb-label--sky">Simulator</span>
+      <h2 class="lb-display-m">Witbalans &amp; kleurprofiel</h2>
+      <p class="lb-lead">Schuif de witbalans van warm naar koel en wissel tussen Normal en D-Log — zie meteen wat het met je beeld doet.</p>
+      <div class="gw-simwrap">
+        <div class="gw-simprev">
+          <div class="gw-simimg" id="simImg"></div>
+          <div class="gw-simtint" id="simTint"></div>
+          <span class="gw-simkv" id="simKV">5500 K</span>
+        </div>
+        <div class="gw-simctrl">
+          <label class="gw-simlbl"><span>Witbalans</span><span id="simWord">Daglicht</span></label>
+          <input type="range" id="simWB" min="3000" max="7000" step="100" value="5500" aria-label="Witbalans in Kelvin" />
+          <div class="gw-simtog" role="group" aria-label="Kleurprofiel">
+            <button class="gw-simbtn on" data-p="normal" type="button">Normal</button>
+            <button class="gw-simbtn" data-p="dlog" type="button">D-Log</button>
+          </div>
+          <p class="gw-simnote" id="simNote"></p>
+        </div>
+      </div>
+    </section>
+
     <section class="gw-cheat lb-reveal">
       <span class="lb-label lb-label--sky">Cheatsheet</span>
       <h2 class="lb-display-m">Pro-instellingen — compleet</h2>
       <p class="lb-lead">Niet alleen framerate en ISO: hier staan álle handmatige instellingen op een rij, mét waaróm. De ND-calculator hierboven vult het sluiter- en ND-deel in; deze kaart doet de rest.</p>
       <ProCheatsheet />
-      <p class="gw-fine">Witbalans, scherpte en kleurprofiel leer je in detail in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a>. Volledige uitleg per instelling: <a href="/artikelen/pro-instellingen-uitgelegd/">het Pro-instellingen-artikel</a>.</p>
+      <p class="gw-fine">Witbalans, scherpte en kleurprofiel leer je in detail in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a>. Volledige uitleg per instelling: <a href="/artikelen/pro-instellingen-uitgelegd/">het Pro-instellingen-artikel</a>. <a href="/en/pro-settings/">English version →</a></p>
     </section>
   </main>
   <Footer />
@@ -102,6 +124,23 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
   .gw-cheat .lb-lead { margin-bottom: 22px; }
   .gw-cheat .gw-fine { margin-top: 18px; }
   .gw-cheat a { color: var(--lb-sky); }
+
+  .gw-sim { margin-top: 52px; }
+  .gw-sim h2 { margin: 8px 0 12px; }
+  .gw-sim .lb-lead { margin-bottom: 22px; }
+  .gw-simwrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; align-items: stretch; }
+  .gw-simprev { position: relative; border-radius: 16px; overflow: hidden; min-height: 240px; }
+  .gw-simimg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1753618282728-f05ecfc5c9d6?w=1100&q=74&auto=format&fit=crop') center/cover; transition: filter .25s ease; }
+  .gw-simtint { position: absolute; inset: 0; mix-blend-mode: overlay; transition: background .15s ease; }
+  .gw-simkv { position: absolute; top: 12px; right: 12px; font-family: var(--lb-font-mono); font-weight: 700; font-size: 16px; color: #06231f; background: var(--lb-bone); padding: 5px 11px; border-radius: 10px; }
+  .gw-simctrl { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 4px; }
+  .gw-simlbl { display: flex; justify-content: space-between; font-family: var(--lb-font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--lb-mist); }
+  .gw-simctrl input[type=range] { width: 100%; accent-color: var(--lb-sky); }
+  .gw-simtog { display: inline-flex; gap: 0; border-radius: 999px; overflow: hidden; align-self: flex-start; box-shadow: inset 0 0 0 1px var(--lb-glass-border); }
+  .gw-simbtn { appearance: none; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--lb-bone); background: transparent; border: 0; padding: 8px 18px; }
+  .gw-simbtn.on { color: #06231f; background: var(--lb-sky); }
+  .gw-simnote { font-size: .85rem; line-height: 1.5; color: var(--lb-mist); margin: 0; min-height: 3em; }
+  @media (max-width: 760px) { .gw-simwrap { grid-template-columns: 1fr; } }
   .gw-head { max-width: 64ch; margin-bottom: 40px; }
   .gw-head h1 { margin: 10px 0 16px; }
   .gw-link { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 24px; padding: 16px 20px; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); border-radius: 16px; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 12px 36px rgba(0,0,0,.24); transition: transform var(--lb-dur) var(--lb-ease); }
@@ -200,5 +239,34 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
     }
     document.getElementById('pfReset').addEventListener('click', function () { done = []; save(done); render(); });
     render();
+  })();
+
+  /* ====== Witbalans & kleurprofiel-simulator ====== */
+  (function () {
+    var wb = document.getElementById('simWB'); if (!wb) return;
+    var img = document.getElementById('simImg'), tint = document.getElementById('simTint'),
+        kv = document.getElementById('simKV'), word = document.getElementById('simWord'), note = document.getElementById('simNote');
+    var prof = 'normal';
+    function upd() {
+      var k = +wb.value; kv.textContent = k + ' K';
+      var d = (k - 5500) / 1500;
+      if (d < 0) { tint.style.background = 'rgba(255,150,40,' + Math.min(0.55, Math.abs(d) * 0.42) + ')'; }
+      else { tint.style.background = 'rgba(50,124,240,' + Math.min(0.55, d * 0.42) + ')'; }
+      word.textContent = k <= 3600 ? 'Kunstlicht (warm)' : (k < 5200 ? 'Bewolkt / schaduw' : (k < 6000 ? 'Daglicht' : 'Koel / blauw'));
+      if (prof === 'dlog') {
+        img.style.filter = 'saturate(.5) contrast(.78) brightness(1.08)';
+        note.textContent = 'D-Log: vlak en grijzig — bewaart detail in licht en donker, maar je moet het beeld nabewerken (kleuren).';
+      } else {
+        img.style.filter = 'none';
+        note.textContent = 'Normal: direct bruikbaar. Zet de witbalans handmatig vast (~5500 K buiten) zodat de kleur niet verspringt tijdens een shot.';
+      }
+    }
+    wb.addEventListener('input', upd);
+    var btns = document.querySelectorAll('.gw-simbtn');
+    btns.forEach(function (b) { b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.remove('on'); }); b.classList.add('on');
+      prof = b.getAttribute('data-p'); upd();
+    }); });
+    upd();
   })();
 </script>

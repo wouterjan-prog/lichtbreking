@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import GlassNav from '../../components/GlassNav.astro';
 import Footer from '../../components/Footer.astro';
+import { curacaoSpots } from '../../data/curacaospots.js';
 ---
 <Base
   title="Drone op Curaçao — de gids"
@@ -50,14 +51,36 @@ import Footer from '../../components/Footer.astro';
         <span><i class="sq" style="background:#9B4DDB"></i>Pocket 4 (grond)</span>
         <span class="cur-legend-hint">klik of beweeg over een marker</span>
       </div>
+      <div class="cur-filters" id="curFilters">
+        <button class="cur-fbtn on" data-f="all" type="button">Alles</button>
+        <button class="cur-fbtn" data-f="fly" type="button">Drone-top</button>
+        <button class="cur-fbtn" data-f="care" type="button">Met beleid</button>
+        <button class="cur-fbtn" data-f="no" type="button">No-fly</button>
+        <button class="cur-fbtn" data-f="pocket" type="button">Pocket 4</button>
+        <input class="cur-search" id="curSearch" type="search" placeholder="Zoek een spot…" aria-label="Zoek een spot" autocomplete="off" />
+      </div>
       <div class="cur-stage">
         <div class="cur-mapbox"><div id="curMap"></div></div>
         <div class="cur-panel">
           <div class="cur-ph empty" id="curPh"><span>Kies een spot op de kaart<br>voor een beeld &amp; tip</span></div>
-          <div class="cur-pbody" id="curPbody" style="display:none"><span class="cur-badge" id="curBadge"></span><h3 id="curPname"></h3><p id="curPtip"></p></div>
+          <div class="cur-pbody" id="curPbody" style="display:none"><span class="cur-badge" id="curBadge"></span><h3 id="curPname"></h3><p id="curPtip"></p><div class="cur-chips" id="curChips"></div></div>
         </div>
       </div>
       <p class="cur-mapnote">Kaartdata © OpenStreetMap-bijdragers, tegels © CARTO. Alle markers staan op hun werkelijke GPS-coördinaten.</p>
+    </div></section>
+
+    <!-- ============ VOORAF ============ -->
+    <section class="cur-sec"><div class="cur-wrap">
+      <span class="cur-kick">Voor vertrek</span>
+      <h2 class="cur-h2">Zo regel je het vooraf</h2>
+      <p class="cur-lead">Op Curaçao is registratie verplicht en de douane controleert erop. Regel dit thuis, dan sta je daar meteen goed.</p>
+      <ol class="cur-steps">
+        <li><span class="cur-stepn">1</span><div><b>Registreer je drone</b><p>Meld je drone aan bij de Regulatory Authority of Curaçao (RAC). Doe dit ruim vóór vertrek — zonder bewijs van registratie kan je drone bij de douane worden ingenomen.</p></div></li>
+        <li><span class="cur-stepn">2</span><div><b>Vraag toestemming bij de CCAA</b><p>Voor vluchten geldt de luchtvaartautoriteit (CCAA). Check de actuele regels en no-fly-zones en vraag waar nodig toestemming aan — zeker rond Hato, de cruise-terminal en natuurparken.</p></div></li>
+        <li><span class="cur-stepn">3</span><div><b>Toon je papieren bij de douane</b><p>Houd je registratiebewijs (en eventueel toestemming) bij de hand bij aankomst. Een drone zonder papieren kan worden vastgehouden tot je het regelt.</p></div></li>
+        <li><span class="cur-stepn">4</span><div><b>Check je verzekering</b><p>Zorg voor een aansprakelijkheidsverzekering die dronevliegen in het buitenland dekt. Vlieg altijd binnen zicht (VLOS), onder 120 m en op 50 m van mensen.</p></div></li>
+      </ol>
+      <p class="cur-fineprint">Regelgeving kan wijzigen — bevestig de actuele eisen altijd bij de RAC en CCAA vóór je reist. Dit is informatief, geen officieel advies.</p>
     </div></section>
 
     <!-- ============ SETTINGS ============ -->
@@ -105,8 +128,8 @@ import Footer from '../../components/Footer.astro';
       <h2 class="cur-h2">Vlieg veilig. Film cinematisch.</h2>
       <p class="cur-lead" style="margin-bottom:18px">Meer gratis gidsen, cursussen &amp; tools vind je elders op de site. Heb je zelf mooie Curaçao-beelden geschoten? Tag <b>@lichtbreking</b> — wie weet komen ze in deze gids.</p>
       <div class="cur-cta">
-        <a class="cur-btn" id="curPdf" href="/curacao/deelbaar/">⬇︎ Download de gids (PDF) — deelbaar op Instagram</a>
-        <a class="cur-btn cur-btn--ghost" href="/cursussen/">Naar de cursussen</a>
+        <a class="cur-btn" id="curPdf" href="/curacao/deelbaar/">⬇︎ Deelbare gids (PDF) voor Instagram</a>
+        <a class="cur-btn cur-btn--ghost" id="curVeld" href="/curacao/veldkaart/">🗺️ Print-veldkaart (A4)</a>
         <a class="cur-btn cur-btn--ghost" href="/gouden-uur/">Plan het gouden uur</a>
       </div>
       <p class="cur-disc">Informatief, met zorg samengesteld op basis van openbare bronnen (juni 2026). Regelgeving op Curaçao kan wijzigen — bevestig de actuele regels en no-fly-zones altijd bij de CCAA vóór je vliegt.</p>
@@ -182,6 +205,28 @@ import Footer from '../../components/Footer.astro';
   .cur-pbody h3{ margin:0 0 4px; font-size:19px; color:var(--bone); }
   .cur-pbody p{ margin:0; color:#d7d6dc; font-size:13.5px; }
   .cur-mapnote{ color:var(--mist); font-size:12px; margin-top:10px; }
+
+  /* filters + zoeken */
+  .cur-filters{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 14px; }
+  .cur-fbtn{ appearance:none; cursor:pointer; font-family:inherit; font-size:12.5px; font-weight:600; color:var(--bone); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:999px; padding:7px 14px; transition:background .2s,border-color .2s; }
+  .cur-fbtn:hover{ background:rgba(255,255,255,.12); }
+  .cur-fbtn.on{ color:#06231f; background:var(--gold); border-color:transparent; }
+  .cur-search{ flex:1; min-width:160px; font-family:inherit; font-size:13px; color:var(--bone); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:999px; padding:8px 14px; }
+  .cur-search::placeholder{ color:var(--mist); }
+  .cur-search:focus{ outline:none; border-color:var(--gold); }
+
+  /* panel-chips: licht/wind/move */
+  .cur-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .cur-chip{ font-size:11.5px; color:#dfe2e6; background:rgba(255,255,255,.08); border-radius:8px; padding:4px 8px; line-height:1.3; }
+  .cur-chip b{ color:var(--gold); font-weight:600; margin-right:2px; }
+
+  /* vooraf-stappen */
+  .cur-steps{ list-style:none; margin:18px 0 0; padding:0; display:grid; gap:12px; max-width:760px; }
+  .cur-steps li{ display:flex; gap:14px; align-items:flex-start; background:rgba(20,22,28,.5); border-radius:14px; padding:15px 16px; box-shadow:inset 0 1px 0 rgba(255,255,255,.1); }
+  .cur-stepn{ flex:0 0 auto; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--mono); font-weight:700; font-size:13px; color:#06231f; background:var(--gold); }
+  .cur-steps b{ display:block; font-size:15px; margin-bottom:2px; }
+  .cur-steps p{ margin:0; color:var(--mist); font-size:13px; }
+  .cur-fineprint{ color:var(--mist); font-size:12px; margin-top:14px; opacity:.85; }
   .cur-page .leaflet-container{ background:#0b1a1f; font-family:inherit; }
   .cur-page .leaflet-popup-content-wrapper,.cur-page .leaflet-popup-tip{ background:#14171c; color:#fff; }
   .cur-page .leaflet-tooltip{ background:#14171c; color:#fff; border:none; box-shadow:0 4px 14px rgba(0,0,0,.4); }
@@ -244,6 +289,7 @@ import Footer from '../../components/Footer.astro';
   }
 </style>
 
+<script define:vars={{ CURSPOTS: curacaoSpots }}>window.CURSPOTS = CURSPOTS;</script>
 <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script is:inline>
 (function(){
@@ -251,68 +297,64 @@ import Footer from '../../components/Footer.astro';
     if(!window.L){ return setTimeout(init,120); }
     var U=function(id){ return 'https://images.unsplash.com/photo-'+id+'?w=900&q=72&auto=format&fit=crop'; };
     var COL={fly:'#46C95F',care:'#FF9A2E',no:'#FF6B5E'};
-    var spots=[
-      // —— DRONE: top-spots (west → zuidoost) ——
-      {ll:[12.3686,-69.1556],t:'fly', n:'Playa Grandi / Piskado', tip:'Zeeschildpadden in helder water — top-down. Ook top om mee te zwemmen met de Pocket.', img:'1496196614460-48988a57fccf'},
-      {ll:[12.3735,-69.1565],t:'fly', n:'Westpunt / Playa Forti', tip:'Kliffen aan de westpunt. Reveal langs de rotsen, vroeg op de dag.', img:'1519144350867-5c35e4a41a6c'},
-      {ll:[12.3567,-69.1305],t:'fly', n:'Grote & Kleine Knip (Kenepa)', tip:'Wit zand, felblauw water. Top-down onthult de kleurovergang.', img:'1685101144016-301f2fa7671c'},
-      {ll:[12.3037,-69.1012],t:'fly', n:'Playa Jeremi', tip:'Diepblauwe baai tussen kliffen — dramatische reveal.', img:'1771822157101-d94c1e8c05fb'},
-      {ll:[12.2965,-69.1088],t:'fly', n:'Santa Cruz / Blue Room', tip:'Kliffen en de Blue Room-grot; orbit boven het turquoise.', img:'1770481479347-3653df02d093'},
-      {ll:[12.3262,-69.1042],t:'fly', n:'Playa Lagun', tip:'Smalle baai tussen kliffen — perfecte reveal.', img:'1618064541372-289bdb6f5b7b'},
-      {ll:[12.2244,-69.0888],t:'fly', n:'Cas Abao', tip:'Brede, rustige baai. Parallax langs de kustlijn.', img:'1616555846456-6d53b92669a8'},
-      {ll:[12.2107,-69.0010],t:'fly', n:'Daaibooi', tip:'Rustige baai met mooi rif — top-down boven het water.', img:'1600582910964-5b7c109e6868'},
-      {ll:[12.2106,-69.0285],t:'fly', n:'Playa PortoMari', tip:'Dubbel rif, kalm water — mooi op het gouden uur.', img:'1753618282728-f05ecfc5c9d6'},
-      {ll:[12.1880,-68.9990],t:'fly', n:'Kokomo Beach (Vaersenbaai)', tip:'Palmen en steiger — fotogeniek van bovenaf.', img:'1536919613842-558d20933582'},
-      {ll:[12.1560,-68.9695],t:'fly', n:'Boka Sami (Sint Michiel)', tip:'Kleurrijk vissersdorp aan een beschutte baai.', img:'1612425643672-dafff8107bb3'},
-      {ll:[12.0688,-68.8560],t:'fly', n:'Caracasbaai / Tugboat', tip:'Scheepswrak + helder water; orbit boven het wrak.', img:'1605692498957-f1045e808732'},
-      {ll:[12.0775,-68.8490],t:'fly', n:'Spaanse Water (lagune)', tip:'Beschutte lagune met bootjes; rustige parallax.', img:'1653465255362-2ce1ced1d97d'},
-      {ll:[12.0440,-68.7530],t:'fly', n:'Oostpunt', tip:'Afgelegen zuidoostpunt — ruige kust, niemand in de buurt.', img:'1546200378-42351b6f4552'},
-      {ll:[11.9846,-68.6452],t:'fly', n:'Klein Curaçao', tip:'Onbewoond eiland met vuurtoren. Orbit — druk rond boottijden.', img:'1603384447003-758330a56ded'},
-      // —— DRONE: met beleid ——
-      {ll:[12.1086,-68.9335],t:'care',n:'Willemstad (Handelskade)', tip:'Pastelhuizen — gevoelig (cruise-terminal/CTR). Alleen heel vroeg & als het mag.', img:'1636517031771-46f4032c895f'},
-      {ll:[12.0825,-68.8860],t:'care',n:'Jan Thiel Beach', tip:'Druk strand — vlieg vroeg en blijf 50 m van mensen.', img:'1612425643044-fa658a575344'},
-      // —— DRONE: no-fly (maar top voor de Pocket vanaf de grond) ——
-      {ll:[12.1889,-68.9598],t:'no', n:'Hato Airport (CUR)', tip:'Controlezone luchthaven. Streng verboden.', img:''},
-      {ll:[12.3636,-69.1144],t:'no', n:'Christoffel National Park', tip:'Drone verboden — pak juist hier de Pocket 4 voor de hike & uitzichten.', img:'1648426676079-27447fcd76d9'},
-      {ll:[12.3856,-69.1092],t:'no', n:'Shete Boka (Boka Tabla)', tip:'Drone verboden — film de spectaculaire branding met de Pocket.', img:'1775351602871-a4656a8af484'},
-      // —— POCKET 4 / grond-spots ——
-      {ll:[12.1110,-68.9320],t:'pocket',n:'Punda & drijvende markt', tip:'Drukke straatjes en de drijvende markt — gimbal-walk op ooghoogte.', img:'1693574276068-d5d65bb34ad0'},
-      {ll:[12.1090,-68.9380],t:'pocket',n:'Otrobanda & Kura Hulanda', tip:'Steegjes, murals en sfeer — perfect voor een wandelende shot.', img:'1596394976386-562d534e51a5'},
-      {ll:[12.1067,-68.9347],t:'pocket',n:'Queen Emma Brug', tip:'Loop mee terwijl de drijvende brug opent en sluit.', img:'1724597837785-09f3f1c04e51'},
-      {ll:[12.1012,-68.9210],t:'pocket',n:'Fort Nassau — uitzicht', tip:'Panorama over de stad en de Sint-Annabaai — mooi op het gouden uur.', img:'1576682953661-a056a5073019'},
-      {ll:[12.1905,-68.9505],t:'pocket',n:'Hato Caves', tip:'Grotten met druipsteen — rustige, sfeervolle beelden.', img:'1779814888539-310978a5dada'},
-      {ll:[12.2030,-68.9970],t:'pocket',n:'Flamingo’s bij Jan Kok', tip:'Drone verboden — film de flamingo’s rustig vanaf de grond.', img:'1553520077-205eb37650fa'}
-    ];
-    var housePalette=['#e76f51','#f4a261','#e9c46a','#2a9d8f','#457b9d','#e07a9b'];
+    var spots = window.CURSPOTS || [];
 
     var map=L.map('curMap',{zoomControl:true,scrollWheelZoom:false,attributionControl:true}).setView([12.18,-68.98],11);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'© OpenStreetMap, © CARTO'}).addTo(map);
 
-    var ph=document.getElementById('curPh'), pbody=document.getElementById('curPbody');
+    var ph=document.getElementById('curPh'), pbody=document.getElementById('curPbody'), chips=document.getElementById('curChips');
+    function chip(label,val){ return '<span class="cur-chip"><b>'+label+'</b> '+val+'</span>'; }
     function render(s){
       pbody.style.display='block';
       document.getElementById('curPname').textContent=s.n;
       document.getElementById('curPtip').textContent=s.tip;
       var b=document.getElementById('curBadge'); b.className='cur-badge '+s.t;
       b.textContent = s.t==='fly'?'Drone-top · go':(s.t==='care'?'Drone · met beleid':(s.t==='pocket'?'Pocket 4 · grond':'No-fly · verboden'));
+      var c='';
+      if(s.light && s.light!=='—') c+=chip('☀︎',s.light);
+      if(s.wind && s.wind!=='—') c+=chip('💨',s.wind);
+      if(s.move && s.move!=='Niet vliegen') c+=chip('🎬',s.move);
+      chips.innerHTML=c;
       ph.classList.remove('empty');
-      if(s.img==='houses'){ ph.style.background='linear-gradient(180deg,#7ec8e3,#bfe3f0)'; ph.innerHTML='<div class="cur-houses">'+housePalette.map(function(c){return '<i style="background:'+c+'"></i>';}).join('')+'</div>'; }
-      else if(s.img && s.img.indexOf('grad:')===0){ ph.style.background=s.img.slice(5); ph.innerHTML=''; }
+      if(s.img && s.img.indexOf('grad:')===0){ ph.style.background=s.img.slice(5); ph.innerHTML=''; }
       else if(s.img){ ph.style.background="url('"+U(s.img)+"') center/cover"; ph.innerHTML=''; }
       else { ph.style.background='linear-gradient(135deg,#3a1416,#5a1d1d)'; ph.innerHTML='<div style="position:absolute;inset:0;display:grid;place-items:center;color:#ffb4ad;font-size:34px;z-index:2">⛔</div>'; }
     }
     var pIcon=L.divIcon({className:'',iconSize:[18,18],iconAnchor:[9,9],html:'<div style="width:16px;height:16px;border-radius:5px;background:#9B4DDB;border:2px solid #2a0f3d;box-shadow:0 0 0 1px rgba(255,255,255,.25);display:grid;place-items:center"><span style="width:5px;height:5px;border-radius:50%;background:#fff;display:block"></span></div>'});
+    var entries=[];
     spots.forEach(function(s){
       var m;
-      if(s.t==='pocket'){ m=L.marker(s.ll,{icon:pIcon}).addTo(map); }
-      else { m=L.circleMarker(s.ll,{radius:8,weight:2,color:'#06231f',fillColor:COL[s.t],fillOpacity:.95}).addTo(map); }
+      if(s.t==='pocket'){ m=L.marker(s.ll,{icon:pIcon}); }
+      else { m=L.circleMarker(s.ll,{radius:8,weight:2,color:'#06231f',fillColor:COL[s.t],fillOpacity:.95}); }
       m.bindTooltip(s.n,{direction:'top',offset:[0,-6]});
       m.on('mouseover',function(){render(s);}); m.on('click',function(){render(s);});
+      m.addTo(map);
+      entries.push({s:s,m:m,on:true});
     });
-    var allBounds=L.latLngBounds(spots.map(function(s){return s.ll;}));
-    function fitIsland(){ map.fitBounds(allBounds,{padding:[28,28]}); }
+
+    /* ====== filters + zoeken ====== */
+    var curCat='all', curQ='';
+    function applyFilter(){
+      var vis=[];
+      entries.forEach(function(e){
+        var ok=(curCat==='all'||e.s.t===curCat) && (!curQ || e.s.n.toLowerCase().indexOf(curQ)>=0);
+        if(ok && !e.on){ e.m.addTo(map); e.on=true; }
+        else if(!ok && e.on){ map.removeLayer(e.m); e.on=false; }
+        if(ok) vis.push(e.s.ll);
+      });
+      if(vis.length){ map.fitBounds(L.latLngBounds(vis),{padding:[28,28],maxZoom:14}); }
+    }
+    var fbtns=document.querySelectorAll('.cur-fbtn');
+    fbtns.forEach(function(btn){ btn.addEventListener('click',function(){
+      fbtns.forEach(function(b){ b.classList.remove('on'); }); btn.classList.add('on');
+      curCat=btn.getAttribute('data-f'); applyFilter();
+    }); });
+    var search=document.getElementById('curSearch');
+    if(search){ search.addEventListener('input',function(){ curQ=search.value.trim().toLowerCase(); applyFilter(); }); }
+
+    function fitIsland(){ map.fitBounds(L.latLngBounds(spots.map(function(s){return s.ll;})),{padding:[28,28]}); }
     fitIsland();
-    map.on('resize',fitIsland);
+    map.on('resize',function(){ if(curCat==='all'&&!curQ) fitIsland(); });
 
     /* ====== ND-simulator ====== */
     var steps=[{name:'Bewolkt',nd:'ND8',tint:.07},{name:'Zonnig',nd:'ND16',tint:.16},{name:'Felle zon',nd:'ND32',tint:.30},{name:'Wit zand',nd:'ND64',tint:.44}];
@@ -323,6 +365,8 @@ import Footer from '../../components/Footer.astro';
     /* ====== PDF-download analytics ====== */
     var pdf=document.getElementById('curPdf');
     if(pdf){ pdf.addEventListener('click',function(){ try{ if(window.va) window.va('event',{name:'pdf_download',page:'curacao'}); }catch(e){} }); }
+    var veld=document.getElementById('curVeld');
+    if(veld){ veld.addEventListener('click',function(){ try{ if(window.va) window.va('event',{name:'veldkaart_open',page:'curacao'}); }catch(e){} }); }
   }
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); } else { init(); }
 })();

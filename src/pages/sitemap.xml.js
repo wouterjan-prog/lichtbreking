@@ -9,7 +9,7 @@ export async function GET() {
 
   ['/', '/werk/', '/cursussen/', '/showreel/', '/over/', '/contact/', '/shotlist/', '/gereedschap/', '/gouden-uur/', '/curacao/', '/wat-is-nieuw/', '/artikelen/'].forEach((p) => add(p, p === '/' ? '1.0' : '0.7'));
   for (const a of articles) add(`/artikelen/${a.slug}/`, '0.6');
-  ['/en/', '/en/werk/', '/en/cursussen/', '/en/showreel/', '/en/over/', '/en/contact/'].forEach((p) => add(p, '0.5'));
+  ['/en/', '/en/werk/', '/en/cursussen/', '/en/showreel/', '/en/over/', '/en/contact/', '/en/pro-settings/'].forEach((p) => add(p, '0.5'));
 
   for (const c of courses) {
     add(`/cursus/${c.slug}/`, '0.8');

@@ -3,8 +3,11 @@ import Base from '../../../layouts/Base.astro';
 import GlassNav from '../../../components/GlassNav.astro';
 import Footer from '../../../components/Footer.astro';
 import SpectrumRule from '../../../components/SpectrumRule.astro';
+import ProCheatsheet from '../../../components/ProCheatsheet.astro';
 import { courses, getLessons } from '../../../data/courses.js';
 import '../../../styles/course.css';
+
+const cam = course?.slug === 'grondfilmer' ? 'pocket' : 'mini';
 
 export function getStaticPaths() {
   return courses.map((c) => ({ params: { slug: c.slug }, props: { course: c } }));
@@ -117,6 +120,13 @@ const jsonld = {
           </div>
         )}
       </div>
+
+      <div class="cur-cheat">
+        <span class="lb-label lb-label--sky">Veldkaart</span>
+        <h2 class="lb-display-m">Pro-instellingen in één oogopslag</h2>
+        <p class="lb-lead">De handmatige instellingen voor {cam === 'pocket' ? 'de Osmo Pocket 4' : 'de Mini 5 Pro'} — met per instelling de waarde én het waarom. Print de veldkaarten hierboven om ze mee te nemen.</p>
+        <ProCheatsheet cams={[cam]} />
+      </div>
     </section>
   </main>
   <Footer />
@@ -124,6 +134,9 @@ const jsonld = {
 
 <style>
   .cur-hero { padding-top: 120px; padding-bottom: 10px; }
+  .cur-cheat { margin-top: 48px; }
+  .cur-cheat h2 { margin: 8px 0 12px; }
+  .cur-cheat .lb-lead { margin-bottom: 22px; }
   .back { display: inline-block; color: var(--lb-mist); margin-bottom: 22px; }
   .back:hover { color: var(--lb-bone); }
   .cur-hero h1 { margin: 10px 0 16px; }

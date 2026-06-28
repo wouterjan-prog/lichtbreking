@@ -1,0 +1,34 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GlassNav from '../../../components/GlassNav.astro';
+import Footer from '../../../components/Footer.astro';
+import ProCheatsheet from '../../../components/ProCheatsheet.astro';
+---
+<Base
+  title="Pro camera settings — cheat sheet"
+  description="The complete manual Pro settings for the DJI Mini 5 Pro and Osmo Pocket 4: resolution, frame rate, shutter, ISO, white balance, colour profile, sharpness and ND — with the value and the reason for each."
+  path="/en/pro-settings/"
+  lang="en">
+  <GlassNav active="" lang="en" switchHref="/gereedschap/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container ps-page">
+    <header class="ps-head lb-reveal">
+      <span class="lb-label lb-label--sky">Cheat sheet</span>
+      <h1 class="lb-display-l">Pro camera settings</h1>
+      <p class="lb-lead">Frame rate and ISO are just the start. White balance, colour profile, shutter angle and sharpness decide just as much whether your footage looks cinematic. Here is every manual setting — with the value and the reason.</p>
+    </header>
+
+    <section class="ps-sheet lb-reveal">
+      <ProCheatsheet lang="en" />
+      <p class="ps-fine">The 180° rule ties it together: keep your shutter at roughly twice your frame rate (1/50 s at 25 fps) and use an ND filter to hold it in bright light. Lock white balance manually so colour never shifts mid-shot.</p>
+    </section>
+  </main>
+  <Footer lang="en" />
+</Base>
+
+<style is:global>
+  .ps-page { padding-top: 130px; padding-bottom: 96px; }
+  .ps-head { max-width: 64ch; margin-bottom: 30px; }
+  .ps-head h1 { margin: 10px 0 16px; }
+  .ps-sheet .ps-fine { margin-top: 20px; font-size: .9rem; color: var(--lb-mist); max-width: 70ch; }
+</style>
