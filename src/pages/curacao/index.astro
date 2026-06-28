@@ -104,7 +104,8 @@ import Footer from '../../components/Footer.astro';
       <h2 class="cur-h2">Vlieg veilig. Film cinematisch.</h2>
       <p class="cur-lead" style="margin-bottom:18px">Meer gratis gidsen, cursussen &amp; tools vind je elders op de site. Heb je zelf mooie Curaçao-beelden geschoten? Tag <b>@lichtbreking</b> — wie weet komen ze in deze gids.</p>
       <div class="cur-cta">
-        <a class="cur-btn" href="/cursussen/">Naar de cursussen</a>
+        <a class="cur-btn" id="curPdf" href="/curacao/deelbaar/">⬇︎ Download de gids (PDF) — deelbaar op Instagram</a>
+        <a class="cur-btn cur-btn--ghost" href="/cursussen/">Naar de cursussen</a>
         <a class="cur-btn cur-btn--ghost" href="/gouden-uur/">Plan het gouden uur</a>
       </div>
       <p class="cur-disc">Informatief, met zorg samengesteld op basis van openbare bronnen (juni 2026). Regelgeving op Curaçao kan wijzigen — bevestig de actuele regels en no-fly-zones altijd bij de CCAA vóór je vliegt.</p>
@@ -251,35 +252,35 @@ import Footer from '../../components/Footer.astro';
     var COL={fly:'#46C95F',care:'#FF9A2E',no:'#FF6B5E'};
     var spots=[
       // —— DRONE: top-spots (west → zuidoost) ——
-      {ll:[12.3686,-69.1556],t:'fly', n:'Playa Grandi / Piskado', tip:'Zeeschildpadden in helder water — top-down. Ook top om mee te zwemmen met de Pocket.', img:'1753618282728-f05ecfc5c9d6'},
-      {ll:[12.3735,-69.1565],t:'fly', n:'Westpunt / Playa Forti', tip:'Kliffen aan de westpunt. Reveal langs de rotsen, vroeg op de dag.', img:'1762740522491-2a4f7c754816'},
-      {ll:[12.3567,-69.1305],t:'fly', n:'Grote & Kleine Knip (Kenepa)', tip:'Wit zand, felblauw water. Top-down onthult de kleurovergang.', img:'1753618282728-f05ecfc5c9d6'},
-      {ll:[12.3037,-69.1012],t:'fly', n:'Playa Jeremi', tip:'Diepblauwe baai tussen kliffen — dramatische reveal.', img:'1762740522491-2a4f7c754816'},
-      {ll:[12.2965,-69.1088],t:'fly', n:'Santa Cruz / Blue Room', tip:'Kliffen en de Blue Room-grot; orbit boven het turquoise.', img:'1762740522491-2a4f7c754816'},
-      {ll:[12.3262,-69.1042],t:'fly', n:'Playa Lagun', tip:'Smalle baai tussen kliffen — perfecte reveal.', img:'1762740522491-2a4f7c754816'},
-      {ll:[12.2244,-69.0888],t:'fly', n:'Cas Abao', tip:'Brede, rustige baai. Parallax langs de kustlijn.', img:'1507525428034-b723cf961d3e'},
-      {ll:[12.2107,-69.0010],t:'fly', n:'Daaibooi', tip:'Rustige baai met mooi rif — top-down boven het water.', img:'1753618282728-f05ecfc5c9d6'},
-      {ll:[12.2106,-69.0285],t:'fly', n:'Playa PortoMari', tip:'Dubbel rif, kalm water — mooi op het gouden uur.', img:'1753588296403-be438eb432e5'},
-      {ll:[12.1880,-68.9990],t:'fly', n:'Kokomo Beach (Vaersenbaai)', tip:'Palmen en steiger — fotogeniek van bovenaf.', img:'1753618282728-f05ecfc5c9d6'},
-      {ll:[12.1560,-68.9695],t:'fly', n:'Boka Sami (Sint Michiel)', tip:'Kleurrijk vissersdorp aan een beschutte baai.', img:'1753588296403-be438eb432e5'},
-      {ll:[12.0688,-68.8560],t:'fly', n:'Caracasbaai / Tugboat', tip:'Scheepswrak + helder water; orbit boven het wrak.', img:'1507525428034-b723cf961d3e'},
-      {ll:[12.0775,-68.8490],t:'fly', n:'Spaanse Water (lagune)', tip:'Beschutte lagune met bootjes; rustige parallax.', img:'1753588296403-be438eb432e5'},
-      {ll:[12.0440,-68.7530],t:'fly', n:'Oostpunt', tip:'Afgelegen zuidoostpunt — ruige kust, niemand in de buurt.', img:'1762740522491-2a4f7c754816'},
-      {ll:[11.9846,-68.6452],t:'fly', n:'Klein Curaçao', tip:'Onbewoond eiland met vuurtoren. Orbit — druk rond boottijden.', img:'1753618282728-f05ecfc5c9d6'},
+      {ll:[12.3686,-69.1556],t:'fly', n:'Playa Grandi / Piskado', tip:'Zeeschildpadden in helder water — top-down. Ook top om mee te zwemmen met de Pocket.', img:'1496196614460-48988a57fccf'},
+      {ll:[12.3735,-69.1565],t:'fly', n:'Westpunt / Playa Forti', tip:'Kliffen aan de westpunt. Reveal langs de rotsen, vroeg op de dag.', img:'1519144350867-5c35e4a41a6c'},
+      {ll:[12.3567,-69.1305],t:'fly', n:'Grote & Kleine Knip (Kenepa)', tip:'Wit zand, felblauw water. Top-down onthult de kleurovergang.', img:'1685101144016-301f2fa7671c'},
+      {ll:[12.3037,-69.1012],t:'fly', n:'Playa Jeremi', tip:'Diepblauwe baai tussen kliffen — dramatische reveal.', img:'1771822157101-d94c1e8c05fb'},
+      {ll:[12.2965,-69.1088],t:'fly', n:'Santa Cruz / Blue Room', tip:'Kliffen en de Blue Room-grot; orbit boven het turquoise.', img:'1770481479347-3653df02d093'},
+      {ll:[12.3262,-69.1042],t:'fly', n:'Playa Lagun', tip:'Smalle baai tussen kliffen — perfecte reveal.', img:'1618064541372-289bdb6f5b7b'},
+      {ll:[12.2244,-69.0888],t:'fly', n:'Cas Abao', tip:'Brede, rustige baai. Parallax langs de kustlijn.', img:'1616555846456-6d53b92669a8'},
+      {ll:[12.2107,-69.0010],t:'fly', n:'Daaibooi', tip:'Rustige baai met mooi rif — top-down boven het water.', img:'1600582910964-5b7c109e6868'},
+      {ll:[12.2106,-69.0285],t:'fly', n:'Playa PortoMari', tip:'Dubbel rif, kalm water — mooi op het gouden uur.', img:'1753618282728-f05ecfc5c9d6'},
+      {ll:[12.1880,-68.9990],t:'fly', n:'Kokomo Beach (Vaersenbaai)', tip:'Palmen en steiger — fotogeniek van bovenaf.', img:'1536919613842-558d20933582'},
+      {ll:[12.1560,-68.9695],t:'fly', n:'Boka Sami (Sint Michiel)', tip:'Kleurrijk vissersdorp aan een beschutte baai.', img:'1612425643672-dafff8107bb3'},
+      {ll:[12.0688,-68.8560],t:'fly', n:'Caracasbaai / Tugboat', tip:'Scheepswrak + helder water; orbit boven het wrak.', img:'1605692498957-f1045e808732'},
+      {ll:[12.0775,-68.8490],t:'fly', n:'Spaanse Water (lagune)', tip:'Beschutte lagune met bootjes; rustige parallax.', img:'1653465255362-2ce1ced1d97d'},
+      {ll:[12.0440,-68.7530],t:'fly', n:'Oostpunt', tip:'Afgelegen zuidoostpunt — ruige kust, niemand in de buurt.', img:'1546200378-42351b6f4552'},
+      {ll:[11.9846,-68.6452],t:'fly', n:'Klein Curaçao', tip:'Onbewoond eiland met vuurtoren. Orbit — druk rond boottijden.', img:'1603384447003-758330a56ded'},
       // —— DRONE: met beleid ——
-      {ll:[12.1086,-68.9335],t:'care',n:'Willemstad (Handelskade)', tip:'Pastelhuizen — gevoelig (cruise-terminal/CTR). Alleen heel vroeg & als het mag.', img:'houses'},
-      {ll:[12.0825,-68.8860],t:'care',n:'Jan Thiel Beach', tip:'Druk strand — vlieg vroeg en blijf 50 m van mensen.', img:'1507525428034-b723cf961d3e'},
+      {ll:[12.1086,-68.9335],t:'care',n:'Willemstad (Handelskade)', tip:'Pastelhuizen — gevoelig (cruise-terminal/CTR). Alleen heel vroeg & als het mag.', img:'1636517031771-46f4032c895f'},
+      {ll:[12.0825,-68.8860],t:'care',n:'Jan Thiel Beach', tip:'Druk strand — vlieg vroeg en blijf 50 m van mensen.', img:'1612425643044-fa658a575344'},
       // —— DRONE: no-fly (maar top voor de Pocket vanaf de grond) ——
       {ll:[12.1889,-68.9598],t:'no', n:'Hato Airport (CUR)', tip:'Controlezone luchthaven. Streng verboden.', img:''},
-      {ll:[12.3636,-69.1144],t:'no', n:'Christoffel National Park', tip:'Drone verboden — pak juist hier de Pocket 4 voor de hike & uitzichten.', img:'grad:linear-gradient(135deg,#2f5e3a,#19331f)'},
-      {ll:[12.3856,-69.1092],t:'no', n:'Shete Boka (Boka Tabla)', tip:'Drone verboden — film de spectaculaire branding met de Pocket.', img:'grad:linear-gradient(135deg,#1e3a4a,#0e2230)'},
+      {ll:[12.3636,-69.1144],t:'no', n:'Christoffel National Park', tip:'Drone verboden — pak juist hier de Pocket 4 voor de hike & uitzichten.', img:'1648426676079-27447fcd76d9'},
+      {ll:[12.3856,-69.1092],t:'no', n:'Shete Boka (Boka Tabla)', tip:'Drone verboden — film de spectaculaire branding met de Pocket.', img:'1775351602871-a4656a8af484'},
       // —— POCKET 4 / grond-spots ——
-      {ll:[12.1110,-68.9320],t:'pocket',n:'Punda & drijvende markt', tip:'Drukke straatjes en de drijvende markt — gimbal-walk op ooghoogte.', img:'houses'},
-      {ll:[12.1090,-68.9380],t:'pocket',n:'Otrobanda & Kura Hulanda', tip:'Steegjes, murals en sfeer — perfect voor een wandelende shot.', img:'houses'},
-      {ll:[12.1067,-68.9347],t:'pocket',n:'Queen Emma Brug', tip:'Loop mee terwijl de drijvende brug opent en sluit.', img:'houses'},
+      {ll:[12.1110,-68.9320],t:'pocket',n:'Punda & drijvende markt', tip:'Drukke straatjes en de drijvende markt — gimbal-walk op ooghoogte.', img:'1693574276068-d5d65bb34ad0'},
+      {ll:[12.1090,-68.9380],t:'pocket',n:'Otrobanda & Kura Hulanda', tip:'Steegjes, murals en sfeer — perfect voor een wandelende shot.', img:'1596394976386-562d534e51a5'},
+      {ll:[12.1067,-68.9347],t:'pocket',n:'Queen Emma Brug', tip:'Loop mee terwijl de drijvende brug opent en sluit.', img:'1724597837785-09f3f1c04e51'},
       {ll:[12.1012,-68.9210],t:'pocket',n:'Fort Nassau — uitzicht', tip:'Panorama over de stad en de Sint-Annabaai — mooi op het gouden uur.', img:'1576682953661-a056a5073019'},
-      {ll:[12.1905,-68.9505],t:'pocket',n:'Hato Caves', tip:'Grotten met druipsteen — rustige, sfeervolle beelden.', img:'grad:linear-gradient(135deg,#241a2e,#0e0a14)'},
-      {ll:[12.2030,-68.9970],t:'pocket',n:'Flamingo’s bij Jan Kok', tip:'Drone verboden — film de flamingo’s rustig vanaf de grond.', img:'grad:linear-gradient(135deg,#e58fa8,#f5c6d4)'}
+      {ll:[12.1905,-68.9505],t:'pocket',n:'Hato Caves', tip:'Grotten met druipsteen — rustige, sfeervolle beelden.', img:'1779814888539-310978a5dada'},
+      {ll:[12.2030,-68.9970],t:'pocket',n:'Flamingo’s bij Jan Kok', tip:'Drone verboden — film de flamingo’s rustig vanaf de grond.', img:'1553520077-205eb37650fa'}
     ];
     var housePalette=['#e76f51','#f4a261','#e9c46a','#2a9d8f','#457b9d','#e07a9b'];
 
@@ -317,6 +318,10 @@ import Footer from '../../components/Footer.astro';
     var light=document.getElementById('curLight');
     function updL(){var s=steps[+light.value];document.getElementById('curLname').textContent=s.name;document.getElementById('curNdlabel').textContent=s.nd;document.getElementById('curNdtint').style.opacity=s.tint;document.getElementById('curVerdict').textContent='Mooi belicht met '+s.nd+' ✓';}
     if(light){ light.addEventListener('input',updL); updL(); }
+
+    /* ====== PDF-download analytics ====== */
+    var pdf=document.getElementById('curPdf');
+    if(pdf){ pdf.addEventListener('click',function(){ try{ if(window.va) window.va('event',{name:'pdf_download',page:'curacao'}); }catch(e){} }); }
   }
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); } else { init(); }
 })();
