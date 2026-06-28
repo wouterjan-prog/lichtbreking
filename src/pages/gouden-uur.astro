@@ -39,6 +39,9 @@ import Footer from '../components/Footer.astro';
   .gh-head { max-width: 64ch; margin-bottom: 32px; }
   .gh-head h1 { margin: 10px 0 16px; }
   .gh-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  /* De 'Gebruik mijn locatie'-knop matcht de invoervelden ernaast en blijft leesbaar in licht én donker */
+  .gh-controls .lb-btn--glass { background: var(--lb-glass-card-bg); color: var(--lb-bone); border: 1px solid var(--lb-glass-border); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .gh-controls .lb-btn--glass:hover { border-color: var(--lb-bone); }
   .gh-controls input[type=date] { background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--lb-glass-border); color: var(--lb-bone); border-radius: 12px; padding: .75rem .8rem; font-size: .95rem; font-family: var(--lb-font-text); }
   .gh-search { position: relative; flex: 1; min-width: 220px; }
   .gh-search input { width: 100%; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--lb-glass-border); color: var(--lb-bone); border-radius: 12px; padding: .75rem .9rem; font-size: .95rem; font-family: var(--lb-font-text); }
