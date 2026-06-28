@@ -169,5 +169,50 @@ export const articles = [
 <div class="callout tip"><div class="c-label">Tip</div><p>Begin met bewegen vóór je opname start en stop ná — dan heb je in de montage altijd ruimte om soepel in en uit te knippen.</p></div>
 <p>De complete workflow — van selectie tot kleur — leer je in <a href="/cursus/grondfilmer/">De Grondfilmer</a>. En plan je opnames slim met de gratis <a href="/shotlist/">shotlist-planner</a>.</p>
 `
+  },
+  {
+    slug: 'welke-drone-en-accessoires',
+    cat: 'Gear',
+    ph: 'd',
+    title: 'Welke drone en accessoires? Een eerlijke keuzehulp',
+    excerpt: 'Welke drone past bij jouw manier van filmen, welke accessoires je écht nodig hebt — en waar je je geld niet aan hoeft uit te geven.',
+    date: '2026-06-28',
+    readMin: 8,
+    body: `
+<p>De duurste drone is zelden de beste keuze. Wat telt is welke bij jouw manier van filmen past, en welke spullen eromheen je echt nodig hebt. Hier een eerlijke keuzehulp zonder verkooppraat.</p>
+
+<h2>Welke drone past bij jou?</h2>
+<ul>
+<li><strong>Reizen & vloggen</strong> — kies een lichte drone onder de 250 gram (de Mini-klasse). Hij past in een jaszak, en in veel landen gelden voor deze klasse soepelere regels. Voor de meeste mensen is dit de slimste start.</li>
+<li><strong>Meer beeldkwaliteit</strong> — wil je grotere prints, zwaarder kleurwerk of opnames bij minder licht, dan helpt een grotere sensor. Dat betekent een zwaardere drone en strengere regels, dus weeg dat mee.</li>
+<li><strong>Vanaf de grond filmen</strong> — geen drone nodig: een gimbal-camera zoals de Osmo Pocket 4 geeft je vloeiende, stabiele beelden op ooghoogte, en mag overal waar een drone niet mag.</li>
+</ul>
+
+<h2>Waarom onder de 250 gram zo fijn is</h2>
+<p>Een drone onder de 250 gram valt in de lichtste categorie. Je mag er dichter bij mensen mee vliegen dan met zwaardere toestellen, en de instapdrempel qua regels en examens is lager. Voor beginners en reizigers scheelt dat enorm veel gedoe — zonder dat je veel beeldkwaliteit inlevert.</p>
+
+<h2>Must-have accessoires</h2>
+<ul>
+<li><strong>ND-filterset</strong> — het belangrijkste accessoire. Zonder ND krijg je je sluiter buiten niet traag genoeg voor filmische beweging. Een set met ND8/16/32/64 dekt vrijwel alles.</li>
+<li><strong>Extra accu's (2 tot 3)</strong> — één accu is 20–30 minuten vliegen. Met drie heb je een ochtend lang plezier. Een fly-more-combo is bijna altijd voordeliger dan losse accu's.</li>
+<li><strong>Snelle SD-kaart</strong> — kies minimaal een V30-kaart (of sneller) met genoeg ruimte; 4K vult een kaart snel. Te trage kaarten geven haperende opnames.</li>
+<li><strong>Een goede tas</strong> — beschermt drone, accu's en filters onderweg. Hoeft niet duur te zijn.</li>
+<li><strong>Reserve-propellers</strong> — licht, goedkoop en je wilt nooit met een beschadigde prop vliegen.</li>
+</ul>
+
+<h2>Handig, maar geen must</h2>
+<p>Een landingsmat, extra kleurfilters (polarisatie) en een aparte controller met scherm zijn leuk, maar voor de meeste mensen niet nodig om te beginnen. Begin klein en breid uit als je merkt dat je iets mist.</p>
+
+<h2>Waar je je geld níet aan hoeft uit te geven</h2>
+<ul>
+<li><strong>Te veel filters</strong> — een halve koffer ND's gebruik je nooit. Een set van vier dekt de praktijk.</li>
+<li><strong>De allerduurste drone "voor later"</strong> — je leert het meest met een toestel dat je makkelijk meeneemt en durft te gebruiken.</li>
+<li><strong>Gadgets die je workflow niet versnellen</strong> — koop pas iets bij als een concreet probleem erom vraagt.</li>
+</ul>
+
+<div class="callout tip"><div class="c-label">Kort samengevat</div><p>Een lichte drone (onder 250 g), een ND-set, een paar extra accu's en een snelle SD-kaart. Daarmee kun je vrijwel alles filmen wat je in de cursussen leert.</p></div>
+
+<p>Welke instellingen je vervolgens kiest, lees je in <a href="/artikelen/pro-instellingen-uitgelegd/">Alle Pro-instellingen uitgelegd</a>. En je leert alles stap voor stap in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a> — beide gratis.</p>
+`
   }
 ];

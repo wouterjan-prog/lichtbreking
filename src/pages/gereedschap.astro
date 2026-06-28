@@ -84,6 +84,53 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
       </section>
     </div>
 
+    <section class="gw-more lb-reveal">
+      <span class="lb-label lb-label--sky">Rekenhulpen</span>
+      <h2 class="lb-display-m">Vliegtijd &amp; beeldhoek</h2>
+      <p class="lb-lead">Twee snelle rekenaars: hoelang je veilig in de lucht blijft, en hoe breed je beeld op de grond is vanaf een bepaalde hoogte.</p>
+      <div class="gw-grid">
+        <section class="gw-card">
+          <span class="gw-cap">Vliegtijd, accu &amp; bereik</span>
+          <div class="gw-row">
+            <label for="btMax">Accu-vliegtijd</label>
+            <input type="range" id="btMax" min="10" max="45" step="1" value="30" />
+            <span class="gw-val" id="btMaxV">30 min</span>
+          </div>
+          <div class="gw-row">
+            <label for="btRes">Reserve</label>
+            <input type="range" id="btRes" min="15" max="50" step="5" value="30" />
+            <span class="gw-val" id="btResV">30%</span>
+          </div>
+          <div class="gw-row">
+            <label for="btWind">Wind</label>
+            <input type="range" id="btWind" min="0" max="50" step="1" value="14" />
+            <span class="gw-val" id="btWindV">14 km/u</span>
+          </div>
+          <div class="gw-out" id="btOut"></div>
+          <p class="gw-note">Keer terug bij de reserve-grens, niet bij 0%. Tegenwind op de terugvlucht kost extra accu — bij meer wind houdt de rekenaar automatisch meer marge aan.</p>
+        </section>
+
+        <section class="gw-card">
+          <span class="gw-cap">Hoogte → beeld (4K)</span>
+          <div class="gw-row">
+            <label for="fvAlt">Hoogte</label>
+            <input type="range" id="fvAlt" min="5" max="120" step="1" value="50" />
+            <span class="gw-val" id="fvAltV">50 m</span>
+          </div>
+          <div class="gw-row">
+            <label for="fvLens">Beeldhoek</label>
+            <select id="fvLens">
+              <option value="73">Groothoek (~24 mm · Mini/Pocket)</option>
+              <option value="63">Standaard (~28 mm)</option>
+              <option value="54">Smal (~35 mm)</option>
+            </select>
+          </div>
+          <div class="gw-out" id="fvOut"></div>
+          <p class="gw-note">Beeldbreedte = 2 × hoogte × tan(beeldhoek ÷ 2). GSD is hoeveel cm één pixel bestrijkt bij 4K (3840 px breed) — handig om te weten of detail scherp genoeg vastligt.</p>
+        </section>
+      </div>
+    </section>
+
     <section class="gw-sim lb-reveal">
       <span class="lb-label lb-label--sky">Simulator</span>
       <h2 class="lb-display-m">Witbalans &amp; kleurprofiel</h2>
@@ -125,6 +172,9 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
   .gw-cheat .gw-fine { margin-top: 18px; }
   .gw-cheat a { color: var(--lb-sky); }
 
+  .gw-more { margin-top: 52px; }
+  .gw-more h2 { margin: 8px 0 12px; }
+  .gw-more .lb-lead { margin-bottom: 22px; }
   .gw-sim { margin-top: 52px; }
   .gw-sim h2 { margin: 8px 0 12px; }
   .gw-sim .lb-lead { margin-bottom: 22px; }
@@ -267,6 +317,41 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
       btns.forEach(function (x) { x.classList.remove('on'); }); b.classList.add('on');
       prof = b.getAttribute('data-p'); upd();
     }); });
+    upd();
+  })();
+
+  /* ====== Vliegtijd, accu & bereik ====== */
+  (function () {
+    var mx = document.getElementById('btMax'); if (!mx) return;
+    var res = document.getElementById('btRes'), wind = document.getElementById('btWind'),
+        mxV = document.getElementById('btMaxV'), resV = document.getElementById('btResV'), windV = document.getElementById('btWindV'),
+        out = document.getElementById('btOut');
+    function upd() {
+      var m = +mx.value, r = +res.value, w = +wind.value;
+      mxV.textContent = m + ' min'; resV.textContent = r + '%'; windV.textContent = w + ' km/u';
+      var safe = m * (1 - r / 100);
+      var windFactor = 1 - Math.min(0.25, w / 200);
+      var usable = Math.max(1, Math.round(safe * windFactor));
+      var warn = w >= 36 ? ' Let op: bij deze wind kan de DJI Mini-klasse moeite krijgen — check de go/no-go hierboven.' : (w >= 20 ? ' Houd extra marge voor de terugvlucht tegen de wind in.' : '');
+      out.innerHTML = '<b>' + usable + ' min</b> veilig in de lucht<span>Keer terug bij <b>' + r + '%</b> accu' + (w > 0 ? ' · wind ' + w + ' km/u' : '') + '.' + warn + '</span>';
+    }
+    [mx, res, wind].forEach(function (el) { el.addEventListener('input', upd); });
+    upd();
+  })();
+
+  /* ====== Hoogte → beeld (4K) ====== */
+  (function () {
+    var alt = document.getElementById('fvAlt'); if (!alt) return;
+    var lens = document.getElementById('fvLens'), altV = document.getElementById('fvAltV'), out = document.getElementById('fvOut');
+    function upd() {
+      var h = +alt.value, fov = +lens.value;
+      altV.textContent = h + ' m';
+      var w = 2 * h * Math.tan(fov * Math.PI / 360);
+      var ht = w * 9 / 16;
+      var gsd = w / 3840 * 100;
+      out.innerHTML = '<b>' + w.toFixed(0) + ' × ' + ht.toFixed(0) + ' m</b> in beeld<span>~' + gsd.toFixed(1) + ' cm per pixel (4K) · beeldbreedte op de grond vanaf ' + h + ' m.</span>';
+    }
+    alt.addEventListener('input', upd); lens.addEventListener('change', upd);
     upd();
   })();
 </script>
