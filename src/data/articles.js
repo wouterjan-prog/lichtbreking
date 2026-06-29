@@ -74,8 +74,8 @@ export const articles = [
 
 <h2>Scherpte & ruisreductie</h2>
 <ul>
-<li><strong>Scherpte −1</strong> — de standaardscherpte van camera's is vaak te hard en oogt "video-achtig". Iets zachter is filmischer, en scherpte voeg je later makkelijk toe; te veel scherpte krijg je er nooit meer uit.</li>
-<li><strong>Ruisreductie 0</strong> — agressieve ruisonderdrukking veegt fijne details weg en geeft een "plastic" look. Liever laag houden.</li>
+<li><strong>Scherpte −1 (−2 mag ook)</strong> — de standaardscherpte oogt vaak te hard en "video-achtig". Iets zachter is filmischer; scherpte voeg je later makkelijk toe, te veel krijg je er nooit meer uit. Voor de DJI Mini 5 Pro is −1 een veilige keuze; −2 kan als je gewend bent zelf bij te scherpen in de montage.</li>
+<li><strong>Ruisreductie 0</strong> — je leest online soms "−2 voor allebei", maar dat advies komt meestal van andere of oudere modellen. DJI's ruisonderdrukking is agressief en veegt fijne details weg ("plastic" look), dus voor de Mini 5 Pro houd je de ruisreductie op <strong>0</strong> en de scherpte op −1 of −2. Op sommige andere drones (zoals de Air 3-serie) werkt ruisreductie −1 net iets beter — het verschilt dus per model.</li>
 </ul>
 
 <h2>De ND-filter, kort</h2>
