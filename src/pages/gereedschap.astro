@@ -160,6 +160,26 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
       <ProCheatsheet />
       <p class="gw-fine">Witbalans, scherpte en kleurprofiel leer je in detail in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a>. Volledige uitleg per instelling: <a href="/artikelen/pro-instellingen-uitgelegd/">het Pro-instellingen-artikel</a>. <a href="/en/pro-settings/">English version →</a></p>
     </section>
+
+    <section class="gw-recipe lb-reveal">
+      <span class="lb-label lb-label--sky">Recept</span>
+      <h2 class="lb-display-m">De meest cinematische look</h2>
+      <p class="lb-lead">De instellingen die samen de filmische look maken (DJI Mini 5 Pro) — in één oogopslag. Het draait om natuurlijke bewegingsonscherpte en zoveel mogelijk kleurinformatie.</p>
+      <div class="gw-recipe-card lb-glass">
+        <dl>
+          <div><dt>Modus</dt><dd>Pro</dd></div>
+          <div><dt>Resolutie · fps</dt><dd>4K · 24–25 fps <span>(50/60 alleen voor slow-mo)</span></dd></div>
+          <div><dt>Sluiter</dt><dd>1/50 s (180°-regel) <span>+ ND-filter in fel licht</span></dd></div>
+          <div><dt>ISO</dt><dd>100 — vast</dd></div>
+          <div><dt>Witbalans</dt><dd>Handmatig vast, ~5500 K</dd></div>
+          <div><dt>Kleurprofiel</dt><dd>D-Log (10-bit) om te kleuren <span>· anders Normal</span></dd></div>
+          <div><dt>Scherpte · ruis</dt><dd>−1 · 0</dd></div>
+          <div><dt>Belichting (EV)</dt><dd>Een tikje onder <span>(−0,3 tot −0,7)</span></dd></div>
+          <div><dt>Vliegen</dt><dd>Cine-modus ~3 m/s, rustige bewegingen</dd></div>
+        </dl>
+      </div>
+      <p class="gw-fine">Volledige uitleg: <a href="/artikelen/pro-instellingen-uitgelegd/">Alle Pro-instellingen uitgelegd</a> · vloeiend vliegen leer je in <a href="/artikelen/cinematische-besturing-veiligheid-mini-5-pro/">dit artikel</a>.</p>
+    </section>
   </main>
   <Footer />
 </Base>
@@ -171,6 +191,20 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
   .gw-cheat .lb-lead { margin-bottom: 22px; }
   .gw-cheat .gw-fine { margin-top: 18px; }
   .gw-cheat a { color: var(--lb-sky); }
+
+  .gw-recipe { margin-top: 52px; }
+  .gw-recipe h2 { margin: 8px 0 12px; }
+  .gw-recipe .lb-lead { margin-bottom: 22px; }
+  .gw-recipe-card { border-radius: 18px; padding: 6px 22px; max-width: 640px; }
+  .gw-recipe dl { margin: 0; }
+  .gw-recipe dl > div { display: grid; grid-template-columns: 170px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--lb-line, rgba(127,127,140,.18)); }
+  .gw-recipe dl > div:last-child { border-bottom: 0; }
+  .gw-recipe dt { font-family: var(--lb-font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--lb-sky); align-self: center; }
+  .gw-recipe dd { margin: 0; font-size: 1rem; color: var(--lb-bone); }
+  .gw-recipe dd span { color: var(--lb-mist); font-size: .85rem; }
+  .gw-recipe .gw-fine { margin-top: 18px; }
+  .gw-recipe .gw-fine a { color: var(--lb-sky); }
+  @media (max-width: 560px) { .gw-recipe dl > div { grid-template-columns: 1fr; gap: 2px; } }
 
   .gw-more { margin-top: 52px; }
   .gw-more h2 { margin: 8px 0 12px; }
