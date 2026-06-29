@@ -296,16 +296,20 @@ export const articles = [
 <li><strong>Met een duiklamp of bij nachtduiken.</strong> De lamp geeft vol-spectrum wit licht; mét een kleurfilter krijg je dan een onnatuurlijke rode of magenta zweem. Lamp aan = filter eraf. Houd er rekening mee dat het bereik van een lamp meestal maar 1 à 2 meter is — fijn voor close-ups van koraal en macro.</li>
 </ul>
 
-<h2>Witbalans</h2>
-<p>Gebruik je een kleurfilter, dan doet het filter het kleurwerk — laat de witbalans dan op een <strong>vaste</strong> waarde staan en niet continu wisselen tijdens een clip. Film je zónder filter, zet de witbalans dan handmatig vast en hoger naarmate je dieper gaat. De grootste valkuil in beide gevallen is auto-witbalans die mid-clip blijft verspringen: dat geeft een onrustig, "ademend" kleurbeeld dat je achteraf nauwelijks corrigeert.</p>
+<h2>Witbalans: mét filter op Auto, zonder filter handmatig</h2>
+<p>Dit is de instelling waar de meeste mensen het mis hebben. <strong>Gebruik je een kleurfilter (zoals het rode MojoGear-filter), zet de witbalans dan op Auto.</strong> Het filter doet de kleurcorrectie optisch, dus de camera mag de rest zelf afmaken — dat geeft het mooiste resultaat. Film je <strong>zónder</strong> filter, zet de witbalans dan juist handmatig vast en hoger naarmate je dieper gaat (niet op auto, want dan blijft de kleur tijdens een clip verspringen). Kort: filter erop → witbalans Auto; geen filter → witbalans handmatig.</p>
 
-<h2>GoPro Hero 12 — instellingen</h2>
+<h2>GoPro Hero 12 — instellingen voor duiken (tot 25 m)</h2>
+<p>Dit zijn de aanbevolen instellingen voor wijdhoek-duikvideo, op basis van de Backscatter-duikgids. Zet de camera eerst op <strong>Bediening: Pro</strong> en <strong>Videomodus: Hoogste kwaliteit</strong>, en sla het op als vaste preset.</p>
 <ul>
-<li><strong>Resolutie 4K</strong> (of 5.3K) — scherp, goed te bewerken en deelbaar; 4K is voor de meeste duikers de beste balans.</li>
-<li><strong>Framerate</strong> — 30 fps bij minder licht (dieper, troebel, eind van de dag); 60 fps in helder, zonnig tropisch water voor vloeiende beweging en lichte slow-motion.</li>
-<li><strong>Lens Wide · HyperSmooth (Boost) aan · ISO 100–6400 · Scherpte Medium · Kleur Natural</strong> (of Flat als je later kleurt). Zet <strong>Protune</strong> aan zodat je deze instellingen zelf kunt regelen.</li>
+<li><strong>Beeldverhouding 16:9 · Resolutie 4K</strong> (of 5.3K als je computer het aankan).</li>
+<li><strong>Framerate</strong> — in Nederland staat je camera op <strong>50 Hz (PAL)</strong>, dus film op <strong>50 fps</strong> algemeen, en <strong>25 fps</strong> bij weinig licht of dieper (tragere sluiter = helderder en minder ruis). 50 fps geeft soepel beeld én ruimte voor lichte slow-motion.</li>
+<li><strong>Lens: Wide</strong> (niet breder — SuperView vervormt te veel) · <strong>HyperSmooth: Boost</strong> · Zoom 1.0×.</li>
+<li><strong>ProTune aan:</strong> Sluiter Auto · <strong>EV-compensatie −0,5</strong> (voorkomt uitgebeten zonlicht aan het oppervlak) · <strong>Witbalans Auto</strong> (mét filter) · ISO min 100, max 6400 · Scherpte Medium · Kleur Natural · BitRate Hoog. Zet <strong>10-bit</strong> aan als je de beelden later gaat kleuren.</li>
+<li><strong>GPS uit</strong> — dat werkt niet op diepte en kost alleen accu.</li>
 <li><strong>Geen ND-filter.</strong> Boven water houd je met ND je sluiter traag in de felle zon; onder water is het licht al gedempt en bewegen je onderwerpen — laat de sluiter z'n werk doen.</li>
 </ul>
+<p>Tot ongeveer 24–25 meter werkt het rode filter prima in blauw water. Wordt het dieper, donkerder of troebel, dan is er te weinig rood licht over om te herstellen: haal het filter eraf en gebruik een duiklamp voor de kleur.</p>
 
 <h2>De MojoGear-behuizing</h2>
 <p>De waterdichte MojoGear-behuizing beschermt je Hero 12 tot zo'n 50 meter diepte. Een paar dingen om op te letten:</p>
@@ -324,7 +328,7 @@ export const articles = [
 <li><strong>Respecteer de natuur.</strong> Raak koraal en dieren niet aan en houd afstand. Het mooiste beeld is er één waarbij niets verstoord wordt.</li>
 </ul>
 
-<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Filter bij het water (rood = blauw, magenta = groen, roze = ondiep), filter eraf bij een lamp of heel ondiep, witbalans niet laten wisselen, en kom dichtbij. Dat zijn de dingen die je onderwaterbeelden het meest verbeteren.</p></div>
+<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Filter bij het water (rood = blauw, magenta = groen, roze = ondiep), filter eraf bij een lamp of heel ondiep, witbalans op Auto zolang je het filter gebruikt, en kom dichtbij. Dat zijn de dingen die je onderwaterbeelden het meest verbeteren.</p></div>
 
 <p>Op zoek naar een plek om dit te oefenen? Bij <a href="/curacao/">Playa Grandi op Curaçao</a> zwem je zo tussen de zeeschildpadden in helder blauw water — perfect voor je rode filter. En wil je je film- en kleurwerk naar een hoger niveau tillen, kijk dan bij <a href="/cursussen/">de gratis cursussen</a>.</p>
 `
