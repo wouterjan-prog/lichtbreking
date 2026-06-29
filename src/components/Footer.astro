@@ -6,8 +6,8 @@ const { lang = "nl" } = Astro.props;
 const F = (t[lang] || t.nl).foot;
 const year = new Date().getFullYear();
 const cols = [
-  { h: F.site, links: [[F.werk, locUrl("/werk/", lang)], [F.cursussen, locUrl("/cursussen/", lang)], [F.showreel, locUrl("/showreel/", lang)]] },
-  { h: F.more, links: [[F.over, locUrl("/over/", lang)], [F.contact, locUrl("/contact/", lang)], ["Curaçao-gids", "/curacao/"], ["Drone rond Heerde", "/heerde/"], [F.articles, "/artikelen/"], [F.news, "/wat-is-nieuw/"]] },
+  { h: F.site, links: [[F.werk, locUrl("/werk/", lang)], [F.cursussen, locUrl("/cursussen/", lang)], [F.showreel, locUrl("/showreel/", lang)], ["Dronespots", "/dronespots/"], ["Zoeken", "/zoeken/"]] },
+  { h: F.more, links: [[F.over, locUrl("/over/", lang)], [F.contact, locUrl("/contact/", lang)], ["Curaçao-gids", "/curacao/"], ["Drone rond Heerde", "/heerde/"], [F.articles, "/artikelen/"], ["FAQ", "/faq/"], [F.news, "/wat-is-nieuw/"]] },
 ];
 ---
 <footer class="lb-foot">

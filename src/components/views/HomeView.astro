@@ -94,6 +94,21 @@ const jsonld = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'htt
         </a>
       </div>
     </section>
+
+    <section class="lb-section tools-teaser">
+      <div class="lb-container">
+        <header class="sec-head lb-reveal">
+          <div><span class="lb-label">{L.home.gKicker}</span><h2 class="lb-display-m">{L.home.gTitle}</h2></div>
+          <a href="/gereedschap/" class="sec-head__link">{L.home.gAll}</a>
+        </header>
+        <div class="tools-grid lb-reveal">
+          <a href="/gereedschap/" class="tool-tile"><span class="tool-tile__name">{L.nav.nd}</span><span class="tool-tile__arrow" aria-hidden="true">→</span></a>
+          <a href="/gouden-uur/" class="tool-tile"><span class="tool-tile__name">{L.nav.golden}</span><span class="tool-tile__arrow" aria-hidden="true">→</span></a>
+          <a href="/gereedschap/" class="tool-tile"><span class="tool-tile__name">{L.home.gFlight}</span><span class="tool-tile__arrow" aria-hidden="true">→</span></a>
+          <a href="/gereedschap/" class="tool-tile"><span class="tool-tile__name">{L.home.gCheat}</span><span class="tool-tile__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
   </main>
   <Footer lang={lang} />
 </Base>
@@ -124,6 +139,12 @@ const jsonld = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'htt
   .spots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .spots-grid .lb-card { aspect-ratio: 16 / 10; }
   @media (max-width: 720px) { .spots-grid { grid-template-columns: 1fr; } .spots-grid .lb-card { aspect-ratio: 3 / 2; } }
+  .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tool-tile { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 22px; border-radius: var(--lb-r-md); background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); color: var(--lb-bone); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transition: transform .25s var(--lb-ease), border-color .25s var(--lb-ease); }
+  .tool-tile:hover { transform: translateY(-3px); border-color: var(--lb-mist); }
+  .tool-tile__name { font-weight: 500; font-size: 1rem; }
+  .tool-tile__arrow { color: var(--lb-sky); }
+  @media (max-width: 720px) { .tools-grid { grid-template-columns: 1fr 1fr; } }
   .ct { display: block; aspect-ratio: 21 / 9; }
   .ct__inner { position: absolute; z-index: 2; left: clamp(24px,4vw,56px); right: clamp(24px,4vw,56px); bottom: clamp(24px,4vw,48px); max-width: 60ch; }
   .ct__inner h2 { color: #fff; margin: 10px 0 0; }

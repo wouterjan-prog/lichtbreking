@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../../components/GlassNav.astro';
+import Footer from '../../components/Footer.astro';
+import { articles } from '../../data/articles.js';
+import { curacaoSpots } from '../../data/curacaospots.js';
+import { heerdeSpots } from '../../data/heerdespots.js';
+
+// Bouw de zoekindex op build-time uit alle content.
+const pages = [
+  { t: 'Dronespots — alle bestemmingen', y: 'Gids', u: '/dronespots/', k: 'spots bestemmingen kaart vliegen filmen plekken locaties' },
+  { t: 'Drone op Curaçao', y: 'Gids', u: '/curacao/', k: 'curacao caribbean spots kaart regels nd instellingen strand schildpad' },
+  { t: 'Drone rond Heerde & de Veluwe', y: 'Gids', u: '/heerde/', k: 'heerde veluwe ijssel natura 2000 nederland spots regels' },
+  { t: 'Gereedschap — ND-calculator, wind & meer', y: 'Tool', u: '/gereedschap/', k: 'gereedschap nd calculator wind go no-go pre-flight checklist vliegtijd accu bereik hoogte beeld witbalans kleurprofiel simulator cheatsheet pro-instellingen' },
+  { t: 'Gouden-uur-planner', y: 'Tool', u: '/gouden-uur/', k: 'gouden uur blauwe uur zonsopkomst zonsondergang wind weer planner licht' },
+  { t: 'Shotlist-planner', y: 'Tool', u: '/shotlist/', k: 'shotlist storyboard planner shots opnames plannen' },
+  { t: 'Veelgestelde vragen (FAQ)', y: 'Pagina', u: '/faq/', k: 'faq vragen antwoorden vliegbewijs regels nd witbalans veluwe curacao' },
+  { t: 'De Vluchtfilmer — gratis cursus (Mini 5 Pro)', y: 'Cursus', u: '/cursus/vluchtfilmer/', k: 'vluchtfilmer cursus drone dji mini 5 pro leren filmen vliegen gratis' },
+  { t: 'De Grondfilmer — gratis cursus (Osmo Pocket 4)', y: 'Cursus', u: '/cursus/grondfilmer/', k: 'grondfilmer cursus osmo pocket 4 gimbal handheld leren filmen gratis' },
+  { t: 'Cursussen', y: 'Pagina', u: '/cursussen/', k: 'cursussen leren gratis vluchtfilmer grondfilmer' },
+  { t: 'Werk', y: 'Pagina', u: '/werk/', k: 'werk portfolio projecten drone foto film' },
+  { t: 'Showreel', y: 'Pagina', u: '/showreel/', k: 'showreel video reel' },
+  { t: 'Over Lichtbreking', y: 'Pagina', u: '/over/', k: 'over about lichtbreking wie' },
+  { t: 'Contact', y: 'Pagina', u: '/contact/', k: 'contact mail bereiken vraag' },
+  { t: 'Wat is nieuw', y: 'Pagina', u: '/wat-is-nieuw/', k: 'wat is nieuw changelog updates' },
+];
+
+const index = [
+  ...pages.map((p) => ({ t: p.t, y: p.y, u: p.u, s: (p.t + ' ' + p.k).toLowerCase() })),
+  ...articles.map((a) => ({ t: a.title, y: 'Artikel', u: `/artikelen/${a.slug}/`, s: (a.title + ' ' + a.excerpt + ' ' + a.cat).toLowerCase() })),
+  ...curacaoSpots.map((p) => ({ t: `${p.n} — Curaçao`, y: 'Spot', u: '/curacao/', s: (p.n + ' ' + p.tip + ' curacao ' + (p.coast || '')).toLowerCase() })),
+  ...heerdeSpots.map((p) => ({ t: `${p.n} — Heerde`, y: 'Spot', u: '/heerde/', s: (p.n + ' ' + p.tip + ' heerde veluwe ' + (p.coast || '')).toLowerCase() })),
+];
+---
+<Base
+  title="Zoeken op de site"
+  description="Doorzoek lichtbreking.nl: artikelen, dronespots, tools en cursussen op één plek."
+  path="/zoeken/">
+  <GlassNav active="" switchHref="/en/cursussen/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container zk-page">
+    <header class="zk-head lb-reveal">
+      <span class="lb-label lb-label--sky">Zoeken</span>
+      <h1 class="lb-display-l">Doorzoek de site</h1>
+      <p class="lb-lead">Vind snel een artikel, een dronespot, een tool of een cursus.</p>
+    </header>
+
+    <div class="zk-box lb-reveal">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" id="zkInput" placeholder="Zoek op trefwoord, plek of onderwerp…" aria-label="Zoeken" autocomplete="off" autofocus />
+    </div>
+
+    <p class="zk-count lb-muted" id="zkCount"></p>
+    <div class="zk-results" id="zkResults"></div>
+    <p class="zk-empty lb-muted" id="zkEmpty" hidden>Niets gevonden. Probeer een ander woord.</p>
+  </main>
+  <Footer />
+</Base>
+
+<script define:vars={{ ZKINDEX: index }}>window.ZKINDEX = ZKINDEX;</script>
+<script is:inline>
+  (function () {
+    var data = window.ZKINDEX || [];
+    var input = document.getElementById('zkInput');
+    var out = document.getElementById('zkResults');
+    var count = document.getElementById('zkCount');
+    var empty = document.getElementById('zkEmpty');
+    if (!input) return;
+
+    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); }
+    function render(items, q) {
+      out.innerHTML = items.map(function (it) {
+        return '<a class="zk-card" href="' + it.u + '"><span class="zk-type">' + esc(it.y) + '</span><span class="zk-title">' + esc(it.t) + '</span><span class="zk-arrow" aria-hidden="true">→</span></a>';
+      }).join('');
+      empty.hidden = items.length > 0 || !q;
+      count.textContent = q ? (items.length + (items.length === 1 ? ' resultaat' : ' resultaten')) : '';
+    }
+    function search() {
+      var q = input.value.trim().toLowerCase();
+      if (!q) { out.innerHTML = ''; count.textContent = ''; empty.hidden = true; return; }
+      var terms = q.split(/\s+/);
+      var hits = data.filter(function (it) { return terms.every(function (t) { return it.s.indexOf(t) >= 0; }); });
+      // sorteer: titel-treffers eerst
+      hits.sort(function (a, b) { return (b.t.toLowerCase().indexOf(terms[0]) >= 0 ? 1 : 0) - (a.t.toLowerCase().indexOf(terms[0]) >= 0 ? 1 : 0); });
+      render(hits.slice(0, 40), q);
+    }
+    input.addEventListener('input', search);
+    // ondersteun ?q= in de URL
+    var pq = new URLSearchParams(location.search).get('q');
+    if (pq) { input.value = pq; search(); }
+  })();
+</script>
+
+<style is:global>
+  .zk-page { padding-top: 130px; padding-bottom: 96px; }
+  .zk-head { max-width: 60ch; margin-bottom: 26px; }
+  .zk-head h1 { margin: 10px 0 14px; }
+  .zk-box { display: flex; align-items: center; gap: 12px; max-width: 640px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); border-radius: 14px; padding: 4px 16px; color: var(--lb-mist); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .zk-box:focus-within { border-color: var(--lb-sky); }
+  .zk-box input { flex: 1; background: none; border: 0; outline: none; color: var(--lb-bone); font-size: 1.05rem; font-family: var(--lb-font-text); padding: 14px 0; }
+  .zk-box input::placeholder { color: var(--lb-mist); }
+  .zk-count { margin: 16px 0 8px; font-size: .85rem; }
+  .zk-results { max-width: 760px; display: flex; flex-direction: column; gap: 8px; }
+  .zk-card { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 12px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); color: var(--lb-bone); transition: transform .2s var(--lb-ease), border-color .2s var(--lb-ease); }
+  .zk-card:hover { transform: translateX(3px); border-color: var(--lb-mist); }
+  .zk-type { flex: 0 0 auto; font-family: var(--lb-font-mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--lb-sky); width: 64px; }
+  .zk-title { flex: 1; font-size: .98rem; }
+  .zk-arrow { color: var(--lb-mist); }
+  .zk-empty { margin-top: 16px; }
+</style>

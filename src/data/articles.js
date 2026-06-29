@@ -265,5 +265,60 @@ export const articles = [
 
 <p>Klaar om te vliegen? Plan je shoot op het mooiste licht met de <a href="/gouden-uur/">gouden-uur-planner</a> en loop je <a href="/gereedschap/">pre-flight checklist</a> af.</p>
 `
+  },
+  {
+    slug: 'onderwater-action-instellingen',
+    cat: 'Onderwater',
+    ph: 'r',
+    title: 'Onder water filmen: beste instellingen voor duiken, snorkelen & zwemmen',
+    excerpt: 'Met een GoPro Hero 12 of DJI Osmo 360 leg je het rif, de schildpadden en het turquoise water prachtig vast — mits je witbalans en behuizing kloppen. Dit zijn de instellingen.',
+    date: '2026-06-29',
+    readMin: 8,
+    body: `
+<p>Boven water draait alles om je ND-filter; onder water draait alles om kleur. Water "eet" kleur op — rood verdwijnt als eerste, al na een paar meter, daarna oranje en geel. Daardoor wordt alles blauwgroen. Met de juiste instellingen op je GoPro Hero 12 of DJI Osmo 360 haal je die kleuren terug en film je het rif, de schildpadden en het heldere water zoals je het zelf ziet.</p>
+
+<div class="callout tip"><div class="c-label">Belangrijk</div><p>Specs en dieptes verschillen per camera en behuizing. Bevestig de actuele dieptegrenzen en instellingen altijd in de handleiding van je camera vóór je het water in gaat — en laat veiligheid (je duik, je adem, het zeeleven) altijd vóór de opname gaan.</p></div>
+
+<h2>De gouden regel: witbalans handmatig vast</h2>
+<p>Net als bij je drone is de grootste valkuil <strong>auto-witbalans</strong>. Onder water blijft de camera dan continu bijsturen, waardoor de kleur in één clip alle kanten op verspringt. Zet je witbalans dus vast:</p>
+<ul>
+<li><strong>Snorkelen / ondiep zwemmen (tot ~10 m)</strong> — kies een vaste witbalans rond <strong>5500 K</strong>. Hier is nog veel rood en zonlicht aanwezig.</li>
+<li><strong>Dieper duiken (vanaf ~10 m)</strong> — kies de hoogste/maximale witbalans-instelling om het verdwenen rood te compenseren.</li>
+</ul>
+
+<h2>GoPro Hero 12 — onderwater-instellingen</h2>
+<ul>
+<li><strong>Resolutie 4K</strong> (of 5.3K) — scherp, goed te bewerken en deelbaar. 4K is voor de meeste duikers de beste balans.</li>
+<li><strong>Framerate</strong> — 30 fps bij minder licht (dieper, troebel, eind van de dag); 60 fps in helder, zonnig tropisch water voor vloeiende beweging en lichte slow-motion.</li>
+<li><strong>Witbalans</strong> — vast (zie hierboven), nooit auto.</li>
+<li><strong>Rood filter</strong> — alleen nuttig in ondiep, helder blauw water met alleen daglicht. De native onderwater-witbalans van de Hero 12 is zo goed dat een rood filter vaak overbodig is — en in groen of troebel water, heel ondiep, bij nachtduiken of met duiklampen geeft het juist een rare rode zweem. Dan: geen filter.</li>
+<li><strong>Lens Wide · HyperSmooth (Boost) aan · ISO 100–6400 · Scherpte Medium · Kleur Natural</strong> (of Flat als je later kleurt). Zet Protune aan zodat je deze instellingen kunt regelen.</li>
+</ul>
+
+<h2>DJI Osmo 360 — onderwater-instellingen</h2>
+<p>De Osmo 360 is een 360-camera: hij filmt met twee lenzen alles om je heen in <strong>8K/30</strong>, en je kiest je kader (en virtuele camerabeweging) pas achteraf. Onder water heeft dat een groot voordeel: je hoeft niet te richten — een langszwemmende schildpad mis je nooit meer.</p>
+<ul>
+<li><strong>Behuizing is een must.</strong> De camera zelf is IP68 en tot ~10 m waterdicht, maar door de bolle fisheye-lenzen vervormt het beeld onder water en mislukt het samenvoegen (stitchen). Gebruik de speciale waterdichte behuizing — daarmee film je tot ongeveer 50 m diep en blijft de 360-stitch netjes.</li>
+<li><strong>8K/30 360</strong> voor maximale resolutie; je snijdt er achteraf een scherp 4K-kader uit.</li>
+<li><strong>Witbalans handmatig vast</strong> — zelfde logica als bij de GoPro.</li>
+<li>De grote 1-inch sensoren en f/1.9 geven veel dynamiek en goed beeld bij weinig licht — fijn op diepte.</li>
+</ul>
+
+<h2>Geen ND nodig onder water</h2>
+<p>Boven water gebruik je een ND-filter om je sluiter traag te houden in de felle zon. Onder water is dat niet nodig: het licht is al gedempt en je onderwerpen bewegen. Laat je sluiter z'n werk doen en richt je energie op witbalans, dichtbij komen en stabiel filmen.</p>
+
+<h2>Praktische tips</h2>
+<ul>
+<li><strong>Kom dichtbij.</strong> Water vermindert kleur, contrast en scherpte razendsnel. Hoe minder water tussen jou en je onderwerp, hoe beter het beeld.</li>
+<li><strong>Zon in je rug.</strong> Dan valt het licht op je onderwerp en komen de kleuren het mooist terug. Blijf ondiep voor het meeste rood.</li>
+<li><strong>Anti-condens-inserts</strong> in je behuizing voorkomen beslagen beelden bij temperatuurverschil.</li>
+<li><strong>Rustige bewegingen.</strong> Langzaam pannen en zweven oogt filmischer — en je verstoort het zeeleven minder.</li>
+<li><strong>Respecteer de natuur.</strong> Raak koraal en dieren niet aan en houd afstand. Het mooiste beeld is er één waarbij niets verstoord wordt.</li>
+</ul>
+
+<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Witbalans vast, dichtbij blijven en zon in je rug — dat zijn de drie dingen die je onderwaterbeelden het meest verbeteren, op elke camera.</p></div>
+
+<p>Op zoek naar een plek om dit te oefenen? Bij <a href="/curacao/">Playa Grandi op Curaçao</a> zwem je zo tussen de zeeschildpadden. En wil je je drone- en filmwerk naar een hoger niveau tillen, kijk dan bij <a href="/cursussen/">de gratis cursussen</a>.</p>
+`
   }
 ];
