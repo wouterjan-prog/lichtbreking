@@ -11,7 +11,8 @@ export function getStaticPaths() {
   return courses.map((c) => ({ params: { slug: c.slug }, props: { course: c } }));
 }
 const { course } = Astro.props;
-const cam = course.slug === 'grondfilmer' ? 'pocket' : 'mini';
+const cams = course.slug === 'grondfilmer' ? ['pocket'] : course.slug === 'kleurfilmer' ? ['mini', 'pocket'] : ['mini'];
+const camLabel = cams.length > 1 ? 'de Mini 5 Pro én de Osmo Pocket 4' : cams[0] === 'pocket' ? 'de Osmo Pocket 4' : 'de Mini 5 Pro';
 const lessons = getLessons(course);
 const total = course.modules.length;
 const hasCards = (course.naslag || []).some((r) => r.key === 'printkaarten');
@@ -123,8 +124,8 @@ const jsonld = {
       <div class="cur-cheat">
         <span class="lb-label lb-label--sky">Veldkaart</span>
         <h2 class="lb-display-m">Pro-instellingen in één oogopslag</h2>
-        <p class="lb-lead">De handmatige instellingen voor {cam === 'pocket' ? 'de Osmo Pocket 4' : 'de Mini 5 Pro'} — met per instelling de waarde én het waarom. Print de veldkaarten hierboven om ze mee te nemen.</p>
-        <ProCheatsheet cams={[cam]} />
+        <p class="lb-lead">De handmatige instellingen voor {camLabel} — met per instelling de waarde én het waarom.{course.slug === 'kleurfilmer' ? ' Beide camera’s filmen 10-bit D-Log, dus de grade-workflow in deze cursus geldt voor allebei.' : ' Print de veldkaarten hierboven om ze mee te nemen.'}</p>
+        <ProCheatsheet cams={cams} />
       </div>
     </section>
   </main>
