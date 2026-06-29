@@ -63,6 +63,7 @@ export const articles = [
 <li><strong>Zet de witbalans handmatig vast.</strong> Buiten bij daglicht zit je rond <strong>5500 K</strong>.</li>
 <li><strong>Kunstlicht binnen</strong> (winkels, lampen) is warmer — daar kies je rond <strong>3200 K</strong>.</li>
 <li>Hogere Kelvin = koeler beeld, lagere Kelvin = warmer. Kies wat bij het licht past en laat het staan.</li>
+<li><strong>Speel ermee:</strong> bij sneeuw zet je 'm wat lager (~5000 K) voor een neutraler wit; bij een zonsondergang juist hoger voor een warmere gloed.</li>
 </ul>
 
 <h2>Kleurprofiel — Normal of D-Log</h2>
@@ -337,6 +338,50 @@ export const articles = [
 <div class="callout tip"><div class="c-label">Onthoud dit</div><p>Filter bij het water (rood = blauw, magenta = groen, roze = ondiep), filter eraf bij een lamp of heel ondiep, witbalans op Auto zolang je het filter gebruikt, en kom dichtbij. Dat zijn de dingen die je onderwaterbeelden het meest verbeteren.</p></div>
 
 <p>Op zoek naar een plek om dit te oefenen? Bij <a href="/curacao/">Playa Grandi op Curaçao</a> zwem je zo tussen de zeeschildpadden in helder blauw water — perfect voor je rode filter. En wil je je film- en kleurwerk naar een hoger niveau tillen, kijk dan bij <a href="/cursussen/">de gratis cursussen</a>.</p>
+`
+  },
+  {
+    slug: 'cinematische-besturing-veiligheid-mini-5-pro',
+    cat: 'Drone',
+    ph: 'd',
+    title: 'Vloeiender vliegen: de besturings- & veiligheidsinstellingen van de DJI Mini 5 Pro',
+    excerpt: 'De camera-instellingen bepalen hoe je beeld eruitziet; de besturings- en veiligheidsinstellingen bepalen hoe vloeiend en veilig je vliegt. Dit zijn de instellingen die je shots rustiger maken.',
+    date: '2026-06-29',
+    readMin: 7,
+    body: `
+<p>Mooie drone-shots komen niet alleen uit de juiste camera-instellingen. Minstens zo belangrijk is hoe de drone reageert op je sticks: vliegt hij rustig en voorspelbaar, of schiet hij bij elke beweging vooruit? Met een paar instellingen worden je beelden meteen vloeiender — en je vluchten veiliger. Hieronder de instellingen zoals dronepiloot Haye Kesteloo (Air Photography / DroneXL) ze gebruikt op de DJI Mini 5 Pro.</p>
+
+<div class="callout tip"><div class="c-label">Goed om te weten</div><p>Dit zijn voorkeuren, geen wetten — experimenteer gerust. Bang om iets te verpesten? Je kunt altijd op “huidige instellingen resetten” tikken en alles staat weer op de fabrieksinstelling.</p></div>
+
+<h2>Vlieg langzamer in Cine-modus</h2>
+<p>In de Cine-modus staat de horizontale snelheid standaard op <strong>6 m/s</strong>, en dat is vaak nét te snel voor rustige beelden. Zet hem terug naar ongeveer <strong>3 m/s</strong> (in de gain- &amp; expo-instellingen). Je shots worden er meteen kalmer en filmischer van.</p>
+
+<h2>Rustiger draaien voor strakke orbits</h2>
+<p>De maximale hoeksnelheid — hoe snel de drone om zijn as draait — staat standaard op <strong>30°/s</strong>. Zet hem op <strong>20–25°/s</strong>, dan draait de drone langzamer en houd je veel meer controle over orbit-shots en pans.</p>
+
+<h2>Verzacht de stickgevoeligheid (expo)</h2>
+<p>Met de expo-instelling bepaal je hoe gevoelig het midden van de sticks is. Verzacht dat een beetje, zodat een klein duwtje niet meteen beweging geeft. Je moet dan iets bewuster duwen voordat de drone reageert — en juist dat geeft die mooie, vloeiende langzame bewegingen. Hoeveel je verzacht is persoonlijk; probeer wat bij jouw hand past.</p>
+
+<h2>Gimbal-snelheid omlaag</h2>
+<p>Zet de <strong>gimbal-snelheid op 11–12</strong> voor rustige kantelbewegingen die mooi samensmelten met je vlucht. De tilt-smoothness laat je gewoon op de standaard (8) staan.</p>
+
+<h2>Cruise control: hands-free vloeiende shots</h2>
+<p>Cruise control laat de drone op een vaste snelheid doorvliegen terwijl je de sticks loslaat — ideaal voor lange, supersoepele shots. Je moet het eerst aan een knop toewijzen (bijvoorbeeld <strong>C2</strong>). Geef je vlucht een zetje met de sticks, druk op de knop, en de drone vliegt rustig door zonder jouw input.</p>
+
+<h2>Veiligheid: obstakelvermijding</h2>
+<p>Houd de obstakelvermijding meestal op <strong>Bypass</strong> (de drone zoekt zelf een veilige route om obstakels heen) of op <strong>Brake</strong> (hij stopt). Alleen voor een echte close-proximity-shot zet je 'm even uit — maar wees voorzichtig: het is zo gebeurd dat je vergeet dat hij uit staat.</p>
+
+<h2>Return-to-Home: Optimal of Preset</h2>
+<p>Voor de terugkeerfunctie heb je twee opties:</p>
+<ul>
+<li><strong>Optimal</strong> — de drone navigeert slim terug en kan onder obstakels door en strak om dingen heen vliegen. Ideaal in open gebied of bij grote, goed zichtbare obstakels.</li>
+<li><strong>Preset</strong> — de drone klimt eerst recht omhoog naar de ingestelde hoogte, vliegt in een rechte lijn terug en daalt boven het startpunt. Handig in lastige omgevingen of bij kale bomen, waar dunne takken en draden lastig te zien zijn.</li>
+</ul>
+<p><strong>Stel altijd je Return-to-Home-hoogte in.</strong> Standaard staat die op 100 m, vaak veel te hoog. Moet de drone alleen wat bomen ontwijken, dan is <strong>60 m</strong> ruim genoeg. Let op: bij een noodterugvlucht met bijna lege accu is Preset minder efficiënt, omdat hij eerst die hele hoogte in klimt.</p>
+
+<div class="callout tip"><div class="c-label">Kort samengevat</div><p>Cine-snelheid ~3 m/s, draaisnelheid 20–25°/s, gimbal 11–12, stickgevoeligheid zachter en cruise control op een knop — dat zijn de instellingen die je beelden het meest vloeiend maken. En zet je RTH-hoogte goed.</p></div>
+
+<p>De bijbehorende camera-instellingen (resolutie, ND, witbalans, kleurprofiel, scherpte) lees je in <a href="/artikelen/pro-instellingen-uitgelegd/">Alle Pro-instellingen uitgelegd</a>. En je leert alles stap voor stap toepassen in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> — gratis. Met dank aan de instellingen van Haye Kesteloo (Air Photography / DroneXL).</p>
 `
   }
 ];
