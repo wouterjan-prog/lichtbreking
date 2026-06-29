@@ -42,14 +42,14 @@ export const t = {
       filters: { alles: 'Alles', drone: 'Drone', video: 'Film', photo: 'Foto' },
     },
     cursussen: {
-      title: 'Cursussen', desc: 'Gratis cinematische cursussen: De Vluchtfilmer (drone) en De Grondfilmer (camera). Leer filmen vanuit de lucht én op de grond.',
+      title: 'Cursussen', desc: 'Gratis cinematische cursussen: De Vluchtfilmer (drone), De Grondfilmer (camera) en De Kleurfilmer (kleurcorrectie & grading). Leer filmen vanuit de lucht, op de grond én kleuren in de montage.',
       kicker: 'Leren', h1: 'Cursussen',
       lead: 'Tutorials zat gekeken en je beeld blijft vlak? Dat ligt niet aan jou — losse video’s geven fragmenten, geen systeem. Hier leer je het hele plaatje: van locatie en licht tot beweging, montage en kleur. Gratis en praktisch — kies je toestel, of volg ze allebei.',
       free: 'Gratis', soon: 'Binnenkort', open: 'Open de cursus →', soonBtn: 'Binnenkort',
       note: 'Deze cursussen groeien mee terwijl ik zelf leer. Ik kocht net een nieuwe drone en deel alles wat ik onderweg uitzoek over gebruik, instellingen en techniek — zodat jij die zoektocht niet opnieuw hoeft te doen.',
       c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '14 modules · ~6 uur', desc: 'Leer je drone filmen, niet alleen vliegen. Van eerste opstart tot afgemonteerde cinematische film — met shot-recepten, beslisbomen en een veldgids.' },
       c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · veldgids', desc: 'De beelden op ooghoogte die je drone compleet maken. Cinematische gimbal-techniek en hoe je lucht en grond samensmelt tot één film.' },
-      c3: { kicker: 'Post · kleur', title: 'Kleur & grade', meta: 'In ontwikkeling', desc: 'Twee camera’s, één look. D-Log matchen, LUTs en een cinematische grade in Final Cut en DaVinci Resolve.' },
+      c3: { kicker: 'Post · DaVinci + Final Cut', title: 'De Kleurfilmer', meta: '8 modules · DaVinci + Final Cut', desc: 'Van plat D-Log naar een cinematische look. Werkvolgorde, scopes, D-Log ontwikkelen, curves, shots matchen en exporteren — met de exacte stappen in DaVinci Resolve én Final Cut Pro.' },
     },
     showreel: {
       title: 'Showreel', desc: 'De showreel van Lichtbreking — een jaar cinematische drone- en filmbeelden in beeld.',
@@ -114,14 +114,14 @@ export const t = {
       filters: { alles: 'All', drone: 'Drone', video: 'Film', photo: 'Photo' },
     },
     cursussen: {
-      title: 'Courses', desc: 'Free cinematic courses: The Flight Filmer (drone) and The Ground Filmer (camera). Learn to film from the air and on the ground.',
+      title: 'Courses', desc: 'Free cinematic courses: The Flight Filmer (drone), The Ground Filmer (camera) and The Colour Filmer (colour correction & grading). Learn to film from the air, on the ground and to grade in the edit.',
       kicker: 'Learning', h1: 'Courses',
       lead: 'Watched plenty of tutorials and your footage still looks flat? That’s not on you — loose videos give fragments, not a system. Here you learn the whole picture: from location and light to the move, the edit and the colour. Free and practical — pick your device, or follow both.',
       free: 'Free', soon: 'Coming soon', open: 'Open the course →', soonBtn: 'Coming soon',
       note: 'These courses grow as I learn. I just bought a new drone and share everything I figure out about use, settings and technique — so you don’t have to repeat that search.',
       c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '14 modules · ~6 hrs', desc: 'Learn to film with your drone, not just fly it. From first power-on to a finished cinematic film — with shot recipes, decision trees and a field guide.' },
       c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · field guide', desc: 'The eye-level imagery that completes your drone. Cinematic gimbal technique and how to merge air and ground into one film.' },
-      c3: { kicker: 'Post · colour', title: 'Colour & grade', meta: 'In development', desc: 'Two cameras, one look. Matching D-Log, LUTs and a cinematic grade in Final Cut and DaVinci Resolve.' },
+      c3: { kicker: 'Post · DaVinci + Final Cut', title: 'De Kleurfilmer', meta: '8 modules · DaVinci + Final Cut', desc: 'From flat D-Log to a cinematic look. Workflow, scopes, developing D-Log, curves, matching shots and exporting — with the exact steps in both DaVinci Resolve and Final Cut Pro.' },
     },
     showreel: {
       title: 'Showreel', desc: 'The Lichtbreking showreel — a year of cinematic drone and film imagery.',
