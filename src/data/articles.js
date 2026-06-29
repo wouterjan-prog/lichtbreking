@@ -270,55 +270,63 @@ export const articles = [
     slug: 'onderwater-action-instellingen',
     cat: 'Onderwater',
     ph: 'r',
-    title: 'Onder water filmen: beste instellingen voor duiken, snorkelen & zwemmen',
-    excerpt: 'Met een GoPro Hero 12 of DJI Osmo 360 leg je het rif, de schildpadden en het turquoise water prachtig vast — mits je witbalans en behuizing kloppen. Dit zijn de instellingen.',
+    title: 'Onder water met de GoPro Hero 12: instellingen & welk filter wanneer',
+    excerpt: 'Met de juiste filter en instellingen haal je onder water de kleuren terug — koraal, schildpadden en helder blauw. Welk MojoGear-filter je wanneer gebruikt, plus de beste GoPro Hero 12-instellingen voor duiken en snorkelen.',
     date: '2026-06-29',
     readMin: 8,
     body: `
-<p>Boven water draait alles om je ND-filter; onder water draait alles om kleur. Water "eet" kleur op — rood verdwijnt als eerste, al na een paar meter, daarna oranje en geel. Daardoor wordt alles blauwgroen. Met de juiste instellingen op je GoPro Hero 12 of DJI Osmo 360 haal je die kleuren terug en film je het rif, de schildpadden en het heldere water zoals je het zelf ziet.</p>
+<p>Boven water draait alles om je ND-filter; onder water draait alles om kleur. Water "eet" kleur op — rood verdwijnt als eerste, al na een paar meter, daarna oranje en geel. Daardoor wordt alles blauwgroen. Met het juiste kleurfilter en de juiste instellingen op je GoPro Hero 12 haal je die kleuren terug en film je koraal, schildpadden en helder water zoals je het zelf ziet.</p>
 
-<div class="callout tip"><div class="c-label">Belangrijk</div><p>Specs en dieptes verschillen per camera en behuizing. Bevestig de actuele dieptegrenzen en instellingen altijd in de handleiding van je camera vóór je het water in gaat — en laat veiligheid (je duik, je adem, het zeeleven) altijd vóór de opname gaan.</p></div>
+<div class="callout tip"><div class="c-label">Belangrijk</div><p>Dieptes en specs verschillen per behuizing en filterset. Bevestig de actuele dieptegrenzen altijd in de handleiding vóór je het water in gaat — en laat veiligheid (je duik, je adem, het zeeleven) altijd vóór de opname gaan. Spoel je behuizing na elke duik na in zoet water.</p></div>
 
-<h2>De gouden regel: witbalans handmatig vast</h2>
-<p>Net als bij je drone is de grootste valkuil <strong>auto-witbalans</strong>. Onder water blijft de camera dan continu bijsturen, waardoor de kleur in één clip alle kanten op verspringt. Zet je witbalans dus vast:</p>
+<h2>Welk filter wanneer? (MojoGear-set)</h2>
+<p>De MojoGear-filterset heeft drie kleuren, elk voor een ander soort water en een andere diepte. Het filter herstelt optisch het verdwenen rood, zodat je beeld er weer natuurlijk uitziet. De vuistregel:</p>
 <ul>
-<li><strong>Snorkelen / ondiep zwemmen (tot ~10 m)</strong> — kies een vaste witbalans rond <strong>5500 K</strong>. Hier is nog veel rood en zonlicht aanwezig.</li>
-<li><strong>Dieper duiken (vanaf ~10 m)</strong> — kies de hoogste/maximale witbalans-instelling om het verdwenen rood te compenseren.</li>
+<li><strong>Roze filter — ondiep / snorkelen (0,5–5 m).</strong> Voor de bovenste laag water, ongeacht of het zee of zoet water is. Ideaal bij snorkelen en zwemmen vlak onder de oppervlakte.</li>
+<li><strong>Rood filter — blauw zeewater (5–25 m).</strong> Het klassieke duikfilter voor heldere tropische zee en oceaan. Dit gebruik je op Curaçao.</li>
+<li><strong>Magenta (paars) filter — groen / zoet water (5–25 m).</strong> Voor meren, plassen en groenig water, waar een rood filter te veel zou doen.</li>
 </ul>
 
-<h2>GoPro Hero 12 — onderwater-instellingen</h2>
+<div class="callout tip"><div class="c-label">Vuistregel</div><p>Ondieper dan ~5 m? Vaak heb je geen filter nodig — er is dan nog genoeg rood licht. Dieper dan ~5 m: kies het filter dat bij het water past (rood = blauw, magenta = groen). De MojoGear-filters passen <strong>alleen op de MojoGear-behuizing</strong>, niet op de originele GoPro-case.</p></div>
+
+<h2>Wanneer juist géén filter</h2>
 <ul>
-<li><strong>Resolutie 4K</strong> (of 5.3K) — scherp, goed te bewerken en deelbaar. 4K is voor de meeste duikers de beste balans.</li>
+<li><strong>Heel ondiep (tot ~5 m).</strong> Genoeg daglicht en rood aanwezig; een filter maakt het beeld dan alleen donkerder en roder dan nodig.</li>
+<li><strong>Heel diep of bij weinig licht (richtlijn vanaf ~25 m).</strong> Er is dan te weinig rood licht over om te herstellen; een filter helpt niet meer. Gebruik dan een duiklamp.</li>
+<li><strong>Met een duiklamp of bij nachtduiken.</strong> De lamp geeft vol-spectrum wit licht; mét een kleurfilter krijg je dan een onnatuurlijke rode of magenta zweem. Lamp aan = filter eraf. Houd er rekening mee dat het bereik van een lamp meestal maar 1 à 2 meter is — fijn voor close-ups van koraal en macro.</li>
+</ul>
+
+<h2>Witbalans</h2>
+<p>Gebruik je een kleurfilter, dan doet het filter het kleurwerk — laat de witbalans dan op een <strong>vaste</strong> waarde staan en niet continu wisselen tijdens een clip. Film je zónder filter, zet de witbalans dan handmatig vast en hoger naarmate je dieper gaat. De grootste valkuil in beide gevallen is auto-witbalans die mid-clip blijft verspringen: dat geeft een onrustig, "ademend" kleurbeeld dat je achteraf nauwelijks corrigeert.</p>
+
+<h2>GoPro Hero 12 — instellingen</h2>
+<ul>
+<li><strong>Resolutie 4K</strong> (of 5.3K) — scherp, goed te bewerken en deelbaar; 4K is voor de meeste duikers de beste balans.</li>
 <li><strong>Framerate</strong> — 30 fps bij minder licht (dieper, troebel, eind van de dag); 60 fps in helder, zonnig tropisch water voor vloeiende beweging en lichte slow-motion.</li>
-<li><strong>Witbalans</strong> — vast (zie hierboven), nooit auto.</li>
-<li><strong>Rood filter</strong> — alleen nuttig in ondiep, helder blauw water met alleen daglicht. De native onderwater-witbalans van de Hero 12 is zo goed dat een rood filter vaak overbodig is — en in groen of troebel water, heel ondiep, bij nachtduiken of met duiklampen geeft het juist een rare rode zweem. Dan: geen filter.</li>
-<li><strong>Lens Wide · HyperSmooth (Boost) aan · ISO 100–6400 · Scherpte Medium · Kleur Natural</strong> (of Flat als je later kleurt). Zet Protune aan zodat je deze instellingen kunt regelen.</li>
+<li><strong>Lens Wide · HyperSmooth (Boost) aan · ISO 100–6400 · Scherpte Medium · Kleur Natural</strong> (of Flat als je later kleurt). Zet <strong>Protune</strong> aan zodat je deze instellingen zelf kunt regelen.</li>
+<li><strong>Geen ND-filter.</strong> Boven water houd je met ND je sluiter traag in de felle zon; onder water is het licht al gedempt en bewegen je onderwerpen — laat de sluiter z'n werk doen.</li>
 </ul>
 
-<h2>DJI Osmo 360 — onderwater-instellingen</h2>
-<p>De Osmo 360 is een 360-camera: hij filmt met twee lenzen alles om je heen in <strong>8K/30</strong>, en je kiest je kader (en virtuele camerabeweging) pas achteraf. Onder water heeft dat een groot voordeel: je hoeft niet te richten — een langszwemmende schildpad mis je nooit meer.</p>
+<h2>De MojoGear-behuizing</h2>
+<p>De waterdichte MojoGear-behuizing beschermt je Hero 12 tot zo'n 50 meter diepte. Een paar dingen om op te letten:</p>
 <ul>
-<li><strong>Behuizing is een must.</strong> De camera zelf is IP68 en tot ~10 m waterdicht, maar door de bolle fisheye-lenzen vervormt het beeld onder water en mislukt het samenvoegen (stitchen). Gebruik de speciale waterdichte behuizing — daarmee film je tot ongeveer 50 m diep en blijft de 360-stitch netjes.</li>
-<li><strong>8K/30 360</strong> voor maximale resolutie; je snijdt er achteraf een scherp 4K-kader uit.</li>
-<li><strong>Witbalans handmatig vast</strong> — zelfde logica als bij de GoPro.</li>
-<li>De grote 1-inch sensoren en f/1.9 geven veel dynamiek en goed beeld bij weinig licht — fijn op diepte.</li>
+<li><strong>Anti-condens-inserts</strong> in de behuizing voorkomen beslagen beelden bij temperatuurverschil tussen lucht en water.</li>
+<li><strong>Controleer de O-ring</strong> (afdichtrubber) op haartjes en zand vóór je sluit — dat is je waterdichtheid.</li>
+<li><strong>Spoel na</strong> in zoet water en laat drogen; zout en zand zijn de grootste vijanden.</li>
+<li>De filters klikken op deze behuizing; wissel ze aan land, met droge handen.</li>
 </ul>
-
-<h2>Geen ND nodig onder water</h2>
-<p>Boven water gebruik je een ND-filter om je sluiter traag te houden in de felle zon. Onder water is dat niet nodig: het licht is al gedempt en je onderwerpen bewegen. Laat je sluiter z'n werk doen en richt je energie op witbalans, dichtbij komen en stabiel filmen.</p>
 
 <h2>Praktische tips</h2>
 <ul>
 <li><strong>Kom dichtbij.</strong> Water vermindert kleur, contrast en scherpte razendsnel. Hoe minder water tussen jou en je onderwerp, hoe beter het beeld.</li>
 <li><strong>Zon in je rug.</strong> Dan valt het licht op je onderwerp en komen de kleuren het mooist terug. Blijf ondiep voor het meeste rood.</li>
-<li><strong>Anti-condens-inserts</strong> in je behuizing voorkomen beslagen beelden bij temperatuurverschil.</li>
-<li><strong>Rustige bewegingen.</strong> Langzaam pannen en zweven oogt filmischer — en je verstoort het zeeleven minder.</li>
+<li><strong>Rustige bewegingen.</strong> Langzaam zweven en pannen oogt filmischer — en je verstoort het zeeleven minder.</li>
 <li><strong>Respecteer de natuur.</strong> Raak koraal en dieren niet aan en houd afstand. Het mooiste beeld is er één waarbij niets verstoord wordt.</li>
 </ul>
 
-<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Witbalans vast, dichtbij blijven en zon in je rug — dat zijn de drie dingen die je onderwaterbeelden het meest verbeteren, op elke camera.</p></div>
+<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Filter bij het water (rood = blauw, magenta = groen, roze = ondiep), filter eraf bij een lamp of heel ondiep, witbalans niet laten wisselen, en kom dichtbij. Dat zijn de dingen die je onderwaterbeelden het meest verbeteren.</p></div>
 
-<p>Op zoek naar een plek om dit te oefenen? Bij <a href="/curacao/">Playa Grandi op Curaçao</a> zwem je zo tussen de zeeschildpadden. En wil je je drone- en filmwerk naar een hoger niveau tillen, kijk dan bij <a href="/cursussen/">de gratis cursussen</a>.</p>
+<p>Op zoek naar een plek om dit te oefenen? Bij <a href="/curacao/">Playa Grandi op Curaçao</a> zwem je zo tussen de zeeschildpadden in helder blauw water — perfect voor je rode filter. En wil je je film- en kleurwerk naar een hoger niveau tillen, kijk dan bij <a href="/cursussen/">de gratis cursussen</a>.</p>
 `
   }
 ];
