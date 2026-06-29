@@ -73,7 +73,7 @@ export const articles = [
 <p>Het kleurprofiel bepaalt hoeveel kleur en contrast de camera al "inbakt".</p>
 <ul>
 <li><strong>Normal (10-bit)</strong> — het beeld is meteen mooi en bruikbaar zonder bewerken. Voor de meeste mensen de beste keuze.</li>
-<li><strong>D-Log / D-Log M</strong> — een vlak, grijzig profiel dat veel meer detail in lichte en donkere delen bewaart. Het geeft je meer ruimte om te kleuren, maar het is verplicht om het achteraf te bewerken (color grading). Kies dit alléén als je echt gaat nabewerken.</li>
+<li><strong>D-Log (10-bit)</strong> — een vlak, grijzig profiel dat veel meer detail in lichte en donkere delen bewaart. Het geeft je meer ruimte om te kleuren, maar het is verplicht om het achteraf te bewerken (color grading). Kies dit alléén als je echt gaat nabewerken. Zowel de Mini 5 Pro als de Osmo Pocket 4 ondersteunen volledige 10-bit D-Log.</li>
 </ul>
 
 <h2>Scherpte & ruisreductie</h2>
