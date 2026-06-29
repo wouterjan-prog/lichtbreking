@@ -57,6 +57,9 @@ export const articles = [
 <h2>ISO — zo laag mogelijk</h2>
 <p>ISO bepaalt hoe gevoelig de sensor is. Hoger ISO = helderder beeld, maar ook meer ruis (korrel). Houd ISO daarom zo laag mogelijk, <strong>100</strong> als het kan. Is het te donker? Regel dan eerst het licht of je ND, en verhoog ISO pas als laatste redmiddel. Verhoog ISO nóóit om een verkeerde belichting te "redden" — daar is je ND of de tijd van de dag voor.</p>
 
+<h2>Belichting (EV)</h2>
+<p>Veel piloten zetten de belichtingscompensatie (EV) een klein beetje lager — zo'n <strong>−0,3 tot −0,7</strong> — omdat het beeld snel net iets te licht is. Zo bescherm je je highlights (lucht, water, sneeuw) tegen uitbeten: een uitgebeten witte lucht krijg je er nooit meer in, terwijl een iets te donker beeld zich makkelijk laat terughalen. Hoeveel je verlaagt hangt af van de scène — experimenteer en kijk naar je histogram.</p>
+
 <h2>Witbalans — handmatig vastzetten</h2>
 <p>Witbalans bepaalt of je beeld warm (geel) of koel (blauw) oogt, gemeten in Kelvin. De grote valkuil is <strong>auto-witbalans</strong>: die past zich tijdens een shot aan, dus midden in een draai verspringt de kleur ineens. Dat ziet er onrustig uit en is in de montage lastig te repareren.</p>
 <ul>
@@ -239,7 +242,7 @@ export const articles = [
 </ul>
 
 <h2>Stap 1 — Registreren bij de RDW</h2>
-<p>Heb je een drone van <strong>250 gram of zwaarder</strong>, óf een drone <strong>met een camera</strong> (ook lichter dan 250 gram), dan moet je je als exploitant registreren bij de RDW. Je krijgt een <strong>exploitantnummer</strong> dat je op je drone(s) plakt. De kosten liggen rond de €23 voor de eerste registratie en €13 per jaar voor verlenging. Een drone onder de 250 gram <em>zonder</em> camera hoef je niet te registreren.</p>
+<p>Heb je een drone van <strong>250 gram of zwaarder</strong>, óf een drone <strong>met een camera</strong> (ook lichter dan 250 gram), dan moet je je als exploitant registreren bij de RDW. Je krijgt een <strong>exploitantnummer</strong> dat je op je drone(s) plakt. Dat kost een kleine vergoeding (een paar tientjes voor de eerste aanvraag en een jaarlijkse verlenging) — kijk voor het actuele tarief op de RDW-site. Een drone onder de 250 gram <em>zonder</em> camera hoef je niet te registreren.</p>
 
 <h2>Stap 2 — Het vliegbewijs (als je drone ≥ 250 g is)</h2>
 <p>Voor drones van 250 gram of zwaarder heb je het <strong>EU-dronebewijs A1/A3</strong> nodig. Je legt een online theorie-examen af via een erkende route; na het slagen vraag je het certificaat aan bij de RDW. Het is <strong>vijf jaar</strong> geldig. Voor een lichte drone onder de 250 gram heb je dit bewijs niet nodig — wél de registratie als er een camera op zit.</p>
