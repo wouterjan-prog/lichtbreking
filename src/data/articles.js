@@ -277,6 +277,12 @@ export const articles = [
     body: `
 <p>Boven water draait alles om je ND-filter; onder water draait alles om kleur. Water "eet" kleur op — rood verdwijnt als eerste, al na een paar meter, daarna oranje en geel. Daardoor wordt alles blauwgroen. Met het juiste kleurfilter en de juiste instellingen op je GoPro Hero 12 haal je die kleuren terug en film je koraal, schildpadden en helder water zoals je het zelf ziet.</p>
 
+<div class="fbox">
+<div class="fbox__col fbox__col--yes"><span class="fbox__h">✓ Wél een filter</span><p>Daglicht, op 5–25 m diepte:</p><ul><li><strong>Blauw zeewater</strong> → rood filter</li><li><strong>Groen / zoet water</strong> → magenta filter</li></ul></div>
+<div class="fbox__col fbox__col--no"><span class="fbox__h">✕ Geen filter</span><ul><li>Heel ondiep / snorkelen (tot ~5 m)</li><li>Dieper dan ~25 m of weinig licht</li><li>Met een duiklamp of 's nachts</li></ul></div>
+</div>
+<p class="fbox-rule"><strong>Vuistregel:</strong> daglicht + 5–25 m + blauw/groen water → filter. Heel ondiep, heel diep, of een lamp erbij → geen filter. Mét filter: witbalans op Auto.</p>
+
 <div class="callout tip"><div class="c-label">Belangrijk</div><p>Dieptes en specs verschillen per behuizing en filterset. Bevestig de actuele dieptegrenzen altijd in de handleiding vóór je het water in gaat — en laat veiligheid (je duik, je adem, het zeeleven) altijd vóór de opname gaan. Spoel je behuizing na elke duik na in zoet water.</p></div>
 
 <h2>Welk filter wanneer? (MojoGear-set)</h2>
