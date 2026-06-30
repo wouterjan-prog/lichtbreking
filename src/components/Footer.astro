@@ -6,8 +6,8 @@ const { lang = "nl" } = Astro.props;
 const F = (t[lang] || t.nl).foot;
 const year = new Date().getFullYear();
 const cols = [
-  { h: F.site, links: [[F.werk, locUrl("/werk/", lang)], [F.cursussen, locUrl("/cursussen/", lang)], [F.showreel, locUrl("/showreel/", lang)], ["Dronespots", "/dronespots/"], ["Zoeken", "/zoeken/"]] },
-  { h: F.more, links: [[F.over, locUrl("/over/", lang)], [F.contact, locUrl("/contact/", lang)], ["Curaçao-gids", "/curacao/"], ["Drone rond Heerde", "/heerde/"], [F.articles, "/artikelen/"], ["FAQ", "/faq/"], [F.news, "/wat-is-nieuw/"]] },
+  { h: F.site, links: [["Start hier", "/start/"], [F.werk, locUrl("/werk/", lang)], [F.cursussen, locUrl("/cursussen/", lang)], [F.showreel, locUrl("/showreel/", lang)], ["Dronespots", "/dronespots/"], ["Zoeken", "/zoeken/"]] },
+  { h: F.more, links: [[F.over, locUrl("/over/", lang)], [F.contact, locUrl("/contact/", lang)], ["Begrippenlijst", "/begrippen/"], ["Curaçao-gids", "/curacao/"], ["Drone rond Heerde", "/heerde/"], [F.articles, "/artikelen/"], ["FAQ", "/faq/"], [F.news, "/wat-is-nieuw/"]] },
 ];
 ---
 <footer class="lb-foot">
@@ -32,6 +32,20 @@ const cols = [
         ))}
       </nav>
     </div>
+    <!-- Nieuwsbrief. Werkt nu via e-mail (mailto-fallback). Voor een echte lijst:
+         vervang het form action door je provider-endpoint (Mailchimp/Buttondown/ConvertKit)
+         en verwijder data-mailto. -->
+    <div class="lb-foot__news">
+      <div class="lb-foot__news-txt">
+        <span class="lb-label lb-label--sky">Nieuwsbrief</span>
+        <p>Nieuwe gidsen, instellingen en cinematische tips — af en toe in je inbox. Geen spam.</p>
+      </div>
+      <form class="lb-foot__news-form" id="lbNews" action="mailto:hallo@lichtbreking.nl" method="post" data-mailto="true">
+        <input type="email" name="email" required placeholder="jouw@e-mail.nl" aria-label="Je e-mailadres" />
+        <button type="submit" class="lb-btn">Aanmelden →</button>
+        <span class="lb-foot__news-ok" id="lbNewsOk" hidden>Bedankt — je aanmelding is geopend in je mailprogramma.</span>
+      </form>
+    </div>
     <div class="lb-foot__bottom">
       <span class="lb-label">© {year} Lichtbreking</span>
       <span class="lb-label">{F.rights}</span>
@@ -50,10 +64,35 @@ const cols = [
   .lb-foot__col ul { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
   .lb-foot__col a { color: var(--lb-mist); font-size: var(--lb-small); transition: color .3s var(--lb-ease); }
   .lb-foot__col a:hover { color: var(--lb-bone); }
-  .lb-foot__bottom { display: flex; justify-content: space-between; gap: 16px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--lb-line); }
+  .lb-foot__news { display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; margin-top: 44px; padding: 22px 0 0; border-top: 1px solid var(--lb-line); }
+  .lb-foot__news-txt p { margin: 6px 0 0; color: var(--lb-mist); font-size: var(--lb-small); max-width: 46ch; }
+  .lb-foot__news-form { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .lb-foot__news-form input { padding: 11px 16px; border-radius: 10px; border: 1px solid var(--lb-glass-border); background: var(--lb-glass-card-bg); color: var(--lb-bone); font-size: var(--lb-small); min-width: 230px; }
+  .lb-foot__news-form input::placeholder { color: var(--lb-mist); }
+  .lb-foot__news-form input:focus { outline: 2px solid var(--lb-sky); outline-offset: 1px; }
+  .lb-foot__news-ok { color: var(--lb-sky); font-size: var(--lb-small); width: 100%; }
+  .lb-foot__bottom { display: flex; justify-content: space-between; gap: 16px; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--lb-line); }
   @media (max-width: 720px) {
     .lb-foot__top { grid-template-columns: 1fr; gap: 28px; }
     .lb-foot__cols { justify-content: flex-start; gap: 40px; }
+    .lb-foot__news { flex-direction: column; align-items: flex-start; }
+    .lb-foot__news-form input { min-width: 0; flex: 1; }
     .lb-foot__bottom { flex-direction: column; gap: 8px; }
   }
 </style>
+<script is:inline>
+  (function () {
+    var f = document.getElementById('lbNews');
+    if (!f || f.getAttribute('data-mailto') !== 'true') return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = (f.querySelector('input[name="email"]') || {}).value || '';
+      if (!email) return;
+      var ok = document.getElementById('lbNewsOk');
+      window.location.href = 'mailto:hallo@lichtbreking.nl?subject=' +
+        encodeURIComponent('Aanmelding nieuwsbrief') +
+        '&body=' + encodeURIComponent('Ik wil me aanmelden voor de nieuwsbrief met dit e-mailadres: ' + email);
+      if (ok) ok.hidden = false;
+    });
+  })();
+</script>

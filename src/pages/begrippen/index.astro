@@ -1,0 +1,150 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../../components/GlassNav.astro';
+import Footer from '../../components/Footer.astro';
+
+// t = term, d = definitie (één zin), link = optioneel [label, href]
+const groups = [
+  {
+    cat: 'Belichting & camera',
+    terms: [
+      { t: 'Sluitertijd', d: 'Hoe lang de sensor licht opvangt per frame. Bij film houd je 1/50 s aan voor natuurlijke beweging.' },
+      { t: 'ISO', d: 'De lichtgevoeligheid van de sensor. Laag (100) = schoon beeld; hoog = lichter maar ruisiger. Houd het zo laag mogelijk.' },
+      { t: 'Diafragma (f-getal)', d: 'De opening van de lens die bepaalt hoeveel licht binnenkomt en hoeveel er scherp is. Bij de Mini en Pocket vast.' },
+      { t: 'Belichting (EV)', d: 'De totale helderheid van je beeld. Een tikje onderbelichten (−0,3 EV) beschermt je highlights.' },
+      { t: '180°-regel', d: 'De vuistregel dat je sluitertijd ongeveer 2× je framerate is (25 fps → 1/50 s). Geeft filmische bewegingsonscherpte.', link: ['Lees meer', '/artikelen/pro-instellingen-uitgelegd/'] },
+      { t: 'ND-filter', d: 'Een grijs filter dat licht tegenhoudt, zodat je in fel licht toch op 1/50 s kunt blijven. Een "zonnebril" voor je camera.', link: ['ND-calculator', '/gereedschap/'] },
+      { t: 'Dynamisch bereik', d: 'Hoeveel detail je camera tegelijk vasthoudt in de lichtste en donkerste delen. Log-profielen vergroten dit.' },
+      { t: 'Histogram', d: 'Een grafiekje van licht naar donker dat laat zien of je beeld goed belicht is (niet te veel "tegen de randen").' },
+    ],
+  },
+  {
+    cat: 'Kleur',
+    terms: [
+      { t: 'Witbalans (Kelvin)', d: 'De kleurtemperatuur van licht, in Kelvin. Zet hem handmatig vast (~5500 K) zodat de kleur niet verspringt tijdens een shot.' },
+      { t: 'Kleurprofiel', d: 'Hoeveel contrast en kleur de camera al in het beeld bakt — van kant-en-klaar (Normal) tot vlak (log).', link: ['Profielen uitgelegd', '/artikelen/kleurprofielen-uitgelegd/'] },
+      { t: 'Normal', d: 'Het standaardprofiel: een mooi, direct bruikbaar beeld zonder nabewerking.' },
+      { t: 'D-Log M / D-Log', d: 'DJI’s vlakke log-profielen. De Mini 5 Pro heeft D-Log M, de Pocket 4 echte D-Log. Bewaren meer detail, maar je moet ze graden.' },
+      { t: 'HLG', d: 'Een 10-bit profiel (op de Mini 5 Pro) dat er goed uitziet op HDR-tv’s zonder dat je hoeft te graden.' },
+      { t: 'LUT', d: 'Een kleur-"preset" (look-up table) die je log-beeld in één stap omzet naar een normale of stilistische look.' },
+      { t: 'Kleurcorrectie', d: 'Je beeld technisch correct maken: neutrale witbalans, goede belichting. Komt vóór de creatieve look.' },
+      { t: 'Color grading', d: 'Je beeld een gevoel of stijl geven (warm, koel, cinematisch). Komt ná de correctie.', link: ['De Kleurfilmer', '/cursus/kleurfilmer/'] },
+      { t: 'Rec.709', d: 'De standaard-kleurruimte voor web en HD. Hierin exporteer je zodat je film er overal hetzelfde uitziet.' },
+      { t: 'Bitdiepte (8- / 10-bit)', d: 'Hoeveel kleurtinten je beeld bevat. 10-bit geeft veel meer tinten en voorkomt strepen (banding) in luchten.' },
+    ],
+  },
+  {
+    cat: 'Beweging & opname',
+    terms: [
+      { t: 'Framerate (fps)', d: 'Het aantal beelden per seconde. 24/25 fps = bioscoop-look; 50/60 fps film je om later te vertragen.', link: ['Keuzehulp', '/artikelen/framerate-keuzehulp/'] },
+      { t: 'Slow-motion', d: 'Vertraagd beeld dat je maakt door hoog te filmen (50/60 fps) en af te spelen op een 25 fps-tijdlijn.' },
+      { t: 'Gimbal', d: 'Het gemotoriseerde ophangsysteem dat de camera stabiel houdt — in de drone én in de Pocket 4.' },
+      { t: 'Cine-modus', d: 'De traagste vliegmodus van de drone: zachte, vloeiende bewegingen voor cinematische shots.' },
+      { t: 'Hyperlapse', d: 'Een timelapse waarbij de camera ook beweegt — lange opname, korte vloeiende clip.' },
+      { t: 'ActiveTrack / POI', d: 'Slimme modi waarbij de camera automatisch een onderwerp volgt (ActiveTrack) of eromheen cirkelt (Point of Interest).' },
+      { t: 'Compositie', d: 'Hoe je het kader vult: regel van derden, leidende lijnen, diepte en een rechte horizon.', link: ['Lees meer', '/artikelen/compositie-cinematisch/'] },
+    ],
+  },
+  {
+    cat: 'Montage & verhaal',
+    terms: [
+      { t: 'B-roll', d: 'Losse sfeer- en detailbeelden die je over je hoofdverhaal heen legt. Film er altijd méér van dan je denkt nodig te hebben.' },
+      { t: 'Establishing shot', d: 'Een wijde openingsshot (vaak vanuit de drone) die laat zien waar je bent.' },
+      { t: 'Sequence', d: 'Een reeks shots (wijd → medium → detail) die samen één moment of handeling vertellen.', link: ['Lees meer', '/artikelen/shots-naar-verhaal/'] },
+      { t: 'Knippen op de beat', d: 'Je sneden laten samenvallen met de muziek — de simpelste manier om een montage strak te laten voelen.' },
+      { t: 'Sounddesign', d: 'Het opbouwen van geluid: omgevingsgeluid, whooshes op overgangen en muziek die zachter gaat bij belangrijke momenten.', link: ['Audio & muziek', '/artikelen/audio-muziek-cinematisch/'] },
+    ],
+  },
+  {
+    cat: 'Drone & regels',
+    terms: [
+      { t: 'EU-dronebewijs (A1/A3)', d: 'Het online examen dat je nodig hebt voor een drone vanaf 250 gram. Gratis te halen bij de overheid.', link: ['Drone-regels', '/artikelen/drone-regels-nederland-eu/'] },
+      { t: 'RDW-registratie', d: 'Je verplichte aanmelding als drone-exploitant; je registratienummer plak je op de drone.' },
+      { t: 'Natura 2000', d: 'Beschermde natuurgebieden (zoals grote delen van de Veluwe) waar dronevliegen verboden is.', link: ['Heerde & Veluwe', '/heerde/'] },
+      { t: 'Return-to-Home (RTH)', d: 'De functie die de drone automatisch terug naar het startpunt laat vliegen — bij lage accu of signaalverlies.' },
+    ],
+  },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org', '@type': 'DefinedTermSet',
+  name: 'Filmtaal voor beginners — begrippenlijst', inLanguage: 'nl-NL',
+  url: 'https://www.lichtbreking.nl/begrippen/',
+};
+---
+<Base
+  title="Begrippenlijst — filmtaal voor beginners, in één zin uitgelegd"
+  description="ISO, sluitertijd, witbalans, D-Log, LUT, framerate, gimbal, B-roll en meer — alle drone- en filmbegrippen helder in één zin uitgelegd."
+  path="/begrippen/"
+  jsonld={jsonld}>
+  <GlassNav active="" switchHref="/en/cursussen/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container begrip-page">
+    <header class="begrip-head lb-reveal">
+      <span class="lb-label lb-label--sky">Filmtaal voor beginners</span>
+      <h1 class="lb-display-l">Begrippenlijst</h1>
+      <p class="lb-lead">Alle drone- en filmtermen die je op deze site tegenkomt — kort en duidelijk in één zin uitgelegd. Zoek een term of blader per categorie.</p>
+      <input type="search" id="begripSearch" class="begrip-search" placeholder="Zoek een term — bijv. sluitertijd, D-Log, framerate…" aria-label="Zoek een begrip" />
+    </header>
+
+    <div id="begripList">
+      {groups.map((g) => (
+        <section class="begrip-group" data-group>
+          <h2 class="begrip-cat lb-display-m">{g.cat}</h2>
+          <dl class="begrip-dl">
+            {g.terms.map((x) => (
+              <div class="begrip-item" data-term={`${x.t} ${x.d}`.toLowerCase()}>
+                <dt>{x.t}</dt>
+                <dd>{x.d}{x.link && <> <a href={x.link[1]} class="begrip-link">{x.link[0]} →</a></>}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+    </div>
+    <p class="begrip-empty lb-muted" id="begripEmpty" hidden>Geen begrip gevonden — probeer een andere term.</p>
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .begrip-page { padding-top: 130px; padding-bottom: 96px; }
+  .begrip-head { max-width: 64ch; margin-bottom: 30px; }
+  .begrip-head h1 { margin: 10px 0 16px; }
+  .begrip-search { width: 100%; max-width: 560px; margin-top: 22px; padding: 13px 18px; border-radius: 12px; border: 1px solid var(--lb-glass-border); background: var(--lb-glass-card-bg); color: var(--lb-bone); font-size: 1rem; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .begrip-search::placeholder { color: var(--lb-mist); }
+  .begrip-search:focus { outline: 2px solid var(--lb-sky); outline-offset: 1px; }
+  .begrip-group { margin-bottom: 40px; }
+  .begrip-cat { margin: 0 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--lb-line); }
+  .begrip-dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .begrip-dl { grid-template-columns: 1fr; } }
+  .begrip-item { padding: 16px 18px; border-radius: 12px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); }
+  .begrip-item dt { color: var(--lb-bone); font-weight: 600; margin-bottom: 5px; }
+  .begrip-item dd { color: var(--lb-mist); margin: 0; font-size: .94rem; line-height: 1.55; }
+  .begrip-link { color: var(--lb-sky); font-weight: 500; white-space: nowrap; }
+  .begrip-empty { margin-top: 20px; }
+</style>
+
+<script is:inline>
+  (function () {
+    var inp = document.getElementById('begripSearch');
+    if (!inp) return;
+    var items = [].slice.call(document.querySelectorAll('.begrip-item'));
+    var groups = [].slice.call(document.querySelectorAll('[data-group]'));
+    var empty = document.getElementById('begripEmpty');
+    inp.addEventListener('input', function () {
+      var q = inp.value.trim().toLowerCase();
+      var any = false;
+      items.forEach(function (el) {
+        var hit = !q || el.getAttribute('data-term').indexOf(q) !== -1;
+        el.style.display = hit ? '' : 'none';
+        if (hit) any = true;
+      });
+      groups.forEach(function (g) {
+        var vis = g.querySelectorAll('.begrip-item:not([style*="none"])').length;
+        g.style.display = vis ? '' : 'none';
+      });
+      if (empty) empty.hidden = any;
+    });
+  })();
+</script>

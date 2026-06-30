@@ -29,6 +29,21 @@ const jsonld = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'htt
       <a href="#werk" class="hero__scroll lb-label">{L.home.scroll}</a>
     </section>
 
+    <section class="lb-section start-band">
+      <div class="lb-container start-band__inner lb-reveal">
+        <div class="start-band__txt">
+          <span class="lb-label lb-label--sky">Nieuw hier?</span>
+          <h2 class="start-band__h">Kies je toestel en begin meteen</h2>
+          <p>Je krijgt het juiste pad: instellingen, techniek, beweging en montage — voor jóuw camera.</p>
+        </div>
+        <div class="start-band__links">
+          <a href="/start/" class="start-band__chip">DJI Mini 5 Pro <span aria-hidden="true">→</span></a>
+          <a href="/start/" class="start-band__chip">DJI Osmo Pocket 4 <span aria-hidden="true">→</span></a>
+          <a href="/start/" class="lb-btn">Start hier →</a>
+        </div>
+      </div>
+    </section>
+
     <section id="werk" class="lb-section">
       <div class="lb-container">
         <header class="sec-head lb-reveal">
@@ -151,4 +166,14 @@ const jsonld = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'htt
   .ct__sub { color: rgba(255,255,255,.85); margin: 14px 0 20px; max-width: 52ch; }
   .ct__btn { pointer-events: none; }
   @media (max-width: 720px) { .ct { aspect-ratio: 4 / 5; } }
+
+  .start-band { padding-top: 0; }
+  .start-band__inner { display: flex; align-items: center; justify-content: space-between; gap: 22px 40px; flex-wrap: wrap; padding: 24px 26px; border-radius: 18px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .start-band__h { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 600; color: var(--lb-bone); margin: 6px 0 6px; }
+  .start-band__txt p { color: var(--lb-mist); margin: 0; max-width: 48ch; font-size: .96rem; }
+  .start-band__links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .start-band__chip { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--lb-glass-border); background: var(--lb-night); color: var(--lb-bone); font-size: .92rem; font-weight: 500; transition: border-color var(--lb-dur) var(--lb-ease), color var(--lb-dur) var(--lb-ease); }
+  .start-band__chip span { color: var(--lb-sky); }
+  .start-band__chip:hover { border-color: var(--lb-sky); color: var(--lb-sky); }
+  @media (max-width: 680px) { .start-band__inner { flex-direction: column; align-items: flex-start; } }
 </style>

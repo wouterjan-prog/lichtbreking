@@ -6,6 +6,7 @@ import { t, locUrl, switchUrl } from "../i18n/ui.js";
 const { active = "", lang = "nl", switchHref, hero = false } = Astro.props;
 const L = t[lang] || t.nl;
 const items = [
+  { label: L.nav.start, href: "/start/", id: "start" },
   { label: L.nav.werk, href: locUrl("/werk/", lang), id: "werk" },
   { label: L.nav.cursus, href: locUrl("/cursussen/", lang), id: "cursussen" },
   { label: L.nav.over, href: locUrl("/over/", lang), id: "over" },

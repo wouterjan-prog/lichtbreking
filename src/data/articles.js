@@ -1,6 +1,7 @@
 // Artikelen (blog) — losse, evergreen vak-artikelen voor groei/SEO.
 // ph = kleurklasse voor de placeholder-afbeelding (zie artikelen-styling).
-export const articles = [
+import { moreArticles } from './articles-more.js';
+const baseArticles = [
   {
     slug: 'gouden-uur-uitgelegd',
     cat: 'Licht',
@@ -73,7 +74,7 @@ export const articles = [
 <p>Het kleurprofiel bepaalt hoeveel kleur en contrast de camera al "inbakt".</p>
 <ul>
 <li><strong>Normal (10-bit)</strong> — het beeld is meteen mooi en bruikbaar zonder bewerken. Voor de meeste mensen de beste keuze.</li>
-<li><strong>D-Log (10-bit)</strong> — een vlak, grijzig profiel dat veel meer detail in lichte en donkere delen bewaart. Het geeft je meer ruimte om te kleuren, maar het is verplicht om het achteraf te bewerken (color grading). Kies dit alléén als je echt gaat nabewerken. Zowel de Mini 5 Pro als de Osmo Pocket 4 ondersteunen volledige 10-bit D-Log.</li>
+<li><strong>D-Log (10-bit)</strong> — een vlak, grijzig profiel dat veel meer detail in lichte en donkere delen bewaart. Het geeft je meer ruimte om te kleuren, maar het is verplicht om het achteraf te bewerken (color grading). Kies dit alléén als je echt gaat nabewerken. Let op het verschil per toestel: de Mini 5 Pro filmt in <strong>D-Log M</strong> (een vereenvoudigd 10-bit log-profiel), de Osmo Pocket 4 in <strong>echte 10-bit D-Log</strong>. Beide convert je in de montage op dezelfde manier.</li>
 </ul>
 
 <h2>Scherpte & ruisreductie</h2>
@@ -106,7 +107,7 @@ export const articles = [
 </ul>
 
 <h2>Snelle waarden om te onthouden</h2>
-<p><strong>DJI Mini 5 Pro (drone):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast · kleurprofiel Normal of D-Log · scherpte −1 · ruis 0 · ND volgens licht.</p>
+<p><strong>DJI Mini 5 Pro (drone):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast · kleurprofiel Normal of D-Log M · scherpte −1 · ruis 0 · ND volgens licht.</p>
 <p><strong>DJI Osmo Pocket 4 (handheld):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast (3200 K binnen) · Normal of D-Log · scherpte −1 · gimbal aan · ND buiten bij zon.</p>
 
 <div class="callout tip"><div class="c-label">Onthoud dit</div><p>Zet vóór elke shoot bewust vier dingen vast: sluiter (1/50), ISO (100), witbalans (5500 K) en je ND. Die vier samen bepalen 90% van de "filmische" look — de rest is licht en beweging.</p></div>
@@ -401,3 +402,5 @@ export const articles = [
 `
   }
 ];
+
+export const articles = [...baseArticles, ...moreArticles];
