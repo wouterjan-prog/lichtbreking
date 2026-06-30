@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import GlassNav from '../../components/GlassNav.astro';
 import Footer from '../../components/Footer.astro';
+import { src, srcset } from '../../data/work.js';
 
 const devices = [
   {
@@ -9,6 +10,7 @@ const devices = [
     name: 'DJI Mini 5 Pro',
     blurb: 'Je vliegt en filmt vanuit de lucht. Begin hier voor je instellingen, je eerste vlucht en cinematische bewegingen.',
     cls: 'mini',
+    photo: '1753618282728-f05ecfc5c9d6',
     links: [
       ['Cursus: De Vluchtfilmer', '/cursus/vluchtfilmer/'],
       ['De instellingen die ik vastzet', '/artikelen/dji-mini-5-pro-instellingen/'],
@@ -21,6 +23,7 @@ const devices = [
     name: 'DJI Osmo Pocket 4',
     blurb: 'Je filmt op de grond met de gimbalcamera. Begin hier voor je instellingen, gimbalmodi en vloeiende loop-technieken.',
     cls: 'pocket',
+    photo: '1762740522491-2a4f7c754816',
     links: [
       ['Cursus: De Grondfilmer', '/cursus/grondfilmer/'],
       ['De instellingen die ik vastzet', '/artikelen/osmo-pocket-4-instellingen/'],
@@ -62,6 +65,7 @@ const jsonld = {
     <div class="dev-grid">
       {devices.map((d) => (
         <div class={`dev-card lb-reveal ${d.cls}`}>
+          <img class="dev-photo" src={src(d.photo, 900)} srcset={srcset(d.photo)} sizes="(max-width: 760px) 100vw, 360px" alt={d.name} width="900" height="320" loading="lazy" decoding="async" />
           <span class="dev-tag lb-label">{d.tag}</span>
           <h2 class="dev-name">{d.name}</h2>
           <p class="dev-blurb">{d.blurb}</p>
@@ -117,7 +121,8 @@ const jsonld = {
   .dev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 60px; }
   @media (max-width: 760px) { .dev-grid { grid-template-columns: 1fr; } }
   .dev-card { position: relative; border-radius: 18px; padding: 26px 26px 24px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); overflow: hidden; }
-  .dev-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; }
+  .dev-photo { display: block; width: calc(100% + 52px); height: 158px; object-fit: cover; margin: -26px -26px 18px; }
+  .dev-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; z-index: 2; }
   .dev-card.mini::before { background: linear-gradient(90deg,#7c2d12,#ea580c 60%,#fb923c); }
   .dev-card.pocket::before { background: linear-gradient(90deg,#9d174d,#db2777 60%,#f9a8d4); }
   .dev-tag { display: block; margin-bottom: 8px; }
