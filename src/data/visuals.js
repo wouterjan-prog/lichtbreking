@@ -11,6 +11,20 @@ const kick = (x, y, t) =>
   `<text x="${x}" y="${y}" fill="${SKY}" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">${t}</text>`;
 const spec = `<linearGradient id="lbspec" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF5147"/><stop offset=".25" stop-color="#FF9A2E"/><stop offset=".5" stop-color="#FFD23E"/><stop offset=".7" stop-color="#46C95F"/><stop offset=".85" stop-color="#2F7CF0"/><stop offset="1" stop-color="#9B4DDB"/></linearGradient>`;
 
+// unieke id's zodat meerdere inline-figuren op één pagina niet botsen
+let _uid = 0; const uid = () => 'lv' + (++_uid);
+const specDef = (id) => `<linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF5147"/><stop offset=".3" stop-color="#FF9A2E"/><stop offset=".6" stop-color="#46C95F"/><stop offset=".85" stop-color="#2F7CF0"/><stop offset="1" stop-color="#9B4DDB"/></linearGradient>`;
+const drone = () => `<rect x="-9" y="-6" width="18" height="12" rx="3" fill="${BONE}"/><circle cx="-11" cy="-8" r="3.4" fill="none" stroke="${BONE}" stroke-width="1.2"/><circle cx="11" cy="-8" r="3.4" fill="none" stroke="${BONE}" stroke-width="1.2"/><circle cx="-11" cy="8" r="3.4" fill="none" stroke="${BONE}" stroke-width="1.2"/><circle cx="11" cy="8" r="3.4" fill="none" stroke="${BONE}" stroke-width="1.2"/>`;
+// herbruikbaar vliegpad-diagram (zijaanzicht/topdown), drone volgt het pad
+const movePath = (d, label, extra = '') => {
+  const g = uid(), p = uid();
+  return wrap(`<defs>${specDef(g)}</defs>${extra}
+    <path id="${p}" d="${d}" fill="none" stroke="url(#${g})" stroke-width="2" stroke-dasharray="4 6" opacity=".85"/>
+    <g><animateMotion dur="4.5s" repeatCount="indefinite" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines="0.42 0 0.58 1"><mpath href="#${p}"/></animateMotion>${drone()}</g>
+    ${cap(28, 162, label, MIST, 12.5)}`, '0 0 560 178');
+};
+const V_move = movePath;
+
 const V = {
   // 180°-regel: roterende sluiter
   shutter: () => wrap(`
@@ -191,6 +205,36 @@ const V = {
     <rect x="20" y="20" width="120" height="26" rx="6" fill="rgba(8,8,10,.6)"/>${cap(34, 38, 'Plat D-Log', '#cdd2d8', 12)}
     <rect x="640" y="20" width="140" height="26" rx="6" fill="rgba(8,8,10,.6)"/>${cap(654, 38, 'Gegradeerd', '#cdd2d8', 12)}`),
 
+  // --- inline mini-diagrammen: dronebewegingen (zijaanzicht/topdown) ---
+  m_reveal: () => V_move('M40 134 C170 134 235 72 520 58', 'Reveal — stijg achter iets vandaan en onthul het landschap',
+    `<path d="M0 144 Q130 74 270 144 Z" fill="#16171B"/><g transform="translate(516 60)"><rect x="-3" y="-20" width="6" height="22" fill="#2f6f53"/><circle cy="-24" r="13" fill="${GREEN}" opacity=".75"/></g>`),
+  m_orbit: () => V_move('M280 42 a68 68 0 1 1 -0.1 0', 'Orbit — cirkel vloeiend rond je onderwerp',
+    `<circle cx="280" cy="110" r="17" fill="#16171B" stroke="${SKY}" stroke-width="1.5"/><circle cx="280" cy="110" r="17" fill="none" stroke="${SKY}"><animate attributeName="r" values="17;26;17" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0;.6" dur="3s" repeatCount="indefinite"/></circle>`),
+  m_flythrough: () => V_move('M40 92 H520', 'Fly-through — scheer langs een voorgrond voor diepte en vaart',
+    `<rect x="190" y="38" width="11" height="104" rx="3" fill="#16171B"/><rect x="350" y="62" width="9" height="80" rx="3" fill="#1d2a37"/>`),
+  m_topdown: () => V_move('M280 34 V118', 'Top-down — camera recht naar beneden, daal langzaam af',
+    `<circle cx="280" cy="138" r="42" fill="none" stroke="${SKY}" stroke-dasharray="3 4" opacity=".45"/><circle cx="280" cy="138" r="22" fill="none" stroke="${SKY}" stroke-dasharray="3 4" opacity=".55"/>`),
+  m_dronie: () => V_move('M130 122 C240 112 370 82 520 50', 'Dronie — vlieg achteruit én omhoog, weg van je onderwerp',
+    `<g transform="translate(96 124)"><circle cy="-14" r="7" fill="${SKY}"/><rect x="-6" y="-6" width="12" height="20" rx="5" fill="${SKY}"/></g>`),
+  m_craneup: () => V_move('M280 140 V42', 'Crane-up — stijg recht omhoog met de camera naar beneden',
+    `<circle cx="280" cy="146" r="15" fill="${SKY}" opacity=".85"/>`),
+  m_pushin: () => V_move('M60 92 H476', 'Push-in — vlieg heel langzaam recht op je onderwerp af',
+    `<circle cx="505" cy="92" r="16" fill="#16171B" stroke="${SKY}" stroke-width="1.5"/><circle cx="505" cy="92" r="6" fill="${SKY}"/>`),
+
+  // --- inline mini-diagrammen: compositie ---
+  c_lines: () => wrap(`
+    <rect x="160" y="20" width="240" height="138" rx="8" fill="#16171B" stroke="rgba(255,255,255,.16)"/>
+    ${[[160, 158], [220, 158], [400, 158], [340, 158]].map(([x, y]) => `<line x1="${x}" y1="${y}" x2="280" y2="70" stroke="${SKY}" stroke-width="1.5" opacity=".6"/>`).join('')}
+    <circle cx="280" cy="70" r="9" fill="${ORANGE}"><animate attributeName="r" values="9;13;9" dur="2.5s" repeatCount="indefinite"/></circle>
+    ${cap(28, 100, 'Leidende lijnen', BONE, 15, 'start', '600')}${cap(28, 124, 'trekken het oog', MIST, 12.5)}${cap(28, 142, 'naar je onderwerp.', MIST, 12.5)}`, '0 0 560 178'),
+  c_depth: () => wrap(`
+    <rect x="180" y="24" width="320" height="130" rx="8" fill="#0f141a"/>
+    <rect x="180" y="24" width="320" height="60" fill="#22425e" opacity=".7"/>
+    <ellipse cx="340" cy="120" rx="150" ry="40" fill="#1d3346"/>
+    <path d="M210 154 l24 -54 8 54 Z" fill="#0a0d11"/>
+    <circle cx="430" cy="96" r="13" fill="${SKY}"><animateTransform attributeName="transform" type="translate" values="0 0;-12 0;0 0" dur="4s" repeatCount="indefinite"/></circle>
+    ${cap(28, 92, 'Voorgrond +', BONE, 15, 'start', '600')}${cap(28, 116, 'parallax =', MIST, 12.5)}${cap(28, 134, 'diepte.', MIST, 12.5)}`, '0 0 560 178'),
+
   // Generiek
   default: () => wrap(`
     <defs>${spec}</defs>
@@ -223,4 +267,25 @@ export const articleHero = {
   'audio-muziek-cinematisch': { viz: 'beat' },
   'shots-naar-verhaal': { viz: 'shotsizes' },
   'kleurprofielen-uitgelegd': { viz: 'grade' },
+};
+
+// Inline mini-diagrammen die vóór een passende <h2> in de body worden gezet (match op tekst).
+export const inlineFigures = {
+  'mini-5-pro-cinematische-bewegingen': [
+    { k: 'De reveal', v: 'm_reveal' },
+    { k: 'De orbit', v: 'm_orbit' },
+    { k: 'De fly-through', v: 'm_flythrough' },
+    { k: 'De top-down', v: 'm_topdown' },
+    { k: 'De dronie', v: 'm_dronie' },
+    { k: 'De crane-up', v: 'm_craneup' },
+    { k: 'De pushed-in', v: 'm_pushin' },
+  ],
+  'pocket-4-gimbalbewegingen': [
+    { k: 'De drie gimbalmodi', v: 'gimbalmodes' },
+    { k: 'Vloeiend lopen', v: 'smoothstick' },
+  ],
+  'compositie-cinematisch': [
+    { k: 'Leidende lijnen', v: 'c_lines' },
+    { k: 'Diepte met voorgrond', v: 'c_depth' },
+  ],
 };

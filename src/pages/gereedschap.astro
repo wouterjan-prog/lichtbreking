@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import GlassNav from '../components/GlassNav.astro';
 import Footer from '../components/Footer.astro';
 import ProCheatsheet from '../components/ProCheatsheet.astro';
+import GradeCompare from '../components/GradeCompare.astro';
 ---
 <Base title="Gereedschap" description="Gratis drone-tools: ND-filter-calculator, wind go/no-go-checker en een pre-flight checklist. Snel, praktisch, voor onderweg." path="/gereedschap/">
   <GlassNav active="gereedschap" switchHref="/en/cursussen/" />
@@ -151,6 +152,13 @@ import ProCheatsheet from '../components/ProCheatsheet.astro';
           <p class="gw-simnote" id="simNote"></p>
         </div>
       </div>
+    </section>
+
+    <section class="gw-sim lb-reveal">
+      <span class="lb-label lb-label--sky">Simulator</span>
+      <h2 class="lb-display-m">Voor / na — de grade</h2>
+      <p class="lb-lead">Sleep om te zien wat color grading doet: van plat D-Log M uit de camera naar een cinematische look.</p>
+      <GradeCompare caption="Links: vlak D-Log M. Rechts: na een cinematische grade. Leren graden? Dat is De Kleurfilmer." />
     </section>
 
     <section class="gw-cheat lb-reveal">

@@ -4,6 +4,7 @@ import GlassNav from '../../../components/GlassNav.astro';
 import Footer from '../../../components/Footer.astro';
 import SpectrumRule from '../../../components/SpectrumRule.astro';
 import ProCheatsheet from '../../../components/ProCheatsheet.astro';
+import GradeCompare from '../../../components/GradeCompare.astro';
 import { courses, getLessons } from '../../../data/courses.js';
 import '../../../styles/course.css';
 
@@ -126,6 +127,7 @@ const jsonld = {
         <h2 class="lb-display-m">Pro-instellingen in één oogopslag</h2>
         <p class="lb-lead">De handmatige instellingen voor {camLabel} — met per instelling de waarde én het waarom.{course.slug === 'kleurfilmer' ? ' Beide camera’s filmen een vlak 10-bit log-profiel (D-Log M op de Mini, echte D-Log op de Pocket 4), dus de grade-workflow in deze cursus geldt voor allebei.' : ' Print de veldkaarten hierboven om ze mee te nemen.'}</p>
         <ProCheatsheet cams={cams} />
+        {course.slug === 'kleurfilmer' && <GradeCompare caption="Sleep om te zien wat een grade doet: links plat D-Log M uit de camera, rechts de cinematische look die je in deze cursus leert maken." />}
       </div>
     </section>
   </main>
