@@ -38,7 +38,7 @@ export const t = {
     },
     werk: {
       title: 'Werk', desc: 'Een selectie cinematische drone-, foto- en filmbeelden van Lichtbreking.',
-      kicker: 'Selectie', h1: 'Het werk',
+      kicker: 'Selectie', h1: 'Het werk', note: 'Beeld ter illustratie — mijn eigen portfolio groeit met elke reis.',
       filters: { alles: 'Alles', drone: 'Drone', video: 'Film', photo: 'Foto' },
     },
     cursussen: {
@@ -110,7 +110,7 @@ export const t = {
     },
     werk: {
       title: 'Work', desc: 'A selection of cinematic drone, photo and film work by Lichtbreking.',
-      kicker: 'Selection', h1: 'The work',
+      kicker: 'Selection', h1: 'The work', note: 'Imagery for illustration — my own portfolio grows with every trip.',
       filters: { alles: 'All', drone: 'Drone', video: 'Film', photo: 'Photo' },
     },
     cursussen: {

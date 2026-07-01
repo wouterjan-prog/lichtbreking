@@ -262,7 +262,7 @@ export const articleHero = {
   'osmo-pocket-4-instellingen': { viz: 'gimbalmodes' },
   'mini-5-pro-cinematische-bewegingen': { viz: 'orbit' },
   'pocket-4-gimbalbewegingen': { viz: 'gimbalmodes' },
-  'compositie-cinematisch': { viz: 'thirds' },
+  'compositie-cinematisch': { photo: '1753618282728-f05ecfc5c9d6' },
   'framerate-keuzehulp': { viz: 'slowmo' },
   'audio-muziek-cinematisch': { viz: 'beat' },
   'shots-naar-verhaal': { viz: 'shotsizes' },
@@ -283,9 +283,5 @@ export const inlineFigures = {
   'pocket-4-gimbalbewegingen': [
     { k: 'De drie gimbalmodi', v: 'gimbalmodes' },
     { k: 'Vloeiend lopen', v: 'smoothstick' },
-  ],
-  'compositie-cinematisch': [
-    { k: 'Leidende lijnen', v: 'c_lines' },
-    { k: 'Diepte met voorgrond', v: 'c_depth' },
   ],
 };

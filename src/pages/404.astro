@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import GlassNav from '../components/GlassNav.astro';
+import Footer from '../components/Footer.astro';
+import SpectrumRule from '../components/SpectrumRule.astro';
+---
+<Base title="Pagina niet gevonden (404)" description="Deze pagina bestaat niet (meer). Vlieg terug naar huis of kies je toestel." path="/404/">
+  <GlassNav active="" switchHref="/en/cursussen/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container nf-page">
+    <div class="nf-inner lb-reveal">
+      <span class="lb-label lb-label--sky">Fout 404 · signaal verloren</span>
+      <h1 class="lb-display-l">Deze pagina is buiten bereik</h1>
+      <p class="lb-lead">De link klopt niet meer of de pagina bestaat niet. Geen paniek — Return-to-Home staat aan.</p>
+      <div class="nf-rule"><SpectrumRule width="160px" thickness={3} /></div>
+      <div class="nf-links">
+        <a href="/" class="lb-btn">← Naar de homepage</a>
+        <a href="/start/" class="lb-btn lb-btn--ghost">Kies je toestel</a>
+        <a href="/artikelen/" class="lb-btn lb-btn--ghost">Alle artikelen</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .nf-page { min-height: 62vh; display: flex; align-items: center; padding-top: 130px; padding-bottom: 96px; }
+  .nf-inner { max-width: 60ch; }
+  .nf-inner h1 { margin: 12px 0 16px; }
+  .nf-rule { margin: 22px 0 26px; }
+  .nf-links { display: flex; flex-wrap: wrap; gap: 12px; }
+</style>
