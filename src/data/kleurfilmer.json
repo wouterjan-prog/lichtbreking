@@ -65,7 +65,8 @@
      "c": 1,
      "u": "Grading = de creatieve look; correctie = neutraal maken."
     }
-   ]
+   ],
+   "doel": "leg je de juiste werkvolgorde vast: eerst corrigeren, dan graden."
   },
   {
    "n": 2,
@@ -106,7 +107,8 @@
      "c": 1,
      "u": "Net onder 100 — boven 100 knijp je highlights weg."
     }
-   ]
+   ],
+   "doel": "lees je je beeld met de waveform, parade en vectorscope."
   },
   {
    "n": 3,
@@ -147,7 +149,8 @@
      "c": 1,
      "u": "De Color Space Transform is wiskundig netjes en buigzaam."
     }
-   ]
+   ],
+   "doel": "ontwikkel je je log-beeld naar een correct Rec.709-startpunt."
   },
   {
    "n": 4,
@@ -188,7 +191,8 @@
      "c": 1,
      "u": "Boven 100 verbrand je highlights — dat detail is weg."
     }
-   ]
+   ],
+   "doel": "maak je je beeld neutraal met witbalans, belichting en contrast."
   },
   {
    "n": 5,
@@ -229,7 +233,8 @@
      "c": 1,
      "u": "Met Hue vs Hue / Hue vs Sat pas je alleen die kleur aan."
     }
-   ]
+   ],
+   "doel": "geef je je beeld filmisch contrast en kleur met curves."
   },
   {
    "n": 6,
@@ -270,7 +275,8 @@
      "c": 1,
      "u": "Track het masker zodat het de beweging volgt."
     }
-   ]
+   ],
+   "doel": "pas je gericht de lucht, huid of het water aan zonder de rest te raken."
   },
   {
    "n": 7,
@@ -311,7 +317,8 @@
      "c": 1,
      "u": "Scopes verraden verschillen die je ogen missen."
     }
-   ]
+   ],
+   "doel": "bouw je een consistente look en trek je losse shots gelijk."
   },
   {
    "n": 8,
@@ -352,7 +359,8 @@
      "c": 1,
      "u": "10-bit geeft veel meer kleurtinten en voorkomt banding."
     }
-   ]
+   ],
+   "doel": "exporteer je correct in Rec.709 en vermijd je de grootste valkuilen."
   }
  ],
  "naslag": [

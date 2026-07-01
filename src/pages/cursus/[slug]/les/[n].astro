@@ -61,6 +61,10 @@ const lessonLd = {
           <div class="hr"></div>
         </header>
 
+        {isModule && les.doel && (
+          <p class="les-doel lb-reveal"><span class="les-doel__lbl">Na deze module kun je</span> {les.doel}</p>
+        )}
+
         {isModule && les.kort && les.kort.length > 0 && (
           <div class="lb-kort lb-reveal">
             <span class="lb-kort__lbl">In het kort</span>
@@ -146,6 +150,8 @@ const lessonLd = {
   .back-m { display: none; color: var(--lb-mist); margin-bottom: 12px; }
   .les-head h1 { margin: 10px 0 10px; }
   .les-min { color: var(--lb-mist); }
+  .les-doel { margin: 0 0 26px; padding: 14px 18px; border-left: 3px solid var(--lb-sky); border-radius: 0 12px 12px 0; background: var(--lb-glass-card-bg); color: var(--lb-bone); font-size: 1.02rem; line-height: 1.55; }
+  .les-doel__lbl { display: block; font-family: var(--lb-font-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--lb-sky); font-weight: 700; margin-bottom: 4px; }
   .hr { height: 2px; background: var(--lb-breakline); margin: 22px 0 30px; max-width: 160px; }
   .les-foot { margin-top: 50px; }
   .done-btn.is-done { background: var(--lb-green); color: #062b12; }
