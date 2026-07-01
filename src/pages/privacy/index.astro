@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../../components/GlassNav.astro';
+import Footer from '../../components/Footer.astro';
+
+const updated = '1 juli 2026';
+---
+<Base
+  title="Privacyverklaring"
+  description="Hoe Lichtbreking omgaat met je gegevens: nieuwsbrief, contact en privacyvriendelijke, cookieloze bezoekstatistieken."
+  path="/privacy/">
+  <GlassNav active="" switchHref="/en/cursussen/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container priv-page">
+    <header class="priv-head lb-reveal">
+      <span class="lb-label lb-label--sky">Privacy</span>
+      <h1 class="lb-display-l">Privacyverklaring</h1>
+      <p class="lb-lead">Kort en duidelijk: welke gegevens ik verwerk, waarom, en wat jouw rechten zijn. Lichtbreking verzamelt zo min mogelijk en verkoopt niets.</p>
+      <p class="priv-upd lb-muted">Laatst bijgewerkt: {updated}</p>
+    </header>
+
+    <article class="priv-body lb-reveal">
+      <h2>Wie is verantwoordelijk?</h2>
+      <p>Deze website (lichtbreking.nl) is een persoonlijk project van Lichtbreking. Vragen over je gegevens? Mail naar <a href="mailto:hallo@lichtbreking.nl">hallo@lichtbreking.nl</a>.</p>
+
+      <h2>Welke gegevens verwerk ik?</h2>
+      <p><strong>Nieuwsbrief.</strong> Alleen als je je zelf aanmeldt, gebruik ik je e-mailadres om je de nieuwsbrief te sturen. Je kunt je op elk moment afmelden. Ik gebruik je adres nergens anders voor en deel het niet met anderen, behalve de maildienst die nodig is om de nieuwsbrief te versturen.</p>
+      <p><strong>Contact.</strong> Als je me mailt, bewaar ik je bericht en e-mailadres zolang dat nodig is om je vraag te beantwoorden.</p>
+      <p><strong>Bezoekstatistieken.</strong> Ik gebruik privacyvriendelijke, geanonimiseerde statistieken (via Vercel) om te zien welke pagina's bezocht worden. Deze plaatsen <strong>geen cookies</strong> en herleiden niets naar jou als persoon.</p>
+
+      <h2>Cookies &amp; opslag</h2>
+      <p>Lichtbreking gebruikt <strong>geen tracking- of advertentiecookies</strong>. Je voorkeuren (zoals licht/donker-thema en je voortgang in een cursus) worden alleen in je eigen browser opgeslagen (localStorage) en verlaten je apparaat niet.</p>
+
+      <h2>Delen met derden</h2>
+      <p>Ik verkoop of verhuur je gegevens niet. Gegevens worden alleen verwerkt door de diensten die deze site laten werken: de hosting/statistiek (Vercel) en, als je je aanmeldt, de mailingdienst voor de nieuwsbrief.</p>
+
+      <h2>Bewaartermijn</h2>
+      <p>Ik bewaar gegevens niet langer dan nodig: je nieuwsbrief-aanmelding tot je je afmeldt, en e-mailcontact tot je vraag is afgehandeld.</p>
+
+      <h2>Jouw rechten</h2>
+      <p>Je hebt het recht om je gegevens in te zien, te laten corrigeren of te laten verwijderen, en om je aanmelding in te trekken. Stuur daarvoor een mail naar <a href="mailto:hallo@lichtbreking.nl">hallo@lichtbreking.nl</a>; ik regel het zo snel mogelijk. Ben je het ergens niet mee eens, dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens.</p>
+
+      <h2>Wijzigingen</h2>
+      <p>Deze verklaring kan af en toe wijzigen. De datum bovenaan laat zien wanneer ik 'm voor het laatst heb aangepast.</p>
+
+      <p class="priv-fine lb-muted">Deze pagina is bedoeld als heldere uitleg, geen juridisch advies.</p>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .priv-page { padding-top: 130px; padding-bottom: 96px; }
+  .priv-head { max-width: 64ch; margin-bottom: 30px; }
+  .priv-head h1 { margin: 10px 0 16px; }
+  .priv-upd { font-size: .88rem; margin-top: 8px; }
+  .priv-body { max-width: 68ch; }
+  .priv-body h2 { font-size: 1.25rem; color: var(--lb-bone); margin: 1.8rem 0 .5rem; }
+  .priv-body p { color: var(--lb-mist); line-height: 1.7; margin: 0 0 .8rem; }
+  .priv-body a { color: var(--lb-sky); text-decoration: underline; text-underline-offset: 2px; }
+  .priv-fine { font-size: .85rem; margin-top: 1.6rem; }
+</style>

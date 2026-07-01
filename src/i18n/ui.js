@@ -73,7 +73,7 @@ export const t = {
       title: 'Contact', desc: 'Neem contact op met Lichtbreking voor drone- en videowerk, samenwerkingen of vragen over de cursus.',
       kicker: 'Contact', h1: 'Laten we iets moois maken.',
       lead: 'Een opdracht, een samenwerking, of gewoon een vraag over de cursus? Stuur gerust een bericht.',
-      cards: [['E-mail', 'hallo@lichtbreking.nl', 'mailto:hallo@lichtbreking.nl'], ['Instagram', '@lichtbreking', '#'], ['Werkgebied', 'Nederland & op reis', null]],
+      cards: [['E-mail', 'hallo@lichtbreking.nl', 'mailto:hallo@lichtbreking.nl'], ['Instagram', '@lichtbreking', 'https://www.instagram.com/lichtbreking/'], ['Werkgebied', 'Nederland & op reis', null]],
     },
     work: {
       'curacao-topdown': { title: 'Turquoise', place: 'Curaçao', cat: 'DRONE', alt: 'Drone-opname recht naar beneden boven turquoise zeewater bij Curaçao' },
@@ -145,7 +145,7 @@ export const t = {
       title: 'Contact', desc: 'Get in touch with Lichtbreking for drone and video work, collaborations or course questions.',
       kicker: 'Contact', h1: 'Let’s make something beautiful.',
       lead: 'A commission, a collaboration, or just a question about the course? Feel free to send a message.',
-      cards: [['Email', 'hallo@lichtbreking.nl', 'mailto:hallo@lichtbreking.nl'], ['Instagram', '@lichtbreking', '#'], ['Service area', 'Netherlands & traveling', null]],
+      cards: [['Email', 'hallo@lichtbreking.nl', 'mailto:hallo@lichtbreking.nl'], ['Instagram', '@lichtbreking', 'https://www.instagram.com/lichtbreking/'], ['Service area', 'Netherlands & traveling', null]],
     },
     work: {
       'curacao-topdown': { title: 'Turquoise', place: 'Curaçao', cat: 'DRONE', alt: 'Top-down drone shot over turquoise sea water near Curaçao' },
