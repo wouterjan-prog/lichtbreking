@@ -80,7 +80,7 @@ const guides = [
 </Base>
 
 <style is:global>
-  .ds-page{ --night:#08080A; --bone:#F4F1EA; --mist:#AEB0B6; --gold:#E7C98F; --sky:#7FB2FF;
+  .ds-page{ --night:#08080A; --bone:#F4F3EF; --mist:#9A9BA1; --gold:var(--lb-gold); --sky:#7FB4D6;
     --spectrum:linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
     --mono:ui-monospace,"SF Mono",Menlo,monospace;
     background:var(--night); color:var(--bone); line-height:1.55; overflow-x:hidden; }
@@ -125,7 +125,7 @@ const guides = [
   .ds-feat-c b{ display:block; font-size:15px; margin-bottom:6px; }
   .ds-feat-c span{ color:var(--mist); font-size:13px; }
   .ds-cta{ display:flex; gap:12px; flex-wrap:wrap; }
-  .ds-btn{ display:inline-block; padding:.8rem 1.3rem; border-radius:999px; font-weight:600; font-size:.95rem; text-decoration:none; color:#06231f; background:var(--gold); transition:transform .25s ease; }
+  .ds-btn{ display:inline-block; padding:.8rem 1.3rem; border-radius:999px; font-weight:600; font-size:.95rem; text-decoration:none; color:var(--lb-night); background:var(--gold); transition:transform .25s ease; }
   .ds-btn--ghost{ color:var(--bone); background:rgba(255,255,255,.08); box-shadow:inset 0 0 0 1px rgba(255,255,255,.18); }
   .ds-btn:hover{ transform:translateY(-2px); }
 

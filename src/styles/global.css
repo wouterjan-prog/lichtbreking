@@ -134,3 +134,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude; opacity: .5; pointer-events: none; }
+
+/* Regenboog-randje als herbruikbare utility (huisstijl-opruiming) */
+.lb-prism-border { position: relative; }
+.lb-prism-border::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px;
+  background: var(--lb-spectrum-135);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; opacity: .45; pointer-events: none; }

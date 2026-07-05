@@ -110,8 +110,8 @@ import { heerdeSpots } from '../../data/heerdespots.js';
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style is:global>
-  .hr-page{ --night:#08080A; --bone:#F4F1EA; --mist:#AEB0B6; --gold:#E7C98F;
-    --green:#46C95F; --orange:#FF9A2E; --red:#FF6B5E; --sky:#7FB2FF;
+  .hr-page{ --night:#08080A; --bone:#F4F3EF; --mist:#9A9BA1; --gold:var(--lb-gold);
+    --green:#46C95F; --orange:#FF9A2E; --red:#FF6B5E; --sky:#7FB4D6;
     --spectrum:linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
     --mono:ui-monospace,"SF Mono",Menlo,monospace;
     background:var(--night); color:var(--bone); line-height:1.55; overflow-x:hidden; }
@@ -155,7 +155,7 @@ import { heerdeSpots } from '../../data/heerdespots.js';
   .hr-filters{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 14px; }
   .hr-fbtn{ appearance:none; cursor:pointer; font-family:inherit; font-size:12.5px; font-weight:600; color:var(--bone); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:999px; padding:7px 14px; }
   .hr-fbtn:hover{ background:rgba(255,255,255,.12); }
-  .hr-fbtn.on{ color:#06231f; background:var(--gold); border-color:transparent; }
+  .hr-fbtn.on{ color:var(--lb-night); background:var(--gold); border-color:transparent; }
   .hr-search{ flex:1; min-width:160px; font-family:inherit; font-size:13px; color:var(--bone); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:999px; padding:8px 14px; }
   .hr-search::placeholder{ color:var(--mist); } .hr-search:focus{ outline:none; border-color:var(--gold); }
   .hr-stage{ display:grid; grid-template-columns:1.7fr 1fr; gap:18px; align-items:stretch; }
@@ -182,13 +182,13 @@ import { heerdeSpots } from '../../data/heerdespots.js';
 
   .hr-steps{ list-style:none; margin:18px 0 0; padding:0; display:grid; gap:12px; max-width:760px; }
   .hr-steps li{ display:flex; gap:14px; align-items:flex-start; background:rgba(20,22,28,.5); border-radius:14px; padding:15px 16px; box-shadow:inset 0 1px 0 rgba(255,255,255,.1); }
-  .hr-stepn{ flex:0 0 auto; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--mono); font-weight:700; font-size:13px; color:#06231f; background:var(--gold); }
+  .hr-stepn{ flex:0 0 auto; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--mono); font-weight:700; font-size:13px; color:var(--lb-night); background:var(--gold); }
   .hr-steps b{ display:block; font-size:15px; margin-bottom:2px; }
   .hr-steps p{ margin:0; color:var(--mist); font-size:13px; }
   .hr-fineprint{ color:var(--mist); font-size:12px; margin-top:14px; opacity:.85; }
 
   .hr-cta{ display:flex; gap:12px; flex-wrap:wrap; }
-  .hr-btn{ display:inline-block; padding:.8rem 1.3rem; border-radius:999px; font-weight:600; font-size:.95rem; text-decoration:none; color:#06231f; background:var(--gold); transition:transform .25s ease; }
+  .hr-btn{ display:inline-block; padding:.8rem 1.3rem; border-radius:999px; font-weight:600; font-size:.95rem; text-decoration:none; color:var(--lb-night); background:var(--gold); transition:transform .25s ease; }
   .hr-btn--ghost{ color:var(--bone); background:rgba(255,255,255,.08); box-shadow:inset 0 0 0 1px rgba(255,255,255,.18); }
   .hr-btn:hover{ transform:translateY(-2px); }
   .hr-close{ text-align:center; padding-bottom:64px; }
@@ -240,7 +240,7 @@ import { heerdeSpots } from '../../data/heerdespots.js';
     spots.forEach(function(s){
       var m;
       if(s.t==='pocket'){ m=L.marker(s.ll,{icon:pIcon}); }
-      else { m=L.circleMarker(s.ll,{radius:8,weight:2,color:'#06231f',fillColor:COL[s.t],fillOpacity:.95}); }
+      else { m=L.circleMarker(s.ll,{radius:8,weight:2,color:'var(--lb-night)',fillColor:COL[s.t],fillOpacity:.95}); }
       m.bindTooltip(s.n,{direction:'top',offset:[0,-6]});
       m.on('mouseover',function(){render(s);}); m.on('click',function(){render(s);});
       m.addTo(map);

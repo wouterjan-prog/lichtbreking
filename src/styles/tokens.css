@@ -15,7 +15,14 @@
   --lb-white:   #FFFFFF;  /* tekst op beeld */
 
   /* — Spectrum (accent — spaarzaam gebruiken) — */
-  --lb-red:    #FF4D4D;
+  --lb-red:    #FF5147;
+  --lb-red-ink:  #FF6B5E;      /* rood als TEKST — leesbaar op donker */
+  --lb-red-soft: #E0584D;      /* rood voor vlakken/borders (waarschuwing) */
+  --lb-amber-ink: #F0C08A;     /* warme amber-tekst (cursus) */
+  --lb-cyan-ink:  #7FD8E6;     /* cyaan-tekst (cursus) */
+  --lb-teal-surface: #143B43;  /* teal vlak (recap/hoofdstuk-hero) */
+  --lb-gold: #E7C98F;          /* warme goud-accent (dronespots/heerde) */
+  --lb-spectrum-135: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
   --lb-orange: #FF9A2E;
   --lb-yellow: #FFD23E;
   --lb-green:  #46C95F;
@@ -27,11 +34,11 @@
   --lb-green-ink:  #7ED88F; /* groen als TEKST — leesbaar op donker */
 
   /* Verlopen */
-  --lb-spectrum: linear-gradient(90deg,#FF4D4D,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
-  --lb-prism:    linear-gradient(180deg,#FF4D4D 0%,#FF9A2E 18%,#FFD23E 36%,#46C95F 54%,#2FB8C4 70%,#2F7CF0 85%,#9B4DDB 100%);
+  --lb-spectrum: linear-gradient(90deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
+  --lb-prism:    linear-gradient(180deg,#FF5147 0%,#FF9A2E 18%,#FFD23E 36%,#46C95F 54%,#2FB8C4 70%,#2F7CF0 85%,#9B4DDB 100%);
   --lb-breakline: linear-gradient(90deg,
       rgba(244,243,239,.5) 0%, rgba(244,243,239,.5) 46%,
-      #FF4D4D 60%, #FFD23E 76%, #46C95F 86%, #2F7CF0 95%, #9B4DDB 100%);
+      #FF5147 60%, #FFD23E 76%, #46C95F 86%, #2F7CF0 95%, #9B4DDB 100%);
 
   /* — Typografie — */
   --lb-font-display: -apple-system, "SF Pro Display", "Schibsted Grotesk", system-ui, sans-serif;
@@ -91,6 +98,10 @@
   --lb-sky:     #22618F;  /* donkerder accent zodat labels leesbaar zijn op papier/wit */
   --lb-orange-ink: #A65200; /* oranje tekst — donkerder zodat het leesbaar is op papier */
   --lb-green-ink:  #1D7A3F; /* groene tekst — donkerder voor leesbaarheid op papier */
+  --lb-red-ink:  #C0392B;
+  --lb-amber-ink: #9A5512;
+  --lb-cyan-ink:  #185A7E;
+  --lb-gold: #8A6D2E;
 
   --lb-shadow-card: 0 10px 30px rgba(20,22,30,.12);
   --lb-shadow-float: 0 24px 60px rgba(20,22,30,.18);
@@ -117,6 +128,10 @@
     --lb-sky:     #22618F;
     --lb-orange-ink: #A65200;
     --lb-green-ink:  #1D7A3F;
+    --lb-red-ink:  #C0392B;
+    --lb-amber-ink: #9A5512;
+    --lb-cyan-ink:  #185A7E;
+    --lb-gold: #8A6D2E;
     --lb-shadow-card: 0 10px 30px rgba(20,22,30,.12);
     --lb-shadow-float: 0 24px 60px rgba(20,22,30,.18);
     --lb-glass-bg: rgba(255,255,255,.16);

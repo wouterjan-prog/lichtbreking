@@ -1,0 +1,313 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../../components/GlassNav.astro';
+import Footer from '../../components/Footer.astro';
+import SpectrumRule from '../../components/SpectrumRule.astro';
+
+// Alle waarden gecheckt tegen de Pocket 4-specs (editie 2026).
+// Let op: D-Log begint pas bij basis-ISO 400 — 'ISO 100' bestaat niet in dat profiel.
+const basis = [
+  { k: 'Resolutie', v: '4K · 16:9', why: 'Volle benutting van de 1-inch sensor, ruimte om te croppen. Zoomen kan tot 4×, maar 2× houdt de kwaliteit het best (1:1 sensor-uitlezing).' },
+  { k: 'Framerate', v: '25 fps', why: 'Kies 25 fps in Nederland vanwege 50Hz-kunstlicht; het oogt vrijwel identiek aan de klassieke 24 fps bioscoop-look.' },
+  { k: 'Kleurprofiel', v: '10-bit D-Log', why: 'Écht log (geen D-Log M meer): 14 stops dynamiek en maximale kleurinformatie voor de grade. Flets beeld tijdens opname hoort zo.' },
+  { k: 'Sluitertijd', v: '1/50 s · 180°-regel', why: 'Sluiter = 2× de framerate. Geeft natuurlijke, filmische motion blur. Zet hem vast — automatiek pompt zichtbaar.' },
+  { k: 'ISO', v: '400 vast — in D-Log', why: "D-Log begint pas bij basis-ISO 400 — 'ISO 100' bestaat niet in dit profiel. Boven ±1600 wordt ruis zichtbaar. In Normal: ISO 50–12800.", warn: true },
+  { k: 'ND-filters', v: 'ND16 / 64 / 256', why: 'Onmisbaar bij daglicht: vaste f/2.0 + basis-ISO 400 + 1/50 s is anders fors overbelicht. Vol zonlicht ND256, bewolkt ND64, gouden uur ND16.' },
+];
+
+// Ingedeeld zoals het PRO-menu op het scherm van de Pocket 4.
+const proMenu = [
+  { h: 'Exposure', rows: [
+    { k: 'Modus', v: 'M (Manual)', why: 'Vergrendelt sluiter én ISO. In Auto pompt de belichting; EV-correctie is dan je enige stuur.' },
+    { k: 'Shutter', v: '1/50 s', why: '180°-regel. Te licht? Niet de sluiter verkorten, maar een ND-filter opzetten.' },
+    { k: 'ISO', v: 'D-Log: 400 vast · Normal: 50–12800', why: 'Basis-ISO in D-Log is 400 — lager kan niet. Ga niet boven ±1600 voor het schoonste beeld.' },
+  ]},
+  { h: 'WB — witbalans', rows: [
+    { k: 'WB', v: 'Handmatig · 5600K', why: 'Bereik 2000–10000K; 5600K = daglicht. Vast zetten voorkomt kleurverschuivingen midden in een shot.' },
+  ]},
+  { h: 'Color', rows: [
+    { k: 'Kleurprofiel', v: '10-bit D-Log', why: 'Écht log: 14 stops dynamiek, maximale kleurinformatie voor de grade.' },
+    { k: 'Film Tones', v: 'Uit bij D-Log', why: 'Zes presets (o.a. CC Film, NC Film, Movie, Retro) voor direct-klaar beeld zónder grade. Kies óf een Film Tone, óf D-Log.' },
+  ]},
+  { h: 'Focus mode', rows: [
+    { k: 'Focus', v: 'AFC · continu', why: 'Intelligent AutoFocus houdt het onderwerp scherp. Vaste compositie? Tik & vasthouden vergrendelt focus en belichting.' },
+  ]},
+  { h: 'Image adjustment', rows: [
+    { k: 'Scherpte', v: '−1', why: "Voorkomt de 'oversharpened' videolook; geeft natuurlijkere huid en detail." },
+    { k: 'Ruisreductie', v: '−1 of 0', why: 'Interne ruisreductie smeert fijn detail weg; verwijder ruis liever gecontroleerd in de post.' },
+  ]},
+];
+
+const gimbal = [
+  { k: 'Gimbal-modus', v: 'Follow', why: 'Vloeiend meebewegen — standaard voor cinematisch pannen. Tilt Locked voor een strakke horizon.' },
+  { k: 'Gimbal-snelheid', v: 'Slow / Cinematic', why: 'Tragere respons = filmischere pans. Zet ook de joystick-gevoeligheid laag.' },
+  { k: '5D-joystick', v: 'Handmatige gimbal', why: 'Soepele, gedoseerde pans en tilts; indrukken recentreert de gimbal of flipt de camera.' },
+  { k: 'ActiveTrack 7.0', v: 'Aan bij onderwerp', why: 'Volgt personen, voertuigen, huisdieren en objecten — tot 4× zoom. De fysieke pan-range van de gimbal blijft de grens.' },
+  { k: 'Dynamic Framing', v: 'Rule of thirds', why: 'Plaats je onderwerp compositioneel met de joystick tijdens het tracken; Spotlight Follow houdt het centraal.' },
+  { k: 'Zoom', v: '2× · max 4×', why: '2× is vrijwel verliesvrij (1:1 uitlezing); 4× kost zichtbaar kwaliteit. Traag inzoomen oogt cinematisch.' },
+  { k: 'Timelapse', v: 'Interval 0,5s–1min', why: 'Opnameduur van 5 minuten tot 10 uur. Gebruik een statief en vaste belichting.' },
+];
+
+const bediening = [
+  { k: 'Zoom-knop', v: '1× / 2× / 4×', why: 'Dedicated knop onder het scherm springt tussen de zoomstanden. Traag bedienen voor het cinematische effect.' },
+  { k: 'Preset-knop', v: '→ Recording presets', why: 'Razendsnel wisselen tussen je 25p-cine-preset en 60p-slowmo-preset zonder het menu in te duiken.' },
+  { k: 'Scherm roteren', v: 'Start opname', why: 'Nieuw: het draaien van het scherm start direct de opname. Roteer de grip voor 9:16 portret of underslung shots.' },
+  { k: 'Opslag', v: '107 GB intern', why: 'Overzetten tot 800 MB/s via USB-C — een geheugenkaart is niet meer nodig, maar blijft handig als buffer.' },
+  { k: 'Tik & vasthouden', v: 'Lock focus/exposure', why: 'Vergrendelt focus en belichting — cruciaal bij vaste witbalans en ISO.' },
+  { k: 'Interne mics', v: 'Richtinggevoelig', why: 'Kies of geluid vóór, achter of rondom prioriteit krijgt. Buiten altijd de windkap gebruiken.' },
+  { k: 'DJI Mic 3', v: 'OsmoAudio · 4 kanalen', why: 'Koppelt draadloos zonder ontvanger en neemt tot vier audiokanalen tegelijk op.' },
+];
+
+const recepten = [
+  { s: 'Cinematic dag · strand / water', r: '4K 25p', p: 'D-Log', n: '1/50 · ND256', i: '400 · 5600K' },
+  { s: 'Wandeling / B-roll · bewolkt', r: '4K 25p', p: 'D-Log', n: '1/50 · ND64', i: '400 · vast' },
+  { s: 'Slowmo · golven / sport', r: '4K 60p', p: 'D-Log', n: '1/120 · ND64–256', i: '400 · vast' },
+  { s: 'Extreme slowmo · 240 fps', r: '4K 240p', p: 'Normal*', n: '1/480 · ND16–64', i: 'auto (max 800)' },
+  { s: 'Zonsondergang', r: '4K 25p', p: 'D-Log', n: '1/50 · ND16–64', i: '400 · 4000–4500K' },
+  { s: 'Onderwater · behuizing', r: '4K 30p', p: 'D-Log', n: '1/60 · geen ND', i: '400–1600 · auto' },
+  { s: 'Portret / social 9:16', r: '3K vert. 25p', p: 'D-Log', n: '1/50 · ND64', i: '400 · vast' },
+];
+
+const modi = [
+  { k: 'Video', v: '4K t/m 60p · D-Log', why: 'Je standaardmodus: 10-bit D-Log tot 4K/60, verticaal 3K voor 9:16. Hier werken tracking, Film Tones en alle audio-opties.' },
+  { k: 'Foto', v: '4K still · SuperPhoto', why: 'Standaard 4K-stills voor social; SuperPhoto (33–37MP) + RAW (DNG) voor prints en serieuze nabewerking. Lange sluiter tot 4 s.' },
+  { k: 'Low-Light Video', v: 'Tot ISO 25600', why: 'Voor écht donker. Alleen liggend, geen D-Log — accepteer dat je hier in Normal grade\u2019t.' },
+  { k: 'Slow Motion', v: '4K 120 / 240fps', why: '240fps = 10× vertraagd op een 24p-tijdlijn. Alleen liggend en alleen Normal-profiel.' },
+  { k: 'Panorama', v: '3×3 of 180°', why: 'De gimbal schiet de frames zelf; samenvoegen in de Mimo-app. Geen tracking beschikbaar.' },
+  { k: 'Timelapse', v: 'Interval 0,5s–1min', why: 'Statief, duur 5 min–10 u. Zet in PRO \u2018Video + RAW\u2019 aan om ook de losse foto\u2019s te bewaren.' },
+  { k: 'Motionlapse', v: 'Waypoints (max 4)', why: 'Timelapse mét camerabeweging: de gimbal pant traag langs waypoints die jij met de joystick vastlegt.' },
+  { k: 'Hyperlapse', v: 'Speed instelbaar', why: 'Timelapse terwijl jíj beweegt. De gimbal stabiliseert en tracking mag hier wél aan.' },
+];
+
+const fcp = [
+  { n: '1', h: 'LUT downloaden', p: "Haal de officiële 'Osmo Pocket 4 D-Log naar Rec.709'-LUT gratis uit het DJI Download Center." },
+  { n: '2', h: 'Camera-LUT toepassen', p: 'Clip → Info-inspector → Log Processing → Camera LUT → jouw Pocket 4 D-Log-LUT. Grade daarna bovenop.' },
+  { n: '3', h: 'Per camera graden', p: 'Pocket 4 = D-Log, Mini 5 Pro = D-Log M. Gebruik per camera de eigen LUT vóór de gedeelde grade.' },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'DJI Osmo Pocket 4: cinematic settings — de complete gids',
+  inLanguage: 'nl',
+  about: 'DJI Osmo Pocket 4 instellingen voor cinematisch filmen',
+};
+---
+<Base
+  title="DJI Osmo Pocket 4 · Cinematic settings — de complete gids"
+  description="De complete referentie voor filmische opnames met de Osmo Pocket 4: PRO-parameters en 10-bit D-Log (basis-ISO 400!), gimbal en ActiveTrack 7.0, opnamemodi, recepten per situatie en de Final Cut Pro-workflow."
+  path="/gids/pocket-4/" image="/img/og-art-osmo-pocket-4-instellingen.png"
+  jsonld={jsonld}>
+  <GlassNav active="" switchHref="/en/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container gp-page">
+
+    <header class="gp-head lb-reveal">
+      <span class="lb-label lb-label--sky">Nº 04 — Cinematic camera guide · editie 2026</span>
+      <h1 class="lb-display-l">DJI Osmo Pocket 4:<br>cinematic settings</h1>
+      <p class="lb-lead">De complete referentie voor filmische opnames — van PRO-parameters en 10-bit D-Log tot gimbal, custom buttons en een kant-en-klare Final Cut Pro-workflow.</p>
+      <div class="gp-cta-row">
+        <a class="lb-btn" href="/downloads/lichtbreking-gids-pocket-4.pdf" download>Download als PDF ↓</a>
+        <a class="lb-btn lb-btn--ghost" href="/cursus/grondfilmer/">Naar de cursus De Grondfilmer →</a>
+      </div>
+    </header>
+
+    <SpectrumRule />
+
+    <!-- Nº 01 · De basis -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-basis">
+      <div class="gp-sec-head">
+        <span class="lb-label">De basis</span>
+        <span class="lb-label lb-label--sky">Nº 01 — Kern</span>
+      </div>
+      <h2 id="gp-basis" class="lb-display-m">Zes instellingen die alles bepalen</h2>
+      <p class="gp-intro lb-muted">Zet altijd de PRO-modus aan. Bij D-Log ziet je opname er flets uit tijdens het filmen — dat hoort zo; de kleur komt pas in de grade.</p>
+      <div class="gp-cards">
+        {basis.map((b, i) => (
+          <article class={'gp-card' + (b.warn ? ' gp-card--warn' : '')}>
+            <div class="gp-card-top">
+              <span class={'lb-label ' + (b.warn ? 'gp-warn-label' : 'lb-label--sky')}>{b.k}{b.warn ? ' — let op' : ''}</span>
+              <span class="gp-num">{['i','ii','iii','iv','v','vi'][i]}.</span>
+            </div>
+            <div class="gp-card-v">{b.v}</div>
+            <p>{b.why}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Nº 02 · PRO-menu -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-pro">
+      <div class="gp-sec-head">
+        <span class="lb-label">Beeld &amp; belichting</span>
+        <span class="lb-label lb-label--sky">Nº 02 — PRO menu</span>
+      </div>
+      <h2 id="gp-pro" class="lb-display-m">De PRO-parameters</h2>
+      <p class="gp-intro lb-muted">Ingedeeld zoals het PRO-menu op het scherm van de Pocket 4. Zet waarden vast; automatiek veroorzaakt zichtbaar 'pompen' van belichting en kleur.</p>
+      {proMenu.map((grp) => (
+        <div class="gp-grp">
+          <span class="lb-label lb-label--sky">{grp.h}</span>
+          {grp.rows.map((r) => (
+            <div class="gp-row">
+              <div class="gp-k">{r.k}</div>
+              <div class="gp-v">{r.v}</div>
+              <div class="gp-w">{r.why}</div>
+            </div>
+          ))}
+        </div>
+      ))}
+      <p class="gp-note">Instellingen-menu (buiten PRO) — Anti-flikker: 50 Hz (lichtnet NL/EU) · Low-Light-modus: uit — alleen bij écht donker; werkt uitsluitend liggend en niet in D-Log.</p>
+    </section>
+
+    <!-- Nº 03 · Gimbal & tracking -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-gimbal">
+      <div class="gp-sec-head">
+        <span class="lb-label">Beweging</span>
+        <span class="lb-label lb-label--sky">Nº 03 — Gimbal &amp; tracking</span>
+      </div>
+      <h2 id="gp-gimbal" class="lb-display-m">Gimbal &amp; ActiveTrack 7.0</h2>
+      <p class="gp-intro lb-muted">Beweging maakt of breekt de cinematische look. Traag en bewust is bijna altijd beter.</p>
+      {gimbal.map((r) => (
+        <div class="gp-row">
+          <div class="gp-k">{r.k}</div>
+          <div class="gp-v">{r.v}</div>
+          <div class="gp-w">{r.why}</div>
+        </div>
+      ))}
+      <p class="gp-note">Tracking kiezen: <b>ActiveTrack</b> als je onderwerp beweegt · <b>Spotlight Follow</b> als jíj beweegt · <b>Dynamic Framing</b> voor off-center B-roll · registreer je gezicht voor solo-shoots. Starten: dubbel-tik op je onderwerp; stoppen: tik op ✕.</p>
+    </section>
+
+    <!-- Nº 04 · Bediening & audio -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-bedien">
+      <div class="gp-sec-head">
+        <span class="lb-label">Bediening</span>
+        <span class="lb-label lb-label--sky">Nº 04 — Buttons &amp; audio</span>
+      </div>
+      <h2 id="gp-bedien" class="lb-display-m">Custom buttons &amp; audio</h2>
+      <p class="gp-intro lb-muted">De Pocket 4 kreeg twee nieuwe fysieke knoppen en een 5D-joystick. Slim toewijzen scheelt gemiste momenten.</p>
+      {bediening.map((r) => (
+        <div class="gp-row">
+          <div class="gp-k">{r.k}</div>
+          <div class="gp-v">{r.v}</div>
+          <div class="gp-w">{r.why}</div>
+        </div>
+      ))}
+    </section>
+
+    <!-- Nº 05 · Recepten -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-recept">
+      <div class="gp-sec-head">
+        <span class="lb-label">Toepassing</span>
+        <span class="lb-label lb-label--sky">Nº 05 — Scenes</span>
+      </div>
+      <h2 id="gp-recept" class="lb-display-m">Recepten per situatie</h2>
+      <p class="gp-intro lb-muted">Kant-en-klare instellingen. Alle D-Log-recepten gaan uit van basis-ISO 400.</p>
+      <div class="gp-table" role="table" aria-label="Recepten per scene">
+        <div class="gp-tr gp-th" role="row">
+          <span role="columnheader">Scene</span><span role="columnheader">Res / fps</span><span role="columnheader">Profiel</span><span role="columnheader">Sluiter · ND</span><span role="columnheader">ISO · WB</span>
+        </div>
+        {recepten.map((r) => (
+          <div class="gp-tr" role="row">
+            <span class="gp-ts" role="cell">{r.s}</span><span class="gp-tv" role="cell">{r.r}</span><span class="gp-tm" role="cell">{r.p}</span><span class="gp-tv" role="cell">{r.n}</span><span class="gp-tm" role="cell">{r.i}</span>
+          </div>
+        ))}
+      </div>
+      <p class="gp-note">* 4K 120/240 fps werkt alleen liggend en alleen in het Normal-profiel — D-Log is daar niet beschikbaar. De sluiter volgt de 180°-regel per framerate.</p>
+    </section>
+
+    <!-- Nº 06 · Opnamemodi -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-modi">
+      <div class="gp-sec-head">
+        <span class="lb-label">Opnamemodi</span>
+        <span class="lb-label lb-label--sky">Nº 06 — Modes</span>
+      </div>
+      <h2 id="gp-modi" class="lb-display-m">Elke modus, één doel</h2>
+      <p class="gp-intro lb-muted">Wisselen: tik het icoon linksonder in het camerabeeld — Hyperlapse, Timelapse en Motionlapse zitten samen onder de Timelapse-tab. Veeg omhoog voor parameters, omlaag voor systeeminstellingen.</p>
+      {modi.map((r) => (
+        <div class="gp-row">
+          <div class="gp-k">{r.k}</div>
+          <div class="gp-v">{r.v}</div>
+          <div class="gp-w">{r.why}</div>
+        </div>
+      ))}
+      <p class="gp-note">Gebaren: handpalm tonen zet tracking op jou; peace-teken start/stopt de opname (bereik 0,5–5 m). ActiveTrack werkt níet in Panorama, Timelapse en Motionlapse; wél in Video, Foto en Hyperlapse.</p>
+    </section>
+
+    <!-- Nº 07 · Final Cut -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-fcp">
+      <div class="gp-sec-head">
+        <span class="lb-label">Workflow</span>
+        <span class="lb-label lb-label--sky">Nº 07 — Final Cut Pro</span>
+      </div>
+      <h2 id="gp-fcp" class="lb-display-m">De D-Log grade in Final Cut</h2>
+      <div class="gp-fcp">
+        {fcp.map((s) => (
+          <article class="gp-card">
+            <span class="gp-fcp-n">{s.n}</span>
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <div class="gp-end lb-reveal">
+      <SpectrumRule />
+      <div class="gp-end-in">
+        <div>
+          <span class="lb-label lb-label--sky">Meenemen op pad?</span>
+          <h2 class="lb-display-m">Download de gids als PDF</h2>
+          <p class="lb-lead">Acht pagina's A4 — dezelfde inhoud, print-klaar voor in je cameratas.</p>
+        </div>
+        <a class="lb-btn" href="/downloads/lichtbreking-gids-pocket-4.pdf" download>Download PDF ↓</a>
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .gp-page { padding-top: 130px; padding-bottom: 96px; }
+  .gp-head { max-width: 70ch; margin-bottom: 40px; }
+  .gp-head h1 { margin: 12px 0 18px; }
+  .gp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  .gp-sec { margin-top: clamp(48px, 7vw, 88px); max-width: 900px; }
+  .gp-sec-head { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+  .gp-intro { max-width: 62ch; margin: 12px 0 22px; }
+  .gp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .gp-card { background: var(--lb-surface); border: 1px solid var(--lb-line); border-radius: var(--lb-r-md); padding: 20px 22px; }
+  .gp-card p { color: var(--lb-mist); font-size: var(--lb-small); line-height: 1.6; margin-top: 8px; }
+  .gp-card h3 { margin: 8px 0 4px; font-size: 17px; font-weight: 500; letter-spacing: 0; }
+  .gp-card--warn { border-color: color-mix(in srgb, var(--lb-red) 55%, transparent); }
+  .gp-warn-label { color: var(--lb-red-ink); }
+  .gp-card-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .gp-num { font-family: var(--lb-font-mono); font-size: 11px; color: var(--lb-mist); }
+  .gp-card-v { font-family: var(--lb-font-display); font-weight: 500; font-size: 22px; letter-spacing: -.02em; margin-top: 10px; }
+  .gp-grp { margin-top: 18px; }
+  .gp-grp > .lb-label { display: block; margin-bottom: 6px; }
+  .gp-row { display: grid; grid-template-columns: 150px 200px 1fr; gap: 20px; padding: 12px 0; border-top: 1px solid var(--lb-line); align-items: baseline; }
+  .gp-k { font-weight: 600; font-size: 15px; }
+  .gp-v { font-family: var(--lb-font-mono); font-size: 13px; color: var(--lb-sky); }
+  .gp-w { color: var(--lb-mist); font-size: var(--lb-small); line-height: 1.6; }
+  .gp-note { margin-top: 14px; color: var(--lb-mist); font-size: 13px; line-height: 1.6; }
+  .gp-note b { color: var(--lb-bone); font-weight: 600; }
+  .gp-table { border-top: 1px solid var(--lb-line); }
+  .gp-tr { display: grid; grid-template-columns: 1.4fr .8fr .6fr .9fr .9fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--lb-line); align-items: baseline; }
+  .gp-th span { font-family: var(--lb-font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--lb-mist); }
+  .gp-ts { font-weight: 600; font-size: 14px; }
+  .gp-tv { font-family: var(--lb-font-mono); font-size: 12px; color: var(--lb-sky); }
+  .gp-tm { font-family: var(--lb-font-mono); font-size: 12px; color: var(--lb-mist); }
+  .gp-fcp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .gp-fcp-n { font-family: var(--lb-font-mono); font-size: 20px; color: var(--lb-sky); }
+  .gp-end { margin-top: clamp(56px, 8vw, 96px); max-width: 900px; }
+  .gp-end-in { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 30px; }
+  .gp-end-in h2 { margin: 8px 0 10px; }
+  @media (max-width: 760px) {
+    .gp-cards, .gp-fcp { grid-template-columns: 1fr; }
+    .gp-row { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+    .gp-tr { grid-template-columns: 1.2fr .9fr .9fr; }
+    .gp-tr span:nth-child(3), .gp-th span:nth-child(3) { display: none; }
+    .gp-tr span:nth-child(5), .gp-th span:nth-child(5) { display: none; }
+  }
+</style>
