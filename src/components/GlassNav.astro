@@ -82,7 +82,7 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
   /* refractie: spectrum-prisma rand (licht breekt in het glas) */
   .lb-nav::after {
     content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
-    background: linear-gradient(90deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
+    background: var(--lb-spectrum);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
     opacity: .6; pointer-events: none;
@@ -134,7 +134,7 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
     background: var(--lb-surface); border-radius: 16px; padding: 6px; box-shadow: 0 20px 54px rgba(0,0,0,.42), inset 0 1px 0 var(--lb-glass-hi);
     display: flex; flex-direction: column; gap: 2px; opacity: 0; pointer-events: none; transition: opacity .22s var(--lb-ease), transform .22s var(--lb-ease); }
   /* spectrum-refractierand op het paneel */
-  .lb-nav__menu::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .55; pointer-events: none; }
+  .lb-nav__menu::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px; background: var(--lb-spectrum-135); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .55; pointer-events: none; }
   /* onzichtbare brug zodat hover niet wegvalt over de tussenruimte */
   .lb-nav__menu::before { content: ""; position: absolute; top: -22px; left: 0; right: 0; height: 22px; }
   .lb-nav__drop:hover .lb-nav__menu, .lb-nav__drop:focus-within .lb-nav__menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }

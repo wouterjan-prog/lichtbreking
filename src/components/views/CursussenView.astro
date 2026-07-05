@@ -68,7 +68,7 @@ const courses = [
   .page-head h1 { margin: 10px 0 18px; }
   .courses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .course { position: relative; display: flex; flex-direction: column; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); border-radius: var(--lb-r-lg); overflow: hidden; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 16px 44px rgba(0,0,0,.28); transition: transform var(--lb-dur) var(--lb-ease); }
-  .course::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; z-index: 2; }
+  .course::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: var(--lb-spectrum-135); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; z-index: 2; }
   .course:hover { transform: translateY(-3px); }
   .course.soon { opacity: .72; pointer-events: none; }
   .course__img { aspect-ratio: 16 / 10; border-radius: 0; }

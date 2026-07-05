@@ -17,7 +17,7 @@ const coord = (ll) => `${ll[0].toFixed(4)}, ${ll[1].toFixed(4)}`;
 <title>Curaçao — veldkaart (A4 / PDF)</title>
 <meta name="robots" content="noindex" />
 <style is:global>
-  :root{ --ink:#13171c; --mut:#5c636b; --line:#d9dde2; --gold:#9a6b12; --spectrum:linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
+  :root{ --ink:#13171c; --mut:#5c636b; --line:#d9dde2; --gold:#9a6b12; --spectrum:var(--lb-spectrum-135);
     --mono:ui-monospace,"SF Mono",Menlo,monospace; --text:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
   *{ box-sizing:border-box }
   body{ margin:0; background:#e9ebee; color:var(--ink); font-family:var(--text); line-height:1.45; }

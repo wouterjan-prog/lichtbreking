@@ -131,7 +131,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%);
   border-radius: 20px; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 18px 50px rgba(0,0,0,.30); }
 .lb-glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
-  background: linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
+  background: var(--lb-spectrum-135);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude; opacity: .5; pointer-events: none; }
 

@@ -14,7 +14,7 @@ const U = (id, w = 1000) => `https://images.unsplash.com/photo-${id}?w=${w}&q=74
   :root{
     --night:#08080A; --ink:#0c1116; --bone:#F4F1EA; --mist:#AEB0B6; --gold:#E7C98F;
     --green:#46C95F; --orange:#FF9A2E; --red:#FF6B5E; --violet:#9B4DDB; --teal:#2FB8C4;
-    --spectrum:linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB);
+    --spectrum:var(--lb-spectrum-135);
     --mono:ui-monospace,"SF Mono",Menlo,monospace;
     --text:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }

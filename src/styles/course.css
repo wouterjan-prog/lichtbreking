@@ -13,7 +13,7 @@
 .course-body>:first-child{margin-top:0}
 .course-body a{color:var(--lb-sky)}
 
-.course-body .hero-eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:#f0c08a;margin-bottom:1.8rem}
+.course-body .hero-eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lb-amber-ink);margin-bottom:1.8rem}
 .course-body .hero-sub{margin-top:1.8rem;max-width:52ch;font-size:clamp(1.05rem,2.2vw,1.3rem);color:#dfe6e3}
 .course-body .hero-meta{margin-top:3rem;display:flex;flex-wrap:wrap;gap:1.8rem 3rem;font-family:var(--mono);font-size:.8rem;letter-spacing:.07em;color:#a8bdbf;text-transform:uppercase}
 .course-body .hero-meta b{color:#fff;font-weight:400;display:block;margin-top:.4rem;letter-spacing:.02em;font-size:.95rem}
@@ -156,12 +156,12 @@
 }
 .course-body .sg{background:#11161c;padding:.85rem 1rem;text-align:center}
 .course-body .sg-l{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#6f7d8c;margin-bottom:.3rem}
-.course-body .sg-v{font-family:var(--mono);font-size:1.05rem;color:#f0c08a;font-weight:700}
+.course-body .sg-v{font-family:var(--mono);font-size:1.05rem;color:var(--lb-amber-ink);font-weight:700}
 .course-body .screen-foot{padding:.6rem 1rem;background:#0c1116;border-top:1px solid #232c38;font-family:var(--mono);font-size:.7rem;color:#7a8694;text-align:center}
 .course-body .cap{font-size:.85rem;color:var(--ink-dim);font-style:italic;margin:.2rem 0 1.4rem;max-width:60ch}
-.course-body .recap{background:linear-gradient(135deg,#143b43,#0f2c33);border-radius:14px;padding:1.5rem 1.7rem;margin:2.4rem 0 1rem;color:#eef7f9}
+.course-body .recap{background:linear-gradient(135deg,var(--lb-teal-surface),#0f2c33);border-radius:14px;padding:1.5rem 1.7rem;margin:2.4rem 0 1rem;color:#eef7f9}
 .course-body .recap *{color:#eef7f9 !important}
-.course-body .recap .recap-h{font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#7fd8e6 !important;font-weight:700;margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+.course-body .recap .recap-h{font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lb-cyan-ink) !important;font-weight:700;margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
 .course-body .recap ul{list-style:none;margin:0;padding:0}
 .course-body .recap li{padding:.4rem 0 .4rem 1.9rem;position:relative;font-size:1rem;line-height:1.5;border-bottom:1px solid rgba(127,216,230,.14)}
 .course-body .recap li:last-child{border-bottom:none}
@@ -179,7 +179,7 @@
 .course-body .tnode{display:flex;flex-direction:column;align-items:center;gap:.35rem}
 .course-body .tbox{background:var(--paper);border:1.5px solid var(--line);border-radius:9px;padding:.6rem 1rem;font-size:.94rem;text-align:center;max-width:340px}
 .course-body .tbox.q{border-color:var(--teal);color:var(--teal-deep);font-weight:600}
-.course-body .tbox.a{background:#143b43;color:#eef7f9;border-color:var(--teal-deep);font-family:var(--mono);font-size:.88rem}
+.course-body .tbox.a{background:var(--lb-teal-surface);color:#eef7f9;border-color:var(--teal-deep);font-family:var(--mono);font-size:.88rem}
 .course-body .tbox.r{background:var(--rust);color:#fff;border-color:var(--rust);font-weight:700}
 .course-body .tarrow{color:var(--ink-dim);font-size:1.1rem;line-height:1}
 .course-body .tbranch{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;width:100%}
@@ -216,8 +216,8 @@
 .course-body .lb-printbtn--ghost:hover{border-color:var(--lb-bone)}
 .course-body .protip{background:rgba(255,154,46,.10);border-left:4px solid var(--rust);border-radius:0 9px 9px 0;padding:1rem 1.3rem;margin:1.3rem 0}
 .course-body .protip .pt-h{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust-deep);font-weight:700;margin-bottom:.35rem}
-.course-body .chap-hero{background:linear-gradient(135deg,#0f2c33,#143b43);border-radius:16px;padding:2.4rem 2rem;margin:1.6rem 0 2rem;color:#eef7f9}
-.course-body .chap-hero .ch-kicker{font-family:var(--mono);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:#7fd8e6;font-weight:700;margin-bottom:.7rem}
+.course-body .chap-hero{background:linear-gradient(135deg,#0f2c33,var(--lb-teal-surface));border-radius:16px;padding:2.4rem 2rem;margin:1.6rem 0 2rem;color:#eef7f9}
+.course-body .chap-hero .ch-kicker{font-family:var(--mono);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lb-cyan-ink);font-weight:700;margin-bottom:.7rem}
 .course-body .chap-hero h3{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:400;color:#fff;margin-bottom:.7rem;border:none;padding:0}
 .course-body .chap-hero p{color:#cfe6ea;max-width:62ch;margin:0}
 .course-body .dayblock{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.4rem 1.6rem;margin:1.2rem 0;break-inside:avoid}
@@ -235,7 +235,7 @@
 .course-body .shot-photo .ph-frame.empty::before{content:"";position:absolute;inset:0;background:
     repeating-linear-gradient(45deg,rgba(127,216,230,.06) 0 12px,transparent 12px 24px)}
 .course-body .shot-photo .ph-frame .ph-tag{position:relative;z-index:2;font-family:var(--mono);font-size:.8rem;letter-spacing:.06em;color:#9fc7ce;text-align:center;padding:1.2rem;max-width:80%;line-height:1.5}
-.course-body .shot-photo .ph-frame .ph-tag b{display:block;color:#7fd8e6;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
+.course-body .shot-photo .ph-frame .ph-tag b{display:block;color:var(--lb-cyan-ink);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
 .course-body .shot-photo figcaption{padding:.7rem 1rem;font-size:.88rem;color:var(--ink-soft);background:var(--card);border-top:1px solid var(--line-soft);display:flex;gap:.6rem;align-items:baseline}
 .course-body .shot-photo figcaption .cap-k{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rust-deep);font-weight:700;white-space:nowrap}
 .course-body .photo-duo{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0}
@@ -386,7 +386,7 @@
 .lb-comp__fb.hit{ color:var(--lb-green-ink); }
 .lb-quiz{ position:relative; background:var(--lb-glass-card-bg); -webkit-backdrop-filter:blur(16px) saturate(170%); backdrop-filter:blur(16px) saturate(170%); border-radius:16px; padding:1.3rem 1.4rem; margin:2.2rem 0 0; box-shadow:inset 0 1px 0 var(--lb-glass-hi), 0 12px 34px rgba(0,0,0,.22); }
 /* spectrum-refractierand op de glas-blokken */
-.lb-kort::after,.lb-todo::after,.lb-quiz::after{ content:""; position:absolute; inset:0; border-radius:inherit; padding:1.3px; background:linear-gradient(135deg,#FF5147,#FF9A2E,#FFD23E,#46C95F,#2FB8C4,#2F7CF0,#9B4DDB); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:.4; pointer-events:none; }
+.lb-kort::after,.lb-todo::after,.lb-quiz::after{ content:""; position:absolute; inset:0; border-radius:inherit; padding:1.3px; background:var(--lb-spectrum-135); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:.4; pointer-events:none; }
 .lb-kort>*,.lb-todo>*,.lb-quiz>*{ position:relative; z-index:1; }
 .lb-quiz__lbl{ display:block; font-family:var(--lb-font-mono); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--lb-sky); margin-bottom:1rem; }
 .lb-quiz__q{ margin-bottom:1.3rem; }
@@ -396,7 +396,7 @@
 .lb-quiz__opt:hover:not(:disabled){ border-color:var(--lb-sky); }
 .lb-quiz__opt:disabled{ cursor:default; }
 .lb-quiz__opt.good{ border-color:#5ED88f; background:rgba(94,216,143,.12); color:var(--lb-green-ink); }
-.lb-quiz__opt.bad{ border-color:#e0584d; background:rgba(224,88,77,.12); }
+.lb-quiz__opt.bad{ border-color:var(--lb-red-soft); background:rgba(224,88,77,.12); }
 .lb-quiz__fb{ font-size:.86rem; color:var(--lb-mist); margin-top:.45rem; display:none; }
 .lb-quiz__fb.show{ display:block; }
 .lb-quiz__done{ display:none; margin-top:1.1rem; padding:.7rem .9rem; border-radius:10px; background:rgba(94,216,143,.1); border:1px solid rgba(94,216,143,.3); color:var(--lb-green-ink); font-size:.92rem; }
