@@ -108,7 +108,7 @@
 .course-body .sheet-head{display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem;padding-bottom:.8rem;border-bottom:2px solid var(--line)}
 .course-body .sheet-badge{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--teal);padding:.3rem .7rem;border-radius:6px;white-space:nowrap}
 .course-body .sheet.moves .sheet-badge{background:var(--rust)}
-.course-body .sheet.emerg .sheet-badge{background:#b03a3a}
+.course-body .sheet.emerg .sheet-badge{background:var(--lb-red-soft)}
 .course-body .sheet-head h4{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--ink);margin:0;border:none;padding:0;letter-spacing:0;text-transform:none}
 .course-body .crow{display:grid;grid-template-columns:minmax(120px,1fr) 2.3fr;gap:.4rem 1rem;padding:.5rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
 .course-body .crow:last-child{border-bottom:none}
@@ -147,7 +147,7 @@
 .course-body .screen-top{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:#0c1116;border-bottom:1px solid #232c38;font-family:var(--mono);font-size:.78rem}
 .course-body .screen-tab{color:#7a8694;padding:.15rem .6rem;border-radius:4px}
 .course-body .screen-tab.active{color:#fff;background:#1f6f7a}
-.course-body .screen-rec{color:#e8674f;font-weight:700;margin-left:auto;letter-spacing:.05em}
+.course-body .screen-rec{color:var(--lb-red-ink);font-weight:700;margin-left:auto;letter-spacing:.05em}
 .course-body .screen-rec.photo-ico{color:#8fd4e0}
 .course-body .screen-batt{color:#9fb3a8;font-size:.72rem}
 .course-body .screen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#232c38}
