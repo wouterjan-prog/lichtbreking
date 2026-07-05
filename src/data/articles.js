@@ -108,7 +108,7 @@ const baseArticles = [
 
 <h2>Snelle waarden om te onthouden</h2>
 <p><strong>DJI Mini 5 Pro (drone):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast · kleurprofiel Normal of D-Log M · scherpte −1 · ruis 0 · ND volgens licht.</p>
-<p><strong>DJI Osmo Pocket 4 (handheld):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast (3200 K binnen) · Normal of D-Log · scherpte −1 · gimbal aan · ND buiten bij zon.</p>
+<p><strong>DJI Osmo Pocket 4 (handheld):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 (Normal) of 400 (basis in D-Log) · witbalans 5500 K vast (3200 K binnen) · Normal of D-Log · scherpte −1 · gimbal aan · ND buiten bij zon.</p>
 
 <div class="callout tip"><div class="c-label">Onthoud dit</div><p>Zet vóór elke shoot bewust vier dingen vast: sluiter (1/50), ISO (100), witbalans (5500 K) en je ND. Die vier samen bepalen 90% van de "filmische" look — de rest is licht en beweging.</p></div>
 
