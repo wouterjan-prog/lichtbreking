@@ -1,0 +1,91 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GlassNav from '../../../components/GlassNav.astro';
+import Footer from '../../../components/Footer.astro';
+import SpectrumRule from '../../../components/SpectrumRule.astro';
+import ProCheatsheet from '../../../components/ProCheatsheet.astro';
+
+const situaties = [
+  { s: 'Swimming pool', r: 'Underwater WB or ~5500 K · no filter · 4K/60 for slow-mo · RockSteady on.' },
+  { s: 'Sea & snorkelling (0–5 m)', r: 'Underwater white balance · get in close · sun behind you · no filter needed.' },
+  { s: 'Diving (up to ~15 m)', r: 'Underwater WB + Dive mode · ISO low · aperture open (f/2.0) · D-Log M for colour headroom.' },
+  { s: 'Deeper / caves / night', r: 'White balance stops working → video light (WB set to the light\'s colour), or D-Log M and correct in the grade.' },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org', '@type': 'TechArticle',
+  headline: 'DJI Osmo Action 6 — action & underwater settings',
+  inLanguage: 'en-GB', url: 'https://www.lichtbreking.nl/en/gids/action-6/',
+};
+---
+<Base
+  title="DJI Osmo Action 6: action & underwater settings — the guide"
+  description="The complete settings for the Osmo Action 6, above and below water. Cheat sheet, the variable aperture, Dive mode and underwater white balance — filterless — plus recipes for every situation."
+  path="/gids/action-6/" image="/img/og-actiefilmer.png"
+  lang="en" hasEn={true}
+  jsonld={jsonld}>
+  <GlassNav active="" lang="en" hasEn={true} switchHref="/gids/action-6/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container a6-page">
+    <header class="a6-head lb-reveal">
+      <span class="lb-label lb-label--sky">Guide · DJI Osmo Action 6</span>
+      <h1 class="lb-display-l">Action 6: above &amp; below water</h1>
+      <p class="lb-lead">The complete settings for the Osmo Action 6 — with the variable aperture, Dive mode and underwater white balance. Below water I work <strong>filterless</strong>: the camera restores the colour itself.</p>
+      <div class="a6-cta">
+        <a href="/en/cursus/actiefilmer/" class="lb-btn">To the course The Action Filmmaker →</a>
+        <a href="/en/artikelen/onderwater-action-instellingen/" class="lb-btn lb-btn--ghost">Underwater article</a>
+      </div>
+      <div class="a6-rule"><SpectrumRule width="160px" thickness={3} /></div>
+    </header>
+
+    <section class="a6-cheat lb-reveal">
+      <span class="lb-label lb-label--sky">Cheat sheet</span>
+      <h2 class="lb-display-m">Every setting at a glance</h2>
+      <p class="lb-lead">The same values as in the course and on the gear page — with the why behind each setting.</p>
+      <ProCheatsheet cams={['action']} lang="en" />
+    </section>
+
+    <section class="a6-block lb-reveal">
+      <span class="lb-label lb-label--sky">Below water</span>
+      <h2 class="lb-display-m">Colour back — without a colour filter</h2>
+      <p class="lb-lead">Water swallows red first, then orange and yellow. The Action 6 corrects this itself with a dedicated white balance sensor: switch on the underwater white balance (Dive mode) and the colours return — no red or magenta filter needed, and you lose no light.</p>
+      <div class="a6-note">
+        <strong>The limit of white balance.</strong> In the shallows (swimming pool, snorkelling, up to ~10–15 m) the underwater white balance does an excellent job. Deeper down there is too little red light left to balance back: reach for a video light (white balance set to the light's colour), or film in D-Log M and pull the last of the colour back in the grade.
+      </div>
+    </section>
+
+    <section class="a6-block lb-reveal">
+      <span class="lb-label lb-label--sky">Recipes</span>
+      <h2 class="lb-display-m">By situation</h2>
+      <div class="a6-sit">
+        {situaties.map((x) => (
+          <div class="a6-sitrow">
+            <span class="a6-sitk">{x.s}</span>
+            <span class="a6-sitv">{x.r}</span>
+          </div>
+        ))}
+      </div>
+      <p class="a6-fine">Rules of thumb throughout: get in close, lock everything manually, sun behind you, move slowly, and rinse with fresh water afterwards + check the O-ring.</p>
+    </section>
+  </main>
+  <Footer lang="en" />
+</Base>
+
+<style is:global>
+  .a6-page { padding-top: 130px; padding-bottom: 96px; }
+  .a6-head { max-width: 64ch; margin-bottom: 20px; }
+  .a6-head h1 { margin: 10px 0 16px; }
+  .a6-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  .a6-rule { margin-top: 26px; }
+  .a6-cheat { margin-top: 40px; }
+  .a6-cheat h2, .a6-block h2 { margin: 8px 0 10px; }
+  .a6-cheat .lb-lead, .a6-block .lb-lead { margin-bottom: 22px; }
+  .a6-block { margin-top: 52px; max-width: 760px; }
+  .a6-note { padding: 16px 18px; border-left: 3px solid var(--lb-sky); border-radius: 0 12px 12px 0; background: var(--lb-glass-card-bg); color: var(--lb-bone); line-height: 1.6; }
+  .a6-sit { display: flex; flex-direction: column; gap: 10px; }
+  .a6-sitrow { display: grid; grid-template-columns: 220px 1fr; gap: 16px; padding: 14px 16px; border-radius: 12px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); }
+  @media (max-width: 640px) { .a6-sitrow { grid-template-columns: 1fr; gap: 4px; } }
+  .a6-sitk { font-weight: 600; color: var(--lb-bone); }
+  .a6-sitv { color: var(--lb-mist); font-size: .96rem; line-height: 1.55; }
+  .a6-fine { margin-top: 16px; color: var(--lb-mist); font-size: .9rem; }
+</style>

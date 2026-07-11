@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../../components/GlassNav.astro';
+import Footer from '../../components/Footer.astro';
+
+/* Categorieën: new (oranje) · imp (groen, verbeterd) · tool (blauw) */
+const TAGS = { new: 'New', imp: 'Improved', tool: 'Tool' };
+
+const entries = [
+  { month: 'June 2026', date: '28 June', tag: 'new', title: 'Local guide: drone flying around Heerde & the Veluwe',
+    body: 'An honest guide to drone flying around Heerde, the Veluwe and the IJssel — with a precise map and filters that show where it is allowed (open farmland, canal) and where it is not (Natura 2000), plus an A4 print field card.',
+    link: ['View the Heerde guide →', '/en/heerde/'] },
+  { month: 'June 2026', date: '28 June', tag: 'tool', title: 'New calculators & specialist articles',
+    body: 'Two new calculators on the tools page (safe flight time based on battery/wind, and altitude→frame width for 4K), plus three new articles: all Pro settings explained, the drone rules in the Netherlands & the EU, and which drone & accessories you really need.',
+    link: ['Go to the tools →', '/en/gereedschap/'] },
+  { month: 'June 2026', date: '28 June', tag: 'new', title: 'Curaçao guide with a precise map',
+    body: 'A complete guide to drone flying and filming on Curaçao: 30+ spots on a real map with GPS markers and filters, no-fly zones, the right ND and Pro settings, the best moves and separate Pocket 4 spots for filming from the ground.',
+    link: ['View the guide →', '/en/curacao/'] },
+  { month: 'June 2026', date: '27 June', tag: 'tool', title: 'Weather in the golden hour planner',
+    body: 'For each light window you now see the forecast wind, gusts, wind direction, cloud cover, chance of rain and temperature — with a go/no-go verdict for the DJI Mini 5 Pro, right inside every window card.',
+    link: ['Open the planner →', '/en/gouden-uur/'] },
+  { month: 'June 2026', date: '26 June', tag: 'tool', title: 'Golden hour planner — worldwide',
+    body: 'Search any place in the world and see sunrise/sunset, golden and blue hour in the right time zone. Plan your shoot for the finest light, wherever you are.',
+    link: ['Open the planner →', '/en/gouden-uur/'] },
+  { month: 'June 2026', date: '25 June', tag: 'new', title: 'Tools page',
+    body: 'An ND filter calculator (shutter angle 180°/90°/360°), a wind go/no-go checker and a pre-flight checklist that remembers your ticks — quick and practical for on the go.',
+    link: ['View the tools →', '/en/gereedschap/'] },
+  { month: 'June 2026', date: '24 June', tag: 'imp', title: 'New ‘liquid glass’ design',
+    body: 'The whole site received a frosted-glass look with spectrum edges and a soft glow — plus faster rendering. Light and dark modes have been checked everywhere for readability.',
+    link: null },
+  { month: 'June 2026', date: '22 June', tag: 'new', title: 'Free field cards (PDF)',
+    body: 'Download the field cards from both courses as handy A4 PDFs to take along or print — settings, shot recipes and checklists in your pocket.',
+    link: ['Go to the courses →', '/en/cursussen/'] },
+  { month: 'Earlier', date: 'May 2026', tag: 'imp', title: 'Interactive lessons & knowledge checks',
+    body: 'For each module an ‘In brief’, a ‘Do this now’ action card, an exposure simulator, drone hotspots and a knowledge check with progress and a diploma.',
+    link: null },
+  { month: 'Earlier', date: 'May 2026', tag: 'new', title: 'Two free courses',
+    body: 'The Flight Filmmaker (DJI Mini 5 Pro) and The Ground Filmmaker (Osmo Pocket 4) — from first start-up to a fully edited cinematic film.',
+    link: ['Go to the courses →', '/en/cursussen/'] },
+];
+
+// groepeer op maand, volgorde behouden
+const months = [];
+for (const e of entries) {
+  let g = months.find((m) => m.h === e.month);
+  if (!g) { g = { h: e.month, items: [] }; months.push(g); }
+  g.items.push(e);
+}
+---
+<Base title="What's new" description="The logbook of lichtbreking.nl — new lessons, free tools and improvements. This site grows in the open." path="/wat-is-nieuw/" lang="en" hasEn={true}>
+  <GlassNav active="nieuw" switchHref="/wat-is-nieuw/" lang="en" hasEn={true} />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container wn-page">
+    <header class="wn-head lb-reveal">
+      <span class="lb-label lb-label--sky">Logbook</span>
+      <h1 class="lb-display-l">What's new</h1>
+      <p class="lb-lead">This site grows in the open. Here you can see what has recently been added or improved — from new lessons to free tools.</p>
+      <p class="wn-sub lb-muted">Follow along on <a href="https://www.instagram.com/lichtbreking/" target="_blank" rel="noopener">Instagram&nbsp;@lichtbreking</a> for updates in between.</p>
+    </header>
+
+    {months.map((m) => (
+      <section class="wn-month-block">
+        <h2 class="wn-month">{m.h}</h2>
+        <div class="wn-feed">
+          {m.items.map((e) => (
+            <article class:list={["wn-entry lb-reveal", e.tag]}>
+              <div class="wn-card">
+                <div class="wn-meta">
+                  <span class="wn-date">{e.date}</span>
+                  <span class:list={["wn-tag", e.tag]}>{TAGS[e.tag]}</span>
+                </div>
+                <h3 class="wn-title">{e.title}</h3>
+                <p class="wn-body">{e.body}</p>
+                {e.link && <a class="wn-go" href={e.link[1]}>{e.link[0]}</a>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <p class="wn-fine lb-muted lb-reveal">Missing something or have a wish? <a href="/en/contact/">Let me know</a> — I build this site out step by step.</p>
+  </main>
+  <Footer lang="en" />
+</Base>
+
+<style>
+  .wn-page { padding-top: 130px; padding-bottom: 96px; max-width: 820px; }
+  .wn-head { margin-bottom: 40px; }
+  .wn-head h1 { margin: 10px 0 16px; }
+  .wn-sub { margin: 14px 0 0; font-size: var(--lb-small); }
+  .wn-sub a { color: var(--lb-sky); }
+  .wn-month { font-family: var(--lb-font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--lb-mist); margin: 0 0 16px; opacity: .8; }
+  .wn-month-block + .wn-month-block .wn-month { margin-top: 36px; }
+
+  .wn-feed { position: relative; margin-left: 7px; padding-left: 34px; }
+  .wn-feed::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: linear-gradient(180deg,#FF9A2E,#46C95F,#2F7CF0,#9B4DDB); opacity: .5; }
+  .wn-entry { position: relative; margin-bottom: 16px; }
+  .wn-entry::before { content: ""; position: absolute; left: -34px; top: 22px; width: 12px; height: 12px; border-radius: 50%; background: var(--lb-night); border: 2px solid var(--lb-orange-ink); box-shadow: 0 0 0 4px var(--lb-night); }
+  .wn-entry.imp::before { border-color: var(--lb-green-ink); }
+  .wn-entry.tool::before { border-color: var(--lb-sky); }
+
+  .wn-card { position: relative; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); border-radius: 16px; padding: 18px 20px; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 14px 40px rgba(0,0,0,.24); }
+  .wn-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px; background: var(--lb-spectrum-135); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .34; pointer-events: none; }
+  .wn-card > * { position: relative; z-index: 1; }
+  .wn-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .wn-date { font-family: var(--lb-font-mono); font-size: .72rem; letter-spacing: .04em; color: var(--lb-mist); }
+  .wn-tag { font-family: var(--lb-font-mono); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .wn-tag.new { color: var(--lb-orange-ink); background: rgba(255,154,46,.14); }
+  .wn-tag.imp { color: var(--lb-green-ink); background: rgba(70,201,95,.14); }
+  .wn-tag.tool { color: var(--lb-sky); background: rgba(47,124,240,.16); }
+  .wn-title { font-size: 1.15rem; margin: 2px 0 6px; }
+  .wn-body { color: var(--lb-mist); font-size: var(--lb-small); margin: 0; }
+  .wn-go { display: inline-block; margin-top: 10px; color: var(--lb-sky); font-size: var(--lb-small); transition: opacity .2s var(--lb-ease); }
+  .wn-go:hover { opacity: .8; }
+  .wn-fine { margin-top: 36px; font-size: var(--lb-small); }
+  .wn-fine a { color: var(--lb-sky); }
+  @media (max-width: 560px) { .wn-feed { padding-left: 26px; } .wn-entry::before { left: -26px; } }
+</style>

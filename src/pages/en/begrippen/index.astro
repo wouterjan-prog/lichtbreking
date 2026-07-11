@@ -1,0 +1,151 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GlassNav from '../../../components/GlassNav.astro';
+import Footer from '../../../components/Footer.astro';
+
+// t = term, d = definition (one sentence), link = optional [label, href]
+const groups = [
+  {
+    cat: 'Exposure & camera',
+    terms: [
+      { t: 'Shutter speed', d: 'How long the sensor gathers light per frame. For film you keep to 1/50 s for natural movement.' },
+      { t: 'ISO', d: 'The light sensitivity of the sensor. Low (100) = clean image; high = brighter but noisier. Keep it as low as possible.' },
+      { t: 'Aperture (f-number)', d: 'The opening of the lens that determines how much light comes in and how much is sharp. Fixed on the Mini and Pocket.' },
+      { t: 'Exposure (EV)', d: 'The overall brightness of your image. A touch of underexposure (−0.3 EV) protects your highlights.' },
+      { t: '180° shutter rule', d: 'The rule of thumb that your shutter speed is roughly 2× your frame rate (25 fps → 1/50 s). Gives cinematic motion blur.', link: ['Read more', '/en/artikelen/pro-instellingen-uitgelegd/'] },
+      { t: 'ND filter', d: 'A grey filter that holds back light, so that in bright conditions you can still stay at 1/50 s. A "pair of sunglasses" for your camera.', link: ['ND calculator', '/en/gereedschap/'] },
+      { t: 'Dynamic range', d: 'How much detail your camera holds at once in the brightest and darkest parts. Log profiles increase this.' },
+      { t: 'Histogram', d: 'A little graph from light to dark that shows whether your image is well exposed (not too much "against the edges").' },
+    ],
+  },
+  {
+    cat: 'Colour',
+    terms: [
+      { t: 'White balance (Kelvin)', d: 'The colour temperature of light, in Kelvin. Set it manually (~5500 K) so the colour does not shift during a shot.' },
+      { t: 'Colour profile', d: 'How much contrast and colour the camera already bakes into the image — from ready-to-use (Normal) to flat (log).', link: ['Profiles explained', '/en/artikelen/kleurprofielen-uitgelegd/'] },
+      { t: 'Normal', d: 'The standard profile: a lovely, immediately usable image without any post-processing.' },
+      { t: 'D-Log M / D-Log', d: 'DJI’s flat log profiles. The Mini 5 Pro has D-Log M, the Pocket 4 true D-Log. They retain more detail, but you have to grade them.' },
+      { t: 'HLG', d: 'A 10-bit profile (on the Mini 5 Pro) that looks great on HDR TVs without you having to grade it.' },
+      { t: 'LUT', d: 'A colour "preset" (look-up table) that converts your log footage in one step to a normal or stylistic look.' },
+      { t: 'Colour correction', d: 'Making your image technically correct: neutral white balance, good exposure. Comes before the creative look.' },
+      { t: 'Colour grading', d: 'Giving your image a feeling or style (warm, cool, cinematic). Comes after the correction.', link: ['The Colour Filmmaker', '/en/cursus/kleurfilmer/'] },
+      { t: 'Rec.709', d: 'The standard colour space for web and HD. You export in this so your film looks the same everywhere.' },
+      { t: 'Bit depth (8- / 10-bit)', d: 'How many colour tones your image contains. 10-bit gives many more tones and prevents banding in skies.' },
+    ],
+  },
+  {
+    cat: 'Movement & capture',
+    terms: [
+      { t: 'Frame rate (fps)', d: 'The number of images per second. 24/25 fps = cinema look; 50/60 fps lets you film to slow down later.', link: ['Choosing guide', '/en/artikelen/framerate-keuzehulp/'] },
+      { t: 'Slow motion', d: 'Slowed-down footage you create by filming at a high rate (50/60 fps) and playing it back on a 25 fps timeline.' },
+      { t: 'Gimbal', d: 'The motorised suspension system that keeps the camera stable — in the drone and in the Pocket 4.' },
+      { t: 'Cine mode', d: 'The slowest flight mode of the drone: soft, smooth movements for cinematic shots.' },
+      { t: 'Hyperlapse', d: 'A timelapse in which the camera also moves — a long recording, a short smooth clip.' },
+      { t: 'ActiveTrack / POI', d: 'Smart modes in which the camera automatically follows a subject (ActiveTrack) or circles around it (Point of Interest).' },
+      { t: 'Composition', d: 'How you fill the frame: rule of thirds, leading lines, depth and a level horizon.', link: ['Read more', '/en/artikelen/compositie-cinematisch/'] },
+    ],
+  },
+  {
+    cat: 'Editing & story',
+    terms: [
+      { t: 'B-roll', d: 'Loose atmosphere and detail shots that you lay over your main story. Always film more of it than you think you need.' },
+      { t: 'Establishing shot', d: 'A wide opening shot (often from the drone) that shows where you are.' },
+      { t: 'Sequence', d: 'A series of shots (wide → medium → detail) that together tell one moment or action.', link: ['Read more', '/en/artikelen/shots-naar-verhaal/'] },
+      { t: 'Cutting on the beat', d: 'Making your cuts coincide with the music — the simplest way to make an edit feel tight.' },
+      { t: 'Sound design', d: 'Building up sound: ambient sound, whooshes on transitions and music that softens at important moments.', link: ['Audio & music', '/en/artikelen/audio-muziek-cinematisch/'] },
+    ],
+  },
+  {
+    cat: 'Drone & rules',
+    terms: [
+      { t: 'EU drone certificate (A1/A3)', d: 'The online exam you need for a drone from 250 grams. Free to obtain from the government.', link: ['Drone rules', '/en/artikelen/drone-regels-nederland-eu/'] },
+      { t: 'RDW registration', d: 'Your compulsory registration as a drone operator; you stick your registration number on the drone.' },
+      { t: 'Natura 2000', d: 'Protected nature reserves (such as large parts of the Veluwe) where drone flying is forbidden.', link: ['Heerde & Veluwe', '/en/heerde/'] },
+      { t: 'Return-to-Home (RTH)', d: 'The function that automatically flies the drone back to the starting point — on low battery or signal loss.' },
+    ],
+  },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org', '@type': 'DefinedTermSet',
+  name: 'Film language for beginners — glossary', inLanguage: 'en-GB',
+  url: 'https://www.lichtbreking.nl/en/begrippen/',
+};
+---
+<Base
+  lang="en" hasEn={true}
+  title="Glossary — film language for beginners, explained in one sentence"
+  description="ISO, shutter speed, white balance, D-Log, LUT, frame rate, gimbal, B-roll and more — every drone and film term clearly explained in one sentence."
+  path="/begrippen/" image="/img/og-begrippen.png"
+  jsonld={jsonld}>
+  <GlassNav lang="en" hasEn={true} active="" switchHref="/begrippen/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container begrip-page">
+    <header class="begrip-head lb-reveal">
+      <span class="lb-label lb-label--sky">Film language for beginners</span>
+      <h1 class="lb-display-l">Glossary</h1>
+      <p class="lb-lead">Every drone and film term you come across on this site — briefly and clearly explained in one sentence. Search for a term or browse by category.</p>
+      <input type="search" id="begripSearch" class="begrip-search" placeholder="Search for a term — e.g. shutter speed, D-Log, frame rate…" aria-label="Search for a term" />
+    </header>
+
+    <div id="begripList">
+      {groups.map((g) => (
+        <section class="begrip-group" data-group>
+          <h2 class="begrip-cat lb-display-m">{g.cat}</h2>
+          <dl class="begrip-dl">
+            {g.terms.map((x) => (
+              <div class="begrip-item" data-term={`${x.t} ${x.d}`.toLowerCase()}>
+                <dt>{x.t}</dt>
+                <dd>{x.d}{x.link && <> <a href={x.link[1]} class="begrip-link">{x.link[0]} →</a></>}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+    </div>
+    <p class="begrip-empty lb-muted" id="begripEmpty" hidden>No term found — try a different term.</p>
+  </main>
+  <Footer lang="en" />
+</Base>
+
+<style is:global>
+  .begrip-page { padding-top: 130px; padding-bottom: 96px; }
+  .begrip-head { max-width: 64ch; margin-bottom: 30px; }
+  .begrip-head h1 { margin: 10px 0 16px; }
+  .begrip-search { width: 100%; max-width: 560px; margin-top: 22px; padding: 13px 18px; border-radius: 12px; border: 1px solid var(--lb-glass-border); background: var(--lb-glass-card-bg); color: var(--lb-bone); font-size: 1rem; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .begrip-search::placeholder { color: var(--lb-mist); }
+  .begrip-search:focus { outline: 2px solid var(--lb-sky); outline-offset: 1px; }
+  .begrip-group { margin-bottom: 40px; }
+  .begrip-cat { margin: 0 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--lb-line); }
+  .begrip-dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .begrip-dl { grid-template-columns: 1fr; } }
+  .begrip-item { padding: 16px 18px; border-radius: 12px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); }
+  .begrip-item dt { color: var(--lb-bone); font-weight: 600; margin-bottom: 5px; }
+  .begrip-item dd { color: var(--lb-mist); margin: 0; font-size: .94rem; line-height: 1.55; }
+  .begrip-link { color: var(--lb-sky); font-weight: 500; white-space: nowrap; }
+  .begrip-empty { margin-top: 20px; }
+</style>
+
+<script is:inline>
+  (function () {
+    var inp = document.getElementById('begripSearch');
+    if (!inp) return;
+    var items = [].slice.call(document.querySelectorAll('.begrip-item'));
+    var groups = [].slice.call(document.querySelectorAll('[data-group]'));
+    var empty = document.getElementById('begripEmpty');
+    inp.addEventListener('input', function () {
+      var q = inp.value.trim().toLowerCase();
+      var any = false;
+      items.forEach(function (el) {
+        var hit = !q || el.getAttribute('data-term').indexOf(q) !== -1;
+        el.style.display = hit ? '' : 'none';
+        if (hit) any = true;
+      });
+      groups.forEach(function (g) {
+        var vis = g.querySelectorAll('.begrip-item:not([style*="none"])').length;
+        g.style.display = vis ? '' : 'none';
+      });
+      if (empty) empty.hidden = any;
+    });
+  })();
+</script>

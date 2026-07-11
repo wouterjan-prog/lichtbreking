@@ -1,0 +1,63 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GlassNav from '../../../components/GlassNav.astro';
+import Footer from '../../../components/Footer.astro';
+
+const updated = '1 July 2026';
+---
+<Base
+  title="Privacy Statement"
+  description="How Lichtbreking handles your data: contact and privacy-friendly, cookieless visitor statistics."
+  path="/privacy/"
+  lang="en"
+  hasEn={true}>
+  <GlassNav active="" lang="en" hasEn={true} switchHref="/privacy/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container priv-page">
+    <header class="priv-head lb-reveal">
+      <span class="lb-label lb-label--sky">Privacy</span>
+      <h1 class="lb-display-l">Privacy Statement</h1>
+      <p class="lb-lead">Short and clear: which data I process, why, and what your rights are. Lichtbreking collects as little as possible and sells nothing.</p>
+      <p class="priv-upd lb-muted">Last updated: {updated}</p>
+    </header>
+
+    <article class="priv-body lb-reveal">
+      <h2>Who is responsible?</h2>
+      <p>This website (lichtbreking.nl) is a personal project by Lichtbreking. Questions about your data? Email <a href="mailto:hallo@lichtbreking.nl">hallo@lichtbreking.nl</a>.</p>
+
+      <h2>Which data do I process?</h2>
+      <p><strong>Contact.</strong> If you email me, I keep your message and email address for as long as needed to answer your question.</p>
+      <p><strong>Visitor statistics.</strong> I use privacy-friendly, anonymised statistics (via Vercel) to see which pages are visited. These place <strong>no cookies</strong> and cannot be traced back to you as a person.</p>
+
+      <h2>Cookies &amp; storage</h2>
+      <p>Lichtbreking uses <strong>no tracking or advertising cookies</strong>. Your preferences (such as light/dark theme and your progress in a course) are stored only in your own browser (localStorage) and never leave your device.</p>
+
+      <h2>Sharing with third parties</h2>
+      <p>I do not sell or rent your data. Data is only processed by the service that keeps this site running: the hosting and privacy-friendly statistics (Vercel).</p>
+
+      <h2>Retention period</h2>
+      <p>I do not keep data longer than necessary: email correspondence is kept until your question has been dealt with.</p>
+
+      <h2>Your rights</h2>
+      <p>You have the right to view, correct or delete your data. To do so, send an email to <a href="mailto:hallo@lichtbreking.nl">hallo@lichtbreking.nl</a>; I will arrange it as soon as possible. If you disagree with something, you can lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens).</p>
+
+      <h2>Changes</h2>
+      <p>This statement may change from time to time. The date at the top shows when I last updated it.</p>
+
+      <p class="priv-fine lb-muted">This page is intended as a clear explanation, not legal advice.</p>
+    </article>
+  </main>
+  <Footer lang="en" />
+</Base>
+
+<style is:global>
+  .priv-page { padding-top: 130px; padding-bottom: 96px; }
+  .priv-head { max-width: 64ch; margin-bottom: 30px; }
+  .priv-head h1 { margin: 10px 0 16px; }
+  .priv-upd { font-size: .88rem; margin-top: 8px; }
+  .priv-body { max-width: 68ch; }
+  .priv-body h2 { font-size: 1.25rem; color: var(--lb-bone); margin: 1.8rem 0 .5rem; }
+  .priv-body p { color: var(--lb-mist); line-height: 1.7; margin: 0 0 .8rem; }
+  .priv-body a { color: var(--lb-sky); text-decoration: underline; text-underline-offset: 2px; }
+  .priv-fine { font-size: .85rem; margin-top: 1.6rem; }
+</style>

@@ -1,0 +1,314 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GlassNav from '../../../components/GlassNav.astro';
+import Footer from '../../../components/Footer.astro';
+import SpectrumRule from '../../../components/SpectrumRule.astro';
+
+// All values checked against the Pocket 4 specs (2026 edition).
+// Note: D-Log only starts at base ISO 400 — 'ISO 100' does not exist in that profile.
+const basis = [
+  { k: 'Resolution', v: '4K · 16:9', why: 'Full use of the 1-inch sensor, with room to crop. You can zoom up to 4×, but 2× best preserves quality (1:1 sensor read-out).' },
+  { k: 'Frame rate', v: '25 fps', why: 'Choose 25 fps in the UK because of 50Hz artificial light; it looks all but identical to the classic 24 fps cinema look.' },
+  { k: 'Colour profile', v: '10-bit D-Log', why: 'True log (no more D-Log M): 14 stops of dynamic range and maximum colour information for the grade. A flat image during recording is exactly as it should be.' },
+  { k: 'Shutter speed', v: '1/50 s · 180° rule', why: 'Shutter = 2× the frame rate. Gives natural, cinematic motion blur. Lock it — automatic mode pumps visibly.' },
+  { k: 'ISO', v: '400 fixed — in D-Log', why: "D-Log only starts at base ISO 400 — 'ISO 100' does not exist in this profile. Above roughly 1600 noise becomes visible. In Normal: ISO 50–12800.", warn: true },
+  { k: 'ND filters', v: 'ND16 / 64 / 256', why: 'Indispensable in daylight: a fixed f/2.0 + base ISO 400 + 1/50 s is otherwise heavily overexposed. In full sun use ND256, overcast ND64, golden hour ND16.' },
+];
+
+// Organised as the PRO menu appears on the Pocket 4 screen.
+const proMenu = [
+  { h: 'Exposure', rows: [
+    { k: 'Mode', v: 'M (Manual)', why: 'Locks shutter and ISO. In Auto the exposure pumps; EV correction is then your only control.' },
+    { k: 'Shutter', v: '1/50 s', why: '180° rule. Too bright? Do not shorten the shutter — fit an ND filter instead.' },
+    { k: 'ISO', v: 'D-Log: 400 fixed · Normal: 50–12800', why: 'Base ISO in D-Log is 400 — you cannot go lower. Do not exceed roughly 1600 for the cleanest image.' },
+  ]},
+  { h: 'WB — white balance', rows: [
+    { k: 'WB', v: 'Manual · 5600K', why: 'Range 2000–10000K; 5600K = daylight. Locking it prevents colour shifts in the middle of a shot.' },
+  ]},
+  { h: 'Color', rows: [
+    { k: 'Colour profile', v: '10-bit D-Log', why: 'True log: 14 stops of dynamic range, maximum colour information for the grade.' },
+    { k: 'Film Tones', v: 'Off with D-Log', why: 'Six presets (including CC Film, NC Film, Movie, Retro) for a ready-to-use image without grading. Choose either a Film Tone or D-Log.' },
+  ]},
+  { h: 'Focus mode', rows: [
+    { k: 'Focus', v: 'AFC · continuous', why: 'Intelligent AutoFocus keeps the subject sharp. Fixed composition? Tap & hold to lock focus and exposure.' },
+  ]},
+  { h: 'Image adjustment', rows: [
+    { k: 'Sharpness', v: '−1', why: "Prevents the 'oversharpened' video look; gives more natural skin and detail." },
+    { k: 'Noise reduction', v: '−1 or 0', why: 'Internal noise reduction smears away fine detail; better to remove noise in a controlled way in post.' },
+  ]},
+];
+
+const gimbal = [
+  { k: 'Gimbal mode', v: 'Follow', why: 'Smooth follow movement — the standard for cinematic panning. Tilt Locked for a level horizon.' },
+  { k: 'Gimbal speed', v: 'Slow / Cinematic', why: 'A slower response = more cinematic pans. Set the joystick sensitivity low as well.' },
+  { k: '5D joystick', v: 'Manual gimbal', why: 'Smooth, measured pans and tilts; pressing it recentres the gimbal or flips the camera.' },
+  { k: 'ActiveTrack 7.0', v: 'On for the subject', why: 'Tracks people, vehicles, pets and objects — up to 4× zoom. The physical pan range of the gimbal remains the limit.' },
+  { k: 'Dynamic Framing', v: 'Rule of thirds', why: 'Place your subject compositionally with the joystick while tracking; Spotlight Follow keeps it central.' },
+  { k: 'Zoom', v: '2× · max 4×', why: '2× is all but lossless (1:1 read-out); 4× costs visible quality. Zooming in slowly looks cinematic.' },
+  { k: 'Timelapse', v: 'Interval 0.5s–1min', why: 'Recording duration from 5 minutes to 10 hours. Use a tripod and fixed exposure.' },
+];
+
+const bediening = [
+  { k: 'Zoom button', v: '1× / 2× / 4×', why: 'A dedicated button under the screen jumps between the zoom settings. Operate it slowly for the cinematic effect.' },
+  { k: 'Preset button', v: '→ Recording presets', why: 'Switch in a flash between your 25p cine preset and 60p slow-mo preset without diving into the menu.' },
+  { k: 'Rotate screen', v: 'Start recording', why: 'New: rotating the screen starts recording immediately. Rotate the grip for 9:16 portrait or underslung shots.' },
+  { k: 'Storage', v: '107 GB internal', why: 'Transfer at up to 800 MB/s via USB-C — a memory card is no longer needed, but remains handy as a buffer.' },
+  { k: 'Tap & hold', v: 'Lock focus/exposure', why: 'Locks focus and exposure — crucial with a fixed white balance and ISO.' },
+  { k: 'Internal mics', v: 'Directional', why: 'Choose whether sound in front, behind or all around takes priority. Outdoors, always use the wind muff.' },
+  { k: 'DJI Mic 3', v: 'OsmoAudio · 4 channels', why: 'Pairs wirelessly without a receiver and records up to four audio channels at once.' },
+];
+
+const recepten = [
+  { s: 'Cinematic day · beach / water', r: '4K 25p', p: 'D-Log', n: '1/50 · ND256', i: '400 · 5600K' },
+  { s: 'Walk / B-roll · overcast', r: '4K 25p', p: 'D-Log', n: '1/50 · ND64', i: '400 · fixed' },
+  { s: 'Slow-mo · waves / sport', r: '4K 60p', p: 'D-Log', n: '1/120 · ND64–256', i: '400 · fixed' },
+  { s: 'Extreme slow-mo · 240 fps', r: '4K 240p', p: 'Normal*', n: '1/480 · ND16–64', i: 'auto (max 800)' },
+  { s: 'Sunset', r: '4K 25p', p: 'D-Log', n: '1/50 · ND16–64', i: '400 · 4000–4500K' },
+  { s: 'Underwater · housing', r: '4K 30p', p: 'D-Log', n: '1/60 · no ND', i: '400–1600 · auto' },
+  { s: 'Portrait / social 9:16', r: '3K vert. 25p', p: 'D-Log', n: '1/50 · ND64', i: '400 · fixed' },
+];
+
+const modi = [
+  { k: 'Video', v: '4K up to 60p · D-Log', why: 'Your standard mode: 10-bit D-Log up to 4K/60, vertical 3K for 9:16. This is where tracking, Film Tones and all audio options work.' },
+  { k: 'Photo', v: '4K still · SuperPhoto', why: 'Standard 4K stills for social; SuperPhoto (33–37MP) + RAW (DNG) for prints and serious post-processing. Long shutter up to 4 s.' },
+  { k: 'Low-Light Video', v: 'Up to ISO 25600', why: 'For truly dark conditions. Landscape only, no D-Log — accept that here you grade in Normal.' },
+  { k: 'Slow Motion', v: '4K 120 / 240fps', why: '240fps = 10× slowed on a 24p timeline. Landscape only and Normal profile only.' },
+  { k: 'Panorama', v: '3×3 or 180°', why: 'The gimbal shoots the frames itself; stitch them in the Mimo app. No tracking available.' },
+  { k: 'Timelapse', v: 'Interval 0.5s–1min', why: 'Tripod, duration 5 min–10 hrs. Turn on ‘Video + RAW’ in PRO to also keep the individual photos.' },
+  { k: 'Motionlapse', v: 'Waypoints (max 4)', why: 'Timelapse with camera movement: the gimbal pans slowly along waypoints that you set with the joystick.' },
+  { k: 'Hyperlapse', v: 'Speed adjustable', why: 'Timelapse while you move. The gimbal stabilises and tracking is allowed to be on here.' },
+];
+
+const fcp = [
+  { n: '1', h: 'Download the LUT', p: "Get the official 'Osmo Pocket 4 D-Log to Rec.709' LUT free from the DJI Download Center." },
+  { n: '2', h: 'Apply the camera LUT', p: 'Clip → Info inspector → Log Processing → Camera LUT → your Pocket 4 D-Log LUT. Grade on top afterwards.' },
+  { n: '3', h: 'Grade per camera', p: 'Pocket 4 = D-Log, Mini 5 Pro = D-Log M. Use each camera’s own LUT before the shared grade.' },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'DJI Osmo Pocket 4: cinematic settings — the complete guide',
+  inLanguage: 'en-GB',
+  about: 'DJI Osmo Pocket 4 settings for cinematic filming',
+};
+---
+<Base
+  title="DJI Osmo Pocket 4 · Cinematic settings — the complete guide"
+  description="The complete reference for cinematic footage with the Osmo Pocket 4: PRO parameters and 10-bit D-Log (base ISO 400!), gimbal and ActiveTrack 7.0, recording modes, recipes per situation and the Final Cut Pro workflow."
+  path="/gids/pocket-4/" image="/img/og-art-osmo-pocket-4-instellingen.png"
+  lang="en" hasEn={true}
+  jsonld={jsonld}>
+  <GlassNav active="" lang="en" hasEn={true} switchHref="/gids/pocket-4/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container gp-page">
+
+    <header class="gp-head lb-reveal">
+      <span class="lb-label lb-label--sky">Nº 04 — Cinematic camera guide · 2026 edition</span>
+      <h1 class="lb-display-l">DJI Osmo Pocket 4:<br>cinematic settings</h1>
+      <p class="lb-lead">The complete reference for cinematic footage — from PRO parameters and 10-bit D-Log to the gimbal, custom buttons and a ready-to-use Final Cut Pro workflow.</p>
+      <div class="gp-cta-row">
+        <a class="lb-btn" href="/downloads/lichtbreking-gids-pocket-4.pdf" download>Download as PDF ↓</a>
+        <a class="lb-btn lb-btn--ghost" href="/en/cursus/grondfilmer/">To the course The Ground Filmer →</a>
+      </div>
+    </header>
+
+    <SpectrumRule />
+
+    <!-- Nº 01 · The basics -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-basis">
+      <div class="gp-sec-head">
+        <span class="lb-label">The basics</span>
+        <span class="lb-label lb-label--sky">Nº 01 — Core</span>
+      </div>
+      <h2 id="gp-basis" class="lb-display-m">Six settings that decide everything</h2>
+      <p class="gp-intro lb-muted">Always switch on PRO mode. With D-Log your footage looks flat while filming — that is exactly right; the colour only arrives in the grade.</p>
+      <div class="gp-cards">
+        {basis.map((b, i) => (
+          <article class={'gp-card' + (b.warn ? ' gp-card--warn' : '')}>
+            <div class="gp-card-top">
+              <span class={'lb-label ' + (b.warn ? 'gp-warn-label' : 'lb-label--sky')}>{b.k}{b.warn ? ' — note' : ''}</span>
+              <span class="gp-num">{['i','ii','iii','iv','v','vi'][i]}.</span>
+            </div>
+            <div class="gp-card-v">{b.v}</div>
+            <p>{b.why}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Nº 02 · PRO menu -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-pro">
+      <div class="gp-sec-head">
+        <span class="lb-label">Image &amp; exposure</span>
+        <span class="lb-label lb-label--sky">Nº 02 — PRO menu</span>
+      </div>
+      <h2 id="gp-pro" class="lb-display-m">The PRO parameters</h2>
+      <p class="gp-intro lb-muted">Organised as the PRO menu appears on the Pocket 4 screen. Lock values; automatic mode causes visible 'pumping' of exposure and colour.</p>
+      {proMenu.map((grp) => (
+        <div class="gp-grp">
+          <span class="lb-label lb-label--sky">{grp.h}</span>
+          {grp.rows.map((r) => (
+            <div class="gp-row">
+              <div class="gp-k">{r.k}</div>
+              <div class="gp-v">{r.v}</div>
+              <div class="gp-w">{r.why}</div>
+            </div>
+          ))}
+        </div>
+      ))}
+      <p class="gp-note">Settings menu (outside PRO) — Anti-flicker: 50 Hz (UK/EU mains) · Low-Light mode: off — only in truly dark conditions; works landscape only and not in D-Log.</p>
+    </section>
+
+    <!-- Nº 03 · Gimbal & tracking -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-gimbal">
+      <div class="gp-sec-head">
+        <span class="lb-label">Movement</span>
+        <span class="lb-label lb-label--sky">Nº 03 — Gimbal &amp; tracking</span>
+      </div>
+      <h2 id="gp-gimbal" class="lb-display-m">Gimbal &amp; ActiveTrack 7.0</h2>
+      <p class="gp-intro lb-muted">Movement makes or breaks the cinematic look. Slow and deliberate is almost always better.</p>
+      {gimbal.map((r) => (
+        <div class="gp-row">
+          <div class="gp-k">{r.k}</div>
+          <div class="gp-v">{r.v}</div>
+          <div class="gp-w">{r.why}</div>
+        </div>
+      ))}
+      <p class="gp-note">Choosing tracking: <b>ActiveTrack</b> when your subject moves · <b>Spotlight Follow</b> when you move · <b>Dynamic Framing</b> for off-centre B-roll · register your face for solo shoots. To start: double-tap your subject; to stop: tap ✕.</p>
+    </section>
+
+    <!-- Nº 04 · Controls & audio -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-bedien">
+      <div class="gp-sec-head">
+        <span class="lb-label">Controls</span>
+        <span class="lb-label lb-label--sky">Nº 04 — Buttons &amp; audio</span>
+      </div>
+      <h2 id="gp-bedien" class="lb-display-m">Custom buttons &amp; audio</h2>
+      <p class="gp-intro lb-muted">The Pocket 4 gained two new physical buttons and a 5D joystick. Assigning them smartly saves you missed moments.</p>
+      {bediening.map((r) => (
+        <div class="gp-row">
+          <div class="gp-k">{r.k}</div>
+          <div class="gp-v">{r.v}</div>
+          <div class="gp-w">{r.why}</div>
+        </div>
+      ))}
+    </section>
+
+    <!-- Nº 05 · Recipes -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-recept">
+      <div class="gp-sec-head">
+        <span class="lb-label">Application</span>
+        <span class="lb-label lb-label--sky">Nº 05 — Scenes</span>
+      </div>
+      <h2 id="gp-recept" class="lb-display-m">Recipes per situation</h2>
+      <p class="gp-intro lb-muted">Ready-to-use settings. All D-Log recipes assume base ISO 400.</p>
+      <div class="gp-table" role="table" aria-label="Recipes per scene">
+        <div class="gp-tr gp-th" role="row">
+          <span role="columnheader">Scene</span><span role="columnheader">Res / fps</span><span role="columnheader">Profile</span><span role="columnheader">Shutter · ND</span><span role="columnheader">ISO · WB</span>
+        </div>
+        {recepten.map((r) => (
+          <div class="gp-tr" role="row">
+            <span class="gp-ts" role="cell">{r.s}</span><span class="gp-tv" role="cell">{r.r}</span><span class="gp-tm" role="cell">{r.p}</span><span class="gp-tv" role="cell">{r.n}</span><span class="gp-tm" role="cell">{r.i}</span>
+          </div>
+        ))}
+      </div>
+      <p class="gp-note">* 4K 120/240 fps works landscape only and only in the Normal profile — D-Log is not available there. The shutter follows the 180° rule per frame rate.</p>
+    </section>
+
+    <!-- Nº 06 · Recording modes -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-modi">
+      <div class="gp-sec-head">
+        <span class="lb-label">Recording modes</span>
+        <span class="lb-label lb-label--sky">Nº 06 — Modes</span>
+      </div>
+      <h2 id="gp-modi" class="lb-display-m">Every mode, one purpose</h2>
+      <p class="gp-intro lb-muted">To switch: tap the icon at the bottom left of the camera view — Hyperlapse, Timelapse and Motionlapse sit together under the Timelapse tab. Swipe up for parameters, down for system settings.</p>
+      {modi.map((r) => (
+        <div class="gp-row">
+          <div class="gp-k">{r.k}</div>
+          <div class="gp-v">{r.v}</div>
+          <div class="gp-w">{r.why}</div>
+        </div>
+      ))}
+      <p class="gp-note">Gestures: showing your palm sets tracking on you; a peace sign starts/stops recording (range 0.5–5 m). ActiveTrack does not work in Panorama, Timelapse and Motionlapse; it does in Video, Photo and Hyperlapse.</p>
+    </section>
+
+    <!-- Nº 07 · Final Cut -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-fcp">
+      <div class="gp-sec-head">
+        <span class="lb-label">Workflow</span>
+        <span class="lb-label lb-label--sky">Nº 07 — Final Cut Pro</span>
+      </div>
+      <h2 id="gp-fcp" class="lb-display-m">The D-Log grade in Final Cut</h2>
+      <div class="gp-fcp">
+        {fcp.map((s) => (
+          <article class="gp-card">
+            <span class="gp-fcp-n">{s.n}</span>
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <div class="gp-end lb-reveal">
+      <SpectrumRule />
+      <div class="gp-end-in">
+        <div>
+          <span class="lb-label lb-label--sky">Taking it out on location?</span>
+          <h2 class="lb-display-m">Download the guide as a PDF</h2>
+          <p class="lb-lead">Eight A4 pages — the same content, print-ready for your camera bag.</p>
+        </div>
+        <a class="lb-btn" href="/downloads/lichtbreking-gids-pocket-4.pdf" download>Download PDF ↓</a>
+      </div>
+    </div>
+
+  </main>
+  <Footer lang="en" />
+</Base>
+
+<style is:global>
+  .gp-page { padding-top: 130px; padding-bottom: 96px; }
+  .gp-head { max-width: 70ch; margin-bottom: 40px; }
+  .gp-head h1 { margin: 12px 0 18px; }
+  .gp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  .gp-sec { margin-top: clamp(48px, 7vw, 88px); max-width: 900px; }
+  .gp-sec-head { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+  .gp-intro { max-width: 62ch; margin: 12px 0 22px; }
+  .gp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .gp-card { background: var(--lb-surface); border: 1px solid var(--lb-line); border-radius: var(--lb-r-md); padding: 20px 22px; }
+  .gp-card p { color: var(--lb-mist); font-size: var(--lb-small); line-height: 1.6; margin-top: 8px; }
+  .gp-card h3 { margin: 8px 0 4px; font-size: 17px; font-weight: 500; letter-spacing: 0; }
+  .gp-card--warn { border-color: color-mix(in srgb, var(--lb-red) 55%, transparent); }
+  .gp-warn-label { color: var(--lb-red-ink); }
+  .gp-card-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .gp-num { font-family: var(--lb-font-mono); font-size: 11px; color: var(--lb-mist); }
+  .gp-card-v { font-family: var(--lb-font-display); font-weight: 500; font-size: 22px; letter-spacing: -.02em; margin-top: 10px; }
+  .gp-grp { margin-top: 18px; }
+  .gp-grp > .lb-label { display: block; margin-bottom: 6px; }
+  .gp-row { display: grid; grid-template-columns: 150px 200px 1fr; gap: 20px; padding: 12px 0; border-top: 1px solid var(--lb-line); align-items: baseline; }
+  .gp-k { font-weight: 600; font-size: 15px; }
+  .gp-v { font-family: var(--lb-font-mono); font-size: 13px; color: var(--lb-sky); }
+  .gp-w { color: var(--lb-mist); font-size: var(--lb-small); line-height: 1.6; }
+  .gp-note { margin-top: 14px; color: var(--lb-mist); font-size: 13px; line-height: 1.6; }
+  .gp-note b { color: var(--lb-bone); font-weight: 600; }
+  .gp-table { border-top: 1px solid var(--lb-line); }
+  .gp-tr { display: grid; grid-template-columns: 1.4fr .8fr .6fr .9fr .9fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--lb-line); align-items: baseline; }
+  .gp-th span { font-family: var(--lb-font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--lb-mist); }
+  .gp-ts { font-weight: 600; font-size: 14px; }
+  .gp-tv { font-family: var(--lb-font-mono); font-size: 12px; color: var(--lb-sky); }
+  .gp-tm { font-family: var(--lb-font-mono); font-size: 12px; color: var(--lb-mist); }
+  .gp-fcp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .gp-fcp-n { font-family: var(--lb-font-mono); font-size: 20px; color: var(--lb-sky); }
+  .gp-end { margin-top: clamp(56px, 8vw, 96px); max-width: 900px; }
+  .gp-end-in { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 30px; }
+  .gp-end-in h2 { margin: 8px 0 10px; }
+  @media (max-width: 760px) {
+    .gp-cards, .gp-fcp { grid-template-columns: 1fr; }
+    .gp-row { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+    .gp-tr { grid-template-columns: 1.2fr .9fr .9fr; }
+    .gp-tr span:nth-child(3), .gp-th span:nth-child(3) { display: none; }
+    .gp-tr span:nth-child(5), .gp-th span:nth-child(5) { display: none; }
+  }
+</style>
