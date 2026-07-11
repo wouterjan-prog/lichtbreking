@@ -50,6 +50,7 @@ export const t = {
       c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '14 modules · ~6 uur', desc: 'Leer je drone filmen, niet alleen vliegen. Van eerste opstart tot afgemonteerde cinematische film — met shot-recepten, beslisbomen en een veldgids.' },
       c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · veldgids', desc: 'De beelden op ooghoogte die je drone compleet maken. Cinematische gimbal-techniek en hoe je lucht en grond samensmelt tot één film.' },
       c3: { kicker: 'Post · DaVinci + Final Cut', title: 'De Kleurfilmer', meta: '8 modules · DaVinci + Final Cut', desc: 'Van plat D-Log naar een cinematische look. Werkvolgorde, scopes, D-Log ontwikkelen, curves, shots matchen en exporteren — met de exacte stappen in DaVinci Resolve én Final Cut Pro.' },
+      c4: { kicker: 'Action & onderwater · DJI Osmo Action 6', title: 'De Actiefilmer', meta: '7 modules · action & onderwater', desc: 'Beheers de Osmo Action 6: instellingen, het variabele diafragma, stabilisatie, en onder water de kleuren terughalen zónder kleurfilter — met de onderwater-witbalans en Dive-modus.' },
     },
     showreel: {
       title: 'Showreel', desc: 'De showreel van Lichtbreking — een jaar cinematische drone- en filmbeelden in beeld.',
@@ -122,6 +123,7 @@ export const t = {
       c1: { kicker: 'Drone · DJI Mini 5 Pro', title: 'De Vluchtfilmer', meta: '14 modules · ~6 hrs', desc: 'Learn to film with your drone, not just fly it. From first power-on to a finished cinematic film — with shot recipes, decision trees and a field guide.' },
       c2: { kicker: 'Camera · DJI Osmo Pocket 4', title: 'De Grondfilmer', meta: '12 modules · field guide', desc: 'The eye-level imagery that completes your drone. Cinematic gimbal technique and how to merge air and ground into one film.' },
       c3: { kicker: 'Post · DaVinci + Final Cut', title: 'De Kleurfilmer', meta: '8 modules · DaVinci + Final Cut', desc: 'From flat D-Log to a cinematic look. Workflow, scopes, developing D-Log, curves, matching shots and exporting — with the exact steps in both DaVinci Resolve and Final Cut Pro.' },
+      c4: { kicker: 'Action & underwater · DJI Osmo Action 6', title: 'De Actiefilmer', meta: '7 modules · action & underwater', desc: 'Master the Osmo Action 6: settings, the variable aperture, stabilisation, and bringing back colour underwater without a colour filter — using the underwater white balance and Dive mode.' },
     },
     showreel: {
       title: 'Showreel', desc: 'The Lichtbreking showreel — a year of cinematic drone and film imagery.',

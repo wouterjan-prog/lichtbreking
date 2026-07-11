@@ -1,0 +1,333 @@
+{
+ "slug": "actiefilmer",
+ "title": "De Actiefilmer",
+ "kicker": "Action & onderwater · DJI Osmo Action 6",
+ "subtitle": "Van POV-actie tot helder onderwater — filterloos.",
+ "lead": "Zeven modules die je de Osmo Action 6 leren beheersen: je instellingen vastzetten, het variabele diafragma, vloeiende stabilisatie, en onder water de kleuren terughalen zónder kleurfilter — via de onderwater-witbalans en Dive-modus. Plus recepten per situatie en de grade in D-Log M. Met een spiekbrief om alles snel op te zoeken.",
+ "meta": [
+  [
+   "Niveau",
+   "Beginner → gevorderd"
+  ],
+  [
+   "Toestel",
+   "DJI Osmo Action 6"
+  ],
+  [
+   "Doel",
+   "Action & onderwater"
+  ],
+  [
+   "Inhoud",
+   "7 modules + spiekbrief"
+  ]
+ ],
+ "storageKey": "actiefilmer_v1",
+ "intro": "<p>Een action-cam kopen is makkelijk; er cinematische, kleurrijke beelden mee maken is een vak — zeker onder water. Deze cursus neemt je mee van de eerste opstart tot een afgemonteerde film, met de <strong>DJI Osmo Action 6</strong>. De rode draad onder water: <strong>filterloos</strong> werken met de ingebouwde onderwater-witbalans en Dive-modus, en op diepte een lamp of een D-Log M-grade.</p>",
+ "parts": [],
+ "modules": [
+  {
+   "n": 1,
+   "tag": "Fundament",
+   "part": "De basis",
+   "min": 4,
+   "title": "Ken je Action 6 — knop voor knop",
+   "doel": "bedien je de Action 6 blind en heb je de Dive-modus klaarstaan.",
+   "body": "<p>Voordat je filmt, moet je hand de camera kennen. De Osmo Action 6 heeft twee schermen en een paar fysieke knoppen — meer heb je niet nodig.</p><h4>De camera</h4><ul><li><span class='em'>Voorscherm</span> — statusscherm om jezelf te kaderen; <span class='em'>achterscherm</span> — touchscreen voor alle menu's (veeg omhoog voor parameters, omlaag voor systeem).</li><li><span class='em'>Quick-Switch-knop</span> (zijkant) — wisselt razendsnel tussen je modi/presets zonder het menu in te duiken.</li><li><span class='em'>Opnameknop</span> (boven) — start/stopt; werkt ook als aan/uit.</li><li><span class='em'>Magnetische quick-release</span> — klik de camera in seconden op elke mount.</li><li><span class='em'>50 GB intern</span> — je kunt zonder kaartje op pad, maar een kaartje blijft handig als buffer.</li></ul><h4>Onder water</h4><p>De Action 6 is waterdicht tot <span class='em'>20 meter</span> zonder behuizing (IP68); met de duikkit tot 60 meter. Zet de <span class='em'>Dive-modus</span> klaar: die toont je diepte in beeld en start/stopt de opname automatisch als je het water in- en uitgaat.</p>",
+   "kort": [
+    "Twee schermen: voor (status) + achter (touch)",
+    "Quick-Switch-knop wisselt snel tussen modi/presets",
+    "Waterdicht tot 20 m zonder case; Dive-modus voor onder water"
+   ],
+   "actie": "Leer de knoppen blind en zet de Dive-modus klaar.",
+   "todo": [
+    "Benoem elke knop zonder te kijken",
+    "Klik de camera op een mount en er weer af",
+    "Zet de Dive-modus aan in het menu"
+   ],
+   "quiz": [
+    {
+     "q": "Hoe diep is de Action 6 waterdicht zónder behuizing?",
+     "o": [
+      "5 meter",
+      "20 meter",
+      "60 meter"
+     ],
+     "c": 1,
+     "u": "20 m zonder case (IP68); 60 m met de duikkit."
+    },
+    {
+     "q": "Waarmee wissel je snel tussen modi?",
+     "o": [
+      "De Quick-Switch-knop",
+      "Het voorscherm",
+      "De accu eruit halen"
+     ],
+     "c": 0,
+     "u": "De Quick-Switch-knop springt tussen je modi/presets."
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "tag": "Fundament",
+   "part": "De basis",
+   "min": 5,
+   "title": "Je basisinstellingen vastzetten",
+   "doel": "zet je je Action 6 in één keer goed voor filmische beelden.",
+   "body": "<p>Auto laat de camera constant zoeken — dat zie je terug als 'pompende' belichting en verspringende kleur. Zet alles handmatig vast en je beeld wordt rustig en samenhangend.</p><ul><li><span class='em'>Resolutie</span>: 4K — benut de grote sensor, ruimte om bij te snijden of te stabiliseren.</li><li><span class='em'>Framerate</span>: 25 fps voor de filmische look; 50/60 fps voor snelle actie en slow-motion.</li><li><span class='em'>Beeldhoek</span>: Wide — vermindert vertekening en houdt de randen scherp.</li><li><span class='em'>Stabilisatie</span>: RockSteady 3.0 aan (meer hierover in module 4).</li><li><span class='em'>Kleurprofiel</span>: Normal voor direct-klaar beeld, of 10-bit <span class='em'>D-Log M</span> als je gaat kleuren.</li><li><span class='em'>Witbalans</span>: boven water handmatig vast (~5500 K). Onder water de onderwater-witbalans (module 5).</li><li><span class='em'>ISO</span>: zo laag mogelijk (100) voor een schoon beeld; begrens de auto-ISO op diepte tot ~800–1600.</li></ul><p>Sla dit op als <span class='em'>preset</span> onder de Quick-Switch-knop, dan sta je met één druk goed.</p>",
+   "kort": [
+    "4K · 25 fps (50/60 voor slow-mo) · FOV Wide",
+    "Normal = klaar; D-Log M = als je graadt",
+    "Zet alles handmatig vast en sla het op als preset"
+   ],
+   "actie": "Zet je Action 6 één keer goed en bewaar het als preset.",
+   "todo": [
+    "Zet 4K/25, FOV Wide en RockSteady aan",
+    "Kies Normal of D-Log M bewust",
+    "Sla je instellingen op onder de Quick-Switch-knop"
+   ],
+   "quiz": [
+    {
+     "q": "Welke framerate voor de filmische look?",
+     "o": [
+      "25 fps",
+      "60 fps",
+      "120 fps"
+     ],
+     "c": 0,
+     "u": "25 fps (NL) ≈ 24 fps bioscoop; 50/60 voor slow-mo."
+    },
+    {
+     "q": "Waarom handmatig vastzetten?",
+     "o": [
+      "Meer megapixels",
+      "Zodat belichting en kleur niet 'pompen'",
+      "Langere accuduur"
+     ],
+     "c": 1,
+     "u": "Vaste waarden = rustig, samenhangend beeld."
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "tag": "Belichting",
+   "part": "Licht regelen",
+   "min": 5,
+   "title": "Het variabele diafragma & belichting",
+   "doel": "regel je de belichting met diafragma en ND in plaats van de camera te laten pompen.",
+   "body": "<p>De Action 6 is de eerste action-cam met een <span class='em'>variabel diafragma (f/2.0–f/4.0)</span>. Dat geeft je een extra knop om licht te regelen zónder de sluiter of ISO te verpesten.</p><ul><li><span class='em'>Open (f/2.0)</span>: weinig licht of op diepte — laat maximaal licht binnen.</li><li><span class='em'>Dicht (f/4.0)</span>: fel licht — houd je belichting in toom.</li></ul><h4>De 180°-regel & ND boven water</h4><p>Voor een filmische look hoort je sluitertijd ongeveer 2× je framerate te zijn (25 fps → 1/50 s). In fel daglicht wordt dat al snel te licht. Los dat op met je <span class='em'>ND-filter</span> — dat houdt licht tegen zodat je op 1/50 s blijft — of door het diafragma te sluiten. Onder water gebruik je géén ND: daar is het licht al beperkt.</p><div class='callout tip'>Snelle actie zonder cine-look? Dan mag de sluiter sneller (scherpere frames). Voor slow-motion film je 50/60 fps met bijpassende sluiter.</div>",
+   "kort": [
+    "Variabel diafragma f/2.0–4.0: open op diepte, dicht in fel licht",
+    "180°-regel: 25 fps → 1/50 s",
+    "ND-filter alleen boven water; onder water niet"
+   ],
+   "actie": "Blijf op 1/50 s in fel licht met je ND of een dichter diafragma.",
+   "todo": [
+    "Film dezelfde scène op f/2.0 en f/4.0",
+    "Zet in fel licht je ND op en blijf op 1/50 s",
+    "Vergelijk het resultaat"
+   ],
+   "quiz": [
+    {
+     "q": "Welke sluitertijd bij 25 fps voor de cine-look?",
+     "o": [
+      "1/25 s",
+      "1/50 s",
+      "1/200 s"
+     ],
+     "c": 1,
+     "u": "180°-regel: sluiter ≈ 2× framerate."
+    },
+    {
+     "q": "Wanneer gebruik je een ND-filter?",
+     "o": [
+      "Onder water op diepte",
+      "Boven water in fel licht",
+      "Nooit"
+     ],
+     "c": 1,
+     "u": "ND houdt boven water licht tegen zodat je op 1/50 s blijft."
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "tag": "Techniek",
+   "part": "Beweging",
+   "min": 5,
+   "title": "Stabilisatie & bewegingstechniek",
+   "doel": "film je vloeiende, stabiele action-shots met de juiste modus en mount.",
+   "body": "<p>Een action-cam draait om beweging — maar schokkerige beelden kijkt niemand uit. De Action 6 stabiliseert elektronisch; jouw techniek doet de rest.</p><h4>De stabilisatiemodi</h4><ul><li><span class='em'>RockSteady 3.0 / 3.0+</span>: vloeiende, stabiele beelden — je standaard.</li><li><span class='em'>HorizonSteady / HorizonBalancing</span>: houdt de horizon recht, ook als de camera kantelt. Boven water top; <span class='em'>onder water uit</span> — er is geen horizon om op te richten.</li></ul><h4>Mount & beweging</h4><ul><li>Kies je mount bij de shot: borst (POV), helm/chin (blik), hand/grip (controle), of achterop.</li><li>Beweeg <span class='em'>traag en bewust</span>; laat de stabilisatie de kleine trillingen doen, niet de grote zwiepen.</li><li>Denk in shots: POV vooruit, een follow achter je onderwerp, een low-angle langs de grond/het water, een reveal.</li></ul>",
+   "kort": [
+    "RockSteady 3.0 = je standaard",
+    "Horizon-nivellering boven water aan, onder water uit",
+    "Kies je mount bij de shot en beweeg rustig"
+   ],
+   "actie": "Film één shot per mount en beweeg bewust traag.",
+   "todo": [
+    "Test RockSteady met een wandel-shot",
+    "Zet HorizonSteady aan en kantel de camera",
+    "Film een POV én een follow-shot"
+   ],
+   "quiz": [
+    {
+     "q": "Wat doe je met horizon-nivellering onder water?",
+     "o": [
+      "Aanzetten",
+      "Uitzetten",
+      "Maakt niet uit"
+     ],
+     "c": 1,
+     "u": "Onder water is er geen horizon; zet het uit."
+    },
+    {
+     "q": "Wat is je standaard-stabilisatie?",
+     "o": [
+      "RockSteady 3.0",
+      "Geen",
+      "Alleen HorizonSteady"
+     ],
+     "c": 0,
+     "u": "RockSteady 3.0 geeft vloeiende, stabiele beelden."
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "tag": "Onderwater",
+   "part": "Onder water",
+   "min": 6,
+   "title": "Onder water: witbalans & Dive-modus — filterloos",
+   "doel": "haal je onder water de kleuren terug zónder kleurfilter, met de onderwater-witbalans en Dive-modus.",
+   "body": "<p>Water 'eet' kleur op — rood eerst, daarna oranje en geel, waardoor alles blauwgroen wordt. Veel mensen zetten daar een rood of magenta kleurfilter voor op. Met de Action 6 hoeft dat niet: de camera corrigeert het rood zelf.</p><h4>Zo doe je het</h4><ul><li>Zet de <span class='em'>onderwater-witbalans (Dive-modus)</span> aan — een aparte sensor geeft het verdwenen rood terug en houdt de kleur stabiel als je van hoek verandert.</li><li>ISO laag, diafragma <span class='em'>open (f/2.0)</span> voor licht, en zet alles handmatig vast.</li><li>Kom <span class='em'>dichtbij</span> je onderwerp — elke meter water slikt kleur en contrast — en houd de zon in je rug.</li></ul><div class='callout tip'>De grens van witbalans: ondiep (zwembad, snorkelen, tot ~10–15 m) doet de onderwater-witbalans het uitstekend. Dieper is er te weinig rood licht over om terug te balanceren. Dan pak je een <span class='em'>videolamp</span> (en zet je de witbalans op de lampkleur), óf je filmt in <span class='em'>D-Log M</span> en haalt de laatste kleur terug in de grade.</div>",
+   "kort": [
+    "Onderwater-witbalans + Dive-modus i.p.v. een kleurfilter",
+    "Dichtbij komen, zon in je rug, alles handmatig vast",
+    "Voorbij ~10–15 m: videolamp of D-Log M-grade"
+   ],
+   "actie": "Zet de onderwater-witbalans aan en kom zo dicht mogelijk bij je onderwerp.",
+   "todo": [
+    "Activeer de Dive-modus + onderwater-witbalans",
+    "Film hetzelfde onderwerp van dichtbij en van 2 m",
+    "Test op diepte een clip in D-Log M"
+   ],
+   "quiz": [
+    {
+     "q": "Hoe krijg je met de Action 6 onder water de kleur terug?",
+     "o": [
+      "Altijd een rood filter",
+      "De onderwater-witbalans / Dive-modus",
+      "Hogere ISO"
+     ],
+     "c": 1,
+     "u": "De ingebouwde onderwater-witbalans corrigeert het rood — zonder filter."
+    },
+    {
+     "q": "Wat doe je voorbij ~15 m diepte?",
+     "o": [
+      "Niets, WB blijft werken",
+      "Videolamp of D-Log M graden",
+      "ND-filter opzetten"
+     ],
+     "c": 1,
+     "u": "Te weinig rood licht — gebruik licht of haal kleur terug in de grade."
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "tag": "Onderwater",
+   "part": "Onder water",
+   "min": 6,
+   "title": "Per situatie: zwembad · snorkelen · duiken · zee",
+   "doel": "kies je per situatie (zwembad, snorkelen, duiken, zee) de juiste instellingen.",
+   "body": "<p>Dezelfde filterloze basis, per situatie fijngeslepen.</p><h4>Zwembad</h4><p>Helder en veel licht. Onderwater-witbalans of ~5500 K, 4K/60 voor speelse slow-motion, RockSteady aan.</p><h4>Zee &amp; snorkelen (0–5 m)</h4><p>Onderwater-witbalans aan — zo ondiep komt de kleur er prima uit. Kom dichtbij, houd de zon in je rug.</p><h4>Duiken (tot ~15 m)</h4><p>Onderwater-witbalans + Dive-modus, ISO laag, diafragma open. Beweeg rustig en kom zo dicht mogelijk. Wil je de veiligste marge op kleur? Film in D-Log M en corrigeer na.</p><h4>Dieper / grotten / nacht</h4><p>Witbalans stopt met werken. Gebruik een videolamp (WB op de lampkleur), of accepteer het blauw en film in D-Log M.</p><div class='callout tip'>Vuistregels overal: dichtbij komen, handmatig vastzetten, zon in je rug, traag bewegen, en na afloop naspoelen met zoet water + de O-ring checken.</div>",
+   "kort": [
+    "Zwembad/snorkelen: onderwater-WB, geen filter",
+    "Duiken: WB + Dive-modus, D-Log M voor marge",
+    "Diep/nacht: videolamp of D-Log M"
+   ],
+   "actie": "Kies vooraf je situatie-recept en zet het vast.",
+   "todo": [
+    "Film een zwembad- of snorkelclip met onderwater-WB",
+    "Film een duikclip in D-Log M",
+    "Spoel na en check de O-ring"
+   ],
+   "quiz": [
+    {
+     "q": "Wat gebruik je in een zwembad?",
+     "o": [
+      "Rood filter",
+      "Onderwater-witbalans, geen filter",
+      "ND-filter"
+     ],
+     "c": 1,
+     "u": "Helder en licht: onderwater-WB, geen filter of ND."
+    },
+    {
+     "q": "Waarom D-Log M bij dieper duiken?",
+     "o": [
+      "Kleinere bestanden",
+      "Meer marge om kleur terug te halen",
+      "Scherper beeld"
+     ],
+     "c": 1,
+     "u": "D-Log M bewaart meer kleurinformatie voor de grade."
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "tag": "Afronden",
+   "part": "Kleur & montage",
+   "min": 5,
+   "title": "Kleur & montage — van clips naar film",
+   "doel": "graad je je D-Log M-beelden en monteer je ze tot één film.",
+   "body": "<p>Je action- en onderwaterbeelden komen tot leven in de montage. Zeker je D-Log M-clips: die zien er plat uit tot je ze ontwikkelt.</p><h4>D-Log M ontwikkelen</h4><ul><li>Zet je D-Log M om naar Rec.709 met de officiële DJI-LUT of een Color Space Transform — dat is je startpunt.</li><li>Onder water: trek de witbalans recht (nog steeds te blauw? corrigeer met curves), til de zwarten net op en geef contrast en verzadiging rustig terug.</li></ul><h4>Tot één film</h4><ul><li>Wissel wijde, medium en detailshots af; knip op de muziek; bouw een begin, midden en eind.</li><li>Match je shots op helderheid en kleur zodat de hele film één geheel is.</li></ul><p>De complete grade-workflow (DaVinci &amp; Final Cut) leer je in <a href='/cursus/kleurfilmer/'>De Kleurfilmer</a>.</p>",
+   "kort": [
+    "D-Log M → Rec.709 met LUT/Color Space Transform",
+    "Onder water: witbalans rechttrekken, dan graden",
+    "Wissel shotgroottes af en knip op de muziek"
+   ],
+   "actie": "Ontwikkel je D-Log M en trek de onderwaterkleur recht.",
+   "todo": [
+    "Pas de DJI D-Log M-LUT toe",
+    "Corrigeer de witbalans van een onderwaterclip",
+    "Zet 3 shots op de tijdlijn en knip op de beat"
+   ],
+   "quiz": [
+    {
+     "q": "Wat doe je eerst met D-Log M?",
+     "o": [
+      "Verzadiging maximaal",
+      "Ontwikkelen naar Rec.709 (LUT/CST)",
+      "Direct exporteren"
+     ],
+     "c": 1,
+     "u": "Eerst log → Rec.709, dan pas corrigeren en graden."
+    },
+    {
+     "q": "Waar leer je de volledige grade?",
+     "o": [
+      "De Vluchtfilmer",
+      "De Kleurfilmer",
+      "De Grondfilmer"
+     ],
+     "c": 1,
+     "u": "De Kleurfilmer behandelt de complete grade-workflow."
+    }
+   ]
+  }
+ ],
+ "naslag": [
+  {
+   "key": "spiekbrief",
+   "min": 2,
+   "title": "Spiekbrief — Action 6 in het kort",
+   "body": "<p>Print of bewaar dit.</p><ul><li><span class='em'>Basis</span>: 4K · 25 fps (50/60 slow-mo) · FOV Wide · RockSteady 3.0 · Normal of D-Log M.</li><li><span class='em'>Boven water</span>: WB ~5500 K vast · 1/50 s met ND in fel licht · diafragma dicht in zon.</li><li><span class='em'>Onder water</span>: onderwater-witbalans (Dive-modus) · géén kleurfilter · géén ND · ISO laag · diafragma open · dichtbij komen.</li><li><span class='em'>Diep/nacht</span>: videolamp (WB op lampkleur) of D-Log M en corrigeren in de grade.</li><li><span class='em'>Altijd</span>: handmatig vastzetten, zon in je rug, traag bewegen, naspoelen + O-ring checken.</li></ul>"
+  }
+ ],
+ "casestudy": []
+}

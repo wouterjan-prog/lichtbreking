@@ -1,8 +1,9 @@
 import grondfilmer from './grondfilmer.json';
 import vluchtfilmer from './vluchtfilmer.json';
 import kleurfilmer from './kleurfilmer.json';
+import actiefilmer from './actiefilmer.json';
 
-export const courses = [vluchtfilmer, grondfilmer, kleurfilmer];
+export const courses = [vluchtfilmer, grondfilmer, kleurfilmer, actiefilmer];
 export const getCourse = (slug) => courses.find((c) => c.slug === slug);
 
 // Lessen = modules + naslaghoofdstukken (referentie).

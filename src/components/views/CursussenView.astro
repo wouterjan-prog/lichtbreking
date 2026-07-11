@@ -10,6 +10,7 @@ const courses = [
   { ...L.c1, href: '/cursus/vluchtfilmer/', badge: L.free, photo: '1507525428034-b723cf961d3e', soon: false },
   { ...L.c2, href: '/cursus/grondfilmer/', badge: L.free, photo: '1753588296403-be438eb432e5', soon: false },
   { ...L.c3, href: '/cursus/kleurfilmer/', badge: L.free, photo: '1762740522491-2a4f7c754816', soon: false },
+  { ...L.c4, href: '/cursus/actiefilmer/', badge: L.free, photo: '1753618282728-f05ecfc5c9d6', soon: false },
 ];
 ---
 <Base title={L.title} description={L.desc} path="/cursussen/" lang={lang}>
@@ -66,7 +67,7 @@ const courses = [
   .page { padding-top: 130px; padding-bottom: 96px; }
   .page-head { margin-bottom: 44px; }
   .page-head h1 { margin: 10px 0 18px; }
-  .courses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .courses { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .course { position: relative; display: flex; flex-direction: column; background: var(--lb-glass-card-bg); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); border-radius: var(--lb-r-lg); overflow: hidden; box-shadow: inset 0 1px 0 var(--lb-glass-hi), 0 16px 44px rgba(0,0,0,.28); transition: transform var(--lb-dur) var(--lb-ease); }
   .course::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.3px; background: var(--lb-spectrum-135); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .42; pointer-events: none; z-index: 2; }
   .course:hover { transform: translateY(-3px); }

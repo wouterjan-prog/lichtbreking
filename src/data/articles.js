@@ -289,19 +289,19 @@ const baseArticles = [
     cat: 'Onderwater',
     ph: 'r',
     title: 'Onder water met de DJI Osmo Action 6: instellingen & welk filter wanneer',
-    excerpt: 'Van het zwembad tot 60 meter diep: de beste instellingen voor de Osmo Action 6 boven én onder water. De Dive-modus en onderwater-witbalans, wanneer je een rood of magenta filter opzet, en per situatie — zwembad, zee, snorkelen, duiken — wat je kiest.',
+    excerpt: 'Van het zwembad tot 60 meter diep: de beste instellingen voor de Osmo Action 6 boven én onder water. De Dive-modus en onderwater-witbalans, de filterloze onderwater-witbalans, en per situatie — zwembad, zee, snorkelen, duiken — wat je kiest.',
     date: '2026-06-29',
     readMin: 8,
     body: `
-<p>Boven water draait alles om je ND-filter; onder water draait alles om kleur. Water "eet" kleur op — rood verdwijnt als eerste, al na een paar meter, daarna oranje en geel, waardoor alles blauwgroen wordt. De DJI Osmo Action 6 heeft daar slim gereedschap voor: een ingebouwde onderwater-witbalans, een Dive-modus met dieptemeter, en als eerste action-cam een variabel diafragma. Met de juiste instellingen en (op diepte) het juiste filter haal je koraal, schildpadden en helder water terug zoals je het zelf ziet.</p>
+<p>Boven water gebruik je een ND-filter om op een filmische sluitertijd te blijven; onder water draait alles om kleur. Water "eet" kleur op — rood verdwijnt als eerste, al na een paar meter, daarna oranje en geel, waardoor alles blauwgroen wordt. Veel mensen lossen dat op met een rood of magenta kleurfilter, maar de DJI Osmo Action 6 heeft een sterke ingebouwde onderwater-witbalans en Dive-modus — daarmee krijg je de kleuren terug <strong>zónder kleurfilter</strong>. Zo pak ik het aan.</p>
 
 <h2>De Action 6 onder water — kort</h2>
 <ul>
-<li><strong>Waterdicht tot 20 meter</strong> zonder behuizing (IP68); met de Dive Case tot 60 meter.</li>
+<li><strong>Waterdicht tot 20 meter</strong> zonder behuizing (IP68); met de duikkit / Dive Case tot 60 meter.</li>
 <li><strong>Dive-modus:</strong> een dieptemeter toont je diepte, en de opname start én stopt automatisch als je het water in- of uitgaat.</li>
-<li><strong>Onderwater-witbalans</strong> met eigen sensor: corrigeert het verdwenen rood en blijft stabiel als je van hoek verandert.</li>
-<li><strong>Grote 1/1.1-inch sensor + variabel diafragma f/2.0–f/4.0:</strong> meer licht op diepte, en je regelt fel licht met het diafragma in plaats van met een ND.</li>
-<li><strong>10-bit D-Log M:</strong> maximale kleurruimte voor wie achteraf graadt.</li>
+<li><strong>Onderwater-witbalans</strong> met eigen sensor: geeft het verdwenen rood terug en blijft stabiel als je van hoek verandert — geen kleurfilter nodig.</li>
+<li><strong>Grote 1/1.1-inch sensor + variabel diafragma f/2.0–f/4.0:</strong> meer licht op diepte, en je regelt fel licht met het diafragma.</li>
+<li><strong>10-bit D-Log M:</strong> maximale kleurruimte — juist onder water fijn, want daarmee haal je in de grade nog kleur terug.</li>
 </ul>
 
 <h2>Je basisinstellingen (de cheatsheet)</h2>
@@ -311,34 +311,25 @@ const baseArticles = [
 <li><strong>Beeldhoek (FOV):</strong> Wide — vermindert vertekening en houdt de randen scherp, juist onder water.</li>
 <li><strong>Stabilisatie:</strong> RockSteady 3.0 aan. Zet horizon-nivellering (HorizonSteady/HorizonBalancing) onder water uit — die zoekt een horizon die er niet is.</li>
 <li><strong>Kleurprofiel:</strong> Normal voor direct-klaar beeld; 10-bit D-Log M als je gaat kleuren.</li>
-<li><strong>Witbalans:</strong> boven water handmatig vast (~5500 K). Onder water de onderwater-witbalans — of, mét kleurfilter, gewoon auto.</li>
-<li><strong>Diafragma:</strong> variabel f/2.0–f/4.0. Open (f/2.0) op diepte en in weinig licht; dicht (f/4.0) in fel licht in plaats van een ND-filter.</li>
+<li><strong>Witbalans:</strong> boven water handmatig vast (~5500 K). Onder water de <strong>onderwater-witbalans</strong> (Dive-modus) — die doet het kleurwerk.</li>
+<li><strong>Diafragma:</strong> variabel f/2.0–f/4.0. Open (f/2.0) op diepte en in weinig licht; dicht (f/4.0) in fel licht.</li>
 <li><strong>ISO:</strong> zo laag mogelijk (100) voor een schoon beeld; begrens de auto-ISO tot ~800–1600 op diepte.</li>
+<li><strong>ND-filter:</strong> alléén boven water, in fel licht, om op 1/50 s te blijven. Onder water zet je géén ND — daar is het licht al beperkt.</li>
 </ul>
 
-<h2>De Dive-modus &amp; onderwater-witbalans</h2>
-<p>De ingebouwde Dive-modus is precies waarvoor je hem inschakelt: je ziet je diepte in beeld en hoeft niet aan opnemen te denken — het water zelf zet de camera aan en uit. De onderwater-witbalans doet de rest van het werk: die geeft het weggeslokte rood terug en houdt de kleur rustig.</p>
-<div class="callout"><span class="c-label">Vuistregel</span><p>Ondiep (tot ~5 m) redt de onderwater-witbalans het vaak zonder filter. Dieper heb je een kleurfilter nodig — dan doet het filter de grove correctie en zet je de witbalans op auto.</p></div>
-
-<h2>Welk filter wanneer?</h2>
-<p>Een kleurfilter geeft het verdwenen licht terug vóórdat het je sensor raakt. Voor de Action 6 zijn er twee soorten.</p>
-<div class="fbox">
-<div class="fbox__col fbox__col--yes"><span class="fbox__h">✓ Wél een filter</span><ul><li><strong>Blauw / helder zeewater, 5–25 m</strong> → rood filter</li><li><strong>Groen of troebel water</strong> → magenta filter</li></ul></div>
-<div class="fbox__col fbox__col--no"><span class="fbox__h">✕ Geen filter</span><ul><li>Heel ondiep / snorkelen tot ~5 m — de onderwater-witbalans volstaat</li><li>Zwembad</li><li>Met een videolamp, of dieper dan ~25 m of 's nachts — een filter werkt niet zonder rood omgevingslicht</li></ul></div>
-</div>
-<p><strong>Belangrijk:</strong> mét een kleurfilter zet je de witbalans op <strong>auto</strong> (filter en camera corrigeren samen). Zónder filter, heel ondiep, gebruik je de <strong>onderwater-witbalans</strong>. Dive-filters klikken op de behuizing/lens — controleer dat je set voor de Osmo Action 6 is.</p>
+<h2>Kleur terugkrijgen — zónder kleurfilter</h2>
+<p>De Action 6 corrigeert het weggeslokte rood zelf, met een aparte witbalans-sensor. Zet de onderwater-witbalans (Dive-modus) aan en de kleuren komen terug: geen rood of magenta filter nodig. Dat scheelt geklier met verwisselen, en je verliest geen licht — want een kleurfilter slikt ook licht.</p>
+<div class="callout"><span class="c-label">De grens van witbalans</span><p>Ondiep — zwembad, snorkelen, tot ongeveer 10–15 meter — doet de onderwater-witbalans het uitstekend. Dieper is er simpelweg te weinig rood licht over om terug te balanceren. Dan pak je een <strong>videolamp</strong> voor je eigen witte licht (en zet je de witbalans op de kleur van die lamp), óf je filmt in <strong>D-Log M</strong> en haalt de laatste kleur terug in de grade.</p></div>
 
 <h2>Per situatie</h2>
 <h3>Zwembad</h3>
-<p>Helder en veel licht. Geen filter; witbalans ~5500 K of de onderwater-modus. Film 4K/60 voor speelse slow-motion en houd RockSteady aan.</p>
+<p>Helder en veel licht. Onderwater-witbalans of ~5500 K, geen filter. Film 4K/60 voor speelse slow-motion en houd RockSteady aan.</p>
 <h3>Zee &amp; snorkelen (0–5 m)</h3>
-<p>Onderwater-witbalans aan; zo ondiep meestal geen filter nodig. Maar in helder blauw water met zon zakt het rood al snel weg — vanaf ~3–5 m zet je een rood filter op. Kom dichtbij je onderwerp.</p>
-<h3>Duiken (5–25 m, blauw water)</h3>
-<p>Rood filter, witbalans op auto, ISO laag en het diafragma open (f/2.0) voor licht. Dive-modus aan. Beweeg rustig, houd de zon in je rug en kom zo dicht mogelijk — elke meter water tussen jou en je onderwerp slikt kleur en contrast.</p>
-<h3>Groen of troebel water</h3>
-<p>Ruil het rode filter voor een magenta filter; dat corrigeert de groene waas.</p>
-<h3>Dieper dan ~25 m, grotten of 's nachts</h3>
-<p>Een filter werkt hier niet meer — er is te weinig rood licht om terug te geven. Gebruik een videolamp en zet je witbalans op de kleur van die lamp; geen filter.</p>
+<p>Onderwater-witbalans aan — zo ondiep komt de kleur er prima uit. Kom dichtbij je onderwerp en houd de zon in je rug; elke meter water slikt kleur en contrast.</p>
+<h3>Duiken (tot ~15 m, blauw water)</h3>
+<p>Onderwater-witbalans + Dive-modus, ISO laag en het diafragma open (f/2.0) voor licht. Beweeg rustig, houd de zon in je rug en kom zo dicht mogelijk. Wil je de veiligste marge op kleur? Film in D-Log M en corrigeer na.</p>
+<h3>Dieper dan ~15 m, grotten of 's nachts</h3>
+<p>Hier stopt de witbalans met werken — er is te weinig rood licht. Gebruik een <strong>videolamp</strong> voor wit licht (zet de witbalans op de lampkleur), of accepteer het blauw en film in D-Log M om in de grade zoveel mogelijk terug te halen.</p>
 
 <h2>Vijf onderwater-vuistregels</h2>
 <ul>
@@ -346,7 +337,7 @@ const baseArticles = [
 <li><strong>Zet alles handmatig vast</strong> — laat de camera niet zoeken naar belichting en kleur.</li>
 <li><strong>Houd de zon in je rug</strong> voor de rijkste kleuren.</li>
 <li><strong>Beweeg traag en vloeiend</strong>; snelle bewegingen wervelen zand op en ogen schokkerig.</li>
-<li><strong>Naspoelen &amp; O-ring checken:</strong> spoel camera en behuizing met zoet water en controleer de afdichting vóór elke duik.</li>
+<li><strong>Naspoelen &amp; afdichting checken:</strong> spoel camera en duikkit met zoet water en controleer de O-ring vóór elke duik.</li>
 </ul>
 
 <p>Film je in D-Log M? Leer het graden in <a href="/cursus/kleurfilmer/">De Kleurfilmer</a>. Boven water met je drone of Pocket 4? Zie de <a href="/gereedschap/">Pro-cheatsheet</a> en de <a href="/gids/pocket-4/">Pocket 4-gids</a>.</p>
