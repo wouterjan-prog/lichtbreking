@@ -15,8 +15,8 @@ const ogImage = image.startsWith('http') ? image : SITE + image;
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 <link rel="alternate" hreflang="nl" href={urlNl} />
-<link rel="alternate" hreflang="en" href={urlEn} />
 <link rel="alternate" hreflang="x-default" href={urlNl} />
+{/* hreflang="en" verwijderd: de meeste pagina's hebben (nog) geen Engelse tegenhanger. Terugzetten zodra de EN-site compleet is: <link rel="alternate" hreflang="en" href={urlEn} /> */}
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#08080A" />
 

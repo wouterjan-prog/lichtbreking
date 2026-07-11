@@ -35,18 +35,6 @@ export const work = [
     alt: 'Luchtfoto van de oceaan tijdens het gouden uur met warm laag licht',
   },
   {
-    id: 'showreel',
-    title: 'Showreel',
-    place: 'Een jaar in beeld',
-    year: '2026',
-    cat: 'drone',
-    type: 'video',
-    photo: '1507525428034-b723cf961d3e',
-    alt: 'Filmische kustlijn vanuit de lucht — still uit de showreel',
-    embed: '', // YouTube/Vimeo embed-URL voor de lightbox
-    video: '', // of een meespelende achtergrondvideo: '/video/showreel.mp4'
-  },
-  {
     id: 'rugged-coast',
     title: 'Ruige kust',
     place: 'Noordkust',

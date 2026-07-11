@@ -46,7 +46,8 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
           <a href="/gouden-uur/">{L.nav.golden}</a>
         </div>
       </div>
-      <a class="lb-nav__lang" href={langHref} aria-label={lang === "nl" ? "Switch to English" : "Schakel naar Nederlands"}>{L.otherName}</a>
+      {/* Taalwissel verborgen tot de Engelse site echte content heeft. Terugzetten = onderstaande regel activeren. */}
+      {/* <a class="lb-nav__lang" href={langHref} aria-label={lang === "nl" ? "Switch to English" : "Schakel naar Nederlands"}>{L.otherName}</a> */}
       <a class="lb-nav__theme lb-nav__search" href="/zoeken/" aria-label={L.nav.search} title={L.nav.search}>
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       </a>
