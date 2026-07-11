@@ -9,8 +9,6 @@ const items = [
   { label: L.nav.start, href: "/start/", id: "start" },
   { label: L.nav.werk, href: locUrl("/werk/", lang), id: "werk" },
   { label: L.nav.cursus, href: locUrl("/cursussen/", lang), id: "cursussen" },
-  { label: L.nav.over, href: locUrl("/over/", lang), id: "over" },
-  { label: L.nav.contact, href: locUrl("/contact/", lang), id: "contact" },
   { label: L.nav.articles, href: "/artikelen/", id: "artikelen" },
 ];
 const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en" : "nl");
@@ -48,7 +46,6 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
           <a href="/gouden-uur/">{L.nav.golden}</a>
         </div>
       </div>
-      <a class="lb-nav__cta" href={locUrl("/showreel/", lang)}>{L.nav.showreel}</a>
       <a class="lb-nav__lang" href={langHref} aria-label={lang === "nl" ? "Switch to English" : "Schakel naar Nederlands"}>{L.otherName}</a>
       <a class="lb-nav__theme lb-nav__search" href="/zoeken/" aria-label={L.nav.search} title={L.nav.search}>
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>

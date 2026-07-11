@@ -20,7 +20,7 @@ export function switchUrl(pathname, toLang) {
 export const t = {
   nl: {
     locale: 'nl_NL', htmlLang: 'nl', langName: 'NL', otherName: 'EN',
-    nav: { start: 'Start hier', werk: 'Werk', cursus: 'Cursus', tools: 'Gereedschap', nd: 'ND-calculator', golden: 'Gouden-uur-planner', spots: 'Dronespots', over: 'Over', contact: 'Contact', articles: 'Artikelen', news: 'Wat is nieuw', showreel: 'Showreel', search: 'Zoeken', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
+    nav: { start: 'Start hier', werk: 'Werk', cursus: 'Cursus', tools: 'Gereedschap', nd: 'ND-calculator', golden: 'Gouden-uur-planner', spots: 'Spots', over: 'Over', contact: 'Contact', articles: 'Artikelen', news: 'Wat is nieuw', showreel: 'Showreel', search: 'Zoeken', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
     foot: { tagline: 'Waar licht breekt — cinematische drone, foto & film.', site: 'Site', more: 'Meer', werk: 'Werk', cursussen: 'Cursussen', showreel: 'Showreel', over: 'Over', contact: 'Contact', articles: 'Artikelen', news: 'Wat is nieuw', rights: 'Drone · foto · film · NL' },
     home: {
       title: 'Lichtbreking — cinematische drone, foto & film',
@@ -31,7 +31,7 @@ export const t = {
       selKicker: 'Selectie', selTitle: 'Het werk', selAll: 'Alles bekijken →',
       cFree: 'Gratis cursus', cTitle: 'Leer je drone filmen,<br>niet alleen vliegen.',
       cSub: 'Vijftien modules van eerste opstart tot afgemonteerde film — shot-recepten, beslisbomen en een veldgids.', cBtn: 'Naar de cursussen →',
-      sKicker: 'Dronespots', sTitle: 'Waar vlieg & film je?', sAll: 'Alle bestemmingen →',
+      sKicker: 'Spots', sTitle: 'Waar vlieg & film je?', sAll: 'Alle bestemmingen →',
       sCur: 'Caribbean · 34 spots, exacte kaart & deelbare gids', sHee: 'Veluwe & IJssel · waar het wél en niet mag',
       gKicker: 'Gratis gereedschap', gTitle: 'Reken het zelf uit', gAll: 'Naar het gereedschap →',
       gFlight: 'Vliegtijd & bereik', gCheat: 'Pro-cheatsheet',
@@ -42,7 +42,7 @@ export const t = {
       filters: { alles: 'Alles', drone: 'Drone', video: 'Film', photo: 'Foto' },
     },
     cursussen: {
-      title: 'Cursussen', desc: 'Gratis cinematische cursussen: De Vluchtfilmer (drone), De Grondfilmer (camera) en De Kleurfilmer (kleurcorrectie & grading). Leer filmen vanuit de lucht, op de grond én kleuren in de montage.',
+      title: 'Cursussen', desc: 'Gratis cinematische cursussen: De Vluchtfilmer (drone), De Grondfilmer (Pocket 4), De Kleurfilmer (grading) en De Actiefilmer (Osmo Action 6, action & onderwater). Vier cursussen, alles gratis.',
       kicker: 'Leren', h1: 'Cursussen',
       lead: 'Tutorials zat gekeken en je beeld blijft vlak? Dat ligt niet aan jou — losse video’s geven fragmenten, geen systeem. Hier leer je het hele plaatje: van locatie en licht tot beweging, montage en kleur. Gratis en praktisch — kies je toestel, of volg ze allebei.',
       free: 'Gratis', soon: 'Binnenkort', open: 'Open de cursus →', soonBtn: 'Binnenkort',
@@ -68,7 +68,7 @@ export const t = {
       p3: 'Wat je hier vindt is het werk dat daaruit ontstaat: cinematische beelden uit de lucht en op ooghoogte. De portfolio groeit met elke reis; de gratis cursussen delen alles wat nodig is om zelf cinematisch te leren vliegen en filmen.',
       p4: 'Eerlijk gezegd is dit ook mijn eigen leerproces. Ik schafte net een nieuwe drone aan en merkte hoe versnipperd de informatie over gebruik, instellingen en techniek is. Alles wat ik onderweg uitzoek en test, verzamel en deel ik hier — zodat jij die zoektocht niet opnieuw hoeft te doen. De cursussen en veldkaarten groeien dus mee terwijl ik zelf verder leer.',
       gearTitle: 'Gereedschap',
-      gear: [['Drone', 'DJI Mini 5 Pro · RC 2'], ['Camera', 'DJI Osmo Pocket 4'], ['Montage', 'Final Cut · DaVinci Resolve'], ['Werk', 'Drone, foto & film']],
+      gear: [['Drone', 'DJI Mini 5 Pro · RC 2'], ['Camera', 'DJI Osmo Pocket 4'], ['Action', 'DJI Osmo Action 6'], ['Montage', 'Final Cut · DaVinci Resolve'], ['Werk', 'Drone, foto & film']],
     },
     contact: {
       title: 'Contact', desc: 'Neem contact op met Lichtbreking voor drone- en videowerk, samenwerkingen of vragen over de cursus.',
@@ -93,7 +93,7 @@ export const t = {
 
   en: {
     locale: 'en_GB', htmlLang: 'en', langName: 'EN', otherName: 'NL',
-    nav: { start: 'Start here', werk: 'Work', cursus: 'Courses', tools: 'Tools', nd: 'ND calculator', golden: 'Golden hour planner', spots: 'Drone spots', over: 'About', contact: 'Contact', articles: 'Articles', news: "What's new", showreel: 'Showreel', search: 'Search', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
+    nav: { start: 'Start here', werk: 'Work', cursus: 'Courses', tools: 'Tools', nd: 'ND calculator', golden: 'Golden hour planner', spots: 'Spots', over: 'About', contact: 'Contact', articles: 'Articles', news: "What's new", showreel: 'Showreel', search: 'Search', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
     foot: { tagline: 'Where light breaks — cinematic drone, photo & film.', site: 'Site', more: 'More', werk: 'Work', cursussen: 'Courses', showreel: 'Showreel', over: 'About', contact: 'Contact', articles: 'Articles', news: "What's new", rights: 'Drone · photo · film · NL' },
     home: {
       title: 'Lichtbreking — cinematic drone, photo & film',
@@ -104,7 +104,7 @@ export const t = {
       selKicker: 'Selection', selTitle: 'The work', selAll: 'View all →',
       cFree: 'Free course', cTitle: 'Learn to film with your drone,<br>not just fly it.',
       cSub: 'Fifteen modules from first power-on to a finished film — shot recipes, decision trees and a field guide.', cBtn: 'To the courses →',
-      sKicker: 'Drone spots', sTitle: 'Where to fly & film', sAll: 'All destinations →',
+      sKicker: 'Spots', sTitle: 'Where to fly & film', sAll: 'All destinations →',
       sCur: 'Caribbean · 34 spots, exact map & shareable guide', sHee: 'Veluwe & IJssel · where you can and can’t fly',
       gKicker: 'Free tools', gTitle: 'Work it out yourself', gAll: 'To the tools →',
       gFlight: 'Flight time & range', gCheat: 'Pro cheat sheet',
@@ -115,7 +115,7 @@ export const t = {
       filters: { alles: 'All', drone: 'Drone', video: 'Film', photo: 'Photo' },
     },
     cursussen: {
-      title: 'Courses', desc: 'Free cinematic courses: The Flight Filmer (drone), The Ground Filmer (camera) and The Colour Filmer (colour correction & grading). Learn to film from the air, on the ground and to grade in the edit.',
+      title: 'Courses', desc: 'Free cinematic courses: The Flight Filmer (drone), The Ground Filmer (Pocket 4), The Colour Filmer (grading) and The Action Filmer (Osmo Action 6, action & underwater). Four courses, all free.',
       kicker: 'Learning', h1: 'Courses',
       lead: 'Watched plenty of tutorials and your footage still looks flat? That’s not on you — loose videos give fragments, not a system. Here you learn the whole picture: from location and light to the move, the edit and the colour. Free and practical — pick your device, or follow both.',
       free: 'Free', soon: 'Coming soon', open: 'Open the course →', soonBtn: 'Coming soon',
@@ -141,7 +141,7 @@ export const t = {
       p3: 'What you find here is the work that comes from it: cinematic imagery from the air and at eye level. The portfolio grows with every trip; the free courses share everything you need to learn cinematic flying and filming yourself.',
       p4: 'Honestly, this is my own learning process too. I just bought a new drone and noticed how scattered the information on use, settings and technique really is. Everything I figure out and test along the way, I gather and share here — so you don’t have to repeat that search. The courses and field cards keep growing as I keep learning.',
       gearTitle: 'Gear',
-      gear: [['Drone', 'DJI Mini 5 Pro · RC 2'], ['Camera', 'DJI Osmo Pocket 4'], ['Editing', 'Final Cut · DaVinci Resolve'], ['Work', 'Drone, photo & film']],
+      gear: [['Drone', 'DJI Mini 5 Pro · RC 2'], ['Camera', 'DJI Osmo Pocket 4'], ['Action', 'DJI Osmo Action 6'], ['Editing', 'Final Cut · DaVinci Resolve'], ['Work', 'Drone, photo & film']],
     },
     contact: {
       title: 'Contact', desc: 'Get in touch with Lichtbreking for drone and video work, collaborations or course questions.',

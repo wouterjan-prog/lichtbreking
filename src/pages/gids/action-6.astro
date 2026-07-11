@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import GlassNav from '../../components/GlassNav.astro';
+import Footer from '../../components/Footer.astro';
+import SpectrumRule from '../../components/SpectrumRule.astro';
+import ProCheatsheet from '../../components/ProCheatsheet.astro';
+
+const situaties = [
+  { s: 'Zwembad', r: 'Onderwater-WB of ~5500 K · geen filter · 4K/60 voor slow-mo · RockSteady aan.' },
+  { s: 'Zee & snorkelen (0–5 m)', r: 'Onderwater-witbalans · dichtbij komen · zon in je rug · geen filter nodig.' },
+  { s: 'Duiken (tot ~15 m)', r: 'Onderwater-WB + Dive-modus · ISO laag · diafragma open (f/2.0) · D-Log M voor kleurmarge.' },
+  { s: 'Dieper / grotten / nacht', r: 'Witbalans stopt met werken → videolamp (WB op lampkleur), of D-Log M en corrigeren in de grade.' },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org', '@type': 'TechArticle',
+  headline: 'DJI Osmo Action 6 — action & onderwater settings',
+  inLanguage: 'nl-NL', url: 'https://www.lichtbreking.nl/gids/action-6/',
+};
+---
+<Base
+  title="DJI Osmo Action 6: action & onderwater settings — de gids"
+  description="De complete instellingen voor de Osmo Action 6, boven én onder water. Cheatsheet, het variabele diafragma, de Dive-modus en onderwater-witbalans — filterloos — plus recepten per situatie."
+  path="/gids/action-6/" image="/img/og-actiefilmer.png"
+  jsonld={jsonld}>
+  <GlassNav active="" switchHref="/en/" />
+  <div class="lb-aura"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <main id="hoofdinhoud" tabindex="-1" class="lb-container a6-page">
+    <header class="a6-head lb-reveal">
+      <span class="lb-label lb-label--sky">Gids · DJI Osmo Action 6</span>
+      <h1 class="lb-display-l">Action 6: boven &amp; onder water</h1>
+      <p class="lb-lead">De complete instellingen voor de Osmo Action 6 — met het variabele diafragma, de Dive-modus en de onderwater-witbalans. Onder water werk ik <strong>filterloos</strong>: de camera haalt de kleur zelf terug.</p>
+      <div class="a6-cta">
+        <a href="/cursus/actiefilmer/" class="lb-btn">Naar de cursus De Actiefilmer →</a>
+        <a href="/artikelen/onderwater-action-instellingen/" class="lb-btn lb-btn--ghost">Onderwater-artikel</a>
+      </div>
+      <div class="a6-rule"><SpectrumRule width="160px" thickness={3} /></div>
+    </header>
+
+    <section class="a6-cheat lb-reveal">
+      <span class="lb-label lb-label--sky">Cheatsheet</span>
+      <h2 class="lb-display-m">Alle instellingen op een rij</h2>
+      <p class="lb-lead">Dezelfde waarden als in de cursus en op de gereedschap-pagina — mét per instelling het waarom.</p>
+      <ProCheatsheet cams={['action']} />
+    </section>
+
+    <section class="a6-block lb-reveal">
+      <span class="lb-label lb-label--sky">Onder water</span>
+      <h2 class="lb-display-m">Kleur terug — zónder kleurfilter</h2>
+      <p class="lb-lead">Water slikt eerst rood, dan oranje en geel. De Action 6 corrigeert dat zelf met een aparte witbalans-sensor: zet de onderwater-witbalans (Dive-modus) aan en de kleuren komen terug — geen rood of magenta filter nodig, en je verliest geen licht.</p>
+      <div class="a6-note">
+        <strong>De grens van witbalans.</strong> Ondiep (zwembad, snorkelen, tot ~10–15 m) doet de onderwater-witbalans het uitstekend. Dieper is er te weinig rood licht over om terug te balanceren: pak dan een videolamp (witbalans op de lampkleur), of film in D-Log M en haal de laatste kleur terug in de grade.
+      </div>
+    </section>
+
+    <section class="a6-block lb-reveal">
+      <span class="lb-label lb-label--sky">Recepten</span>
+      <h2 class="lb-display-m">Per situatie</h2>
+      <div class="a6-sit">
+        {situaties.map((x) => (
+          <div class="a6-sitrow">
+            <span class="a6-sitk">{x.s}</span>
+            <span class="a6-sitv">{x.r}</span>
+          </div>
+        ))}
+      </div>
+      <p class="a6-fine">Vuistregels overal: dichtbij komen, alles handmatig vastzetten, zon in je rug, traag bewegen, en na afloop naspoelen met zoet water + de O-ring checken.</p>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .a6-page { padding-top: 130px; padding-bottom: 96px; }
+  .a6-head { max-width: 64ch; margin-bottom: 20px; }
+  .a6-head h1 { margin: 10px 0 16px; }
+  .a6-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  .a6-rule { margin-top: 26px; }
+  .a6-cheat { margin-top: 40px; }
+  .a6-cheat h2, .a6-block h2 { margin: 8px 0 10px; }
+  .a6-cheat .lb-lead, .a6-block .lb-lead { margin-bottom: 22px; }
+  .a6-block { margin-top: 52px; max-width: 760px; }
+  .a6-note { padding: 16px 18px; border-left: 3px solid var(--lb-sky); border-radius: 0 12px 12px 0; background: var(--lb-glass-card-bg); color: var(--lb-bone); line-height: 1.6; }
+  .a6-sit { display: flex; flex-direction: column; gap: 10px; }
+  .a6-sitrow { display: grid; grid-template-columns: 220px 1fr; gap: 16px; padding: 14px 16px; border-radius: 12px; background: var(--lb-glass-card-bg); border: 1px solid var(--lb-glass-border); }
+  @media (max-width: 640px) { .a6-sitrow { grid-template-columns: 1fr; gap: 4px; } }
+  .a6-sitk { font-weight: 600; color: var(--lb-bone); }
+  .a6-sitv { color: var(--lb-mist); font-size: .96rem; line-height: 1.55; }
+  .a6-fine { margin-top: 16px; color: var(--lb-mist); font-size: .9rem; }
+</style>

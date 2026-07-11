@@ -33,4 +33,21 @@ export const proSettings = [
       { k: { nl: 'ND-filter', en: 'ND filter' }, v: { nl: 'buiten bij zon', en: 'outdoors in sun' }, why: { nl: 'Zelfde logica als de drone: ND houdt het licht tegen zodat je op 1/50 s blijft zonder overbelichting.', en: 'Same logic as the drone: ND blocks light so you stay at 1/50 s without overexposing.' } },
     ],
   },
+  {
+    cam: 'action',
+    name: 'DJI Osmo Action 6',
+    kind: { nl: 'Action & onderwater · Pro-modus', en: 'Action & underwater · Pro mode' },
+    rows: [
+      { k: { nl: 'Resolutie', en: 'Resolution' }, v: '4K', why: { nl: 'Benut de grote 1/1.1-inch sensor; 4K/120 (4:3) voor strakke slow-motion.', en: 'Uses the large 1/1.1-inch sensor; 4K/120 (4:3) for crisp slow-motion.' } },
+      { k: { nl: 'Framerate', en: 'Frame rate' }, v: '24–30 fps', why: { nl: '24/25 fps = bioscoop-look; 50/60 fps voor snelle actie en slow-motion.', en: '24/25 fps = cinematic look; 50/60 fps for fast action and slow-motion.' } },
+      { k: { nl: 'Beeldhoek', en: 'FOV' }, v: 'Wide', why: { nl: 'Vermindert vertekening en houdt de randen scherp — juist onder water.', en: 'Reduces distortion and keeps the edges sharp — especially underwater.' } },
+      { k: { nl: 'Sluitertijd', en: 'Shutter' }, v: { nl: '1/50 s', en: '1/50 s' }, why: { nl: '180°-regel. In fel daglicht een ND opzetten om op 1/50 s te blijven.', en: '180° rule. In bright daylight add an ND to stay at 1/50 s.' } },
+      { k: { nl: 'ISO', en: 'ISO' }, v: '100', why: { nl: 'Laag houden voor een schoon beeld; begrens de auto-ISO op diepte tot ~800–1600.', en: 'Keep it low for a clean image; cap the auto-ISO at depth to ~800–1600.' } },
+      { k: { nl: 'Diafragma', en: 'Aperture' }, v: { nl: 'variabel f/2.0–4.0', en: 'variable f/2.0–4.0' }, why: { nl: 'Uniek voor een action-cam: open (f/2.0) op diepte/weinig licht, dicht (f/4.0) in fel licht.', en: 'Unique for an action cam: open (f/2.0) at depth/low light, closed (f/4.0) in bright light.' } },
+      { k: { nl: 'Witbalans', en: 'White balance' }, v: { nl: '5500 K — vast', en: '5500 K — fixed' }, why: { nl: 'Boven water handmatig vast; onder water de onderwater-witbalans (Dive-modus).', en: 'Fixed manually above water; underwater use the underwater white balance (Dive mode).' } },
+      { k: { nl: 'Kleurprofiel', en: 'Colour profile' }, v: { nl: 'Normal of D-Log M', en: 'Normal or D-Log M' }, why: { nl: 'Normal = direct klaar. 10-bit D-Log M als je gaat kleuren — onder water fijn om kleur terug te halen.', en: 'Normal = ready to use. 10-bit D-Log M if you grade — handy underwater to recover colour.' } },
+      { k: { nl: 'Stabilisatie', en: 'Stabilisation' }, v: { nl: 'RockSteady 3.0', en: 'RockSteady 3.0' }, why: { nl: 'Vloeiende beelden. HorizonSteady boven water aan, onder water uit (geen horizon).', en: 'Smooth footage. HorizonSteady on above water, off underwater (no horizon).' } },
+      { k: { nl: 'Onder water', en: 'Underwater' }, v: { nl: 'geen kleurfilter', en: 'no colour filter' }, why: { nl: 'De onderwater-witbalans + Dive-modus halen de kleur terug — geen rood/magenta filter nodig. Voorbij ~15 m een lamp of D-Log M-grade.', en: 'The underwater white balance + Dive mode restore colour — no red/magenta filter needed. Beyond ~15 m use a light or a D-Log M grade.' } },
+    ],
+  },
 ];
