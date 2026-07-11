@@ -3,14 +3,17 @@
    actieve link en mobiel menu. */
 import Logo from "./Logo.astro";
 import { t, locUrl, switchUrl } from "../i18n/ui.js";
-const { active = "", lang = "nl", switchHref, hero = false } = Astro.props;
+const { active = "", lang = "nl", switchHref, hasEn = false, hero = false } = Astro.props;
 const L = t[lang] || t.nl;
 const items = [
-  { label: L.nav.start, href: "/start/", id: "start" },
+  { label: L.nav.start, href: locUrl("/start/", lang), id: "start" },
   { label: L.nav.werk, href: locUrl("/werk/", lang), id: "werk" },
   { label: L.nav.cursus, href: locUrl("/cursussen/", lang), id: "cursussen" },
-  { label: L.nav.articles, href: "/artikelen/", id: "artikelen" },
+  { label: L.nav.articles, href: locUrl("/artikelen/", lang), id: "artikelen" },
 ];
+// Taalwissel verschijnt alleen als de pagina expliciet een tegenhanger declareert (hasEn),
+// zodat we nooit naar een nog-niet-bestaande vertaling linken.
+const showLang = hasEn;
 const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en" : "nl");
 ---
 <header class:list={["lb-nav-shell", { "lb-nav-shell--hero": hero }]} data-lb-nav>
@@ -26,29 +29,30 @@ const langHref = switchHref || switchUrl(Astro.url.pathname, lang === "nl" ? "en
         <a href={it.href} class={active === it.id ? "on" : ""} aria-current={active === it.id ? "page" : undefined}>{it.label}</a>
       ))}
       <div class="lb-nav__drop">
-        <a href="/dronespots/" class:list={["lb-nav__droptop", { on: active === "spots" }]} aria-current={active === "spots" ? "page" : undefined}>
+        <a href={locUrl("/dronespots/", lang)} class:list={["lb-nav__droptop", { on: active === "spots" }]} aria-current={active === "spots" ? "page" : undefined}>
           {L.nav.spots}
           <svg class="lb-nav__caret" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <div class="lb-nav__menu">
-          <a href="/dronespots/">Alle bestemmingen</a>
-          <a href="/curacao/">Curaçao</a>
-          <a href="/heerde/">Heerde &amp; Veluwe</a>
+          <a href={locUrl("/dronespots/", lang)}>{L.nav.allSpots}</a>
+          <a href={locUrl("/curacao/", lang)}>Curaçao</a>
+          <a href={locUrl("/heerde/", lang)}>Heerde &amp; Veluwe</a>
         </div>
       </div>
       <div class="lb-nav__drop">
-        <a href="/gereedschap/" class:list={["lb-nav__droptop", { on: active === "gereedschap" }]} aria-current={active === "gereedschap" ? "page" : undefined}>
+        <a href={locUrl("/gereedschap/", lang)} class:list={["lb-nav__droptop", { on: active === "gereedschap" }]} aria-current={active === "gereedschap" ? "page" : undefined}>
           {L.nav.tools}
           <svg class="lb-nav__caret" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <div class="lb-nav__menu">
-          <a href="/gereedschap/">{L.nav.nd}</a>
-          <a href="/gouden-uur/">{L.nav.golden}</a>
+          <a href={locUrl("/gereedschap/", lang)}>{L.nav.nd}</a>
+          <a href={locUrl("/gouden-uur/", lang)}>{L.nav.golden}</a>
         </div>
       </div>
-      {/* Taalwissel verborgen tot de Engelse site echte content heeft. Terugzetten = onderstaande regel activeren. */}
-      {/* <a class="lb-nav__lang" href={langHref} aria-label={lang === "nl" ? "Switch to English" : "Schakel naar Nederlands"}>{L.otherName}</a> */}
-      <a class="lb-nav__theme lb-nav__search" href="/zoeken/" aria-label={L.nav.search} title={L.nav.search}>
+      {showLang && (
+        <a class="lb-nav__lang" href={langHref} aria-label={lang === "nl" ? "Switch to English" : "Schakel naar Nederlands"}>{L.otherName}</a>
+      )}
+      <a class="lb-nav__theme lb-nav__search" href={locUrl("/zoeken/", lang)} aria-label={L.nav.search} title={L.nav.search}>
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       </a>
       <button class="lb-nav__theme" id="lb-theme-toggle" aria-label={L.nav.theme} title={L.nav.theme}>

@@ -1,6 +1,6 @@
 ---
 import { t, locUrl } from '../i18n/ui.js';
-const { title, description, image = '/img/og.jpg', type = 'website', path = '', lang = 'nl', jsonld } = Astro.props;
+const { title, description, image = '/img/og.jpg', type = 'website', path = '', lang = 'nl', hasEn = false, jsonld } = Astro.props;
 const SITE = 'https://www.lichtbreking.nl';
 const L = t[lang] || t.nl;
 const fullTitle = title ? `${title} · Lichtbreking` : 'Lichtbreking — cinematische drone, foto & film';
@@ -16,7 +16,8 @@ const ogImage = image.startsWith('http') ? image : SITE + image;
 <link rel="canonical" href={canonical} />
 <link rel="alternate" hreflang="nl" href={urlNl} />
 <link rel="alternate" hreflang="x-default" href={urlNl} />
-{/* hreflang="en" verwijderd: de meeste pagina's hebben (nog) geen Engelse tegenhanger. Terugzetten zodra de EN-site compleet is: <link rel="alternate" hreflang="en" href={urlEn} /> */}
+{/* hreflang="en" alleen als de pagina daadwerkelijk een Engelse tegenhanger heeft (hasEn), zodat we nooit naar een 404 verwijzen. */}
+{hasEn && <link rel="alternate" hreflang="en" href={urlEn} />}
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#08080A" />
 

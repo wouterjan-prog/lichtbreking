@@ -6,8 +6,8 @@ const { lang = "nl" } = Astro.props;
 const F = (t[lang] || t.nl).foot;
 const year = new Date().getFullYear();
 const cols = [
-  { h: F.site, links: [["Start hier", "/start/"], [F.werk, locUrl("/werk/", lang)], [F.cursussen, locUrl("/cursussen/", lang)], ["Spots", "/dronespots/"], ["Zoeken", "/zoeken/"]] },
-  { h: F.more, links: [[F.over, locUrl("/over/", lang)], [F.contact, locUrl("/contact/", lang)], ["Begrippenlijst", "/begrippen/"], ["Curaçao-gids", "/curacao/"], ["Drone rond Heerde", "/heerde/"], ["Pocket 4-gids", "/gids/pocket-4/"], ["Action 6-gids", "/gids/action-6/"], [F.articles, "/artikelen/"], ["FAQ", "/faq/"], [F.news, "/wat-is-nieuw/"], ["Privacy", "/privacy/"]] },
+  { h: F.site, links: [[F.start, locUrl("/start/", lang)], [F.werk, locUrl("/werk/", lang)], [F.cursussen, locUrl("/cursussen/", lang)], [F.spots, locUrl("/dronespots/", lang)], [F.search, locUrl("/zoeken/", lang)]] },
+  { h: F.more, links: [[F.over, locUrl("/over/", lang)], [F.contact, locUrl("/contact/", lang)], [F.begrippen, locUrl("/begrippen/", lang)], [F.curacaoGuide, locUrl("/curacao/", lang)], [F.heerdeGuide, locUrl("/heerde/", lang)], [F.pocketGuide, locUrl("/gids/pocket-4/", lang)], [F.actionGuide, locUrl("/gids/action-6/", lang)], [F.articles, locUrl("/artikelen/", lang)], [F.faq, locUrl("/faq/", lang)], [F.news, locUrl("/wat-is-nieuw/", lang)], [F.privacy, locUrl("/privacy/", lang)]] },
 ];
 ---
 <footer class="lb-foot">

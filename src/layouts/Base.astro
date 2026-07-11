@@ -3,13 +3,13 @@ import BaseHead from '../components/BaseHead.astro';
 import { t } from '../i18n/ui.js';
 import '../styles/tokens.css';
 import '../styles/global.css';
-const { title, description, path = '', image, type, jsonld, lang = 'nl' } = Astro.props;
+const { title, description, path = '', image, type, jsonld, lang = 'nl', hasEn = false } = Astro.props;
 const L = t[lang] || t.nl;
 ---
 <!DOCTYPE html>
 <html lang={L.htmlLang}>
 <head>
-  <BaseHead title={title} description={description} image={image} type={type} path={path} lang={lang} jsonld={jsonld} />
+  <BaseHead title={title} description={description} image={image} type={type} path={path} lang={lang} hasEn={hasEn} jsonld={jsonld} />
   <!-- Thema vóór paint: voorkomt flits. Standaard donker, tenzij bezoeker licht koos. -->
   <script is:inline>
     (function () {
