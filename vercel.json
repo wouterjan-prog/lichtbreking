@@ -1,5 +1,11 @@
 {
   "framework": "astro",
   "buildCommand": "astro build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/showreel", "destination": "/werk/", "permanent": true },
+    { "source": "/showreel/", "destination": "/werk/", "permanent": true },
+    { "source": "/en/showreel", "destination": "/en/werk/", "permanent": true },
+    { "source": "/en/showreel/", "destination": "/en/werk/", "permanent": true }
+  ]
 }
