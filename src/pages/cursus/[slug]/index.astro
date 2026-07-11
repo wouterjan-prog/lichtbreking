@@ -122,6 +122,7 @@ const jsonld = {
         )}
       </div>
 
+      {course.slug !== 'actiefilmer' && (
       <div class="cur-cheat">
         <span class="lb-label lb-label--sky">Veldkaart</span>
         <h2 class="lb-display-m">Pro-instellingen in één oogopslag</h2>
@@ -129,6 +130,7 @@ const jsonld = {
         <ProCheatsheet cams={cams} />
         {course.slug === 'kleurfilmer' && <GradeCompare caption="Sleep om te zien wat een grade doet: links plat D-Log M uit de camera, rechts de cinematische look die je in deze cursus leert maken." />}
       </div>
+      )}
     </section>
   </main>
   <Footer />
