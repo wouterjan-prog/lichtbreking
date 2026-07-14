@@ -6,7 +6,7 @@ import SpectrumRule from '../../../components/SpectrumRule.astro';
 import ProCheatsheet from '../../../components/ProCheatsheet.astro';
 
 const situaties = [
-  { s: 'Swimming pool', r: 'Underwater WB or ~5500 K · no filter · 4K/60 for slow-mo · RockSteady on.' },
+  { s: 'Swimming pool', r: 'Underwater WB or ~5500 K · no filter · 4K/60 for slow-mo · HorizonBalancing on.' },
   { s: 'Sea & snorkelling (0–5 m)', r: 'Underwater white balance · get in close · sun behind you · no filter needed.' },
   { s: 'Diving (up to ~15 m)', r: 'Underwater WB + Dive mode · ISO low · aperture open (f/2.0) · D-Log M for colour headroom.' },
   { s: 'Deeper / caves / night', r: 'White balance stops working → video light (WB set to the light\'s colour), or D-Log M and correct in the grade.' },
@@ -18,22 +18,22 @@ const basis = [
   'Video is always 10-bit; no separate switch needed.',
   'Pro mode: EV −0.3, ISO auto, white balance fixed at ~5600 K, Color on Normal (or D-Log M to grade).',
   'Image adjustment: sharpness ("Texture") −1, noise reduction −1 (−2 in the dark).',
-  'FOV Wide or Natural Wide, RockSteady 3.0.',
+  'FOV Wide or Natural Wide. Stabilisation: HorizonBalancing as the default (level horizon), RockSteady for 4K/120 slow-mo and deliberate action.',
 ];
 
 const perGel = [
-  { g: 'General / vlog', m: 'Video', r: '4K/25', f: 'Wide or Natural Wide', s: 'RockSteady 3.0', d: 'Auto (f/2.0–4.0)', x: 'WB fixed at 5600 K' },
+  { g: 'General / vlog', m: 'Video', r: '4K/25', f: 'Wide or Natural Wide', s: 'HorizonBalancing', d: 'Auto (f/2.0–4.0)', x: 'WB fixed at 5600 K' },
   { g: 'Action & sport', m: 'Video', r: '4K/50–60', f: 'Wide / UltraWide', s: 'RockSteady 3.0+', d: 'Auto', x: 'InvisiStick for skiing' },
-  { g: 'Slow-motion', m: 'Slow-mo', r: '4K 4× (120) · 1080p 8× (240)', f: 'Wide', s: 'RockSteady', d: 'f/2.0–2.8', x: 'needs plenty of light' },
-  { g: 'Low light / evening', m: 'SuperNight', r: '4K/25–30', f: 'Standard / Natural Wide', s: 'RockSteady 3.0', d: 'Large f/2.0', x: 'keep ISO low' },
+  { g: 'Slow-motion', m: 'Slow-mo', r: '4K 4× (120) · 1080p 8× (240)', f: 'Wide', s: 'RockSteady', d: 'f/2.0–2.8', x: 'plenty of light · >60 fps: no horizon modes' },
+  { g: 'Low light / evening', m: 'SuperNight', r: '4K/25–30', f: 'Standard / Natural Wide', s: 'HorizonBalancing', d: 'Large f/2.0', x: 'keep ISO low' },
   { g: 'City lights at night', m: 'Video/Photo', r: '—', f: '—', s: '—', d: 'Starburst f/4.0', x: 'creates starbursts' },
   { g: 'Underwater (filterless)', m: 'Video', r: '4K/25–30', f: 'Wide', s: 'HorizonBalancing / low', d: 'f/2.0 or Auto', x: 'Dive/underwater WB · Dive Case >20 m' },
   { g: 'Timelapse (tripod)', m: 'Timelapse', r: '4K/25–30', f: 'Standard/Wide', s: '—', d: 'Auto', x: 'interval 2–5 s for clouds, longer for stars' },
-  { g: 'Hyperlapse (walking/riding)', m: 'Hyperlapse', r: '4K/25–30', f: 'Wide', s: 'RockSteady/HorizonSteady', d: 'Auto', x: '×5–×10' },
+  { g: 'Hyperlapse (walking/riding)', m: 'Hyperlapse', r: '4K/25–30', f: 'Wide', s: 'HorizonBalancing / HorizonSteady', d: 'Auto', x: '×5–×10' },
   { g: 'Landscape photo', m: 'Photo', r: 'RAW+JPEG · 4:3', f: 'Standard (Dewarp)', s: '—', d: 'Fixed f/2.8', x: 'WB 5600 K' },
   { g: 'Night photo', m: 'Photo', r: 'tripod', f: 'Standard', s: '—', d: 'f/2.0', x: 'long shutter, keep ISO low' },
-  { g: 'Vertical / socials', m: 'Portrait Mode or 9:16', r: '2.7K/1080p', f: 'Natural Wide', s: 'RockSteady', d: 'Auto', x: 'exposure tuned to skin tone' },
-  { g: 'Subject tracking', m: 'Subject Tracking', r: '2.7K 16:9 or 9:16 /30–60', f: 'Wide', s: 'RockSteady', d: 'Auto', x: 'keeps the subject centred' },
+  { g: 'Vertical / socials', m: 'Portrait Mode or 9:16', r: '2.7K/1080p', f: 'Natural Wide', s: 'HorizonBalancing', d: 'Auto', x: 'exposure tuned to skin tone' },
+  { g: 'Subject tracking', m: 'Subject Tracking', r: '2.7K 16:9 or 9:16 /30–60', f: 'Wide', s: 'HorizonBalancing', d: 'Auto', x: 'keeps the subject centred' },
 ];
 
 const modi = [
@@ -62,9 +62,9 @@ const aspect = [
 ];
 
 const stab = [
-  { k: 'RockSteady 3.0 / 3.0+', v: 'Your standard; 3.0+ for heavy vibration.' },
-  { k: 'HorizonBalancing', v: 'Keeps the horizon level under slight tilt, while preserving the wide FOV.' },
-  { k: 'HorizonSteady', v: 'Locks the horizon through a full 360° rotation, but crops heavily (up to 4K/60). For rolling/spinning action.' },
+  { k: 'HorizonBalancing', v: 'Your everyday default: keeps the horizon level within ±45° of tilt (exactly the lean you introduce handheld), with only a modest crop, up to 4K/60. Not available above 60 fps.' },
+  { k: 'RockSteady 3.0 / 3.0+', v: 'Maximum field of view and natural motion. Use it for 4K/120 slow-mo (horizon modes cannot run there) and for deliberate tilt (berms, motorbike). 3.0+ for heavy vibration.' },
+  { k: 'HorizonSteady', v: 'Locks the horizon through a full 360° rotation (up to 4K/60), but crops heavily. For rolling or spinning action.' },
 ];
 
 const pro = [
@@ -97,7 +97,7 @@ const jsonld = {
       <h1 class="lb-display-l">Action 6: above &amp; below water</h1>
       <p class="lb-lead">The complete settings for the Osmo Action 6 — with the variable aperture, Dive mode and underwater white balance. Below water I work <strong>filterless</strong>: the camera restores the colour itself.</p>
       <div class="a6-cta">
-        <a href="/en/cursus/actiefilmer/" class="lb-btn">To the course The Action Filmmaker →</a>
+        <a href="/en/cursus/actiefilmer/" class="lb-btn">To the course The Action Filmer →</a>
         <a href="/en/artikelen/onderwater-action-instellingen/" class="lb-btn lb-btn--ghost">Underwater article</a>
         <a href="/action6-cheatsheet.pdf" class="lb-btn lb-btn--ghost" download>Cheat sheet (PDF) ↓</a>
       </div>

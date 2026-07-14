@@ -6,7 +6,7 @@ import SpectrumRule from '../../components/SpectrumRule.astro';
 import ProCheatsheet from '../../components/ProCheatsheet.astro';
 
 const situaties = [
-  { s: 'Zwembad', r: 'Onderwater-WB of ~5500 K · geen filter · 4K/60 voor slow-mo · RockSteady aan.' },
+  { s: 'Zwembad', r: 'Onderwater-WB of ~5500 K · geen filter · 4K/60 voor slow-mo · HorizonBalancing aan.' },
   { s: 'Zee & snorkelen (0–5 m)', r: 'Onderwater-witbalans · dichtbij komen · zon in je rug · geen filter nodig.' },
   { s: 'Duiken (tot ~15 m)', r: 'Onderwater-WB + Dive-modus · ISO laag · diafragma open (f/2.0) · D-Log M voor kleurmarge.' },
   { s: 'Dieper / grotten / nacht', r: 'Witbalans stopt met werken → videolamp (WB op lampkleur), of D-Log M en corrigeren in de grade.' },
@@ -18,22 +18,22 @@ const basis = [
   'Video is altijd 10-bit; geen aparte knop nodig.',
   'Pro-modus: EV −0.3, ISO auto, witbalans vast op ~5600 K, Color op Normal (of D-Log M om te graden).',
   'Image adjustment: scherpte ("Texture") −1, ruisreductie −1 (−2 in het donker).',
-  'FOV Wide of Natural Wide, RockSteady 3.0.',
+  'FOV Wide of Natural Wide. Stabilisatie: HorizonBalancing als standaard (rechte horizon), RockSteady voor 4K/120-slowmo en bewuste actie.',
 ];
 
 const perGel = [
-  { g: 'Algemeen / vlog', m: 'Video', r: '4K/25', f: 'Wide of Natural Wide', s: 'RockSteady 3.0', d: 'Auto (f/2.0–4.0)', x: 'WB 5600 K vast' },
+  { g: 'Algemeen / vlog', m: 'Video', r: '4K/25', f: 'Wide of Natural Wide', s: 'HorizonBalancing', d: 'Auto (f/2.0–4.0)', x: 'WB 5600 K vast' },
   { g: 'Actie & sport', m: 'Video', r: '4K/50–60', f: 'Wide / UltraWide', s: 'RockSteady 3.0+', d: 'Auto', x: 'InvisiStick bij ski' },
-  { g: 'Slow-motion', m: 'Slow-mo', r: '4K 4× (120) · 1080p 8× (240)', f: 'Wide', s: 'RockSteady', d: 'f/2.0–2.8', x: 'veel licht nodig' },
-  { g: 'Weinig licht / avond', m: 'SuperNight', r: '4K/25–30', f: 'Standard / Natural Wide', s: 'RockSteady 3.0', d: 'Large f/2.0', x: 'ISO laag houden' },
+  { g: 'Slow-motion', m: 'Slow-mo', r: '4K 4× (120) · 1080p 8× (240)', f: 'Wide', s: 'RockSteady', d: 'f/2.0–2.8', x: 'veel licht · >60 fps: geen horizonmodi' },
+  { g: 'Weinig licht / avond', m: 'SuperNight', r: '4K/25–30', f: 'Standard / Natural Wide', s: 'HorizonBalancing', d: 'Large f/2.0', x: 'ISO laag houden' },
   { g: 'Stad met lampen ’s nachts', m: 'Video/Foto', r: '—', f: '—', s: '—', d: 'Starburst f/4.0', x: 'geeft sterretjes' },
   { g: 'Onder water (filterloos)', m: 'Video', r: '4K/25–30', f: 'Wide', s: 'HorizonBalancing / laag', d: 'f/2.0 of Auto', x: 'Dive-/onderwater-WB · Dive Case >20 m' },
   { g: 'Timelapse (statief)', m: 'Timelapse', r: '4K/25–30', f: 'Standard/Wide', s: '—', d: 'Auto', x: 'interval 2–5 s wolken, langer voor sterren' },
-  { g: 'Hyperlapse (lopend/rijdend)', m: 'Hyperlapse', r: '4K/25–30', f: 'Wide', s: 'RockSteady/HorizonSteady', d: 'Auto', x: '×5–×10' },
+  { g: 'Hyperlapse (lopend/rijdend)', m: 'Hyperlapse', r: '4K/25–30', f: 'Wide', s: 'HorizonBalancing / HorizonSteady', d: 'Auto', x: '×5–×10' },
   { g: 'Foto landschap', m: 'Photo', r: 'RAW+JPEG · 4:3', f: 'Standard (Dewarp)', s: '—', d: 'Fixed f/2.8', x: 'WB 5600 K' },
   { g: 'Foto nacht', m: 'Photo', r: 'statief', f: 'Standard', s: '—', d: 'f/2.0', x: 'lange sluiter, ISO laag' },
-  { g: 'Vertical / socials', m: 'Portrait Mode of 9:16', r: '2.7K/1080p', f: 'Natural Wide', s: 'RockSteady', d: 'Auto', x: 'belichting op huidtint' },
-  { g: 'Onderwerp volgen', m: 'Subject Tracking', r: '2.7K 16:9 of 9:16 /30–60', f: 'Wide', s: 'RockSteady', d: 'Auto', x: 'houdt onderwerp gecentreerd' },
+  { g: 'Vertical / socials', m: 'Portrait Mode of 9:16', r: '2.7K/1080p', f: 'Natural Wide', s: 'HorizonBalancing', d: 'Auto', x: 'belichting op huidtint' },
+  { g: 'Onderwerp volgen', m: 'Subject Tracking', r: '2.7K 16:9 of 9:16 /30–60', f: 'Wide', s: 'HorizonBalancing', d: 'Auto', x: 'houdt onderwerp gecentreerd' },
 ];
 
 const modi = [
@@ -62,9 +62,9 @@ const aspect = [
 ];
 
 const stab = [
-  { k: 'RockSteady 3.0 / 3.0+', v: 'Je standaard; 3.0+ voor heftige trillingen.' },
-  { k: 'HorizonBalancing', v: 'Houdt de horizon recht bij kleine kanteling, met behoud van brede FOV.' },
-  { k: 'HorizonSteady', v: 'Vergrendelt de horizon over volle 360° rotatie, maar snijdt fors bij (tot 4K/60). Voor rollende/draaiende actie.' },
+  { k: 'HorizonBalancing', v: 'Je alledaagse standaard: houdt de horizon recht binnen ±45° kanteling (precies de scheefstand die je handheld introduceert), met beperkte crop, tot 4K/60. Werkt niet boven 60 fps.' },
+  { k: 'RockSteady 3.0 / 3.0+', v: 'Maximale beeldhoek en natuurlijke beweging. Pak deze voor 4K/120-slowmo (horizonmodi kunnen daar niet) en voor bewuste kanteling (berm, motor). 3.0+ bij heftige trillingen.' },
+  { k: 'HorizonSteady', v: 'Vergrendelt de horizon over volle 360° rotatie (tot 4K/60), maar snijdt fors bij. Voor rollende of draaiende actie.' },
 ];
 
 const pro = [
