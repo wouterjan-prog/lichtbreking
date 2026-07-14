@@ -12,6 +12,71 @@ const situaties = [
   { s: 'Deeper / caves / night', r: 'White balance stops working → video light (WB set to the light\'s colour), or D-Log M and correct in the grade.' },
 ];
 
+const basis = [
+  'Bitrate on High + Video Quality Priority on — the biggest jump in quality (costs battery and heat).',
+  '4K, frame rate 25 fps (EU look) or 50 fps if you want to slow things down — don\'t mix the two families.',
+  'Video is always 10-bit; no separate switch needed.',
+  'Pro mode: EV −0.3, ISO auto, white balance fixed at ~5600 K, Color on Normal (or D-Log M to grade).',
+  'Image adjustment: sharpness ("Texture") −1, noise reduction −1 (−2 in the dark).',
+  'FOV Wide or Natural Wide, RockSteady 3.0.',
+];
+
+const perGel = [
+  { g: 'General / vlog', m: 'Video', r: '4K/25', f: 'Wide or Natural Wide', s: 'RockSteady 3.0', d: 'Auto (f/2.0–4.0)', x: 'WB fixed at 5600 K' },
+  { g: 'Action & sport', m: 'Video', r: '4K/50–60', f: 'Wide / UltraWide', s: 'RockSteady 3.0+', d: 'Auto', x: 'InvisiStick for skiing' },
+  { g: 'Slow-motion', m: 'Slow-mo', r: '4K 4× (120) · 1080p 8× (240)', f: 'Wide', s: 'RockSteady', d: 'f/2.0–2.8', x: 'needs plenty of light' },
+  { g: 'Low light / evening', m: 'SuperNight', r: '4K/25–30', f: 'Standard / Natural Wide', s: 'RockSteady 3.0', d: 'Large f/2.0', x: 'keep ISO low' },
+  { g: 'City lights at night', m: 'Video/Photo', r: '—', f: '—', s: '—', d: 'Starburst f/4.0', x: 'creates starbursts' },
+  { g: 'Underwater (filterless)', m: 'Video', r: '4K/25–30', f: 'Wide', s: 'HorizonBalancing / low', d: 'f/2.0 or Auto', x: 'Dive/underwater WB · Dive Case >20 m' },
+  { g: 'Timelapse (tripod)', m: 'Timelapse', r: '4K/25–30', f: 'Standard/Wide', s: '—', d: 'Auto', x: 'interval 2–5 s for clouds, longer for stars' },
+  { g: 'Hyperlapse (walking/riding)', m: 'Hyperlapse', r: '4K/25–30', f: 'Wide', s: 'RockSteady/HorizonSteady', d: 'Auto', x: '×5–×10' },
+  { g: 'Landscape photo', m: 'Photo', r: 'RAW+JPEG · 4:3', f: 'Standard (Dewarp)', s: '—', d: 'Fixed f/2.8', x: 'WB 5600 K' },
+  { g: 'Night photo', m: 'Photo', r: 'tripod', f: 'Standard', s: '—', d: 'f/2.0', x: 'long shutter, keep ISO low' },
+  { g: 'Vertical / socials', m: 'Portrait Mode or 9:16', r: '2.7K/1080p', f: 'Natural Wide', s: 'RockSteady', d: 'Auto', x: 'exposure tuned to skin tone' },
+  { g: 'Subject tracking', m: 'Subject Tracking', r: '2.7K 16:9 or 9:16 /30–60', f: 'Wide', s: 'RockSteady', d: 'Auto', x: 'keeps the subject centred' },
+];
+
+const modi = [
+  { k: 'Photo', v: 'Still image. Choose RAW+JPEG for editing headroom; 4:3 uses the full sensor.' },
+  { k: 'Video', v: 'Your main mode — always 10-bit.' },
+  { k: 'SuperNight', v: 'Night mode that combines the f/2.0 aperture with noise suppression; 4K up to 60 fps.' },
+  { k: 'Portrait Mode', v: 'Recognises the person and optimises the exposure for natural skin tones.' },
+  { k: 'Subject Tracking', v: 'Automatically keeps a moving subject centred (skiing, cycling); 2.7K/1080p.' },
+  { k: 'Slow-motion', v: '4K 4× (120 fps), 1080p 8× (240 fps), up to 32× super-slow via interpolation. Needs plenty of light.' },
+  { k: 'Timelapse', v: 'From a tripod; speeds up movement (clouds, stars). Interval and duration adjustable.' },
+  { k: 'Hyperlapse', v: 'Timelapse while you move, with RockSteady and ×2–×30 speed.' },
+];
+
+const fov = [
+  { k: 'Standard (Dewarp)', v: 'All distortion removed, straight lines — best for architecture and landscape photos.' },
+  { k: 'Natural Wide', v: 'Wide image, but corrects vertical distortion (buildings, trees). Ideal for vlogging.' },
+  { k: 'Wide', v: 'The all-rounder: wide with limited bulging.' },
+  { k: 'UltraWide', v: 'The widest, with the most fisheye distortion; for action up close.' },
+];
+
+const aspect = [
+  { k: '16:9', v: 'Standard landscape.' },
+  { k: '9:16 (Portrait)', v: 'Vertical for socials, whatever the camera orientation.' },
+  { k: 'Landscape lock', v: 'Stays horizontal, even as the camera tilts.' },
+  { k: 'Custom (square)', v: 'Film 1:1 with crop lines — crop afterwards to landscape or portrait.' },
+];
+
+const stab = [
+  { k: 'RockSteady 3.0 / 3.0+', v: 'Your standard; 3.0+ for heavy vibration.' },
+  { k: 'HorizonBalancing', v: 'Keeps the horizon level under slight tilt, while preserving the wide FOV.' },
+  { k: 'HorizonSteady', v: 'Locks the horizon through a full 360° rotation, but crops heavily (up to 4K/60). For rolling/spinning action.' },
+];
+
+const pro = [
+  { k: 'Exposure (EV)', v: '−0.3 as a rule of thumb; action cams tend to overexpose slightly.' },
+  { k: 'ISO', v: 'Leave on auto; only cap it in the dark.' },
+  { k: 'White balance', v: 'Fixed at ~5600 K to prevent colour shifts; 5000–5100 K for snow, warmer at sunset.' },
+  { k: 'Color', v: 'Normal (ready to go) or D-Log M (flat, more dynamic range; with live colour-recovery preview and colour restoration in the Mimo app).' },
+  { k: 'Variable aperture', v: 'Auto (f/2.0–4.0), Fixed (f/2.8, focuses down to 35 cm), Starburst (f/4.0, starbursts, down to 20 cm), Large (f/2.0, night/macro).' },
+  { k: 'Stabilization scenario', v: 'The stabilisation choice ties to your FOV and resolution; underwater or on a tripod, set it lower or off.' },
+  { k: 'Image adjustment', v: 'Sharpness ("Texture") and noise reduction — better a touch softer (−1/−2). You can add sharpness later; you cannot take it away.' },
+];
+
 const jsonld = {
   '@context': 'https://schema.org', '@type': 'TechArticle',
   headline: 'DJI Osmo Action 6 — action & underwater settings',
@@ -43,6 +108,42 @@ const jsonld = {
       <h2 class="lb-display-m">Every setting at a glance</h2>
       <p class="lb-lead">The same values as in the course and on the gear page — with the why behind each setting.</p>
       <ProCheatsheet cams={['action']} lang="en" />
+    </section>
+
+    <section class="a6-block a6-wide lb-reveal">
+      <span class="lb-label lb-label--sky">All settings</span>
+      <h2 class="lb-display-m">Which setting, when?</h2>
+      <p class="lb-lead">Set the basics right once; then choose by occasion. All modes and pro functions follow in brief.</p>
+
+      <div class="a6-basis">
+        <strong>The basics — set once</strong>
+        <ul>{basis.map((b) => (<li>{b}</li>))}</ul>
+      </div>
+
+      <h3 class="a6-h3">Best settings by occasion</h3>
+      <div class="a6-scroll">
+        <table class="a6-tbl">
+          <thead><tr><th>Occasion</th><th>Mode</th><th>Res · fps</th><th>FOV</th><th>Stabilisation</th><th>Aperture</th><th>Extra</th></tr></thead>
+          <tbody>
+            {perGel.map((r) => (<tr><td>{r.g}</td><td>{r.m}</td><td>{r.r}</td><td>{r.f}</td><td>{r.s}</td><td>{r.d}</td><td>{r.x}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="a6-h3">Shooting modes</h3>
+      <div class="a6-sit">{modi.map((x) => (<div class="a6-sitrow"><span class="a6-sitk">{x.k}</span><span class="a6-sitv">{x.v}</span></div>))}</div>
+
+      <h3 class="a6-h3">Field of view (FOV)</h3>
+      <div class="a6-sit">{fov.map((x) => (<div class="a6-sitrow"><span class="a6-sitk">{x.k}</span><span class="a6-sitv">{x.v}</span></div>))}</div>
+
+      <h3 class="a6-h3">Aspect ratio</h3>
+      <div class="a6-sit">{aspect.map((x) => (<div class="a6-sitrow"><span class="a6-sitk">{x.k}</span><span class="a6-sitv">{x.v}</span></div>))}</div>
+
+      <h3 class="a6-h3">Stabilisation</h3>
+      <div class="a6-sit">{stab.map((x) => (<div class="a6-sitrow"><span class="a6-sitk">{x.k}</span><span class="a6-sitv">{x.v}</span></div>))}</div>
+
+      <h3 class="a6-h3">Pro functions</h3>
+      <div class="a6-sit">{pro.map((x) => (<div class="a6-sitrow"><span class="a6-sitk">{x.k}</span><span class="a6-sitv">{x.v}</span></div>))}</div>
     </section>
 
     <section class="a6-block lb-reveal">
@@ -88,4 +189,16 @@ const jsonld = {
   .a6-sitk { font-weight: 600; color: var(--lb-bone); }
   .a6-sitv { color: var(--lb-mist); font-size: .96rem; line-height: 1.55; }
   .a6-fine { margin-top: 16px; color: var(--lb-mist); font-size: .9rem; }
+  .a6-wide { max-width: 980px; }
+  .a6-h3 { font-size: 1.05rem; color: var(--lb-bone); margin: 24px 0 8px; }
+  .a6-basis { padding: 16px 18px; border-left: 3px solid var(--lb-sky); border-radius: 0 12px 12px 0; background: var(--lb-glass-card-bg); color: var(--lb-bone); }
+  .a6-basis ul { margin: 8px 0 0; padding-left: 1.1rem; }
+  .a6-basis li { margin: 4px 0; color: var(--lb-mist); line-height: 1.5; }
+  .a6-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--lb-glass-border); border-radius: 12px; margin: 6px 0 4px; }
+  .a6-tbl { width: 100%; border-collapse: collapse; min-width: 760px; font-size: .92rem; }
+  .a6-tbl th, .a6-tbl td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--lb-glass-border); vertical-align: top; }
+  .a6-tbl th { color: var(--lb-bone); font-weight: 600; background: var(--lb-glass-card-bg); white-space: nowrap; }
+  .a6-tbl td { color: var(--lb-mist); }
+  .a6-tbl tbody tr td:first-child { color: var(--lb-bone); font-weight: 600; }
+  .a6-tbl tbody tr:last-child td { border-bottom: 0; }
 </style>
