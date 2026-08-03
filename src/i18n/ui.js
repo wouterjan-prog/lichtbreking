@@ -21,7 +21,7 @@ export const t = {
   nl: {
     locale: 'nl_NL', htmlLang: 'nl', langName: 'NL', otherName: 'EN',
     nav: { start: 'Start hier', werk: 'Werk', cursus: 'Cursus', tools: 'Gereedschap', nd: 'ND-calculator', golden: 'Gouden-uur-planner', spots: 'Spots', allSpots: 'Alle bestemmingen', over: 'Over', contact: 'Contact', articles: 'Artikelen', news: 'Wat is nieuw', showreel: 'Showreel', search: 'Zoeken', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Wissel licht/donker' },
-    foot: { tagline: 'Waar licht breekt — cinematische drone, foto & film.', site: 'Site', more: 'Meer', start: 'Start hier', spots: 'Spots', search: 'Zoeken', werk: 'Werk', cursussen: 'Cursussen', showreel: 'Showreel', over: 'Over', contact: 'Contact', begrippen: 'Begrippenlijst', curacaoGuide: 'Curaçao-gids', heerdeGuide: 'Drone rond Heerde', pocketGuide: 'Pocket 4-gids', actionGuide: 'Action 6-gids', faq: 'FAQ', articles: 'Artikelen', news: 'Wat is nieuw', privacy: 'Privacy', rights: 'Drone · foto · film · NL' },
+    foot: { tagline: 'Waar licht breekt — cinematische drone, foto & film.', site: 'Site', more: 'Meer', start: 'Start hier', spots: 'Spots', search: 'Zoeken', werk: 'Werk', cursussen: 'Cursussen', showreel: 'Showreel', over: 'Over', contact: 'Contact', begrippen: 'Begrippenlijst', curacaoGuide: 'Curaçao-gids', heerdeGuide: 'Drone rond Heerde', pocketGuide: 'Pocket 4-gids', actionGuide: 'Action 6-gids', miniGuide: 'Mini 5 Pro-gids', faq: 'FAQ', articles: 'Artikelen', news: 'Wat is nieuw', privacy: 'Privacy', rights: 'Drone · foto · film · NL' },
     home: {
       title: 'Lichtbreking — cinematische drone, foto & film',
       desc: 'Cinematische drone-, foto- en videobeelden, plus vier gratis cursussen voor drone, Pocket 4 en Osmo Action 6. Waar licht breekt.',
@@ -94,7 +94,7 @@ export const t = {
   en: {
     locale: 'en_GB', htmlLang: 'en', langName: 'EN', otherName: 'NL',
     nav: { start: 'Start here', werk: 'Work', cursus: 'Courses', tools: 'Tools', nd: 'ND calculator', golden: 'Golden hour planner', spots: 'Spots', allSpots: 'All destinations', over: 'About', contact: 'Contact', articles: 'Articles', news: "What's new", showreel: 'Showreel', search: 'Search', home: 'Lichtbreking — home', menu: 'Menu', theme: 'Toggle light/dark' },
-    foot: { tagline: 'Where light breaks — cinematic drone, photo & film.', site: 'Site', more: 'More', start: 'Start here', spots: 'Spots', search: 'Search', werk: 'Work', cursussen: 'Courses', showreel: 'Showreel', over: 'About', contact: 'Contact', begrippen: 'Glossary', curacaoGuide: 'Curaçao guide', heerdeGuide: 'Drone around Heerde', pocketGuide: 'Pocket 4 guide', actionGuide: 'Action 6 guide', faq: 'FAQ', articles: 'Articles', news: "What's new", privacy: 'Privacy', rights: 'Drone · photo · film · NL' },
+    foot: { tagline: 'Where light breaks — cinematic drone, photo & film.', site: 'Site', more: 'More', start: 'Start here', spots: 'Spots', search: 'Search', werk: 'Work', cursussen: 'Courses', showreel: 'Showreel', over: 'About', contact: 'Contact', begrippen: 'Glossary', curacaoGuide: 'Curaçao guide', heerdeGuide: 'Drone around Heerde', pocketGuide: 'Pocket 4 guide', actionGuide: 'Action 6 guide', miniGuide: 'Mini 5 Pro guide', faq: 'FAQ', articles: 'Articles', news: "What's new", privacy: 'Privacy', rights: 'Drone · photo · film · NL' },
     home: {
       title: 'Lichtbreking — cinematic drone, photo & film',
       desc: 'Cinematic drone, photo and video work, plus four free courses for drone, Pocket 4 and Osmo Action 6. Where light breaks.',

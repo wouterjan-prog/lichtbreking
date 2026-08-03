@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import GlassNav from '../../components/GlassNav.astro';
 import Footer from '../../components/Footer.astro';
 import SpectrumRule from '../../components/SpectrumRule.astro';
+import VeldkaartPocket from '../../components/veldkaart/VeldkaartPocket.astro';
 
 // Alle waarden gecheckt tegen de Pocket 4-specs (editie 2026).
 // Let op: D-Log begint pas bij basis-ISO 400 — 'ISO 100' bestaat niet in dat profiel.
@@ -50,7 +51,7 @@ const gimbal = [
 
 const bediening = [
   { k: 'Zoom-knop', v: '1× / 2× / 4×', why: 'Dedicated knop onder het scherm springt tussen de zoomstanden. Traag bedienen voor het cinematische effect.' },
-  { k: 'Preset-knop', v: '→ Recording presets', why: 'Razendsnel wisselen tussen je 25p-cine-preset en 60p-slowmo-preset zonder het menu in te duiken.' },
+  { k: 'Custom-knop', v: '→ Switch C1/C2', why: 'Sla tot vijf custom modes op via het control center; wijs de custom-knop toe aan "Switch C1/C2" en wissel blind tussen je 25p-cine-slot en je slowmo-slot.' },
   { k: 'Scherm roteren', v: 'Start opname', why: 'Nieuw: het draaien van het scherm start direct de opname. Roteer de grip voor 9:16 portret of underslung shots.' },
   { k: 'Opslag', v: '107 GB intern', why: 'Overzetten tot 800 MB/s via USB-C — een geheugenkaart is niet meer nodig, maar blijft handig als buffer.' },
   { k: 'Tik & vasthouden', v: 'Lock focus/exposure', why: 'Vergrendelt focus en belichting — cruciaal bij vaste witbalans en ISO.' },
@@ -63,7 +64,7 @@ const recepten = [
   { s: 'Wandeling / B-roll · bewolkt', r: '4K 25p', p: 'D-Log', n: '1/50 · ND64', i: '400 · vast' },
   { s: 'Slowmo · golven / sport', r: '4K 60p', p: 'D-Log', n: '1/120 · ND64–256', i: '400 · vast' },
   { s: 'Extreme slowmo · 240 fps', r: '4K 240p', p: 'Normal*', n: '1/480 · ND16–64', i: 'auto (max 800)' },
-  { s: 'Zonsondergang', r: '4K 25p', p: 'D-Log', n: '1/50 · ND16–64', i: '400 · 4000–4500K' },
+  { s: 'Zonsondergang', r: '4K 25p', p: 'D-Log', n: '1/50 · ND16–64', i: '400 · 5600–6500K' },
   { s: 'Onderwater · behuizing', r: '4K 30p', p: 'D-Log', n: '1/60 · geen ND', i: '400–1600 · auto' },
   { s: 'Portret / social 9:16', r: '3K vert. 25p', p: 'D-Log', n: '1/50 · ND64', i: '400 · vast' },
 ];
@@ -107,12 +108,24 @@ const jsonld = {
       <h1 class="lb-display-l">DJI Osmo Pocket 4:<br>cinematic settings</h1>
       <p class="lb-lead">De complete referentie voor filmische opnames — van PRO-parameters en 10-bit D-Log tot gimbal, custom buttons en een kant-en-klare Final Cut Pro-workflow.</p>
       <div class="gp-cta-row">
-        <a class="lb-btn" href="/downloads/lichtbreking-gids-pocket-4.pdf" download>Download als PDF ↓</a>
+        <a class="lb-btn" href="/downloads/veldkaart-pocket-4.pdf" download>Veldkaart (PDF, print-klaar) ↓</a>
+        <a class="lb-btn lb-btn--ghost" href="/downloads/lichtbreking-gids-pocket-4.pdf" download>Volledige gids als PDF ↓</a>
         <a class="lb-btn lb-btn--ghost" href="/cursus/grondfilmer/">Naar de cursus De Grondfilmer →</a>
       </div>
     </header>
 
     <SpectrumRule />
+
+    <!-- Nº 00 · Veldkaart -->
+    <section class="gp-sec lb-reveal" aria-labelledby="gp-veldkaart">
+      <div class="gp-sec-head">
+        <span class="lb-label">Veldkaart</span>
+        <span class="lb-label lb-label--sky">Curaçao-editie</span>
+      </div>
+      <h2 id="gp-veldkaart" class="lb-display-m">Instellen in 30 seconden</h2>
+      <p class="gp-intro lb-muted">Voor op je telefoon, of geprint in de cameratas: het instel-ritueel, je vijf custom modes en per scène een Normaal- en een PRO-regel. De uitgebreide onderbouwing staat in de secties eronder.</p>
+      <VeldkaartPocket />
+    </section>
 
     <!-- Nº 01 · De basis -->
     <section class="gp-sec lb-reveal" aria-labelledby="gp-basis">

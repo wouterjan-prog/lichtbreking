@@ -64,7 +64,7 @@ const baseArticles = [
 <h2>Witbalans — handmatig vastzetten</h2>
 <p>Witbalans bepaalt of je beeld warm (geel) of koel (blauw) oogt, gemeten in Kelvin. De grote valkuil is <strong>auto-witbalans</strong>: die past zich tijdens een shot aan, dus midden in een draai verspringt de kleur ineens. Dat ziet er onrustig uit en is in de montage lastig te repareren.</p>
 <ul>
-<li><strong>Zet de witbalans handmatig vast.</strong> Buiten bij daglicht zit je rond <strong>5500 K</strong>.</li>
+<li><strong>Zet de witbalans handmatig vast.</strong> Buiten bij daglicht zit je rond <strong>5600 K</strong>.</li>
 <li><strong>Kunstlicht binnen</strong> (winkels, lampen) is warmer — daar kies je rond <strong>3200 K</strong>.</li>
 <li>Hogere Kelvin = koeler beeld, lagere Kelvin = warmer. Kies wat bij het licht past en laat het staan.</li>
 <li><strong>Speel ermee:</strong> bij sneeuw zet je 'm wat lager (~5000 K) voor een neutraler wit; bij een zonsondergang juist hoger voor een warmere gloed.</li>
@@ -100,17 +100,17 @@ const baseArticles = [
 <li><strong>Pro-modus aan</strong> — alleen zo regel je sluiter, ISO en witbalans zelf.</li>
 <li><strong>4K · 24 of 25 fps</strong> — dé bioscoopstandaard. 50/60 fps gebruik je alleen voor slow-motion.</li>
 <li><strong>Sluiter 1/50 s</strong> (180°-regel) — mét een ND-filter zodat je in fel licht niet overbelicht.</li>
-<li><strong>ISO 100</strong> vast en <strong>witbalans handmatig</strong> vast (~5500 K) — geen automatisch geschommel.</li>
+<li><strong>ISO 100</strong> vast en <strong>witbalans handmatig</strong> vast (~5600 K) — geen automatisch geschommel.</li>
 <li><strong>Kleurprofiel D-Log (10-bit)</strong> als je gaat kleuren — dat geeft de meeste dynamiek en de echte cinematische ruimte. Wil je niet nabewerken, dan is Normal prima.</li>
 <li><strong>Scherpte −1, ruis 0</strong> en de belichting (EV) een tikje onder voor veilige highlights.</li>
 <li><strong>Vlieg langzaam</strong> — in Cine-modus op ~3 m/s met rustige gimbal- en draaibewegingen. Dat doet net zoveel voor de "film-look" als je camera-instellingen. <a href="/artikelen/cinematische-besturing-veiligheid-mini-5-pro/">Zo stel je dat in →</a></li>
 </ul>
 
 <h2>Snelle waarden om te onthouden</h2>
-<p><strong>DJI Mini 5 Pro (drone):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 · witbalans 5500 K vast · kleurprofiel Normal of D-Log M · scherpte −1 · ruis 0 · ND volgens licht.</p>
-<p><strong>DJI Osmo Pocket 4 (handheld):</strong> 4K · 24–30 fps · sluiter 1/50 s · ISO 100 (Normal) of 400 (basis in D-Log) · witbalans 5500 K vast (3200 K binnen) · Normal of D-Log · scherpte −1 · gimbal aan · ND buiten bij zon.</p>
+<p><strong>DJI Mini 5 Pro (drone):</strong> 4K · 25 fps · sluiter 1/50 s · ISO 100 · witbalans 5600 K vast · kleurprofiel Normal of D-Log M · scherpte −1 · ruis 0 · ND volgens licht.</p>
+<p><strong>DJI Osmo Pocket 4 (handheld):</strong> 4K · 25 fps · sluiter 1/50 s · ISO 100 (Normal) of 400 (basis in D-Log) · witbalans 5600 K vast (3200 K binnen) · Normal of D-Log · scherpte −1 · gimbal aan · ND buiten bij zon.</p>
 
-<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Zet vóór elke shoot bewust vier dingen vast: sluiter (1/50), ISO (100), witbalans (5500 K) en je ND. Die vier samen bepalen 90% van de "filmische" look — de rest is licht en beweging.</p></div>
+<div class="callout tip"><div class="c-label">Onthoud dit</div><p>Zet vóór elke shoot bewust vier dingen vast: sluiter (1/50), ISO (100), witbalans (5600 K) en je ND. Die vier samen bepalen 90% van de "filmische" look — de rest is licht en beweging.</p></div>
 
 <p>De complete cheatsheet met álle waarden naast elkaar staat op de <a href="/gereedschap/">gereedschap-pagina</a>. En je leert ze stap voor stap toepassen in <a href="/cursus/vluchtfilmer/">De Vluchtfilmer</a> en <a href="/cursus/grondfilmer/">De Grondfilmer</a> — beide gratis.</p>
 `
@@ -309,9 +309,9 @@ const baseArticles = [
 <li><strong>Resolutie:</strong> 4K — de grote sensor benutten, ruimte om bij te snijden of te stabiliseren.</li>
 <li><strong>Framerate:</strong> 25 fps voor de filmische look; 50/60 fps voor snelle actie en slow-motion.</li>
 <li><strong>Beeldhoek (FOV):</strong> Wide — vermindert vertekening en houdt de randen scherp, juist onder water.</li>
-<li><strong>Stabilisatie:</strong> RockSteady 3.0 aan. Zet horizon-nivellering (HorizonSteady/HorizonBalancing) onder water uit — die zoekt een horizon die er niet is.</li>
+<li><strong>Stabilisatie:</strong> laag of uit — test wat rustig oogt. Zet horizon-nivellering (HorizonSteady/HorizonBalancing) onder water uit — die zoekt een horizon die er niet is.</li>
 <li><strong>Kleurprofiel:</strong> Normal voor direct-klaar beeld; 10-bit D-Log M als je gaat kleuren.</li>
-<li><strong>Witbalans:</strong> boven water handmatig vast (~5500 K). Onder water de <strong>onderwater-witbalans</strong> (Dive-modus) — die doet het kleurwerk.</li>
+<li><strong>Witbalans:</strong> boven water handmatig vast (~5600 K). Onder water de <strong>onderwater-witbalans</strong> (Dive-modus) — die doet het kleurwerk.</li>
 <li><strong>Diafragma:</strong> variabel f/2.0–f/4.0. Open (f/2.0) op diepte en in weinig licht; dicht (f/4.0) in fel licht.</li>
 <li><strong>ISO:</strong> zo laag mogelijk (100) voor een schoon beeld; begrens de auto-ISO tot ~800–1600 op diepte.</li>
 <li><strong>ND-filter:</strong> alléén boven water, in fel licht, om op 1/50 s te blijven. Onder water zet je géén ND — daar is het licht al beperkt.</li>
@@ -323,7 +323,7 @@ const baseArticles = [
 
 <h2>Per situatie</h2>
 <h3>Zwembad</h3>
-<p>Helder en veel licht. Onderwater-witbalans of ~5500 K, geen filter. Film 4K/60 voor speelse slow-motion en houd RockSteady aan.</p>
+<p>Helder en veel licht. Onderwater-witbalans of ~5600 K, geen filter. Film 4K/60 voor speelse slow-motion en houd RockSteady aan.</p>
 <h3>Zee &amp; snorkelen (0–5 m)</h3>
 <p>Onderwater-witbalans aan — zo ondiep komt de kleur er prima uit. Kom dichtbij je onderwerp en houd de zon in je rug; elke meter water slikt kleur en contrast.</p>
 <h3>Duiken (tot ~15 m, blauw water)</h3>

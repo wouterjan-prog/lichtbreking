@@ -1,0 +1,195 @@
+---
+import '../../styles/veldkaart.css';
+---
+<div class="vk">
+
+  <div class="vk-legend">
+    <span><span class="vk-dot vk-dot--n"></span><b>Normaal</b> — direct klaar, geen nabewerking</span>
+    <span><span class="vk-dot vk-dot--p"></span><b>PRO</b> — handmatig vast, D-Log(-M), graden verplicht</span>
+  </div>
+  <p class="vk-ev-note"><b>EV of ND?</b> EV-correctie bestaat alleen bij auto-belichting. Zet je sluiter én ISO vast (M), dan verdwijnt EV — je belichting stuur je dan met je ND-filter. Vandaar: EV bij de blauwe regels, ND bij de oranje.</p>
+  <p class="vk-ev-note"><b>Curaçao in drie regels.</b> Het licht is fel en de reflectie hard: pak standaard één ND-stop zwaarder dan je in Nederland zou doen. Het net is er 50 Hz, dus 25 fps en anti-flikker 50 Hz blijven gewoon gelden. En de hitte is echt: camera tussen shots uit en in de schaduw, accu's nooit in de volle zon.</p>
+
+
+      <div class="vk-dev-head">
+        <span class="vk-dev-kind">Handheld · DJI Osmo Pocket 4</span>
+        <h2>Eerst het ritueel, dan de scène</h2>
+        <p>Zelfde volgorde bij elke shoot. Stap 1–3 doe je altijd; stap 4 alleen in PRO.</p>
+      </div>
+
+      <div class="vk-rite">
+        <span class="vk-rite-cap">Instel-ritueel — 30 seconden</span>
+        <ol>
+          <li><span><span class="vk-v">Video · 4K · 25 fps</span> <span class="vk-w">— je C1-preset; 25 fps vanwege 50 Hz-lichtnet.</span></span></li>
+          <li><span><span class="vk-v">Normaal of PRO?</span> <span class="vk-w">— ga je graden? PRO + D-Log. Anders Normaal + Film Tone.</span></span></li>
+          <li><span><span class="vk-v">ND opschroeven</span> <span class="vk-w">— zie de strip hieronder; bij twijfel één stop donkerder.</span></span></li>
+          <li><span><span class="vk-v">PRO: M · 1/50 · ISO 400 · WB 5600 K</span> <span class="vk-w">— D-Log kan niet lager dan ISO 400. In M is er geen EV: te licht = zwaardere ND.</span></span></li>
+          <li><span><span class="vk-v">Testshot</span> <span class="vk-w">— tik &amp; vasthouden = focus/belichting vast; check het histogram.</span></span></li>
+        </ol>
+      </div>
+
+      <div class="vk-once">
+        <span class="vk-once-cap">Eén keer zetten — daarna nooit meer aanraken</span>
+        <div class="vk-chips"><span class="vk-chip vk-chip--key">Bitrate High</span><span class="vk-chip">Anti-flikker 50 Hz</span><span class="vk-chip">Scherpte −1</span><span class="vk-chip">Ruisreductie −1/0</span><span class="vk-chip">Histogram aan*</span><span class="vk-chip">Overbelichtingswaarschuwing aan*</span><span class="vk-chip">Rasterlijnen aan</span><span class="vk-chip">Windreductie aan</span><span class="vk-chip">Glamour-effecten uit</span><span class="vk-chip">Gimbal Slow</span><span class="vk-chip">Joystick-gevoeligheid laag</span><span class="vk-chip">Custom-knop → Switch C1/C2</span></div>
+        <p class="vk-p-note">Bitrate op High (tot 180 Mbps, altijd H.265): maximale detailbehoud, en met 107 GB intern is de extra opslag geen bezwaar. Standaard alleen als de ruimte echt krap wordt.</p>
+        <p class="vk-p-note">* Niet officieel gedocumenteerd voor de Pocket 4. Zoek onder veeg-links (beeldinstellingen), het control center-tandwiel of in de Mimo-app; nergens te vinden = bestaat niet op dit toestel. Zonder deze hulpjes belicht je op het beeld zelf: liever iets te donker dan uitgebeten.</p>
+      </div>
+
+      <div class="vk-presets">
+        <span class="vk-presets-cap">Thuis klaarzetten — custom modes (max 5)</span>
+        <ul>
+          <li><span class="vk-p-slot">C1</span><span class="vk-p-v">CINE — 4K/25 · D-Log · M · 1/50 · ISO 400 · 5600 K · + ND</span></li>
+          <li><span class="vk-p-slot">C2</span><span class="vk-p-v">SLOWMO — 4K/60 · D-Log · M · 1/120 · ISO 400 · 5600 K · + ND</span></li>
+          <li><span class="vk-p-slot">C3</span><span class="vk-p-v">SNEL — 4K/25 · Normal · Auto · max ISO 3200 · EV −0.3 · zonder ND kan</span></li>
+          <li><span class="vk-p-slot">C4</span><span class="vk-p-v">BINNEN — 4K/25 · D-Log · M · 1/50 · ISO 400–800 · 3200 K · geen ND</span></li>
+          <li><span class="vk-p-slot">C5</span><span class="vk-p-v">AVOND — 4K/25 · Normal · 1/50 · ISO ≤ 3200 · WB op lichtbron (±3500–4500 K) · geen ND</span></li>
+        </ul>
+        <p class="vk-p-note">ND zit nooit ín een preset: het is een los opzetstuk. Slot kiezen en filter opschroeven zijn dus twee handelingen. Welke sterkte: zie de ND-strip hieronder. C3 redt zich zonder (auto-belichting compenseert, ten koste van motion blur).</p>
+        <p class="vk-p-note">De Max ISO-limiet zit in het belichtingsmenu (auto met bovengrens); 3200 houdt de ruis binnen de perken waar auto anders tot 12800 mag. Wordt het echt donker, wissel dan alsnog bewust naar C4 of C5.</p>
+        <p class="vk-p-note">Opslaan: veeg omlaag naar het control center → Custom Mode bewaart je huidige instellingen als slot. Je twee favorieten wissel je blind door de custom-knop toe te wijzen aan "Switch C1/C2"; de rest kies je via het menu. Eigen namen typen kan niet, dus houd deze volgorde aan — de scène-kaarten hieronder verwijzen ernaar met → C1 enz.</p>
+        <p class="vk-p-note">Timelapse en hyperlapse krijgen bewust geen slot: dat zijn geplande, rustige shoots waarvoor de lapse-kaarten onderaan je recept zijn. Doe je ze vaak, ruil dan C4 of C5 in voor een LAPSE-slot (interval 2–5 s · M · WB vast · Video + RAW) — check dan wel eenmalig of het slot de lapse-modus mee opslaat.</p>
+      </div>
+
+      <p class="vk-sec-label">ND bij basis-ISO 400 · f/2.0 · 1/50</p>
+      <div class="vk-ndstrip">
+        <div class="vk-nd"><div class="vk-n">ND256</div><div class="vk-l">volle zon</div></div>
+        <div class="vk-nd"><div class="vk-n">ND64</div><div class="vk-l">bewolkt / schaduw</div></div>
+        <div class="vk-nd"><div class="vk-n">ND16</div><div class="vk-l">gouden uur</div></div>
+        <div class="vk-nd"><div class="vk-n">geen</div><div class="vk-l">binnen / avond</div></div>
+      </div>
+      <p class="vk-strip-note"><b>Curaçao:</b> buiten overdag is ND256 je uitgangspunt — zon, wit zand en water tellen op. ND64 alleen bij bewolking of in de schaduw.</p>
+
+      <p class="vk-sec-label">Beeldverhouding</p>
+      <div class="vk-ndstrip vk-ndstrip--2">
+        <div class="vk-nd"><div class="vk-n">16:9</div><div class="vk-l">liggend · 4K · standaard</div></div>
+        <div class="vk-nd"><div class="vk-n">9:16</div><div class="vk-l">grip draaien · 3K verticaal — roteren start de opname</div></div>
+      </div>
+      <p class="vk-strip-note"><b>Oriëntatie: Auto-Rotation aan laten.</b> De grip-draai ís je 9:16-schakelaar. Vergrendel alleen op Landscape als je zeker geen verticaal wilt.</p>
+
+      <p class="vk-sec-label">Scènes — video</p>
+      <div class="vk-scenes">
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Wandeling &amp; B-roll</h3><span class="vk-scene-licht">bewolkt · buiten</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">4K/25</span><span class="vk-chip">Film Tone</span><span class="vk-chip vk-chip--key">EV −0.3</span><span class="vk-chip">ActiveTrack aan</span><span class="vk-chip">ND64</span></div>
+            <p class="vk-mode-note">Film Tone (bijv. CC Film) geeft direct een look zonder grade. ND ook in Normaal: houdt beweging vloeiend.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--slot">→ C1</span><span class="vk-chip">4K/25</span><span class="vk-chip">D-Log</span><span class="vk-chip vk-chip--key">1/50</span><span class="vk-chip">ISO 400</span><span class="vk-chip">5600 K</span><span class="vk-chip">ND64</span></div>
+            <p class="vk-mode-note">Gimbal op Slow/Cinematic, joystick-gevoeligheid laag.</p>
+          </div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Zon, strand &amp; water</h3><span class="vk-scene-licht">fel licht · reflectie</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">4K/25</span><span class="vk-chip vk-chip--key">EV −0.7</span><span class="vk-chip">ND256</span></div>
+            <p class="vk-mode-note">Wit zand en water belichten snel over; liever iets te donker dan uitgebeten lucht.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--slot">→ C1</span><span class="vk-chip">4K/25</span><span class="vk-chip">D-Log</span><span class="vk-chip vk-chip--key">1/50</span><span class="vk-chip">ISO 400</span><span class="vk-chip">5600 K</span><span class="vk-chip vk-chip--key">ND256</span></div>
+          </div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Gouden uur &amp; zonsondergang</h3><span class="vk-scene-licht">laag, warm licht</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">4K/25</span><span class="vk-chip vk-chip--key">EV −0.3</span><span class="vk-chip">ND16</span></div>
+            <p class="vk-mode-note">Belicht op de lucht, niet op de voorgrond; silhouetten mogen.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--slot">→ C1</span><span class="vk-chip">4K/25</span><span class="vk-chip">D-Log</span><span class="vk-chip vk-chip--key">1/50</span><span class="vk-chip">ISO 400</span><span class="vk-chip vk-chip--key">WB 5600–6500 K</span><span class="vk-chip">ND16–64</span></div>
+            <p class="vk-mode-note">WB laten staan of iets hóger voor extra gloed; een lagere Kelvin maakt het beeld juist koeler. In de tropen zakt de zon snel: het gouden uur duurt eerder twintig minuten dan een uur, dus sta klaar.</p>
+          </div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Binnen &amp; kunstlicht</h3><span class="vk-scene-licht">winkel · huiskamer</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">4K/25</span><span class="vk-chip">EV 0</span><span class="vk-chip">geen ND</span></div>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--slot">→ C4</span><span class="vk-chip">4K/25</span><span class="vk-chip">D-Log</span><span class="vk-chip vk-chip--key">1/50</span><span class="vk-chip">ISO 400–800</span><span class="vk-chip vk-chip--key">WB 3200 K</span><span class="vk-chip">geen ND</span></div>
+            <p class="vk-mode-note">Anti-flikker op 50 Hz laten staan; anders strepen bij lampen.</p>
+          </div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Avond &amp; donker</h3><span class="vk-scene-licht">schemer · nacht</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">Low-Light-modus</span><span class="vk-chip">4K/25</span></div>
+            <p class="vk-mode-note">Alleen liggend; de camera regelt de rest.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--slot">→ C5</span><span class="vk-chip vk-chip--key">Normal-profiel</span><span class="vk-chip">1/50</span><span class="vk-chip">ISO ≤ 3200</span><span class="vk-chip">WB op lichtbron</span></div>
+            <p class="vk-mode-note">In het donker géén D-Log: basis-ISO 400 + weinig licht = ruis in de schaduwen.</p>
+          </div>
+          <div class="vk-scene-warn"><b>Let op:</b> Low-Light en D-Log sluiten elkaar uit.</div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Slow-motion</h3><span class="vk-scene-licht">golven · sport · kinderen</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">Slow-mo-modus</span><span class="vk-chip vk-chip--key">4K/120 of 240</span><span class="vk-chip">ND16–64</span></div>
+            <p class="vk-mode-note">120/240 fps werkt alleen liggend en alleen in Normal-profiel.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--slot">→ C2</span><span class="vk-chip">4K/60</span><span class="vk-chip">D-Log</span><span class="vk-chip vk-chip--key">1/120</span><span class="vk-chip">ISO 400</span><span class="vk-chip">ND64–256</span></div>
+            <p class="vk-mode-note">60 fps op een 25p-tijdlijn = 2,4× vertraagd, mét D-Log-kleurruimte.</p>
+          </div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Verticaal voor social</h3><span class="vk-scene-licht">9:16</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">grip draaien</span><span class="vk-chip vk-chip--key">3K vert. · 25</span><span class="vk-chip">EV −0.3</span></div>
+            <p class="vk-mode-note">Scherm roteren start direct de opname.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip">3K vert. · 25</span><span class="vk-chip">D-Log</span><span class="vk-chip vk-chip--key">1/50</span><span class="vk-chip">ISO 400</span><span class="vk-chip">5600 K</span><span class="vk-chip">ND64</span></div>
+          </div>
+        </article>
+      </div>
+
+      <p class="vk-sec-label">Meer dan video — lapse, foto &amp; panorama</p>
+      <div class="vk-scenes">
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Timelapse &amp; Motionlapse</h3><span class="vk-scene-licht">statief</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">Timelapse</span><span class="vk-chip vk-chip--key">interval 2–5 s</span><span class="vk-chip">statief</span></div>
+            <p class="vk-mode-note">2–5 s voor wolken; sterren veel langer. Motionlapse = timelapse mét camerabeweging: max 4 waypoints, de gimbal pant traag.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--key">M-belichting vast</span><span class="vk-chip vk-chip--key">WB vast</span><span class="vk-chip">Video + RAW aan</span></div>
+            <p class="vk-mode-note">Vaste belichting is hier de hele truc: auto = flikkerende timelapse. Video + RAW bewaart ook de losse foto's.</p>
+          </div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Hyperlapse</h3><span class="vk-scene-licht">jij beweegt · "timewarp"</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--key">×5–10</span><span class="vk-chip">ActiveTrack mag aan</span></div>
+            <p class="vk-mode-note">Loop in een rustig, gelijkmatig tempo; de stabilisatie doet de rest.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--key">WB vast</span><span class="vk-chip">ND opzetten</span></div>
+            <p class="vk-mode-note">Een ND geeft motion blur per frame en dus een vloeiender eindresultaat.</p>
+          </div>
+        </article>
+
+        <article class="vk-scene">
+          <div class="vk-scene-top"><h3>Foto &amp; panorama</h3><span class="vk-scene-licht">stills</span></div>
+          <div class="vk-mode vk-mode--n"><span class="vk-mode-tag">Normaal</span>
+            <div class="vk-chips"><span class="vk-chip">4K-still</span><span class="vk-chip vk-chip--key">SuperPhoto 33–37 MP</span><span class="vk-chip">Panorama 3×3 of 180°</span></div>
+            <p class="vk-mode-note">De gimbal schiet de panorama-frames zelf; samenvoegen in de Mimo-app.</p>
+          </div>
+          <div class="vk-mode vk-mode--p"><span class="vk-mode-tag">PRO</span>
+            <div class="vk-chips"><span class="vk-chip vk-chip--key">RAW (DNG)</span><span class="vk-chip">ISO laag</span><span class="vk-chip">lange sluiter tot 4 s</span></div>
+            <p class="vk-mode-note">RAW voor prints en serieuze nabewerking; lange sluiter alleen vanaf statief of steun.</p>
+          </div>
+        </article>
+      </div>
+  <div class="vk-dl">
+    <a class="lb-btn" href="/downloads/veldkaart-pocket-4.pdf" download>Download de veldkaart (PDF, print-klaar) ↓</a>
+  </div>
+</div>
