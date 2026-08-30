@@ -13,3 +13,5 @@ Thumbs.db
 
 # Werkbestanden (mockups e.d.)
 /drafts/
+.vercel
+.env*
