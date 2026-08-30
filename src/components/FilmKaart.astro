@@ -1,0 +1,59 @@
+---
+import PlaceholderTile from './PlaceholderTile.astro';
+import { toestelNaam } from '../data/site.js';
+
+const { film, groot = false } = Astro.props;
+const meta = [toestelNaam(film.toestel), film.duur, film.formaat].filter(Boolean).join(' · ');
+const speelbaar = Boolean(film.bron);
+const id = `lb-film-${film.slug}`;
+---
+<div class="lb-film-kader">
+  <div class:list={['lb-film', !groot && 'lb-film--klein']} data-film id={id}>
+    {speelbaar ? (
+      <video
+        class="lb-film__beeld"
+        src={film.bron}
+        poster={film.poster ?? undefined}
+        playsinline
+        preload="none"
+        data-video
+      ></video>
+    ) : film.poster ? (
+      <img class:list={['lb-film__beeld', groot && 'lb-tegel-beeld--kb']} src={film.poster} alt={film.titel} loading="lazy" decoding="async" />
+    ) : (
+      <PlaceholderTile label={groot ? 'film 21:9' : 'film 16:9'} bestand="films.js" />
+    )}
+
+    <div class="lb-film__waas"></div>
+
+    {film.extern ? (
+      <a class="lb-film__knop" href={film.extern} target="_blank" rel="noopener" aria-label={`Film ${film.titel} bekijken`}>&#9654;</a>
+    ) : (
+      <button type="button" class="lb-film__knop" data-speel aria-label={`Film ${film.titel} afspelen`} disabled={!speelbaar}>&#9654;</button>
+    )}
+
+    <div class="lb-film__onder">
+      <div class="lb-film__titel">{film.titel}</div>
+      {meta && <div class="lb-film__meta">{meta}</div>}
+    </div>
+  </div>
+</div>
+
+{speelbaar && (
+  <script is:inline define:vars={{ id }}>
+    (() => {
+      const kaart = document.getElementById(id);
+      if (!kaart) return;
+      const video = kaart.querySelector('[data-video]');
+      const knop = kaart.querySelector('[data-speel]');
+      if (!video || !knop) return;
+      knop.addEventListener('click', () => {
+        video.controls = true;
+        video.play().catch(() => {});
+        kaart.querySelector('.lb-film__waas')?.remove();
+        kaart.querySelector('.lb-film__onder')?.remove();
+        knop.remove();
+      });
+    })();
+  </script>
+)}

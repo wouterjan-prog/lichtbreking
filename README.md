@@ -1,54 +1,51 @@
-# Lichtbreking
+# lichtbreking.nl
 
-Cinematische portfolio-, foto- en videosite met de cursus *De Vluchtfilmer*. Gebouwd met Astro in een filmische, bijna-zwarte stijl met full-screen beeldscènes, parallax en automatische licht/donker-modus (iOS-stijl).
+Statische site (Astro 4, geen framework-runtime in de browser). Vercel bouwt
+automatisch vanaf `main` en zet live op lichtbreking.nl.
 
-## Pagina's
-- **Home** (`/`) — filmische hero (video-ready) + full-screen portfolio-scènes + cursus-teaser
-- **Cursus** (`/cursus/`) — landingspagina naar de volledige cursus
-- **De Vluchtfilmer** (`/cursus/vluchtfilmer/`) — de complete cursus (statisch HTML)
-- **Over** (`/over/`) en **Contact** (`/contact/`)
-
-## Lokaal draaien
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # bouwt naar dist/
+npm run build    # naar dist/
 ```
 
-## Online zetten (GitHub → Vercel → lichtbreking.nl)
-1. Nieuwe GitHub-repo `lichtbreking`; upload de inhoud van deze map via "Add file → Upload files" (alles behalve `node_modules/` en `dist/` — die staan in `.gitignore`).
-2. [vercel.com](https://vercel.com) → "Add New → Project" → kies de repo. Astro wordt automatisch herkend.
-3. Deploy. In Vercel → Settings → Domains: voeg `lichtbreking.nl` en `www.lichtbreking.nl` toe en volg de DNS-stappen.
+## Waar staat wat
 
-## Wat er is geoptimaliseerd
+| Wat | Bestand |
+| --- | --- |
+| Merk, contact, menu, hero-tekst | `src/data/site.js` |
+| Beelden in het raster en de verticale scroller | `src/data/shots.js` |
+| Films | `src/data/films.js` |
+| Kleuren, spacing, glas, animaties | `src/styles/v4.css` |
+| Pagina's | `src/pages/` |
 
-**SEO & vindbaarheid**
-- Per pagina unieke `<title>` + meta-description (in `src/components/Seo.astro`)
-- JSON-LD structured data: WebSite + Person (home), Course (cursus)
-- Open Graph + Twitter Card met deelbeeld `public/img/og.jpg`
-- Canonical-URL's, `robots.txt`, en `sitemap.xml` (in `public/`)
-- Semantische HTML (`<main>`, `<article>`, `<figure>`), zinvolle `alt`-teksten
+## Beeld toevoegen
 
-**Snelheid**
-- Responsive beelden met `srcset` (640–2600px): elk scherm laadt de juiste resolutie
-- Hero met `fetchpriority="high"`; overige beelden `loading="lazy"`
-- `preconnect`/`dns-prefetch` naar de beeld-CDN
-- Vrijwel geen JavaScript; CSS is licht en zonder framework
-- `width`/`height` op beelden tegen layout-shift (goede CLS)
+1. Zet het bestand in `public/img/werk/`.
+2. Voeg in `src/data/shots.js` een regel toe en vul `bestand: '/img/werk/naam.jpg'`.
+3. `verhouding: '16/9'` loopt over twee kolommen, `'9/16'` gaat naar de
+   Verticaal-scroller, `'4/5'` en `'1/1'` staan in één kolom.
 
-**Responsive**
-- Vloeiende type-schalen (`clamp()`) en geteste breakpoints voor mobiel, tablet, desktop
-- `viewport-fit=cover` + `svh`-units voor correcte full-screen op mobiel (notch/adresbalk)
-- `prefers-reduced-motion` gerespecteerd (parallax/animaties uit)
+Zolang `bestand: null` staat, toont de site een nette lege tegel met de naam van
+het veld dat gevuld moet worden. Zo blijft de layout kloppen voordat er media is.
 
-## Eigen beelden & video toevoegen
-- **Portfolio:** pas `src/data/work.js` aan. Voor eigen foto's: zet ze in `public/img/` — je kunt de Unsplash-`photo`-id's vervangen.
-- **Hero-video:** zet je clip op `public/video/hero.mp4` — die speelt dan automatisch (zacht, geloopt). Zonder video toont het posterbeeld.
-- **Showreel:** in `work.js` bij het showreel-item een YouTube/Vimeo-`embed`-URL invullen (opent in lightbox), of een `video`-pad voor een meespelende achtergrond.
-- **OG-deelbeeld:** vervang `public/img/og.jpg` (1200×630) door een eigen beeld voor mooiere social-previews.
+## Film toevoegen
 
-## Designsysteem
-Alles op CSS-variabelen in `src/styles/global.css`. De spectrale gradient (`--spectrum`) is de "lichtbreking" — spaarzaam gebruiken. Donker is de default (filmisch); de toggle in de nav onthoudt een handmatige keuze. De nav is transparant boven de hero en wordt glas bij scroll.
+1. Video in `public/video/`, stilstaand beeld in `public/img/films/`.
+2. In `src/data/films.js` `bron` en `poster` invullen. Extern gehost? Vul `extern`
+   met de link, dan wordt de afspeelknop een doorverwijzing.
 
-## Domein wijzigen
-Pas `site` aan in `astro.config.mjs`, de URL's in `public/sitemap.xml` + `public/robots.txt`, en de `path`-props in de pagina's.
+De bovenste film uit de lijst staat groot in het spectrumkader op de homepage.
+
+## Hero-video
+
+De hero draait op `public/video/hero.mp4` met `public/video/poster.jpg` als
+stilstaand beeld. Ontbreken die, dan toont de hero een rustig verloopvlak in
+plaats van een gat. De geluidsknop verschijnt alleen als de video er is.
+
+## Ontwerp
+
+Donker, beeld-eerst, één thema (geen licht/donker-schakelaar). Vaste
+spectrumvolgorde `#FF5147 · #FF9A2E · #FFD23E · #46C95F · #2F7CF0 · #9B4DDB`.
+Elementkleuren: lucht `#2F7CF0`, land `#46C95F`, water `#FFD23E`, nacht `#9B4DDB`.
+Alle animaties staan uit bij `prefers-reduced-motion: reduce`.

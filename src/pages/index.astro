@@ -1,4 +1,45 @@
 ---
-import HomeView from '../components/views/HomeView.astro';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import FilterBalk from '../components/FilterBalk.astro';
+import Tegel from '../components/Tegel.astro';
+import FilmKaart from '../components/FilmKaart.astro';
+import Scroller from '../components/Scroller.astro';
+import Overband from '../components/Overband.astro';
+import { hero, site } from '../data/site.js';
+import { rasterShots, verticaleShots, aantalBeelden } from '../data/shots.js';
+import { films, aantalFilms } from '../data/films.js';
+
+const uitgelicht = rasterShots.slice(0, 6);
 ---
-<HomeView lang="nl" />
+<Base titel={null} beschrijving={site.beschrijving} hero={true}>
+  <Hero slot="hero" badge={hero.badge} titel={hero.titel} meta={hero.meta} />
+
+  <FilterBalk modus="link" telling={`${aantalBeelden} beelden`} id="beeld" />
+
+  <div class="lb-raster lb-marge">
+    {uitgelicht.map((s, i) => <Tegel shot={s} lazy={i > 1} />)}
+  </div>
+  <div class="lb-meer lb-marge">
+    <a href="/werk/">Alle beelden &#8594;</a>
+  </div>
+
+  {films.length > 0 && (
+    <section class="lb-sectie lb-marge" id="films">
+      <div class="lb-sectiekop">
+        <h2>Films</h2>
+        <span class="lb-label">{aantalFilms} {aantalFilms === 1 ? 'film' : 'films'}</span>
+      </div>
+      <FilmKaart film={films[0]} groot={true} />
+      {films.length > 1 && (
+        <div class="lb-meer">
+          <a href="/films/">Alle films &#8594;</a>
+        </div>
+      )}
+    </section>
+  )}
+
+  <Scroller shots={verticaleShots} kop="Verticaal" meta="Pocket 4 · iPhone" id="verticaal" />
+
+  <Overband />
+</Base>

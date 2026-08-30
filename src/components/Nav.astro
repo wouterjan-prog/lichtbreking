@@ -1,0 +1,35 @@
+---
+import Logo from './Logo.astro';
+import { menu } from '../data/site.js';
+
+/* variant: 'over-hero' (transparant over de hero) of 'vast' (donkere balk bovenaan) */
+const { variant = 'vast' } = Astro.props;
+const pad = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const actief = (href) => {
+  const h = href.replace(/\/+$/, '') || '/';
+  return h === '/' ? pad === '/' : pad === h || pad.startsWith(h + '/');
+};
+---
+<nav class:list={['lb-nav', variant === 'vast' && 'lb-nav--vast']} aria-label="Hoofdmenu">
+  <a class="lb-merk" href="/">
+    <Logo id="lbnavhex" />
+    <span>lichtbreking</span>
+  </a>
+  <div class="lb-pillen">
+    {menu.map((item) => (
+      <a class="lb-pil" href={item.href} aria-current={actief(item.href) ? 'page' : undefined}>{item.label}</a>
+    ))}
+  </div>
+</nav>
+
+{variant === 'over-hero' && (
+  <script is:inline>
+    (() => {
+      const nav = document.querySelector('.lb-nav');
+      if (!nav) return;
+      const zet = () => nav.classList.toggle('is-gescrold', window.scrollY > 40);
+      zet();
+      window.addEventListener('scroll', zet, { passive: true });
+    })();
+  </script>
+)}

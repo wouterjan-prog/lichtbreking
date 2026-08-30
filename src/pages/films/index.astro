@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import FilmKaart from '../../components/FilmKaart.astro';
+import { films, aantalFilms } from '../../data/films.js';
+
+const [eerste, ...rest] = films;
+---
+<Base
+  titel="Films"
+  beschrijving="Korte films van Lichtbreking, gefilmd met DJI Mini 5 Pro, Action 6 en Pocket 4."
+>
+  <div class="lb-paginakop lb-marge">
+    <h1>Films</h1>
+    <div class="lb-rule lb-rule--kort"></div>
+    <p>{aantalFilms} {aantalFilms === 1 ? 'film' : 'films'}. Beeld zonder commentaar, geluid uit de plek zelf.</p>
+  </div>
+
+  {eerste && (
+    <section class="lb-marge" style="padding-top:clamp(20px,3.4vw,30px)">
+      <FilmKaart film={eerste} groot={true} />
+    </section>
+  )}
+
+  {rest.length > 0 && (
+    <section class="lb-sectie lb-marge">
+      <div class="lb-sectiekop">
+        <h2>Meer</h2>
+        <span class="lb-label">Archief</span>
+      </div>
+      <div class="lb-filmlijst">
+        {rest.map((f) => <FilmKaart film={f} />)}
+      </div>
+    </section>
+  )}
+</Base>

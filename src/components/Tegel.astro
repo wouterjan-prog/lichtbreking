@@ -1,0 +1,23 @@
+---
+import PlaceholderTile from './PlaceholderTile.astro';
+import { toestelNaam } from '../data/site.js';
+
+const { shot, caption = null, lazy = true } = Astro.props;
+const breed = shot.verhouding === '16/9';
+const toonCaption = caption === null ? breed : caption;
+const alt = shot.alt || `${shot.titel}, ${toestelNaam(shot.toestel)}`;
+---
+<div
+  class:list={['lb-tegel', breed && 'lb-tegel--breed']}
+  style={`aspect-ratio:${shot.verhouding}`}
+  data-element={shot.element}
+  data-toestel={shot.toestel}
+  data-type={shot.type}
+>
+  {shot.bestand
+    ? <img src={shot.bestand} alt={alt} loading={lazy ? 'lazy' : 'eager'} decoding="async" />
+    : <PlaceholderTile label={`beeld ${shot.verhouding.replace('/', ':')}`} />}
+
+  {shot.type === 'video' && <span class="lb-tegel__speel" aria-hidden="true">&#9654;</span>}
+  {toonCaption && <span class="lb-tegel__caption">{shot.titel} · {toestelNaam(shot.toestel).replace('DJI ', '')}</span>}
+</div>

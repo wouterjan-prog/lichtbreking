@@ -1,0 +1,27 @@
+---
+import { toestellen, elementKleur } from '../data/site.js';
+import { shots } from '../data/shots.js';
+
+const tel = (id) => shots.filter((s) => s.toestel === id).length;
+---
+<section class="lb-overband" id="over" aria-labelledby="lb-definitie">
+  <span class="lb-blob lb-blob--a" aria-hidden="true"></span>
+  <span class="lb-blob lb-blob--b" aria-hidden="true"></span>
+  <div class="lb-overband__binnen">
+    <div>
+      <p class="lb-definitie" id="lb-definitie">
+        Lichtbreking is het veranderen van de richting van een lichtstraal wanneer deze van de ene doorzichtige stof naar een andere overgaat.
+      </p>
+      <p>Dit archief doet hetzelfde met momenten: hetzelfde landschap, gebroken door vier lenzen.</p>
+    </div>
+    <div class="lb-toestellen">
+      {toestellen.map((t) => (
+        <div class="lb-toestel">
+          <span class="lb-toestel__dot" style={`background:${elementKleur(t.element)}`}></span>
+          <span class="lb-toestel__naam">{t.naam}</span>
+          <span class="lb-toestel__telling">{t.rol} · {tel(t.id)}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

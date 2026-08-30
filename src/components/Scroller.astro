@@ -1,0 +1,16 @@
+---
+import Tegel from './Tegel.astro';
+
+const { shots = [], kop = 'Verticaal', meta = null, id = null } = Astro.props;
+---
+{shots.length > 0 && (
+  <section class="lb-sectie" id={id}>
+    <div class="lb-sectiekop lb-marge">
+      <h2>{kop}</h2>
+      {meta && <span class="lb-label">{meta}</span>}
+    </div>
+    <div class="lb-scroller">
+      {shots.map((s) => <Tegel shot={s} caption={false} />)}
+    </div>
+  </section>
+)}

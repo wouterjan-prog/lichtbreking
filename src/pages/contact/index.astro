@@ -1,4 +1,41 @@
 ---
-import ContactView from '../../components/views/ContactView.astro';
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site.js';
 ---
-<ContactView lang="nl" />
+<Base
+  titel="Contact"
+  beschrijving={`Contact met Lichtbreking via ${site.email} of Instagram ${site.instagramNaam}.`}
+>
+  <div class="lb-paginakop lb-marge">
+    <h1>Contact</h1>
+    <div class="lb-rule lb-rule--kort"></div>
+    <p>Over een beeld, een opname of het gebruik van materiaal.</p>
+  </div>
+
+  <div class="lb-proza lb-marge">
+    <div>
+      <p>
+        Wil je een beeld gebruiken, iets vragen over hoe een opname gemaakt is, of overleggen
+        over een klus? Mail gerust. Ik lees alles en reageer zodra ik achter de computer zit.
+      </p>
+      <p>
+        Meld bij een aanvraag kort waar het over gaat, waar en wanneer het speelt, en wat je
+        met het beeld wilt doen. Dan kan ik in één keer een goed antwoord geven.
+      </p>
+      <p style="margin-top:28px">
+        <a class="lb-knop" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+
+    <div class="lb-kaart">
+      <h2>Elders</h2>
+      <ul class="lb-lijst">
+        <li><b>Instagram</b><span><a href={site.instagram} rel="me noopener" target="_blank">{site.instagramNaam}</a></span></li>
+        <li><b>E-mail</b><span><a href={`mailto:${site.email}`}>{site.email}</a></span></li>
+      </ul>
+      <p style="margin-top:22px">
+        Nieuw werk verschijnt eerst hier op de site en daarna pas op Instagram.
+      </p>
+    </div>
+  </div>
+</Base>

@@ -1,4 +1,70 @@
 ---
-import WerkView from '../../components/views/WerkView.astro';
+import Base from '../../layouts/Base.astro';
+import FilterBalk from '../../components/FilterBalk.astro';
+import Tegel from '../../components/Tegel.astro';
+import Scroller from '../../components/Scroller.astro';
+import { rasterShots, verticaleShots, aantalBeelden } from '../../data/shots.js';
+import { aantalFilms } from '../../data/films.js';
 ---
-<WerkView lang="nl" />
+<Base
+  titel="Werk"
+  beschrijving="Alle beelden uit het archief van Lichtbreking, te filteren op lucht, land, water en nacht."
+>
+  <div class="lb-paginakop lb-marge">
+    <h1>Werk</h1>
+    <div class="lb-rule lb-rule--kort"></div>
+    <p>{aantalBeelden} beelden · {aantalFilms} {aantalFilms === 1 ? 'film' : 'films'}</p>
+  </div>
+
+  <FilterBalk modus="filter" telling={`${rasterShots.length} beelden`} />
+
+  <div class="lb-raster lb-marge" data-raster>
+    {rasterShots.map((s, i) => <Tegel shot={s} lazy={i > 1} />)}
+  </div>
+  <p class="lb-geenresultaat lb-marge" data-geenresultaat hidden>Geen beelden in dit element.</p>
+
+  <Scroller shots={verticaleShots} kop="Verticaal" meta="Pocket 4 · iPhone" />
+</Base>
+
+<script is:inline>
+  (() => {
+    const balk = document.querySelector('[data-filterbalk]');
+    const raster = document.querySelector('[data-raster]');
+    if (!balk || !raster) return;
+
+    const chips = [...balk.querySelectorAll('.lb-chip')];
+    const tegels = [...raster.querySelectorAll('.lb-tegel')];
+    const telling = balk.querySelector('[data-telling]');
+    const leeg = document.querySelector('[data-geenresultaat]');
+
+    const pas = (filter) => {
+      let zichtbaar = 0;
+      tegels.forEach((t) => {
+        const toon = filter === 'alles' || t.dataset.element === filter;
+        t.hidden = !toon;
+        if (toon) zichtbaar++;
+      });
+      chips.forEach((c) => {
+        const actief = c.dataset.filter === filter;
+        c.classList.toggle('is-actief', actief);
+        c.setAttribute('aria-pressed', String(actief));
+      });
+      if (telling) telling.textContent = zichtbaar + (zichtbaar === 1 ? ' beeld' : ' beelden');
+      if (leeg) leeg.hidden = zichtbaar > 0;
+    };
+
+    chips.forEach((c) =>
+      c.addEventListener('click', () => {
+        const f = c.dataset.filter;
+        pas(f);
+        const url = new URL(location.href);
+        if (f === 'alles') url.searchParams.delete('f');
+        else url.searchParams.set('f', f);
+        history.replaceState(null, '', url);
+      })
+    );
+
+    const start = new URLSearchParams(location.search).get('f');
+    if (start && chips.some((c) => c.dataset.filter === start)) pas(start);
+  })();
+</script>
