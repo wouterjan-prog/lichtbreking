@@ -3,12 +3,6 @@
   "buildCommand": "astro build",
   "outputDirectory": "dist",
   "redirects": [
-    {
-      "source": "/:pad*",
-      "has": [{ "type": "host", "value": "lichtbreking.nl" }],
-      "destination": "https://www.lichtbreking.nl/:pad*",
-      "permanent": true
-    },
     { "source": "/showreel", "destination": "/werk/", "permanent": true },
     { "source": "/showreel/", "destination": "/werk/", "permanent": true }
   ]
