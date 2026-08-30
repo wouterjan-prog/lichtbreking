@@ -1,10 +1,13 @@
 ---
-/* Lege tegel zolang er nog geen bestand is. Toont welk veld je moet vullen. */
+/* Lege tegel zolang er nog geen bestand is.
+   In productie blijft het stil: alleen het hexagon, geen tekst.
+   Tijdens ontwikkelen staat er wél bij welk veld gevuld moet worden. */
 const { label = 'beeld', bestand = 'shots.js' } = Astro.props;
+const toonHint = import.meta.env.DEV;
 ---
 <span class="lb-leeg" aria-hidden="true">
   <svg viewBox="0 0 100 100" fill="none">
     <polygon points="50,12 82.9,31 82.9,69 50,88 17.1,69 17.1,31" stroke="currentColor" stroke-width="6" stroke-linejoin="round" />
   </svg>
-  <span>{label} · vervang in {bestand}</span>
+  {toonHint && <span>{label} · vervang in {bestand}</span>}
 </span>

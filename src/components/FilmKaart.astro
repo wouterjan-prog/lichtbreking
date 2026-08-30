@@ -1,8 +1,20 @@
 ---
+import { Picture } from 'astro:assets';
 import PlaceholderTile from './PlaceholderTile.astro';
 import { toestelNaam } from '../data/site.js';
 
+/* Posters uit src/beelden/films/ gaan door de beeldpijplijn.
+   Een pad dat met / begint komt rechtstreeks uit public/. */
+const posters = import.meta.glob(
+  '../beelden/films/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+
 const { film, groot = false } = Astro.props;
+const posterUitPublic = typeof film.poster === 'string' && film.poster.startsWith('/');
+const posterOrigineel = film.poster && !posterUitPublic
+  ? posters[`../beelden/films/${film.poster}`]?.default ?? null
+  : null;
 const meta = [toestelNaam(film.toestel), film.duur, film.formaat].filter(Boolean).join(' · ');
 const speelbaar = Boolean(film.bron);
 const id = `lb-film-${film.slug}`;
@@ -13,12 +25,23 @@ const id = `lb-film-${film.slug}`;
       <video
         class="lb-film__beeld"
         src={film.bron}
-        poster={film.poster ?? undefined}
+        poster={posterUitPublic ? film.poster : undefined}
         playsinline
         preload="none"
         data-video
       ></video>
-    ) : film.poster ? (
+    ) : posterOrigineel ? (
+      <Picture
+        class:list={['lb-film__beeld', groot && 'lb-tegel-beeld--kb']}
+        src={posterOrigineel}
+        formats={['avif', 'webp']}
+        widths={[640, 960, 1280, 1600, 2000]}
+        sizes={groot ? '(min-width: 1240px) 1184px, 100vw' : '(min-width: 1240px) 584px, 100vw'}
+        alt={film.titel}
+        loading="lazy"
+        decoding="async"
+      />
+    ) : posterUitPublic ? (
       <img class:list={['lb-film__beeld', groot && 'lb-tegel-beeld--kb']} src={film.poster} alt={film.titel} loading="lazy" decoding="async" />
     ) : (
       <PlaceholderTile label={groot ? 'film 21:9' : 'film 16:9'} bestand="films.js" />

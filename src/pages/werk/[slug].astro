@@ -1,0 +1,67 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { shots } from '../../data/shots.js';
+import { toestelNaam, elementen, elementKleur } from '../../data/site.js';
+
+const originelen = import.meta.glob(
+  '../../beelden/werk/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+
+/* Alleen beelden die er echt zijn krijgen een eigen pagina. Zolang shots.js
+   nog geen bestanden noemt levert dit nul routes op, dus geen lege pagina's. */
+export function getStaticPaths() {
+  const metBeeld = shots.filter((s) => Boolean(s.bestand));
+  return metBeeld.map((shot, i) => ({
+    params: { slug: shot.slug },
+    props: {
+      shot,
+      vorige: metBeeld[(i - 1 + metBeeld.length) % metBeeld.length],
+      volgende: metBeeld[(i + 1) % metBeeld.length],
+    },
+  }));
+}
+
+const { shot, vorige, volgende } = Astro.props;
+const uitPublic = shot.bestand.startsWith('/');
+const origineel = uitPublic ? null : originelen[`../../beelden/werk/${shot.bestand}`]?.default ?? null;
+const alt = shot.alt || `${shot.titel}, ${toestelNaam(shot.toestel)}`;
+const elementNaam = elementen.find((e) => e.id === shot.element)?.naam ?? shot.element;
+const alleen = vorige?.slug === shot.slug;
+---
+<Base
+  titel={shot.titel}
+  beschrijving={`${shot.titel}, vastgelegd met ${toestelNaam(shot.toestel)}. Element ${elementNaam.toLowerCase()}.`}
+>
+  <div class="lb-paginakop lb-marge">
+    <h1>{shot.titel}</h1>
+    <div class="lb-rule lb-rule--kort"></div>
+    <p>
+      <span class="lb-toestel__dot" style={`background:${elementKleur(shot.element)};display:inline-block;margin-right:8px`}></span>
+      {elementNaam} · {toestelNaam(shot.toestel)} · {shot.type === 'video' ? 'video' : 'foto'}
+    </p>
+  </div>
+
+  <div class="lb-detail lb-marge">
+    {origineel ? (
+      <Picture
+        src={origineel}
+        formats={['avif', 'webp']}
+        widths={[640, 960, 1280, 1600, 2000, 2400]}
+        sizes="(min-width: 1240px) 1184px, 100vw"
+        alt={alt}
+        loading="eager"
+        decoding="async"
+      />
+    ) : (
+      <img src={shot.bestand} alt={alt} loading="eager" decoding="async" />
+    )}
+  </div>
+
+  <nav class="lb-verder lb-marge" aria-label="Naar een ander beeld">
+    {!alleen && <a class="lb-knop lb-knop--rand" href={`/werk/${vorige.slug}/`}>&#8592; {vorige.titel}</a>}
+    <a class="lb-knop lb-knop--rand" href="/werk/">Alle beelden</a>
+    {!alleen && <a class="lb-knop lb-knop--rand" href={`/werk/${volgende.slug}/`}>{volgende.titel} &#8594;</a>}
+  </nav>
+</Base>

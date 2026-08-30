@@ -1,0 +1,70 @@
+---
+/* Groter bekijken. Werkt alleen voor tegels die echt een beeld hebben;
+   lege tegels zijn geen knop en doen dus niets. */
+---
+<dialog class="lb-lightbox" id="lb-lightbox" aria-label="Beeld groter bekijken">
+  <button type="button" class="lb-lightbox__sluit" data-sluit aria-label="Sluiten">&#10005;</button>
+  <button type="button" class="lb-lightbox__nav lb-lightbox__nav--vorige" data-vorige aria-label="Vorige beeld">&#8249;</button>
+  <figure class="lb-lightbox__figuur">
+    <img data-beeld alt="" />
+    <figcaption class="lb-lightbox__bijschrift" data-bijschrift></figcaption>
+  </figure>
+  <button type="button" class="lb-lightbox__nav lb-lightbox__nav--volgende" data-volgende aria-label="Volgende beeld">&#8250;</button>
+</dialog>
+
+<script is:inline>
+  (() => {
+    const venster = document.getElementById('lb-lightbox');
+    if (!venster || typeof venster.showModal !== 'function') return;
+
+    const beeld = venster.querySelector('[data-beeld]');
+    const bijschrift = venster.querySelector('[data-bijschrift]');
+    const knopVorige = venster.querySelector('[data-vorige]');
+    const knopVolgende = venster.querySelector('[data-volgende]');
+
+    let reeks = [];
+    let positie = 0;
+
+    const zichtbareTegels = () =>
+      [...document.querySelectorAll('.lb-tegel--klikbaar')].filter((t) => !t.hidden);
+
+    const toon = (i) => {
+      const tegel = reeks[i];
+      if (!tegel) return;
+      positie = i;
+      beeld.src = tegel.dataset.groot;
+      beeld.alt = tegel.querySelector('img')?.alt || '';
+      bijschrift.textContent = tegel.dataset.bijschrift || '';
+      const meerdere = reeks.length > 1;
+      knopVorige.hidden = !meerdere;
+      knopVolgende.hidden = !meerdere;
+    };
+
+    const stap = (richting) => toon((positie + richting + reeks.length) % reeks.length);
+
+    document.addEventListener('click', (e) => {
+      const tegel = e.target.closest('.lb-tegel--klikbaar');
+      if (!tegel) return;
+      reeks = zichtbareTegels();
+      const i = reeks.indexOf(tegel);
+      if (i === -1) return;
+      toon(i);
+      venster.showModal();
+    });
+
+    knopVorige.addEventListener('click', () => stap(-1));
+    knopVolgende.addEventListener('click', () => stap(1));
+    venster.querySelector('[data-sluit]').addEventListener('click', () => venster.close());
+
+    venster.addEventListener('click', (e) => {
+      if (e.target === venster) venster.close();
+    });
+
+    venster.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); stap(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); stap(1); }
+    });
+
+    venster.addEventListener('close', () => { beeld.removeAttribute('src'); });
+  })();
+</script>

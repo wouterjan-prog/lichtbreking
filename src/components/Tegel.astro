@@ -1,23 +1,77 @@
 ---
+import { Picture, getImage } from 'astro:assets';
 import PlaceholderTile from './PlaceholderTile.astro';
 import { toestelNaam } from '../data/site.js';
 
-const { shot, caption = null, lazy = true } = Astro.props;
+/* Alle originelen uit src/beelden/werk/ worden hier ingelezen. Astro maakt er
+   tijdens de build AVIF en WebP van in meerdere breedtes. Een pad dat met een
+   / begint komt uit public/ en gaat ongemoeid door. */
+const originelen = import.meta.glob(
+  '../beelden/werk/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+
+const { shot, caption = null, lazy = true, lightbox = true } = Astro.props;
+
 const breed = shot.verhouding === '16/9';
+const staand = shot.verhouding === '9/16';
 const toonCaption = caption === null ? breed : caption;
 const alt = shot.alt || `${shot.titel}, ${toestelNaam(shot.toestel)}`;
+
+const uitPublic = typeof shot.bestand === 'string' && shot.bestand.startsWith('/');
+const origineel = shot.bestand && !uitPublic
+  ? originelen[`../beelden/werk/${shot.bestand}`]?.default ?? null
+  : null;
+
+const sizes = staand
+  ? '250px'
+  : breed
+    ? '(min-width: 1240px) 1184px, 100vw'
+    : '(min-width: 1240px) 584px, 50vw';
+
+const breedtes = staand
+  ? [180, 250, 500]
+  : breed
+    ? [640, 960, 1280, 1600, 2000]
+    : [320, 480, 640, 960, 1200];
+
+/* Grote versie voor de lightbox */
+const groot = origineel
+  ? await getImage({ src: origineel, format: 'webp', width: Math.min(origineel.width, 2200) })
+  : null;
+
+const heeftBeeld = Boolean(origineel || uitPublic);
+const klikbaar = lightbox && heeftBeeld;
+const Tag = klikbaar ? 'button' : 'div';
+const grootPad = groot?.src ?? (uitPublic ? shot.bestand : null);
 ---
-<div
-  class:list={['lb-tegel', breed && 'lb-tegel--breed']}
+<Tag
+  class:list={['lb-tegel', breed && 'lb-tegel--breed', klikbaar && 'lb-tegel--klikbaar']}
   style={`aspect-ratio:${shot.verhouding}`}
   data-element={shot.element}
   data-toestel={shot.toestel}
   data-type={shot.type}
+  type={klikbaar ? 'button' : undefined}
+  data-groot={klikbaar ? grootPad : undefined}
+  data-bijschrift={klikbaar ? `${shot.titel} · ${toestelNaam(shot.toestel)}` : undefined}
+  aria-label={klikbaar ? `${shot.titel} groter bekijken` : undefined}
 >
-  {shot.bestand
-    ? <img src={shot.bestand} alt={alt} loading={lazy ? 'lazy' : 'eager'} decoding="async" />
-    : <PlaceholderTile label={`beeld ${shot.verhouding.replace('/', ':')}`} />}
+  {origineel ? (
+    <Picture
+      src={origineel}
+      formats={['avif', 'webp']}
+      widths={breedtes}
+      sizes={sizes}
+      alt={alt}
+      loading={lazy ? 'lazy' : 'eager'}
+      decoding="async"
+    />
+  ) : uitPublic ? (
+    <img src={shot.bestand} alt={alt} loading={lazy ? 'lazy' : 'eager'} decoding="async" />
+  ) : (
+    <PlaceholderTile label={`beeld ${shot.verhouding.replace('/', ':')}`} />
+  )}
 
   {shot.type === 'video' && <span class="lb-tegel__speel" aria-hidden="true">&#9654;</span>}
   {toonCaption && <span class="lb-tegel__caption">{shot.titel} · {toestelNaam(shot.toestel).replace('DJI ', '')}</span>}
-</div>
+</Tag>

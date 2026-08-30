@@ -6,8 +6,9 @@ import Tegel from '../components/Tegel.astro';
 import FilmKaart from '../components/FilmKaart.astro';
 import Scroller from '../components/Scroller.astro';
 import Overband from '../components/Overband.astro';
+import Lightbox from '../components/Lightbox.astro';
 import { hero, site } from '../data/site.js';
-import { rasterShots, verticaleShots, aantalBeelden } from '../data/shots.js';
+import { rasterShots, verticaleShots, aantalBeelden, heeftBeeldmateriaal } from '../data/shots.js';
 import { films, aantalFilms } from '../data/films.js';
 
 const uitgelicht = rasterShots.slice(0, 6);
@@ -16,6 +17,10 @@ const uitgelicht = rasterShots.slice(0, 6);
   <Hero slot="hero" badge={hero.badge} titel={hero.titel} meta={hero.meta} />
 
   <FilterBalk modus="link" telling={`${aantalBeelden} beelden`} id="beeld" />
+
+  {!heeftBeeldmateriaal && (
+    <p class="lb-inaanbouw lb-marge">Het archief wordt gevuld. De beelden verschijnen hier binnenkort.</p>
+  )}
 
   <div class="lb-raster lb-marge">
     {uitgelicht.map((s, i) => <Tegel shot={s} lazy={i > 1} />)}
@@ -42,4 +47,5 @@ const uitgelicht = rasterShots.slice(0, 6);
   <Scroller shots={verticaleShots} kop="Verticaal" meta="Pocket 4 · iPhone" id="verticaal" />
 
   <Overband />
+  <Lightbox />
 </Base>

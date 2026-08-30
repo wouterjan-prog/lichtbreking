@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site.js';
+---
+<Base
+  titel="Privacy en colofon"
+  beschrijving="Wat deze site wel en niet van bezoekers verwerkt, en wie erachter zit."
+>
+  <div class="lb-paginakop lb-marge">
+    <h1>Privacy en colofon</h1>
+    <div class="lb-rule lb-rule--kort"></div>
+    <p>Kort, want deze site verzamelt vrijwel niets.</p>
+  </div>
+
+  <div class="lb-proza lb-marge">
+    <div>
+      <h2>Wat er niet gebeurt</h2>
+      <p>
+        Deze site plaatst geen cookies, gebruikt geen analytics of trackingpixels, en laadt
+        niets van andere partijen in. Ook het lettertype staat op de eigen server, zodat je
+        browser tijdens een bezoek geen contact legt met Google of een ander bedrijf. Er is
+        daarom ook geen cookiemelding: er valt niets te kiezen.
+      </p>
+      <h2>Wat er wel gebeurt</h2>
+      <p>
+        De site wordt gehost door Vercel. Om een pagina te kunnen uitleveren verwerkt Vercel
+        technische gegevens in serverlogs, waaronder je IP-adres, het opgevraagde adres en je
+        browsertype. Dat is nodig om de site te tonen en te beschermen tegen misbruik. Ik kijk
+        die logs zelf niet in en gebruik ze niet om bezoekers te volgen.
+      </p>
+      <h2>Als je mailt</h2>
+      <p>
+        Stuur je een bericht naar {site.email}, dan bewaar ik die mail zolang dat nodig is om je
+        vraag af te handelen. Ik gebruik je adres nergens anders voor en geef het niet door.
+        Wil je weten wat er van je bewaard wordt, of wil je dat het weg is, mail dan naar
+        hetzelfde adres.
+      </p>
+      <h2>Beeldrechten</h2>
+      <p>
+        Alle foto's en films op deze site zijn van mij. Ze zijn niet vrij te gebruiken, ook niet
+        met bronvermelding. Wil je een beeld gebruiken, vraag het even. Meestal komen we eruit.
+      </p>
+    </div>
+
+    <div class="lb-kaart">
+      <h2>Colofon</h2>
+      <ul class="lb-lijst">
+        <li><b>Site</b><span>lichtbreking.nl</span></li>
+        <li><b>Contact</b><span><a href={`mailto:${site.email}`}>{site.email}</a></span></li>
+        <li><b>Instagram</b><span><a href={site.instagram} rel="me noopener" target="_blank">{site.instagramNaam}</a></span></li>
+        <li><b>Hosting</b><span>Vercel</span></li>
+        <li><b>Gebouwd met</b><span>Astro</span></li>
+        <li><b>Lettertype</b><span><a href="/fonts/albert-sans-OFL.txt">Albert Sans, OFL</a></span></li>
+      </ul>
+      <p style="margin-top:22px">
+        Klopt er iets niet of mis je iets? <a href="/contact/">Laat het weten</a>.
+      </p>
+    </div>
+  </div>
+</Base>

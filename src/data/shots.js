@@ -43,3 +43,7 @@ export const shots = [
 export const rasterShots = shots.filter((s) => s.verhouding !== '9/16');
 export const verticaleShots = shots.filter((s) => s.verhouding === '9/16');
 export const aantalBeelden = shots.length;
+
+/* Zolang geen enkel beeld een bestand heeft, toont de site een korte
+   melding in plaats van te doen alsof het archief al gevuld is. */
+export const heeftBeeldmateriaal = shots.some((s) => Boolean(s.bestand));

@@ -3,7 +3,8 @@ import Base from '../../layouts/Base.astro';
 import FilterBalk from '../../components/FilterBalk.astro';
 import Tegel from '../../components/Tegel.astro';
 import Scroller from '../../components/Scroller.astro';
-import { rasterShots, verticaleShots, aantalBeelden } from '../../data/shots.js';
+import Lightbox from '../../components/Lightbox.astro';
+import { rasterShots, verticaleShots, aantalBeelden, heeftBeeldmateriaal } from '../../data/shots.js';
 import { aantalFilms } from '../../data/films.js';
 ---
 <Base
@@ -18,12 +19,17 @@ import { aantalFilms } from '../../data/films.js';
 
   <FilterBalk modus="filter" telling={`${rasterShots.length} beelden`} />
 
+  {!heeftBeeldmateriaal && (
+    <p class="lb-inaanbouw lb-marge">Het archief wordt gevuld. De beelden verschijnen hier binnenkort.</p>
+  )}
+
   <div class="lb-raster lb-marge" data-raster>
     {rasterShots.map((s, i) => <Tegel shot={s} lazy={i > 1} />)}
   </div>
   <p class="lb-geenresultaat lb-marge" data-geenresultaat hidden>Geen beelden in dit element.</p>
 
   <Scroller shots={verticaleShots} kop="Verticaal" meta="Pocket 4 · iPhone" />
+  <Lightbox />
 </Base>
 
 <script is:inline>

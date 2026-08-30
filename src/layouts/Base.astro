@@ -15,6 +15,41 @@ const {
 const paginaTitel = titel ? `${titel} · lichtbreking` : 'lichtbreking';
 const canoniek = new URL(Astro.url.pathname, site.url).href;
 const ogUrl = new URL(ogAfbeelding, site.url).href;
+
+/* Gestructureerde data: wie de site is, welke site het is, en welke pagina je bekijkt.
+   Zoekmachines lezen dit om merk, taal en samenhang te begrijpen. */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}/#organisatie`,
+      name: 'Lichtbreking',
+      url: `${site.url}/`,
+      email: site.email,
+      logo: { '@type': 'ImageObject', url: `${site.url}/app-icon-512.png` },
+      sameAs: [site.instagram],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: `${site.url}/`,
+      name: 'lichtbreking',
+      inLanguage: 'nl-NL',
+      description: site.beschrijving,
+      publisher: { '@id': `${site.url}/#organisatie` },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canoniek}#pagina`,
+      url: canoniek,
+      name: paginaTitel,
+      description: beschrijving,
+      inLanguage: 'nl-NL',
+      isPartOf: { '@id': `${site.url}/#website` },
+    },
+  ],
+};
 ---
 <!doctype html>
 <html lang="nl">
@@ -32,12 +67,9 @@ const ogUrl = new URL(ogAfbeelding, site.url).href;
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon-180.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&display=swap"
-    />
+    <!-- Albert Sans wordt zelf gehost en pas opgehaald als het lettertype echt
+         nodig is. Op Apple-apparaten wint de systeemfont uit de stack, dus daar
+         wordt er niets gedownload. -->
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="lichtbreking" />
@@ -49,6 +81,8 @@ const ogUrl = new URL(ogAfbeelding, site.url).href;
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="sitemap" href="/sitemap.xml" />
+
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />}
   </head>
   <body>
     <a class="lb-overslaan" href="#inhoud">Naar de inhoud</a>
