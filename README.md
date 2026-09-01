@@ -51,9 +51,32 @@ De bovenste film uit de lijst staat groot in het spectrumkader op de homepage.
 
 ## Hero-video
 
-De hero draait op `public/video/hero.mp4` met `public/video/poster.jpg` als
-stilstaand beeld. Ontbreken die, dan toont de hero een rustig verloopvlak in
-plaats van een gat. De geluidsknop verschijnt alleen als de video er is.
+De hero gebruikt drie bestanden in `public/video/`:
+
+| Bestand | Wat |
+| --- | --- |
+| `hero.hevc.mp4` | HEVC 1080p, wordt als eerste aangeboden (Safari en nieuwere Chrome) |
+| `hero.mp4` | H.264 1080p, terugval voor de rest |
+| `poster.webp` | stilstaand beeld, gelijk aan het eerste frame |
+
+Ontbreken ze, dan toont de hero een rustig verloopvlak in plaats van een gat.
+
+De video heeft bewust **geen** `autoplay`-attribuut. Een klein script start hem,
+maar slaat dat over bij `prefers-reduced-motion: reduce` of als de bezoeker
+databesparing aan heeft staan. Die zien het posterbeeld, een fractie van het
+gewicht. Daarom staat `preload="none"`: zonder afspelen wordt de video ook niet
+opgehaald.
+
+De geluidsknop verschijnt alleen als `hero.videoHeeftGeluid` in `src/data/site.js`
+op `true` staat. Zet dat pas aan bij een hero-video met een écht geluidsspoor.
+
+### Nieuwe hero-video maken
+
+De omzetting van een zware camerabestand naar deze drie bestanden gaat met
+AVFoundation, dus zonder extra software. Het scriptje daarvoor staat niet in de
+repo; vraag erom, of gebruik een encoder naar keuze met deze richtwaarden:
+1920 breed, H.264 op ongeveer 2,6 Mbit/s en HEVC op ongeveer 1,6 Mbit/s, zonder
+geluidsspoor, met fast start aan.
 
 ## Ontwerp
 

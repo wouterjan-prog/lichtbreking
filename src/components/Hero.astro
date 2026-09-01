@@ -2,34 +2,39 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import Nav from './Nav.astro';
+import { hero as heroInstelling } from '../data/site.js';
 
-const {
-  badge = 'Nieuwste serie',
-  titel,
-  meta = null,
-} = Astro.props;
+const { badge, titel, meta = null } = Astro.props;
 
-/* De hero draait op /video/hero.mp4 zodra dat bestand er is.
-   Zolang het ontbreekt tonen we een rustig verloopvlak in plaats van een gat. */
+/* De hero draait op public/video/. Ontbreken die bestanden, dan toont de hero
+   een rustig verloopvlak in plaats van een gat.
+   hero.hevc.mp4 gaat voorop: Safari en nieuwere Chrome nemen die en zijn ruim
+   een derde lichter uit. Browsers zonder HEVC slaan hem over op de type-regel
+   en pakken hero.mp4. */
 const pub = (p) => path.join(process.cwd(), 'public', p);
-const heeftVideo = fs.existsSync(pub('video/hero.mp4'));
-const heeftPoster = fs.existsSync(pub('video/poster.jpg'));
+const heeftH264 = fs.existsSync(pub('video/hero.mp4'));
+const heeftHevc = fs.existsSync(pub('video/hero.hevc.mp4'));
+const heeftPoster = fs.existsSync(pub('video/poster.webp'));
+const heeftVideo = heeftH264 || heeftHevc;
+const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
 ---
 <header class="lb-hero">
   {heeftVideo ? (
     <video
       id="lb-hero-video"
       class="lb-hero__media"
-      autoplay
       muted
       loop
       playsinline
-      preload="auto"
-      src="/video/hero.mp4"
-      poster={heeftPoster ? '/video/poster.jpg' : undefined}
-    ></video>
+      preload="none"
+      poster={heeftPoster ? '/video/poster.webp' : undefined}
+      aria-label="Sfeerbeeld: helder water met een steiger en een rode boot, van bovenaf"
+    >
+      {heeftHevc && <source src="/video/hero.hevc.mp4" type='video/mp4; codecs="hvc1"' />}
+      {heeftH264 && <source src="/video/hero.mp4" type='video/mp4; codecs="avc1.640028"' />}
+    </video>
   ) : heeftPoster ? (
-    <img class="lb-hero__media" src="/video/poster.jpg" alt="" />
+    <img class="lb-hero__media" src="/video/poster.webp" alt="" />
   ) : (
     <div class="lb-hero__leeg"><span>hero-video · /video/hero.mp4</span></div>
   )}
@@ -50,7 +55,7 @@ const heeftPoster = fs.existsSync(pub('video/poster.jpg'));
       )}
     </div>
 
-    {heeftVideo && (
+    {toonGeluid && (
       <button type="button" class="lb-geluid" id="lb-geluid" aria-pressed="false">
         <span class="lb-geluid__icoon" data-icoon>&#128263;</span>
         <span class="lb-geluid__tekst" data-tekst>Geluid aan</span>
@@ -64,9 +69,23 @@ const heeftPoster = fs.existsSync(pub('video/poster.jpg'));
 {heeftVideo && (
   <script is:inline>
     (() => {
-      const knop = document.getElementById('lb-geluid');
       const video = document.getElementById('lb-hero-video');
-      if (!knop || !video) return;
+      if (!video) return;
+
+      /* Bewust geen autoplay-attribuut: zo halen bezoekers die geen beweging
+         willen, of die op databesparing staan, de video ook niet binnen.
+         Zij zien het posterbeeld, dat is een paar honderd kilobyte. */
+      const rustig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const zuinig = navigator.connection && navigator.connection.saveData;
+      if (!rustig && !zuinig) {
+        video.play().catch(() => {});
+      }
+
+      /* Gaat het decoderen toch mis, dan blijft het posterbeeld staan. */
+      video.addEventListener('error', () => video.removeAttribute('src'), true);
+
+      const knop = document.getElementById('lb-geluid');
+      if (!knop) return;
       knop.addEventListener('click', () => {
         const aan = video.muted;
         video.muted = !aan;
