@@ -24,10 +24,10 @@ De vier bestanden die de site verwacht:
 
 ```bash
 B="/pad/naar/bron.mp4"
-./lus-maken "$B" ../public/video/hero-2160.hevc.mp4 hevc 3840 10000000 5.0 11.0 1.0
-./lus-maken "$B" ../public/video/hero-2160.mp4      h264 3840 12000000 5.0 11.0 1.0
-./lus-maken "$B" ../public/video/hero-1440.hevc.mp4 hevc 2560  6000000 5.0 11.0 1.0
-./lus-maken "$B" ../public/video/hero-1440.mp4      h264 2560  8000000 5.0 11.0 1.0
+./lus-maken "$B" ../public/video/hero-2160.hevc.mp4 hevc 3840 26000000 5.0 11.0 1.0
+./lus-maken "$B" ../public/video/hero-2160.mp4      h264 3840 32000000 5.0 11.0 1.0
+./lus-maken "$B" ../public/video/hero-1440.hevc.mp4 hevc 2560 10000000 5.0 11.0 1.0
+./lus-maken "$B" ../public/video/hero-1440.mp4      h264 2560 14000000 5.0 11.0 1.0
 ./frame-pakken ../public/video/hero-2160.hevc.mp4 poster.jpg 0.02 2560 0.95
 python3 -c "from PIL import Image; Image.open('poster.jpg').convert('RGB').save('../public/video/poster.webp','WEBP',quality=76,method=6)"
 ```
@@ -58,6 +58,9 @@ beeldpunten heeft zijn scherm echt.
   pixeldichtheid wordt 1440p nog opgeblazen en dat zie je meteen in water.
 - **HEVC haalt bij ongeveer 60% van de bitrate dezelfde kwaliteit** als H.264.
   Wie het niet kan decoderen valt terug op de H.264-versie.
+- **Bewegend water is het zwaarste dat je een encoder geeft.** Gemeten op deze
+  clip ligt het omslagpunt rond 18 tot 26 Mbit/s voor HEVC op 2160p. Onder de
+  10 Mbit/s worden de rimpels zichtbaar weggepoetst. Kies dus niet zuinig.
 
 Het geluidsspoor gaat er bewust af. Dronebeeld heeft doorgaans een leeg spoor.
 Zit er wél bruikbaar geluid op, dan moet dit gereedschap uitgebreid worden en kan
@@ -68,3 +71,13 @@ Zit er wél bruikbaar geluid op, dan moet dit gereedschap uitgebreid worden en k
 Video's spelen niet in `python3 -m http.server`: die kent geen Range-verzoeken.
 Gebruik een server die dat wel doet, anders lijkt het alsof de video stilstaat
 terwijl er niets mis is.
+
+## Tempo controleren
+
+`tempo.swift` (in de scratchpad van die sessie, zo weer te maken) leest alle
+tijdstempels uit een bestand en laat zien of de afstanden gelijk zijn. Handig om
+uit te sluiten dat schokkerigheid uit de omzetting komt.
+
+Belangrijk: een bron van 24 fps geeft bij een pannende opname zichtbare schokken
+op een 60Hz-scherm, hoe goed je ook omzet. Dat zit in het materiaal, niet in de
+codering. Filmen op 50 of 60 fps lost dat bij de bron op.

@@ -31,7 +31,7 @@ const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
       muted
       loop
       playsinline
-      preload="none"
+      preload="auto"
       poster={heeftPoster ? '/video/poster.webp' : undefined}
       aria-label="Sfeerbeeld: helder water met een steiger en een rode boot, van bovenaf"
     ></video>
@@ -104,12 +104,28 @@ const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
       video.addEventListener('error', () => {
         i += 1;
         if (i >= kandidaten.length) return;
-        video.src = kandidaten[i];
-        video.play().catch(() => {});
+        start(kandidaten[i]);
       });
 
-      video.src = kandidaten[0];
-      video.play().catch(() => {});
+      /* Pas afspelen als de browser zegt dat hij het in één keer uitspeelt.
+         Meteen starten geeft haperingen terwijl het bestand nog binnenkomt.
+         Blijft dat signaal uit, dan na vier seconden alsnog beginnen. */
+      let gestart = false;
+      const speel = () => {
+        if (gestart) return;
+        gestart = true;
+        video.play().catch(() => {});
+      };
+
+      const start = (bron) => {
+        gestart = false;
+        video.addEventListener('canplaythrough', speel, { once: true });
+        video.src = bron;
+        video.load();
+        setTimeout(speel, 4000);
+      };
+
+      start(kandidaten[0]);
     })();
   </script>
 )}
