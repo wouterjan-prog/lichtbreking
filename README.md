@@ -72,11 +72,9 @@ op `true` staat. Zet dat pas aan bij een hero-video met een écht geluidsspoor.
 
 ### Nieuwe hero-video maken
 
-De omzetting van een zware camerabestand naar deze drie bestanden gaat met
-AVFoundation, dus zonder extra software. Het scriptje daarvoor staat niet in de
-repo; vraag erom, of gebruik een encoder naar keuze met deze richtwaarden:
-1920 breed, H.264 op ongeveer 2,6 Mbit/s en HEVC op ongeveer 1,6 Mbit/s, zonder
-geluidsspoor, met fast start aan.
+In `tools/` staan twee kleine Swift-programma's die dit doen met AVFoundation,
+dus zonder extra software te installeren. Zie `tools/LEESMIJ.md` voor de
+commando's en de richtwaarden.
 
 ## Ontwerp
 
