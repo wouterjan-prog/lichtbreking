@@ -6,16 +6,21 @@ import { hero as heroInstelling } from '../data/site.js';
 
 const { badge, titel, meta = null } = Astro.props;
 
-/* De hero draait op public/video/. Ontbreken die bestanden, dan toont de hero
-   een rustig verloopvlak in plaats van een gat.
-   hero.hevc.mp4 gaat voorop: Safari en nieuwere Chrome nemen die en zijn ruim
-   een derde lichter uit. Browsers zonder HEVC slaan hem over op de type-regel
-   en pakken hero.mp4. */
+/* De hero-video staat in drie uitvoeringen in public/video/. Welke een bezoeker
+   krijgt bepaalt het script hieronder, op basis van het aantal beeldpunten dat
+   zijn scherm echt heeft. Op een scherm met dubbele pixeldichtheid wordt 1080p
+   bijna twee keer opgeblazen en dat is goed zichtbaar in water, vandaar 2160p
+   voor grote schermen. */
 const pub = (p) => path.join(process.cwd(), 'public', p);
-const heeftH264 = fs.existsSync(pub('video/hero.mp4'));
-const heeftHevc = fs.existsSync(pub('video/hero.hevc.mp4'));
+const bestaat = (naam) => (fs.existsSync(pub(`video/${naam}`)) ? `/video/${naam}` : null);
+const bronnen = {
+  hevcGroot: bestaat('hero-2160.hevc.mp4'),
+  hevcKlein: bestaat('hero-1440.hevc.mp4'),
+  h264Groot: bestaat('hero-2160.mp4'),
+  h264Klein: bestaat('hero-1440.mp4'),
+};
 const heeftPoster = fs.existsSync(pub('video/poster.webp'));
-const heeftVideo = heeftH264 || heeftHevc;
+const heeftVideo = Object.values(bronnen).some(Boolean);
 const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
 ---
 <header class="lb-hero">
@@ -29,14 +34,11 @@ const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
       preload="none"
       poster={heeftPoster ? '/video/poster.webp' : undefined}
       aria-label="Sfeerbeeld: helder water met een steiger en een rode boot, van bovenaf"
-    >
-      {heeftHevc && <source src="/video/hero.hevc.mp4" type='video/mp4; codecs="hvc1"' />}
-      {heeftH264 && <source src="/video/hero.mp4" type='video/mp4; codecs="avc1.640028"' />}
-    </video>
+    ></video>
   ) : heeftPoster ? (
     <img class="lb-hero__media" src="/video/poster.webp" alt="" />
   ) : (
-    <div class="lb-hero__leeg"><span>hero-video · /video/hero.mp4</span></div>
+    <div class="lb-hero__leeg"><span>hero-video · /video/hero-2160.hevc.mp4</span></div>
   )}
 
   <div class="lb-hero__waas"></div>
@@ -67,33 +69,47 @@ const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
 </header>
 
 {heeftVideo && (
-  <script is:inline>
+  <script is:inline define:vars={{ bronnen }}>
     (() => {
       const video = document.getElementById('lb-hero-video');
       if (!video) return;
 
-      /* Bewust geen autoplay-attribuut: zo halen bezoekers die geen beweging
-         willen, of die op databesparing staan, de video ook niet binnen.
-         Zij zien het posterbeeld, dat is een paar honderd kilobyte. */
+      /* Geen video ophalen voor wie geen beweging wil of op databesparing zit.
+         Die houden het posterbeeld, een fractie van het gewicht. */
       const rustig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const zuinig = navigator.connection && navigator.connection.saveData;
-      if (!rustig && !zuinig) {
+      if (rustig || zuinig) return;
+
+      /* Twee vragen bepalen welk bestand je krijgt: kan de browser HEVC, en
+         hoeveel beeldpunten heeft het scherm echt. Op een scherm met dubbele
+         pixeldichtheid wordt 1440p nog opgeblazen, en dat zie je meteen in
+         water. Vandaar 2160p zodra het scherm groot genoeg is. */
+      const kanHevc = video.canPlayType('video/mp4; codecs="hvc1"') !== '';
+      const groot = window.innerWidth * (window.devicePixelRatio || 1) >= 2000;
+
+      const volgorde = kanHevc
+        ? (groot
+            ? ['hevcGroot', 'hevcKlein', 'h264Groot', 'h264Klein']
+            : ['hevcKlein', 'hevcGroot', 'h264Klein', 'h264Groot'])
+        : (groot
+            ? ['h264Groot', 'h264Klein']
+            : ['h264Klein', 'h264Groot']);
+
+      const kandidaten = volgorde.map((k) => bronnen[k]).filter(Boolean);
+      if (!kandidaten.length) return;
+
+      /* Lukt het decoderen niet, dan schuift hij door naar de volgende.
+         Raakt de lijst op, dan blijft het posterbeeld gewoon staan. */
+      let i = 0;
+      video.addEventListener('error', () => {
+        i += 1;
+        if (i >= kandidaten.length) return;
+        video.src = kandidaten[i];
         video.play().catch(() => {});
-      }
-
-      /* Gaat het decoderen toch mis, dan blijft het posterbeeld staan. */
-      video.addEventListener('error', () => video.removeAttribute('src'), true);
-
-      const knop = document.getElementById('lb-geluid');
-      if (!knop) return;
-      knop.addEventListener('click', () => {
-        const aan = video.muted;
-        video.muted = !aan;
-        if (aan) video.play().catch(() => {});
-        knop.setAttribute('aria-pressed', String(aan));
-        knop.querySelector('[data-icoon]').textContent = aan ? '\u{1F50A}' : '\u{1F507}';
-        knop.querySelector('[data-tekst]').textContent = aan ? 'Geluid uit' : 'Geluid aan';
       });
+
+      video.src = kandidaten[0];
+      video.play().catch(() => {});
     })();
   </script>
 )}

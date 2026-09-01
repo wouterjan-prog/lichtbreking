@@ -55,9 +55,14 @@ De hero gebruikt drie bestanden in `public/video/`:
 
 | Bestand | Wat |
 | --- | --- |
-| `hero.hevc.mp4` | HEVC 1080p, wordt als eerste aangeboden (Safari en nieuwere Chrome) |
-| `hero.mp4` | H.264 1080p, terugval voor de rest |
+| `hero-2160.hevc.mp4` | HEVC 2160p, voor grote schermen die HEVC aankunnen |
+| `hero-2160.mp4` | H.264 2160p, grote schermen zonder HEVC |
+| `hero-1440.hevc.mp4` | HEVC 1440p, kleinere schermen |
+| `hero-1440.mp4` | H.264 1440p, kleinere schermen zonder HEVC |
 | `poster.webp` | stilstaand beeld, gelijk aan het eerste frame |
+
+Een script kiest bij het laden welk bestand nodig is, op basis van
+`canPlayType` en het werkelijke aantal beeldpunten van het scherm.
 
 Ontbreken ze, dan toont de hero een rustig verloopvlak in plaats van een gat.
 
