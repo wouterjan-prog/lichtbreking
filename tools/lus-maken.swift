@@ -15,7 +15,10 @@ let start = Double(a[6])!, duur = Double(a[7])!, fade = Double(a[8])!
 let asset = AVURLAsset(url: bron)
 guard let spoor = asset.tracks(withMediaType: .video).first else { print("geen videospoor"); exit(1) }
 
-let ts: CMTimeScale = 600
+// De tijdschaal van de bron overnemen. 29,97 fps is 1001/30000 en past niet
+// in de standaard 600, waardoor sommige beeldjes 35,00 ms zouden krijgen in
+// plaats van 33,37. Dat geeft micro-schokken.
+let ts: CMTimeScale = spoor.naturalTimeScale > 0 ? spoor.naturalTimeScale : 600
 func T(_ s: Double) -> CMTime { CMTime(seconds: s, preferredTimescale: ts) }
 
 let natuurlijk = spoor.naturalSize.applying(spoor.preferredTransform)
@@ -34,6 +37,9 @@ let uitDuur = duur - fade
 let comp = AVMutableComposition()
 let basis = comp.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)!
 let kop = comp.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)!
+// Tijdschaal van de bron overnemen, anders worden de beeldjes afgerond.
+basis.naturalTimeScale = ts
+kop.naturalTimeScale = ts
 try! basis.insertTimeRange(CMTimeRange(start: T(start + fade), duration: T(uitDuur)), of: spoor, at: .zero)
 try! kop.insertTimeRange(CMTimeRange(start: T(start), duration: T(fade)), of: spoor, at: T(uitDuur - fade))
 
@@ -73,6 +79,7 @@ lezer.add(uitvoer)
 try? FileManager.default.removeItem(at: uit)
 let schrijver = try! AVAssetWriter(outputURL: uit, fileType: .mp4)
 schrijver.shouldOptimizeForNetworkUse = true
+schrijver.movieTimeScale = ts
 var compressie: [String: Any] = [
     AVVideoAverageBitRateKey: bitrate,
     AVVideoMaxKeyFrameIntervalKey: Int(fps * 2),
@@ -84,6 +91,9 @@ let invoer = AVAssetWriterInput(mediaType: .video, outputSettings: [
     AVVideoCodecKey: codec, AVVideoWidthKey: doelBreedte, AVVideoHeightKey: doelH,
     AVVideoCompressionPropertiesKey: compressie])
 invoer.expectsMediaDataInRealTime = false
+// Zonder dit schrijft AVFoundation op tijdschaal 600, en dan past 29,97 fps
+// er niet in: sommige beeldjes krijgen dan 35,00 ms in plaats van 33,37.
+invoer.mediaTimeScale = ts
 schrijver.add(invoer)
 
 schrijver.startWriting(); schrijver.startSession(atSourceTime: .zero); lezer.startReading()

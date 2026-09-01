@@ -79,11 +79,23 @@ terwijl er niets mis is.
 tijdstempels uit een bestand en laat zien of de afstanden gelijk zijn. Handig om
 uit te sluiten dat schokkerigheid uit de omzetting komt.
 
-Belangrijk: een bron van 24 fps geeft bij een pannende opname zichtbare schokken
-op een 60Hz-scherm, hoe goed je ook omzet. Dat zit in het materiaal, niet in de
-codering. Filmen op 50 of 60 fps lost dat bij de bron op, net als een ND-filter
-waarmee de sluitertijd rond 1/50 blijft en er natuurlijke bewegingsonscherpte
-ontstaat.
+### Let op de beeldsnelheid van de export
+
+Dit heeft ons een hele ronde gekost. De eerste export uit DJI stond op **24 fps**
+terwijl het origineel 30 fps was. Bij die omzetting verdwijnt ongeveer één op de
+vijf beeldjes, en dat schokt zichtbaar. Het origineel was gewoon vloeiend.
+
+Controleer dus altijd eerst de beeldsnelheid van het aangeleverde bestand, en
+vraag om een export op de oorspronkelijke snelheid als die afwijkt. 30 fps past
+bovendien exact twee keer in een 60Hz-scherm; 24 niet.
+
+Let ook op de tijdschaal bij het schrijven. Zonder `movieTimeScale` en
+`mediaTimeScale` schrijft AVFoundation op 600, en dan past 29,97 fps er niet in:
+dan krijgen enkele beeldjes 35,00 ms in plaats van 33,37.
+
+Een ND-filter waarmee de sluitertijd rond 1/50 blijft geeft natuurlijke
+bewegingsonscherpte en maakt beweging nog rustiger. Deze opname stond op
+1/4000, dus messcherpe beeldjes zonder enige bewegingsonscherpte.
 
 ## Bewegingsonscherpte tegen 24p-schok
 
