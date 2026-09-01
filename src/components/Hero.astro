@@ -126,6 +126,21 @@ const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
       };
 
       start(kandidaten[0]);
+
+      /* 2160p decoderen is zwaar. Laat een toestel toch frames vallen, dan ziet
+         dat er schokkerig uit terwijl er niets mis is met het bestand. Na drie
+         seconden kijken we of dat gebeurt en stappen we zo nodig één stap terug
+         naar een lichtere versie, op dezelfde plek in de lus. */
+      setTimeout(() => {
+        if (!video.getVideoPlaybackQuality || i + 1 >= kandidaten.length) return;
+        const k = video.getVideoPlaybackQuality();
+        if (!k.totalVideoFrames) return;
+        if (k.droppedVideoFrames / k.totalVideoFrames < 0.05) return;
+        const plek = video.currentTime;
+        i += 1;
+        start(kandidaten[i]);
+        video.addEventListener('loadedmetadata', () => { video.currentTime = plek; }, { once: true });
+      }, 3000);
     })();
   </script>
 )}
