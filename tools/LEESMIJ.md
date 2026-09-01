@@ -6,9 +6,10 @@ geïnstalleerd te worden.
 
 ```bash
 cd tools
-swiftc -O -o lus-maken      lus-maken.swift
-swiftc -O -o video-omzetten video-omzetten.swift
-swiftc -O -o frame-pakken   frame-pakken.swift
+swiftc -O -o lus-maken             lus-maken.swift
+swiftc -O -o bewegingsonscherpte   bewegingsonscherpte.swift
+swiftc -O -o video-omzetten        video-omzetten.swift
+swiftc -O -o frame-pakken          frame-pakken.swift
 ```
 
 ## Een nieuwe hero-video
@@ -80,4 +81,32 @@ uit te sluiten dat schokkerigheid uit de omzetting komt.
 
 Belangrijk: een bron van 24 fps geeft bij een pannende opname zichtbare schokken
 op een 60Hz-scherm, hoe goed je ook omzet. Dat zit in het materiaal, niet in de
-codering. Filmen op 50 of 60 fps lost dat bij de bron op.
+codering. Filmen op 50 of 60 fps lost dat bij de bron op, net als een ND-filter
+waarmee de sluitertijd rond 1/50 blijft en er natuurlijke bewegingsonscherpte
+ontstaat.
+
+## Bewegingsonscherpte tegen 24p-schok
+
+Is de bron 24 fps met scherpe beeldjes, dan maskeert een beetje kunstmatige
+bewegingsonscherpte de schok. `bewegingsonscherpte` mengt elk beeldje met het
+vorige en het volgende, symmetrisch zodat het beeld niet in de tijd verschuift,
+en met wraparound zodat de lus heel blijft.
+
+```
+bewegingsonscherpte <lus-in> <uit> <codec> <breedte> <bitrate> <sterkte>
+```
+
+Werk in twee stappen: maak eerst met `lus-maken` een tussenversie op hoge
+bitrate (bijvoorbeeld 4K HEVC op 60 Mbit/s), en draai daar de onscherpte
+overheen naar de vier eindbestanden.
+
+Gemeten op deze clip:
+
+| sterkte | verschil tussen opeenvolgende beeldjes | oordeel |
+| --- | --- | --- |
+| 0 | 11,1 | schokt zichtbaar |
+| 0,12 | 8,3 | boot blijft scherp, water iets zachter |
+| 0,15 | ongeveer 7,7 | gekozen middenweg |
+| 0,18 | 6,9 | duidelijk zachter water |
+
+Boven 0,20 gaat het zichtbaar ten koste van scherpte.
