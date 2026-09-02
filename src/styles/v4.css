@@ -719,14 +719,28 @@ img, video { max-width: 100%; }
 }
 
 /* ------------------------------------------------------------------ lightbox */
-.lb-tegel--klikbaar {
+.lb-tegel--klikbaar,
+.lb-tegel--pagina {
   padding: 0;
   border: 0;
   font: inherit;
   color: inherit;
-  cursor: zoom-in;
   text-align: left;
   width: 100%;
+}
+.lb-tegel--klikbaar { cursor: zoom-in; }
+.lb-tegel--pagina { cursor: pointer; }
+.lb-tegel--pagina:hover { color: inherit; }
+/* het afspeelknopje wordt groter en witter op een tegel die naar de speler gaat */
+.lb-tegel--pagina .lb-tegel__speel {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  transition: background .2s ease, transform .2s ease;
+}
+.lb-tegel--pagina:hover .lb-tegel__speel {
+  background: rgba(255, 255, 255, .28);
+  transform: scale(1.06);
 }
 
 .lb-lightbox {

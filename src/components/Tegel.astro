@@ -41,20 +41,38 @@ const groot = origineel
   : null;
 
 const heeftBeeld = Boolean(origineel || uitPublic);
-const klikbaar = lightbox && heeftBeeld;
-const Tag = klikbaar ? 'button' : 'div';
+
+/* Een tegel met een video hoort naar zijn eigen pagina te gaan, want daar staat
+   de speler. De lightbox toont alleen stilstaand beeld, en een afspeelknopje dat
+   een foto opent is misleidend. Foto's blijven wel de lightbox openen. */
+const heeftVideo = Boolean(shot.video);
+const naarPagina = heeftVideo && heeftBeeld;
+const klikbaar = lightbox && heeftBeeld && !naarPagina;
+const Tag = naarPagina ? 'a' : klikbaar ? 'button' : 'div';
 const grootPad = groot?.src ?? (uitPublic ? shot.bestand : null);
 ---
 <Tag
-  class:list={['lb-tegel', breed && 'lb-tegel--breed', klikbaar && 'lb-tegel--klikbaar']}
+  class:list={[
+    'lb-tegel',
+    breed && 'lb-tegel--breed',
+    klikbaar && 'lb-tegel--klikbaar',
+    naarPagina && 'lb-tegel--pagina',
+  ]}
   style={`aspect-ratio:${shot.verhouding}`}
   data-element={shot.element}
   data-toestel={shot.toestel}
   data-type={shot.type}
   type={klikbaar ? 'button' : undefined}
+  href={naarPagina ? `/werk/${shot.slug}/` : undefined}
   data-groot={klikbaar ? grootPad : undefined}
   data-bijschrift={klikbaar ? `${shot.titel} · ${toestelNaam(shot.toestel)}` : undefined}
-  aria-label={klikbaar ? `${shot.titel} groter bekijken` : undefined}
+  aria-label={
+    naarPagina
+      ? `${shot.titel} afspelen`
+      : klikbaar
+        ? `${shot.titel} groter bekijken`
+        : undefined
+  }
 >
   {origineel ? (
     <Picture

@@ -115,3 +115,25 @@ const feiten = [
     {!alleen && <a class="lb-knop lb-knop--rand" href={`/werk/${volgende.slug}/`}>{volgende.titel} &#8594;</a>}
   </nav>
 </Base>
+
+{shot.video?.h264 && (
+  <script is:inline define:vars={{ terugval: shot.video.h264 }}>
+    (() => {
+      const video = document.querySelector('.lb-detail__video');
+      if (!video) return;
+      /* Belooft een browser HEVC maar struikelt hij er alsnog over, dan schuift
+         hij hier eenmalig door naar de H.264-versie. */
+      let geprobeerd = false;
+      video.addEventListener(
+        'error',
+        () => {
+          if (geprobeerd) return;
+          geprobeerd = true;
+          video.src = terugval;
+          video.load();
+        },
+        true
+      );
+    })();
+  </script>
+)}
