@@ -105,6 +105,23 @@ export const shots = [
       hoogte: 50, iso: '100', sluiter: '1/500', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },
+  {
+    slug: 'kleine-knip', titel: 'Kleine Knip',
+    element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
+    bestand: 'kleine-knip.jpg',
+    alt: 'Kleine Knip van boven: turkoois water tegen een rotskust, met rijen rode parasols op het strand',
+    video: { hevc: '/video/werk/kleine-knip.hevc.mp4', h264: '/video/werk/kleine-knip.mp4' },
+    verhaal:
+      'Kleine Knip ligt in een kom tussen twee kliffen, ruim een kilometer ten zuiden van Grote ' +
+      'Knip. Van boven zie je hoe klein het strand eigenlijk is: een sikkel zand met twee rijen ' +
+      'parasols, en daarachter meteen de parkeerplaats. Het water loopt in een paar meter van wit ' +
+      'naar diep turkoois.',
+    opname: {
+      datum: '2026-08-17', tijd: '13:04', plek: 'Kleine Knip, Curaçao',
+      lat: 12.341837, lon: -69.153128,
+      hoogte: 143, iso: '100', sluiter: '1/100 tot 1/160', diafragma: 'f/1.8', profiel: 'dlog_m',
+    },
+  },
   { slug: 'duinrand',          titel: 'Duinrand',          element: 'land',  toestel: 'pocket', type: 'foto',  verhouding: '4/5',  bestand: null, alt: '' },
   { slug: 'branding',          titel: 'Branding',          element: 'water', toestel: 'action', type: 'foto',  verhouding: '4/5',  bestand: null, alt: '' },
   { slug: 'rif',               titel: 'Rif',               element: 'water', toestel: 'action', type: 'video', verhouding: '1/1',  bestand: null, alt: '' },
