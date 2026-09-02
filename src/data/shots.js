@@ -16,6 +16,12 @@
                  '9/16' komt automatisch in de Verticaal-scroller
    - bestand     pad in /public, of null
    - alt         beschrijving voor schermlezers en zoekmachines
+   - uitsnede    optioneel, waar het raster op /werk/ moet snijden. Twee
+                 percentages, net als CSS object-position: eerst links naar
+                 rechts, dan boven naar onder. Weglaten is '50% 50%', dus
+                 het midden. Alleen nodig als het midden niet klopt: de
+                 staande vakken houden maar 46% van de breedte over (34% op
+                 een telefoon), de band 47% van de hoogte.
    - verhaal     optioneel, een paar zinnen over de plek. Komt onder het beeld.
    - weetje      optioneel, één feit dat je van boven niet ziet. Krijgt een
                  eigen kadertje. Alleen wat je zeker weet.
@@ -43,6 +49,7 @@ export const shots = [
     slug: 'playa-grandi', titel: 'Playa Grandi',
     element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
     bestand: 'playa-grandi.jpg',
+    uitsnede: '50% 75%', /* iets lager, zodat het vlot en de boot in beeld blijven */
     alt: 'Vlot en een rode boot in helder turkoois water, van boven gezien',
     video: { hevc: '/video/werk/playa-grandi.hevc.mp4', h264: '/video/werk/playa-grandi.mp4' },
     verhaal:
@@ -62,6 +69,7 @@ export const shots = [
     slug: 'fort', titel: 'Fort Beekenburg',
     element: 'land', toestel: 'mini', type: 'video', verhouding: '16/9',
     bestand: 'fort.jpg',
+    uitsnede: '25% 50%', /* naar links, want het fort staat linksonder */
     alt: 'Fort Beekenburg op de klif boven Caracasbaai, met het Spaanse Water erachter',
     video: { hevc: '/video/werk/fort.hevc.mp4', h264: '/video/werk/fort.mp4' },
     verhaal:
@@ -82,6 +90,7 @@ export const shots = [
     slug: 'daaibooi', titel: 'Daaibooibaai',
     element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
     bestand: 'daaibooi.jpg',
+    uitsnede: '100% 50%', /* helemaal rechts */
     alt: 'Kleine baai met wit strand, parasols en helder turkoois water, van boven gezien',
     video: { hevc: '/video/werk/daaibooi.hevc.mp4', h264: '/video/werk/daaibooi.mp4' },
     verhaal:
@@ -121,6 +130,7 @@ export const shots = [
     slug: 'kleine-knip', titel: 'Kleine Knip',
     element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
     bestand: 'kleine-knip.jpg',
+    uitsnede: '25% 50%', /* naar links */
     alt: 'Kleine Knip van boven: turkoois water tegen een rotskust, met rijen rode parasols op het strand',
     video: { hevc: '/video/werk/kleine-knip.hevc.mp4', h264: '/video/werk/kleine-knip.mp4' },
     verhaal:
@@ -140,6 +150,7 @@ export const shots = [
     slug: 'grote-knip', titel: 'Grote Knip',
     element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
     bestand: 'grote-knip.jpg',
+    uitsnede: '50% 0%', /* bovenrand, want de band snijdt ruim de helft van de hoogte weg */
     alt: 'Grote Knip van boven: een brede turkooizen baai met wit strand en rijen parasols',
     video: { hevc: '/video/werk/grote-knip.hevc.mp4', h264: '/video/werk/grote-knip.mp4' },
     verhaal:

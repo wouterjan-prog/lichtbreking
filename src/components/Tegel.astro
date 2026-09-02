@@ -50,6 +50,14 @@ const naarPagina = heeftVideo && heeftBeeld;
 const klikbaar = lightbox && heeftBeeld && !naarPagina;
 const Tag = naarPagina ? 'a' : klikbaar ? 'button' : 'div';
 const grootPad = groot?.src ?? (uitPublic ? shot.bestand : null);
+
+/* Een tegel snijdt vanuit het midden, tenzij er een uitsnede opgegeven is.
+   Die gaat als variabele mee naar de opmaak, want dan hoeft de <Picture> er
+   niets van te weten. */
+const stijl = [
+  vorm ? null : `aspect-ratio:${shot.verhouding}`,
+  shot.uitsnede ? `--lb-uitsnede:${shot.uitsnede}` : null,
+].filter(Boolean).join(';') || undefined;
 ---
 <Tag
   class:list={[
@@ -58,7 +66,7 @@ const grootPad = groot?.src ?? (uitPublic ? shot.bestand : null);
     klikbaar && 'lb-tegel--klikbaar',
     naarPagina && 'lb-tegel--pagina',
   ]}
-  style={vorm ? undefined : `aspect-ratio:${shot.verhouding}`}
+  style={stijl}
   data-element={shot.element}
   data-toestel={shot.toestel}
   data-type={shot.type}

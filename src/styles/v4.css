@@ -379,6 +379,8 @@ img, video { max-width: 100%; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* standaard vanuit het midden; per beeld te zetten in shots.js */
+  object-position: var(--lb-uitsnede, 50% 50%);
   display: block;
 }
 .lb-tegel__caption {
