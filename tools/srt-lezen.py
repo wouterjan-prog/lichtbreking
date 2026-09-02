@@ -96,11 +96,33 @@ def main():
                    help='tijdzone waarop de controller stond (standaard Europe/Amsterdam)')
     p.add_argument('--plek-tz', default='America/Curacao',
                    help='tijdzone van de plek waar je filmde (standaard America/Curacao)')
+    p.add_argument('--van', type=float, default=None,
+                   help='alleen het stuk vanaf deze seconde in de clip')
+    p.add_argument('--tot', type=float, default=None,
+                   help='alleen het stuk tot deze seconde in de clip')
     p.add_argument('--slug', default='naam-van-het-beeld')
     p.add_argument('--plek', default=None, help='naam van de plek, komt in het fragment')
     a = p.parse_args()
 
     rijen = lees(a.bestand)
+
+    # Exporteer je maar een stukje uit de opname, geef dan het bereik op. De
+    # cijfers gaan dan alleen over dat stuk, wat scheelt als de drone in de
+    # rest van de clip nog tientallen meters klimt.
+    if a.van is not None or a.tot is not None:
+        t0 = datetime.datetime.strptime(rijen[0]['klok'], '%Y-%m-%d %H:%M:%S')
+        van = a.van if a.van is not None else 0.0
+        tot = a.tot if a.tot is not None else 1e9
+        gekozen = []
+        for r in rijen:
+            versch = (datetime.datetime.strptime(r['klok'], '%Y-%m-%d %H:%M:%S') - t0).total_seconds()
+            if van <= versch <= tot:
+                gekozen.append(r)
+        if gekozen:
+            rijen = gekozen
+        else:
+            print('Let op: dat bereik levert niets op, ik gebruik de hele clip.')
+
     eerste, laatste = rijen[0], rijen[-1]
 
     t0 = datetime.datetime.strptime(eerste['klok'], '%Y-%m-%d %H:%M:%S')
