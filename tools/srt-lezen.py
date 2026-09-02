@@ -166,6 +166,7 @@ def main():
     bestand: null, alt: '',
     opname: {{
       datum: '{lokaal:%Y-%m-%d}', tijd: '{lokaal:%H:%M}', plek: '{plek}',
+      lat: {eerste['lat']:.6f}, lon: {eerste['lon']:.6f},
       hoogte: {max(rels):.0f}, iso: '{min(isos):.0f}' , sluiter: '{sluiters[0]}',
       diafragma: 'f/{eerste['fnum']:.1f}', profiel: '{eerste['kleur']}',
     }},

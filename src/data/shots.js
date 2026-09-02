@@ -21,9 +21,12 @@
                  de opname zet, dan rolt er een kant en klare regel uit:
                    opname: {
                      datum: '2026-08-09', tijd: '19:21', plek: 'Playa Grandi',
+                     lat: 12.198475, lon: -69.078781,
                      hoogte: 48, iso: '1600', sluiter: '1/30',
                      diafragma: 'f/1.8', profiel: 'dlog_m',
                    }
+                 De coördinaten komen niet op de pagina te staan. Ze worden
+                 gebruikt om de stand van de zon uit te rekenen.
                  Let op: de klok in die bestanden is die van je controller. Het
                  script rekent om naar de tijd op de plek zelf.
    ========================================================================== */
@@ -37,6 +40,7 @@ export const shots = [
     video: { hevc: '/video/werk/playa-grandi.hevc.mp4', h264: '/video/werk/playa-grandi.mp4' },
     opname: {
       datum: '2026-08-06', tijd: '15:38', plek: 'Playa Grandi, Curaçao',
+      lat: 12.369358, lon: -69.154348,
       hoogte: 18, iso: '100', sluiter: '1/4000', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },
@@ -48,6 +52,7 @@ export const shots = [
     video: { hevc: '/video/werk/fort.hevc.mp4', h264: '/video/werk/fort.mp4' },
     opname: {
       datum: '2026-08-13', tijd: '14:40', plek: 'Caracasbaai, Curaçao',
+      lat: 12.072006, lon: -68.863401,
       hoogte: 91, iso: '100', sluiter: '1/5000', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },

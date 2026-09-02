@@ -3,6 +3,7 @@ import { Picture, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { shots } from '../../data/shots.js';
 import { toestelNaam, elementen, elementKleur } from '../../data/site.js';
+import { lichtBij } from '../../lib/zon.js';
 
 const originelen = import.meta.glob(
   '../../beelden/werk/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
@@ -51,10 +52,14 @@ const datumTekst = (() => {
 const instellingen = o
   ? [o.diafragma, o.sluiter, o.iso ? `ISO ${o.iso}` : null].filter(Boolean).join(' · ')
   : null;
+/* Uit tijd en gps volgt wat de zon deed. Curaçao ligt op UTC-4. */
+const licht = o ? lichtBij({ datum: o.datum, tijd: o.tijd, lat: o.lat, lon: o.lon }) : null;
+
 const feiten = [
   o?.plek ? ['Plek', o.plek] : null,
   datumTekst ? ['Wanneer', datumTekst] : null,
   o?.hoogte ? ['Vlieghoogte', `${o.hoogte} m`] : null,
+  licht ? ['Licht', licht.kort] : null,
   instellingen ? ['Instellingen', instellingen] : null,
 ].filter(Boolean);
 ---
