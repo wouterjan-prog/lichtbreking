@@ -122,6 +122,23 @@ export const shots = [
       hoogte: 143, iso: '100', sluiter: '1/100 tot 1/160', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },
+  {
+    slug: 'grote-knip', titel: 'Grote Knip',
+    element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
+    bestand: 'grote-knip.jpg',
+    alt: 'Grote Knip van boven: een brede turkooizen baai met wit strand en rijen parasols',
+    video: { hevc: '/video/werk/grote-knip.hevc.mp4', h264: '/video/werk/grote-knip.mp4' },
+    verhaal:
+      'De grootste van de twee Knippen, met een strand dat een stuk breder is dan dat van zijn ' +
+      'kleine buur. De drone staat hier vrijwel stil en klimt alleen, waardoor de baai zich van ' +
+      'onderaf opent. Rechts zie je meteen waarom het er druk is: de parkeerplaats ligt er pal ' +
+      'naast.',
+    opname: {
+      datum: '2026-08-17', tijd: '13:54', plek: 'Grote Knip, Curaçao',
+      lat: 12.350928, lon: -69.152246,
+      hoogte: 119, iso: '120', sluiter: '1/100', diafragma: 'f/1.8', profiel: 'dlog_m',
+    },
+  },
   { slug: 'duinrand',          titel: 'Duinrand',          element: 'land',  toestel: 'pocket', type: 'foto',  verhouding: '4/5',  bestand: null, alt: '' },
   { slug: 'branding',          titel: 'Branding',          element: 'water', toestel: 'action', type: 'foto',  verhouding: '4/5',  bestand: null, alt: '' },
   { slug: 'rif',               titel: 'Rif',               element: 'water', toestel: 'action', type: 'video', verhouding: '1/1',  bestand: null, alt: '' },
