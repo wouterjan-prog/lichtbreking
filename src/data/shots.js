@@ -16,6 +16,8 @@
                  '9/16' komt automatisch in de Verticaal-scroller
    - bestand     pad in /public, of null
    - alt         beschrijving voor schermlezers en zoekmachines
+   - verhaal     optioneel, een paar zinnen over de plek. Komt naast het
+                 kaartje te staan onder het beeld.
    - opname      optioneel blok met opnamegegevens, komt op de detailpagina te
                  staan. Laat `tools/srt-lezen.py` los op de .SRT die DJI naast
                  de opname zet, dan rolt er een kant en klare regel uit:
@@ -38,6 +40,10 @@ export const shots = [
     bestand: 'playa-grandi.jpg',
     alt: 'Vlot en een rode boot in helder turkoois water, van boven gezien',
     video: { hevc: '/video/werk/playa-grandi.hevc.mp4', h264: '/video/werk/playa-grandi.mp4' },
+    verhaal:
+      'Vissers noemen deze plek Playa Piskadó. Ze maken er hun vangst schoon en gooien de resten ' +
+      'overboord, en daar komen de zeeschildpadden op af. Vanaf achttien meter hoogte zie je vooral ' +
+      'het patroon: het vlot, de rode boot, en de schaduwen die scherp op de zandbodem vallen.',
     opname: {
       datum: '2026-08-06', tijd: '15:38', plek: 'Playa Grandi, Curaçao',
       lat: 12.369358, lon: -69.154348,
@@ -50,6 +56,11 @@ export const shots = [
     bestand: 'fort.jpg',
     alt: 'Fort Beekenburg op de klif boven Caracasbaai, met het Spaanse Water erachter',
     video: { hevc: '/video/werk/fort.hevc.mp4', h264: '/video/werk/fort.mp4' },
+    verhaal:
+      'De ronde toren linksonder is Fort Beekenburg, op de klif bij de ingang van Caracasbaai. ' +
+      'Daarachter ligt het Spaanse Water vol zeilboten. Het fort is begin achttiende eeuw gebouwd ' +
+      'door de West-Indische Compagnie om de baai te bewaken. Vanaf eenennegentig meter zie je in ' +
+      'één beeld waarom het daar staat: wie de baai in wil, moet erlangs.',
     opname: {
       datum: '2026-08-13', tijd: '14:40', plek: 'Caracasbaai, Curaçao',
       lat: 12.072006, lon: -68.863401,

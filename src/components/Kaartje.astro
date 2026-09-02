@@ -1,0 +1,32 @@
+---
+import { kaart, naarPunt } from '../lib/curacao.js';
+import { elementKleur } from '../data/site.js';
+
+/* Klein kaartje van Curaçao met een stip op de plek van de opname.
+   Puur decoratief bedoeld, dus het krijgt geen eigen tekst voor schermlezers;
+   de plaatsnaam staat al in de feitenrij ernaast. */
+const { lat, lon, element = 'water', titel = null } = Astro.props;
+const punt = naarPunt(lat, lon);
+const kleur = elementKleur(element);
+const rand = 40;
+---
+{punt && (
+  <figure class="lb-kaartje">
+    <svg
+      viewBox={`${-rand} ${-rand} ${kaart.breedte + rand * 2} ${kaart.hoogte + rand * 2}`}
+      role="img"
+      aria-label={titel ? `Kaartje van Curaçao met de plek van ${titel}` : 'Kaartje van Curaçao'}
+    >
+      <path
+        d={kaart.pad}
+        fill="rgba(255,255,255,.06)"
+        stroke="rgba(255,255,255,.30)"
+        stroke-width="6"
+        stroke-linejoin="round"
+      />
+      <circle cx={punt.x} cy={punt.y} r="30" fill={kleur} fill-opacity=".22" />
+      <circle cx={punt.x} cy={punt.y} r="15" fill={kleur} />
+    </svg>
+    <figcaption class="lb-label">Curaçao</figcaption>
+  </figure>
+)}

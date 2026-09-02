@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { shots } from '../../data/shots.js';
 import { toestelNaam, elementen, elementKleur } from '../../data/site.js';
 import { lichtBij } from '../../lib/zon.js';
+import Kaartje from '../../components/Kaartje.astro';
 
 const originelen = import.meta.glob(
   '../../beelden/werk/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
@@ -30,6 +31,9 @@ const origineel = uitPublic ? null : originelen[`../../beelden/werk/${shot.besta
 const alt = shot.alt || `${shot.titel}, ${toestelNaam(shot.toestel)}`;
 const elementNaam = elementen.find((e) => e.id === shot.element)?.naam ?? shot.element;
 const alleen = vorige?.slug === shot.slug;
+/* Bij precies twee beelden wijzen vorige en volgende naar hetzelfde. Dan is één
+   knop genoeg, anders staat dezelfde titel twee keer naast elkaar. */
+const zelfdeBuur = !alleen && vorige?.slug === volgende?.slug;
 
 /* Heeft dit beeld een video, dan komt het stilstaande beeld als posterframe
    op de speler te staan. De browser haalt de video pas op als iemand op play
@@ -114,10 +118,21 @@ const feiten = [
     </dl>
   )}
 
+  {(shot.verhaal || (o?.lat != null && o?.lon != null)) && (
+    <div class="lb-plek lb-marge">
+      {shot.verhaal ? <p>{shot.verhaal}</p> : <p></p>}
+      <Kaartje lat={o?.lat} lon={o?.lon} element={shot.element} titel={shot.titel} />
+    </div>
+  )}
+
   <nav class="lb-verder lb-marge" aria-label="Naar een ander beeld">
-    {!alleen && <a class="lb-knop lb-knop--rand" href={`/werk/${vorige.slug}/`}>&#8592; {vorige.titel}</a>}
+    {!alleen && !zelfdeBuur && (
+      <a class="lb-knop lb-knop--rand" href={`/werk/${vorige.slug}/`}>&#8592; {vorige.titel}</a>
+    )}
     <a class="lb-knop lb-knop--rand" href="/werk/">Alle beelden</a>
-    {!alleen && <a class="lb-knop lb-knop--rand" href={`/werk/${volgende.slug}/`}>{volgende.titel} &#8594;</a>}
+    {!alleen && (
+      <a class="lb-knop lb-knop--rand" href={`/werk/${volgende.slug}/`}>{volgende.titel} &#8594;</a>
+    )}
   </nav>
 </Base>
 

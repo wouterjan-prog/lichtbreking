@@ -865,3 +865,33 @@ img, video { max-width: 100%; }
   border-radius: var(--lb-r-tegel);
   background: var(--lb-tegel);
 }
+
+/* ---------------------------------------------------------------- kaartje */
+.lb-kaartje { margin: 0; }
+.lb-kaartje { width: clamp(200px, 22vw, 280px); }
+.lb-kaartje svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.lb-kaartje figcaption { margin-top: 12px; text-align: center; }
+
+/* verhaal naast het kaartje */
+.lb-plek {
+  padding-top: clamp(24px, 4vw, 44px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 5vw, 64px);
+  align-items: start;
+}
+.lb-plek p {
+  margin: 0;
+  font-size: clamp(14px, 2.2vw, 16px);
+  line-height: 1.75;
+  color: var(--lb-ink-70);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+@media (max-width: 640px) {
+  .lb-plek { grid-template-columns: minmax(0, 1fr); }
+}
