@@ -266,7 +266,10 @@ img, video { max-width: 100%; }
   font-size: clamp(34px, 7.5vw, 72px);
   font-weight: 600;
   letter-spacing: -.045em;
-  line-height: .98;
+  line-height: 1.02;
+  /* Zonder dit blijft er bij een langere zin één woord op de laatste regel over. */
+  text-wrap: balance;
+  max-width: 20ch;
 }
 .lb-hero__regel {
   display: flex;
@@ -1055,4 +1058,14 @@ img, video { max-width: 100%; }
   .lb-mozaiek .lb-tegel--vk,
   .lb-mozaiek .lb-tegel--band { grid-column: span 2; grid-row: span 2; }
   .lb-mozaiek .lb-tegel--staand { grid-column: span 1; grid-row: span 3; }
+}
+
+/* De regel onder de herotitel is een volzin, geen label. Kapitalen met brede
+   spatiëring lezen dan schreeuwerig, dus die krijgt gewone tekst. */
+.lb-hero__regel .lb-meta {
+  text-transform: none;
+  letter-spacing: .01em;
+  font-size: clamp(13px, 2vw, 16px);
+  font-weight: 400;
+  color: var(--lb-ink-70);
 }
