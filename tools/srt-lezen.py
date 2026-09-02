@@ -182,6 +182,7 @@ def main():
     print()
     print('REGEL VOOR src/data/shots.js')
     plek = a.plek or 'vul de plek in'
+    # hoogte boven zeeniveau, zodat opnames onderling vergelijkbaar zijn
     print(f"""  {{
     slug: '{a.slug}', titel: '{a.slug.replace('-', ' ').capitalize()}',
     element: 'lucht', toestel: 'mini', type: 'video', verhouding: '16/9',
@@ -189,7 +190,7 @@ def main():
     opname: {{
       datum: '{lokaal:%Y-%m-%d}', tijd: '{lokaal:%H:%M}', plek: '{plek}',
       lat: {eerste['lat']:.6f}, lon: {eerste['lon']:.6f},
-      hoogte: {max(rels):.0f}, iso: '{min(isos):.0f}' , sluiter: '{sluiters[0]}',
+      hoogte: {max(abss):.0f}, iso: '{min(isos):.0f}' , sluiter: '{sluiters[0]}',
       diafragma: 'f/{eerste['fnum']:.1f}', profiel: '{eerste['kleur']}',
     }},
   }},""")

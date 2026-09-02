@@ -62,7 +62,7 @@ const licht = o ? lichtBij({ datum: o.datum, tijd: o.tijd, lat: o.lat, lon: o.lo
 const feiten = [
   o?.plek ? ['Plek', o.plek] : null,
   datumTekst ? ['Wanneer', datumTekst] : null,
-  o?.hoogte ? ['Vlieghoogte', `${o.hoogte} m`] : null,
+  o?.hoogte ? ['Hoogte boven zee', `${o.hoogte} m`] : null,
   licht ? ['Licht', licht.kort] : null,
   instellingen ? ['Instellingen', instellingen] : null,
 ].filter(Boolean);
@@ -85,6 +85,7 @@ const feiten = [
       <video
         class="lb-detail__video"
         controls
+        loop
         playsinline
         preload="none"
         poster={posterPad}

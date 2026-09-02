@@ -18,7 +18,11 @@
    - alt         beschrijving voor schermlezers en zoekmachines
    - verhaal     optioneel, een paar zinnen over de plek. Komt naast het
                  kaartje te staan onder het beeld.
-   - opname      optioneel blok met opnamegegevens, komt op de detailpagina te
+   - opname      hoogte is altijd de hoogte boven zeeniveau (abs_alt in de
+                 telemetrie), niet boven het startpunt. Anders is het niet
+                 vergelijkbaar: bij Santa Martha steeg de drone op vanaf een
+                 klif en vloog hij dus lager dan zijn startpunt.
+                 optioneel blok met opnamegegevens, komt op de detailpagina te
                  staan. Laat `tools/srt-lezen.py` los op de .SRT die DJI naast
                  de opname zet, dan rolt er een kant en klare regel uit:
                    opname: {
@@ -47,7 +51,7 @@ export const shots = [
     opname: {
       datum: '2026-08-06', tijd: '15:38', plek: 'Playa Grandi, Curaçao',
       lat: 12.369358, lon: -69.154348,
-      hoogte: 18, iso: '100', sluiter: '1/4000', diafragma: 'f/1.8', profiel: 'dlog_m',
+      hoogte: 32, iso: '100', sluiter: '1/4000', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },
   {
@@ -64,7 +68,7 @@ export const shots = [
     opname: {
       datum: '2026-08-13', tijd: '14:40', plek: 'Caracasbaai, Curaçao',
       lat: 12.072006, lon: -68.863401,
-      hoogte: 91, iso: '100', sluiter: '1/5000', diafragma: 'f/1.8', profiel: 'dlog_m',
+      hoogte: 115, iso: '100', sluiter: '1/5000', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },
   {
@@ -81,7 +85,24 @@ export const shots = [
     opname: {
       datum: '2026-08-14', tijd: '11:30', plek: 'Daaibooi, Sint Willibrordus',
       lat: 12.211680, lon: -69.085389,
-      hoogte: 119, iso: '100', sluiter: '1/8000', diafragma: 'f/1.8', profiel: 'dlog_m',
+      hoogte: 113, iso: '100', sluiter: '1/8000', diafragma: 'f/1.8', profiel: 'dlog_m',
+    },
+  },
+  {
+    slug: 'santa-martha', titel: 'Santa Martha Baai',
+    element: 'land', toestel: 'mini', type: 'video', verhouding: '16/9',
+    bestand: 'santa-martha.jpg',
+    alt: 'Santa Martha Baai met afgemeerde boten, cactussen op de oever en heuvels op de achtergrond',
+    video: { hevc: '/video/werk/santa-martha.hevc.mp4', h264: '/video/werk/santa-martha.mp4' },
+    verhaal:
+      'Santa Martha Baai snijdt diep het land in, zodat het water er stil ligt terwijl de open zee ' +
+      'vlakbij is. Daar liggen de boten dan ook. Het licht is hier heel anders dan aan de westkust: ' +
+      'bewolkt, en daardoor gedempt groen in plaats van turkoois. Opgestegen vanaf de klifrand, ' +
+      'want de drone vloog veertien meter lager dan het startpunt.',
+    opname: {
+      datum: '2026-08-15', tijd: '12:24', plek: 'Santa Martha Baai, Soto',
+      lat: 12.270628, lon: -69.124215,
+      hoogte: 50, iso: '100', sluiter: '1/500', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },
   { slug: 'duinrand',          titel: 'Duinrand',          element: 'land',  toestel: 'pocket', type: 'foto',  verhouding: '4/5',  bestand: null, alt: '' },
