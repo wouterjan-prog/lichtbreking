@@ -16,7 +16,7 @@ const actief = (href) => {
 <nav class:list={['lb-nav', variant === 'vast' && 'lb-nav--vast']} aria-label="Hoofdmenu">
   <a class="lb-merk" href="/">
     <Logo id="lbnavhex" />
-    <span>lichtbreking</span>
+    {variant !== 'over-hero' && <span>lichtbreking</span>}
   </a>
   <div class="lb-pillen">
     {items.map((item) => (
