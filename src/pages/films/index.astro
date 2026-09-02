@@ -1,18 +1,23 @@
 ---
 import Base from '../../layouts/Base.astro';
 import FilmKaart from '../../components/FilmKaart.astro';
-import { films, aantalFilms } from '../../data/films.js';
+import { zichtbareFilms as films, aantalFilms } from '../../data/films.js';
 
 const [eerste, ...rest] = films;
 ---
 <Base
   titel="Films"
   beschrijving="Korte films van Lichtbreking, gefilmd met DJI Mini 5 Pro, Action 6 en Pocket 4."
+  noindex={aantalFilms === 0}
 >
   <div class="lb-paginakop lb-marge">
     <h1>Films</h1>
     <div class="lb-rule lb-rule--kort"></div>
-    <p>{aantalFilms} {aantalFilms === 1 ? 'film' : 'films'}. Beeld zonder commentaar, geluid uit de plek zelf.</p>
+    <p>
+      {aantalFilms > 0
+        ? `${aantalFilms} ${aantalFilms === 1 ? 'film' : 'films'}. Beeld zonder commentaar, geluid uit de plek zelf.`
+        : 'Hier komen de langere stukken te staan. Losse beelden vind je onder Beeld.'}
+    </p>
   </div>
 
   {eerste && (

@@ -40,6 +40,17 @@ export const shots = [
       hoogte: 18, iso: '100', sluiter: '1/4000', diafragma: 'f/1.8', profiel: 'dlog_m',
     },
   },
+  {
+    slug: 'fort', titel: 'Fort Beekenburg',
+    element: 'land', toestel: 'mini', type: 'video', verhouding: '16/9',
+    bestand: 'fort.jpg',
+    alt: 'Fort Beekenburg op de klif boven Caracasbaai, met het Spaanse Water erachter',
+    video: { hevc: '/video/werk/fort.hevc.mp4', h264: '/video/werk/fort.mp4' },
+    opname: {
+      datum: '2026-08-13', tijd: '14:40', plek: 'Caracasbaai, Curaçao',
+      hoogte: 91, iso: '100', sluiter: '1/5000', diafragma: 'f/1.8', profiel: 'dlog_m',
+    },
+  },
   { slug: 'duinrand',          titel: 'Duinrand',          element: 'land',  toestel: 'pocket', type: 'foto',  verhouding: '4/5',  bestand: null, alt: '' },
   { slug: 'branding',          titel: 'Branding',          element: 'water', toestel: 'action', type: 'foto',  verhouding: '4/5',  bestand: null, alt: '' },
   { slug: 'rif',               titel: 'Rif',               element: 'water', toestel: 'action', type: 'video', verhouding: '1/1',  bestand: null, alt: '' },
@@ -60,9 +71,16 @@ export const shots = [
   { slug: 'v-zwembad',    titel: 'Zwembad',    element: 'water', toestel: 'action', type: 'video', verhouding: '9/16', bestand: null, alt: '' },
 ];
 
-export const rasterShots = shots.filter((s) => s.verhouding !== '9/16');
-export const verticaleShots = shots.filter((s) => s.verhouding === '9/16');
-export const aantalBeelden = shots.length;
+/* Zolang er nog niets is, tonen we de lege tegels: dan is de opzet van de
+   pagina tenminste te zien. Zodra er echt beeld is verdwijnen ze, want lege
+   vakken naast echt werk ogen onaf. */
+const heeftBestand = (s) => Boolean(s.bestand);
+const gevuld = shots.some(heeftBestand);
+const zichtbaar = gevuld ? shots.filter(heeftBestand) : shots;
+
+export const rasterShots = zichtbaar.filter((s) => s.verhouding !== '9/16');
+export const verticaleShots = zichtbaar.filter((s) => s.verhouding === '9/16');
+export const aantalBeelden = zichtbaar.length;
 
 /* Zolang geen enkel beeld een bestand heeft, toont de site een korte
    melding in plaats van te doen alsof het archief al gevuld is. */

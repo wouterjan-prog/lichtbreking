@@ -1,9 +1,12 @@
 ---
 import Logo from './Logo.astro';
 import { menu } from '../data/site.js';
+import { aantalFilms } from '../data/films.js';
 
 /* variant: 'over-hero' (transparant over de hero) of 'vast' (donkere balk bovenaan) */
 const { variant = 'vast' } = Astro.props;
+/* Geen menu-item naar een lege Films-pagina. */
+const items = menu.filter((m) => m.href !== '/films/' || aantalFilms > 0);
 const pad = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const actief = (href) => {
   const h = href.replace(/\/+$/, '') || '/';
@@ -16,7 +19,7 @@ const actief = (href) => {
     <span>lichtbreking</span>
   </a>
   <div class="lb-pillen">
-    {menu.map((item) => (
+    {items.map((item) => (
       <a class="lb-pil" href={item.href} aria-current={actief(item.href) ? 'page' : undefined}>{item.label}</a>
     ))}
   </div>

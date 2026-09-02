@@ -47,4 +47,9 @@ export const films = [
   },
 ];
 
-export const aantalFilms = films.length;
+/* Zelfde regel als bij de beelden: zolang er nog geen film is tonen we de lege
+   kaarten zodat de opzet zichtbaar is, en zodra er één echt is verdwijnen ze. */
+const heeftMedia = (f) => Boolean(f.bron || f.poster || f.extern);
+export const heeftFilms = films.some(heeftMedia);
+export const zichtbareFilms = heeftFilms ? films.filter(heeftMedia) : [];
+export const aantalFilms = zichtbareFilms.length;

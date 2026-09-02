@@ -14,7 +14,10 @@ import { aantalFilms } from '../../data/films.js';
   <div class="lb-paginakop lb-marge">
     <h1>Werk</h1>
     <div class="lb-rule lb-rule--kort"></div>
-    <p>{aantalBeelden} beelden · {aantalFilms} {aantalFilms === 1 ? 'film' : 'films'}</p>
+    <p>
+      {aantalBeelden} {aantalBeelden === 1 ? 'beeld' : 'beelden'}
+      {aantalFilms > 0 && ` · ${aantalFilms} ${aantalFilms === 1 ? 'film' : 'films'}`}
+    </p>
   </div>
 
   <FilterBalk modus="filter" telling={`${rasterShots.length} beelden`} />

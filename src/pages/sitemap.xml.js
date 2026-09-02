@@ -1,7 +1,8 @@
 import { site } from '../data/site.js';
 import { shots } from '../data/shots.js';
+import { aantalFilms } from '../data/films.js';
 
-const vaste = ['/', '/werk/', '/films/', '/over/', '/contact/', '/privacy/'];
+const vaste = ['/', '/werk/', ...(aantalFilms > 0 ? ['/films/'] : []), '/over/', '/contact/', '/privacy/'];
 
 /* Detailpagina's bestaan alleen voor beelden die er echt zijn. */
 const beelden = shots.filter((s) => Boolean(s.bestand)).map((s) => `/werk/${s.slug}/`);
