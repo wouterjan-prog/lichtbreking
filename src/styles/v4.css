@@ -166,11 +166,6 @@ img, video { max-width: 100%; }
   backdrop-filter: blur(20px) saturate(150%);
   -webkit-backdrop-filter: blur(20px) saturate(150%);
 }
-.lb-nav.is-gescrold {
-  background: rgba(8, 8, 10, .72);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-}
 
 .lb-merk { display: flex; align-items: center; gap: 11px; }
 .lb-merk:hover { color: var(--lb-ink); }
@@ -526,24 +521,6 @@ img, video { max-width: 100%; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: var(--lb-gap);
-}
-
-/* ---------------------------------------------------------------- verticaal */
-.lb-scroller {
-  margin-top: clamp(16px, 3vw, 26px);
-  display: flex;
-  gap: var(--lb-gap);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--lb-marge);
-  padding: 0 var(--lb-marge) 4px;
-  -webkit-overflow-scrolling: touch;
-}
-.lb-scroller > * {
-  flex: 0 0 auto;
-  width: clamp(180px, 40vw, 250px);
-  aspect-ratio: 9 / 16;
-  scroll-snap-align: start;
 }
 
 /* ----------------------------------------------------------------- overband */
@@ -926,8 +903,12 @@ img, video { max-width: 100%; }
   gap: clamp(12px, 2vw, 26px);
   margin-top: clamp(20px, 3vw, 34px);
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  /* Vastklikken mag, maar niet dwingend: bij 'mandatory' vecht de browser
+     tegen kleine bewegingen van de trackpad. */
+  scroll-snap-type: x proximity;
+  /* Geen scroll-behavior hier. Dat geldt namelijk ook voor je eigen scrollen,
+     en dan loopt de strook achter je vinger aan. De pijlknoppen doen het
+     vloeiende scrollen zelf, in het script. */
   padding-inline: var(--lb-marge);
   scroll-padding-inline: var(--lb-marge);
   -webkit-overflow-scrolling: touch;

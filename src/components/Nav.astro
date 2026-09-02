@@ -25,14 +25,6 @@ const actief = (href) => {
   </div>
 </nav>
 
-{variant === 'over-hero' && (
-  <script is:inline>
-    (() => {
-      const nav = document.querySelector('.lb-nav');
-      if (!nav) return;
-      const zet = () => nav.classList.toggle('is-gescrold', window.scrollY > 40);
-      zet();
-      window.addEventListener('scroll', zet, { passive: true });
-    })();
-  </script>
-)}
+{/* Boven de hero staat het menu absoluut en scrollt het gewoon mee omhoog.
+    Er hoort dus niets te veranderen tijdens het scrollen: een achtergrond die
+    verschijnt op iets wat toch verdwijnt oogt als een storing. */}

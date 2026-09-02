@@ -93,23 +93,36 @@ const dias = await Promise.all(
     const terug = document.getElementById('lb-terug');
     const verder = document.getElementById('lb-verder');
 
+    /* De plek van een dia binnen de strook, gemeten en niet afgeleid uit
+       offsetLeft. Daar zit de binnenmarge voor het vastklikken namelijk niet
+       in, en dan wijst de knop 48 pixels naast het doel. */
+    const marge = () => parseFloat(getComputedStyle(strook).scrollPaddingLeft) || 0;
+    const linksVan = (d) =>
+      d.getBoundingClientRect().left - strook.getBoundingClientRect().left + strook.scrollLeft;
+    const doelVan = (d) => Math.max(0, Math.round(linksVan(d) - marge()));
+
     const huidige = () => {
       let beste = 0, kleinst = Infinity;
       dias.forEach((d, i) => {
-        const v = Math.abs(d.offsetLeft - strook.offsetLeft - strook.scrollLeft);
+        const v = Math.abs(doelVan(d) - strook.scrollLeft);
         if (v < kleinst) { kleinst = v; beste = i; }
       });
       return beste;
     };
-    const ververs = () => {
-      const i = huidige();
+    const toon = (i) => {
       teller.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(dias.length).padStart(2, '0');
       terug.disabled = i === 0;
       verder.disabled = i === dias.length - 1;
     };
+    const ververs = () => toon(huidige());
+
     const ga = (stap) => {
-      const doel = dias[Math.max(0, Math.min(dias.length - 1, huidige() + stap))];
-      strook.scrollTo({ left: doel.offsetLeft - strook.offsetLeft, behavior: 'smooth' });
+      const i = Math.max(0, Math.min(dias.length - 1, huidige() + stap));
+      /* Meteen bijwerken bij de klik. Wachten op het scroll-signaal geeft
+         vertraging, en tijdens een vloeiende beweging klopt de telling nog niet. */
+      toon(i);
+      const rustig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      strook.scrollTo({ left: doelVan(dias[i]), behavior: rustig ? 'auto' : 'smooth' });
     };
     terug.addEventListener('click', () => ga(-1));
     verder.addEventListener('click', () => ga(1));
