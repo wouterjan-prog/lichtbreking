@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { shots } from '../../data/shots.js';
 import { toestelNaam, elementen, elementKleur } from '../../data/site.js';
@@ -29,6 +29,34 @@ const origineel = uitPublic ? null : originelen[`../../beelden/werk/${shot.besta
 const alt = shot.alt || `${shot.titel}, ${toestelNaam(shot.toestel)}`;
 const elementNaam = elementen.find((e) => e.id === shot.element)?.naam ?? shot.element;
 const alleen = vorige?.slug === shot.slug;
+
+/* Heeft dit beeld een video, dan komt het stilstaande beeld als posterframe
+   op de speler te staan. De browser haalt de video pas op als iemand op play
+   drukt, dankzij preload="none". */
+const posterPad = origineel
+  ? (await getImage({ src: origineel, format: 'webp', width: 1920 })).src
+  : (uitPublic ? shot.bestand : undefined);
+
+/* Opnamegegevens komen uit de .SRT van de drone, zie tools/srt-lezen.py.
+   Alleen wat ingevuld is wordt getoond. */
+const o = shot.opname ?? null;
+const maanden = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli',
+                 'augustus', 'september', 'oktober', 'november', 'december'];
+const datumTekst = (() => {
+  if (!o?.datum) return null;
+  const [j, m, d] = o.datum.split('-').map(Number);
+  const dag = `${d} ${maanden[m - 1]} ${j}`;
+  return o.tijd ? `${dag}, ${o.tijd}` : dag;
+})();
+const instellingen = o
+  ? [o.diafragma, o.sluiter, o.iso ? `ISO ${o.iso}` : null].filter(Boolean).join(' · ')
+  : null;
+const feiten = [
+  o?.plek ? ['Plek', o.plek] : null,
+  datumTekst ? ['Wanneer', datumTekst] : null,
+  o?.hoogte ? ['Vlieghoogte', `${o.hoogte} m`] : null,
+  instellingen ? ['Instellingen', instellingen] : null,
+].filter(Boolean);
 ---
 <Base
   titel={shot.titel}
@@ -44,7 +72,18 @@ const alleen = vorige?.slug === shot.slug;
   </div>
 
   <div class="lb-detail lb-marge">
-    {origineel ? (
+    {shot.video ? (
+      <video
+        class="lb-detail__video"
+        controls
+        playsinline
+        preload="none"
+        poster={posterPad}
+      >
+        {shot.video.hevc && <source src={shot.video.hevc} type='video/mp4; codecs="hvc1"' />}
+        {shot.video.h264 && <source src={shot.video.h264} type="video/mp4" />}
+      </video>
+    ) : origineel ? (
       <Picture
         src={origineel}
         formats={['avif', 'webp']}
@@ -58,6 +97,17 @@ const alleen = vorige?.slug === shot.slug;
       <img src={shot.bestand} alt={alt} loading="eager" decoding="async" />
     )}
   </div>
+
+  {feiten.length > 0 && (
+    <dl class="lb-opname lb-marge">
+      {feiten.map(([label, waarde]) => (
+        <div>
+          <dt class="lb-label">{label}</dt>
+          <dd>{waarde}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
 
   <nav class="lb-verder lb-marge" aria-label="Naar een ander beeld">
     {!alleen && <a class="lb-knop lb-knop--rand" href={`/werk/${vorige.slug}/`}>&#8592; {vorige.titel}</a>}

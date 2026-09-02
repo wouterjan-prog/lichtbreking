@@ -88,6 +88,20 @@ spectrumvolgorde `#FF5147 · #FF9A2E · #FFD23E · #46C95F · #2F7CF0 · #9B4DDB
 Elementkleuren: lucht `#2F7CF0`, land `#46C95F`, water `#FFD23E`, nacht `#9B4DDB`.
 Alle animaties staan uit bij `prefers-reduced-motion: reduce`.
 
+## Opnamegegevens uit de drone
+
+DJI zet naast elke opname een `.SRT` met per beeldje de tijd, gps, hoogte en
+camera-instellingen. `tools/srt-lezen.py` leest die uit en levert een kant en
+klare regel voor `shots.js`:
+
+```bash
+python3 tools/srt-lezen.py "/pad/DJI_....SRT" --slug playa-grandi --plek "Playa Grandi"
+```
+
+Let op de klok: die is van je controller, niet van de plek. Stond je telefoon op
+Nederlandse tijd terwijl je op Curaçao filmde, dan loopt hij zes uur voor. Het
+script rekent om en toont beide tijden.
+
 ## Privacy
 
 De site laadt niets van derden. Albert Sans staat zelf in `public/fonts/`

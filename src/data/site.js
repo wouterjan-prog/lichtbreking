@@ -45,7 +45,7 @@ export const menu = [
    (met public/video/poster.jpg als stilstaand beeld). */
 export const hero = {
   badge: 'Nieuwste serie',
-  titel: 'Playa Grandi',
+  titel: 'Coral Estate',
   meta: 'DJI Mini 5 Pro · Curaçao',
   /* De hero-video speelt altijd zonder geluid. Zet dit op true zodra er een
      hero-video met een écht geluidsspoor staat, dan verschijnt de geluidsknop. */
