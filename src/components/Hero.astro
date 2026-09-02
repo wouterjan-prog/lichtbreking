@@ -47,7 +47,7 @@ const toonGeluid = heeftVideo && heroInstelling.videoHeeftGeluid === true;
 
   <div class="lb-hero__onder">
     <div>
-      <span class="lb-badge">{badge}</span>
+      {badge && <span class="lb-badge">{badge}</span>}
       <h1 class="lb-hero__titel">{titel}</h1>
       {meta && (
         <div class="lb-hero__regel">

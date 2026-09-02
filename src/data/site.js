@@ -47,8 +47,8 @@ export const menu = [
 export const hero = {
   /* De hero draagt niet de naam van de clip maar waar de site over gaat. */
   badge: null,
-  titel: 'Wat er te zien was',
-  meta: 'Beeldarchief van boven · Curaçao en verder',
+  titel: 'Licht dat ik niet corrigeer',
+  meta: 'Beeldarchief van boven. Curaçao, en wat daarna komt.',
   /* De hero-video speelt altijd zonder geluid. Zet dit op true zodra er een
      hero-video met een écht geluidsspoor staat, dan verschijnt de geluidsknop. */
   videoHeeftGeluid: false,
