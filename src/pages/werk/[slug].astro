@@ -1,18 +1,16 @@
 ---
 import { Picture, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
+import Kaartjes from '../../components/Kaartjes.astro';
 import { shots } from '../../data/shots.js';
 import { toestelNaam, elementen, elementKleur } from '../../data/site.js';
-import { lichtBij } from '../../lib/zon.js';
-import Kaartje from '../../components/Kaartje.astro';
 
 const originelen = import.meta.glob(
   '../../beelden/werk/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
   { eager: true }
 );
 
-/* Alleen beelden die er echt zijn krijgen een eigen pagina. Zolang shots.js
-   nog geen bestanden noemt levert dit nul routes op, dus geen lege pagina's. */
+/* Alleen beelden die er echt zijn krijgen een eigen pagina. */
 export function getStaticPaths() {
   const metBeeld = shots.filter((s) => Boolean(s.bestand));
   return metBeeld.map((shot, i) => ({
@@ -26,70 +24,50 @@ export function getStaticPaths() {
 }
 
 const { shot, vorige, volgende } = Astro.props;
+const o = shot.opname ?? null;
+
 const uitPublic = shot.bestand.startsWith('/');
 const origineel = uitPublic ? null : originelen[`../../beelden/werk/${shot.bestand}`]?.default ?? null;
 const alt = shot.alt || `${shot.titel}, ${toestelNaam(shot.toestel)}`;
-const elementNaam = elementen.find((e) => e.id === shot.element)?.naam ?? shot.element;
-const alleen = vorige?.slug === shot.slug;
-/* Bij precies twee beelden wijzen vorige en volgende naar hetzelfde. Dan is één
-   knop genoeg, anders staat dezelfde titel twee keer naast elkaar. */
-const zelfdeBuur = !alleen && vorige?.slug === volgende?.slug;
-
-/* Heeft dit beeld een video, dan komt het stilstaande beeld als posterframe
-   op de speler te staan. De browser haalt de video pas op als iemand op play
-   drukt, dankzij preload="none". */
 const posterPad = origineel
   ? (await getImage({ src: origineel, format: 'webp', width: 1920 })).src
   : (uitPublic ? shot.bestand : undefined);
 
-/* Opnamegegevens komen uit de .SRT van de drone, zie tools/srt-lezen.py.
-   Alleen wat ingevuld is wordt getoond. */
-const o = shot.opname ?? null;
+const elementNaam = elementen.find((e) => e.id === shot.element)?.naam ?? shot.element;
+
 const maanden = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli',
                  'augustus', 'september', 'oktober', 'november', 'december'];
 const datumTekst = (() => {
   if (!o?.datum) return null;
   const [j, m, d] = o.datum.split('-').map(Number);
-  const dag = `${d} ${maanden[m - 1]} ${j}`;
-  return o.tijd ? `${dag}, ${o.tijd}` : dag;
+  return `${d} ${maanden[m - 1]} ${j}`;
 })();
-const instellingen = o
-  ? [o.diafragma, o.sluiter, o.iso ? `ISO ${o.iso}` : null].filter(Boolean).join(' · ')
-  : null;
-/* Uit tijd en gps volgt wat de zon deed. Curaçao ligt op UTC-4. */
-const licht = o ? lichtBij({ datum: o.datum, tijd: o.tijd, lat: o.lat, lon: o.lon }) : null;
 
-const feiten = [
-  o?.plek ? ['Plek', o.plek] : null,
-  datumTekst ? ['Wanneer', datumTekst] : null,
-  o?.hoogte ? ['Hoogte boven zee', `${o.hoogte} m`] : null,
-  licht ? ['Licht', licht.kort] : null,
-  instellingen ? ['Instellingen', instellingen] : null,
-].filter(Boolean);
+/* Eén rustige regel met wat de camera meeschreef. Geen tabel. */
+const regel = [
+  datumTekst,
+  o?.hoogte ? `${o.hoogte} m` : null,
+  [o?.diafragma, o?.sluiter, o?.iso ? `ISO ${o.iso}` : null].filter(Boolean).join(' · ') || null,
+].filter(Boolean).join(' · ');
+
+const alleen = vorige?.slug === shot.slug;
+const zelfdeBuur = !alleen && vorige?.slug === volgende?.slug;
 ---
 <Base
   titel={shot.titel}
-  beschrijving={`${shot.titel}, vastgelegd met ${toestelNaam(shot.toestel)}. Element ${elementNaam.toLowerCase()}.`}
+  beschrijving={`${shot.titel}${o?.plek ? `, ${o.plek}` : ''}. Vastgelegd met ${toestelNaam(shot.toestel)}.`}
 >
   <div class="lb-paginakop lb-marge">
-    <h1>{shot.titel}</h1>
-    <div class="lb-rule lb-rule--kort"></div>
-    <p>
+    <p class="lb-label">
       <span class="lb-toestel__dot" style={`background:${elementKleur(shot.element)};display:inline-block;margin-right:8px`}></span>
-      {elementNaam} · {toestelNaam(shot.toestel)} · {shot.type === 'video' ? 'video' : 'foto'}
+      {o?.plek ?? elementNaam}
     </p>
+    <h1>{shot.titel}</h1>
   </div>
 
   <div class="lb-detail lb-marge">
     {shot.video ? (
-      <video
-        class="lb-detail__video"
-        controls
-        loop
-        playsinline
-        preload="none"
-        poster={posterPad}
-      >
+      <video class="lb-detail__video" controls loop playsinline preload="none" poster={posterPad}>
         {shot.video.hevc && <source src={shot.video.hevc} type='video/mp4; codecs="hvc1"' />}
         {shot.video.h264 && <source src={shot.video.h264} type="video/mp4" />}
       </video>
@@ -106,25 +84,21 @@ const feiten = [
     ) : (
       <img src={shot.bestand} alt={alt} loading="eager" decoding="async" />
     )}
+    {regel && <p class="lb-label lb-detail__regel">{regel}</p>}
   </div>
 
-  {feiten.length > 0 && (
-    <dl class="lb-opname lb-marge">
-      {feiten.map(([label, waarde]) => (
-        <div>
-          <dt class="lb-label">{label}</dt>
-          <dd>{waarde}</dd>
+  <div class="lb-plek lb-marge">
+    <div>
+      {shot.verhaal && <p class="lb-groot">{shot.verhaal}</p>}
+      {shot.weetje && (
+        <div class="lb-weetje">
+          <p class="lb-label">Weetje</p>
+          <p>{shot.weetje}</p>
         </div>
-      ))}
-    </dl>
-  )}
-
-  {(shot.verhaal || (o?.lat != null && o?.lon != null)) && (
-    <div class="lb-plek lb-marge">
-      {shot.verhaal ? <p>{shot.verhaal}</p> : <p></p>}
-      <Kaartje lat={o?.lat} lon={o?.lon} element={shot.element} titel={shot.titel} />
+      )}
     </div>
-  )}
+    <Kaartjes lat={o?.lat} lon={o?.lon} element={shot.element} titel={shot.titel} />
+  </div>
 
   <nav class="lb-verder lb-marge" aria-label="Naar een ander beeld">
     {!alleen && !zelfdeBuur && (
@@ -142,19 +116,13 @@ const feiten = [
     (() => {
       const video = document.querySelector('.lb-detail__video');
       if (!video) return;
-      /* Belooft een browser HEVC maar struikelt hij er alsnog over, dan schuift
-         hij hier eenmalig door naar de H.264-versie. */
       let geprobeerd = false;
-      video.addEventListener(
-        'error',
-        () => {
-          if (geprobeerd) return;
-          geprobeerd = true;
-          video.src = terugval;
-          video.load();
-        },
-        true
-      );
+      video.addEventListener('error', () => {
+        if (geprobeerd) return;
+        geprobeerd = true;
+        video.src = terugval;
+        video.load();
+      }, true);
     })();
   </script>
 )}

@@ -1,51 +1,82 @@
 ---
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
-import FilterBalk from '../components/FilterBalk.astro';
-import Tegel from '../components/Tegel.astro';
-import FilmKaart from '../components/FilmKaart.astro';
-import Scroller from '../components/Scroller.astro';
-import Overband from '../components/Overband.astro';
-import Lightbox from '../components/Lightbox.astro';
+import Galerij from '../components/Galerij.astro';
 import { hero, site } from '../data/site.js';
-import { rasterShots, verticaleShots, aantalBeelden, heeftBeeldmateriaal } from '../data/shots.js';
-import { zichtbareFilms as films, aantalFilms } from '../data/films.js';
+import { rasterShots, heeftBeeldmateriaal } from '../data/shots.js';
 
-const uitgelicht = rasterShots.slice(0, 6);
+const metBeeld = rasterShots.filter((s) => s.bestand);
+
+/* Eén beeld schermvullend tussen de galerij en de tekst, als adempauze.
+   Nu Daaibooi, want die vult de volle breedte het mooist. */
+const plaatShot = metBeeld.find((s) => s.slug === 'daaibooi') ?? metBeeld[0];
+const originelen = import.meta.glob(
+  '../beelden/werk/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+const plaat = plaatShot?.bestand && !plaatShot.bestand.startsWith('/')
+  ? originelen[`../beelden/werk/${plaatShot.bestand}`]?.default ?? null
+  : null;
 ---
 <Base titel={null} beschrijving={site.beschrijving} hero={true}>
   <Hero slot="hero" badge={hero.badge} titel={hero.titel} meta={hero.meta} />
-
-  <FilterBalk modus="link" telling={`${aantalBeelden} beelden`} id="beeld" />
 
   {!heeftBeeldmateriaal && (
     <p class="lb-inaanbouw lb-marge">Het archief wordt gevuld. De beelden verschijnen hier binnenkort.</p>
   )}
 
-  <div class="lb-raster lb-marge">
-    {uitgelicht.map((s, i) => <Tegel shot={s} lazy={i > 1} />)}
-  </div>
-  <div class="lb-meer lb-marge">
-    <a href="/werk/">Alle beelden &#8594;</a>
-  </div>
+  <section class="lb-inleiding lb-marge">
+    <p class="lb-groot">Vier toestellen, en licht dat elke twee uur iets anders doet.</p>
+    <p class="lb-bijzin">
+      Dit archief verzamelt wat er te zien is boven, op en onder de waterlijn. Bij elk beeld staat
+      waar het gemaakt is, en wat die plek bijzonder maakt.
+    </p>
+  </section>
 
-  {films.length > 0 && (
-    <section class="lb-sectie lb-marge" id="films">
-      <div class="lb-sectiekop">
-        <h2>Films</h2>
-        <span class="lb-label">{aantalFilms} {aantalFilms === 1 ? 'film' : 'films'}</span>
+  <Galerij shots={metBeeld} />
+
+  {plaat && (
+    <section class="lb-plaat">
+      <div class="lb-plaat__beeld">
+        <Picture
+          src={plaat}
+          formats={['avif', 'webp']}
+          widths={[960, 1440, 1920, 2400]}
+          sizes="100vw"
+          alt={plaatShot.alt || plaatShot.titel}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
-      <FilmKaart film={films[0]} groot={true} />
-      {films.length > 1 && (
-        <div class="lb-meer">
-          <a href="/films/">Alle films &#8594;</a>
-        </div>
-      )}
+      <div class="lb-plaat__onder">
+        <span class="lb-plaat__naam">{plaatShot.titel}</span>
+        <span class="lb-label">{plaatShot.opname?.plek}</span>
+      </div>
     </section>
   )}
 
-  <Scroller shots={verticaleShots} kop="Verticaal" meta="Pocket 4 · iPhone" id="verticaal" />
-
-  <Overband />
-  <Lightbox />
+  <section class="lb-tekstblad lb-marge">
+    <div>
+      <span class="lb-rule"></span>
+      <p class="lb-label">Over dit archief</p>
+    </div>
+    <div>
+      <p class="lb-groot">
+        Op mijn werk breek ik licht. Een brillenglas of een contactlens buigt de straal precies
+        zoveel dat hij op de goede plek in het oog terechtkomt. Dan ziet iemand weer scherp.
+      </p>
+      <p class="lb-groot">Hier breek ik het niet, maar vang ik het.</p>
+      <p>
+        Dezelfde natuurkunde, hetzelfde geslepen glas. Alleen zit de lens nu aan een drone, en komt
+        het licht niet in een oog terecht maar op een sensor.
+      </p>
+      <p>Op mijn werk bepaal ik hoe iemand kijkt. Hier wat er te zien was.</p>
+      <p>Curaçao is het begin. Wat hierna komt hoeft niet op hetzelfde eiland te liggen.</p>
+    </div>
+  </section>
 </Base>
+
+<style>
+  .lb-bijzin { margin: 20px 0 0; font-size: clamp(14px, 1.8vw, 16px); line-height: 1.72; color: var(--lb-ink-70); max-width: 58ch; }
+</style>

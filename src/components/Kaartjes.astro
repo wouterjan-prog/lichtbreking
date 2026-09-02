@@ -1,0 +1,51 @@
+---
+import { wereld, wereldPunt } from '../lib/wereld.js';
+import { kaart, naarPunt } from '../lib/curacao.js';
+import { elementKleur } from '../data/site.js';
+
+/* Twee kaartjes onder een beeld: waar op aarde, en waar precies.
+   De wereldkaart werkt overal. Het tweede kaartje verschijnt alleen als we
+   voor die plek een lokale omtrek hebben; nu is dat Curaçao. Filmt hij ergens
+   anders, dan komt er één omtrek bij en werkt de rest vanzelf. */
+const { lat, lon, element = 'water', titel = '' } = Astro.props;
+
+const wp = wereldPunt(lat, lon);
+const kleur = elementKleur(element);
+
+/* Ruwe begrenzing van Curaçao. Ligt de opname daarbuiten, dan slaan we het
+   eilandkaartje over in plaats van een stip naast het eiland te zetten. */
+const opCuracao = lat != null && lon != null &&
+  lat > 11.9 && lat < 12.5 && lon > -69.3 && lon < -68.6;
+const lp = opCuracao ? naarPunt(lat, lon) : null;
+---
+{wp && (
+  <div class="lb-kaartjes">
+    <figure class="lb-kaartje">
+      <figcaption class="lb-label">Waar op de wereld</figcaption>
+      <svg
+        viewBox={`0 0 ${wereld.breedte} ${wereld.hoogte}`}
+        role="img"
+        aria-label={`Wereldkaart met de plek van ${titel}`}
+      >
+        <path class="lb-wereldpad" d={wereld.pad} />
+        <circle cx={wp.x} cy={wp.y} r="9" fill={kleur} fill-opacity="0.25" />
+        <circle cx={wp.x} cy={wp.y} r="3.6" fill={kleur} />
+      </svg>
+    </figure>
+
+    {lp && (
+      <figure class="lb-kaartje">
+        <figcaption class="lb-label">Waar op het eiland</figcaption>
+        <svg
+          viewBox={`-50 -50 ${kaart.breedte + 100} ${kaart.hoogte + 100}`}
+          role="img"
+          aria-label={`Kaart van Curaçao met de plek van ${titel}`}
+        >
+          <path class="lb-eilandpad" d={kaart.pad} />
+          <circle cx={lp.x} cy={lp.y} r="60" fill={kleur} fill-opacity="0.2" />
+          <circle cx={lp.x} cy={lp.y} r="26" fill={kleur} />
+        </svg>
+      </figure>
+    )}
+  </div>
+)}

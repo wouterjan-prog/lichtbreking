@@ -11,9 +11,9 @@ const originelen = import.meta.glob(
   { eager: true }
 );
 
-const { shot, caption = null, lazy = true, lightbox = true } = Astro.props;
+const { shot, caption = null, lazy = true, lightbox = true, vorm = null } = Astro.props;
 
-const breed = shot.verhouding === '16/9';
+const breed = vorm ? vorm === 'lb-tegel--breed' || vorm === 'lb-tegel--band' : shot.verhouding === '16/9';
 const staand = shot.verhouding === '9/16';
 const toonCaption = caption === null ? breed : caption;
 const alt = shot.alt || `${shot.titel}, ${toestelNaam(shot.toestel)}`;
@@ -54,11 +54,11 @@ const grootPad = groot?.src ?? (uitPublic ? shot.bestand : null);
 <Tag
   class:list={[
     'lb-tegel',
-    breed && 'lb-tegel--breed',
+    vorm || (breed && 'lb-tegel--breed'),
     klikbaar && 'lb-tegel--klikbaar',
     naarPagina && 'lb-tegel--pagina',
   ]}
-  style={`aspect-ratio:${shot.verhouding}`}
+  style={vorm ? undefined : `aspect-ratio:${shot.verhouding}`}
   data-element={shot.element}
   data-toestel={shot.toestel}
   data-type={shot.type}

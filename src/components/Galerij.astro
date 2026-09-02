@@ -1,0 +1,143 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { Picture, getImage } from 'astro:assets';
+import { toestelNaam } from '../data/site.js';
+
+/* De galerij: een strook waar je opzij doorheen scrollt. Video's spelen mee,
+   maar alleen die van het beeld dat in zicht is. Zo blijft de pagina licht,
+   ook als het archief groeit. */
+const { shots = [] } = Astro.props;
+
+const originelen = import.meta.glob(
+  '../beelden/werk/*.{jpg,jpeg,png,webp,avif,tif,tiff,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+const pub = (p) => path.join(process.cwd(), 'public', p);
+
+const dias = await Promise.all(
+  shots.map(async (shot) => {
+    const origineel = shot.bestand && !shot.bestand.startsWith('/')
+      ? originelen[`../beelden/werk/${shot.bestand}`]?.default ?? null
+      : null;
+    const voorvertoning = `video/preview/${shot.slug}.mp4`;
+    return {
+      shot,
+      origineel,
+      poster: origineel
+        ? (await getImage({ src: origineel, format: 'webp', width: 1280 })).src
+        : shot.bestand,
+      preview: fs.existsSync(pub(voorvertoning)) ? `/${voorvertoning}` : null,
+    };
+  })
+);
+---
+{dias.length > 0 && (
+  <section class="lb-galerij" aria-labelledby="lb-galerij-kop">
+    <div class="lb-marge lb-galerij__kop">
+      <h2 id="lb-galerij-kop">Galerij</h2>
+      <p class="lb-label">Scroll opzij · klik voor de plek</p>
+    </div>
+
+    <div class="lb-strook" id="lb-strook" tabindex="0" role="region" aria-label="Galerij, scroll opzij">
+      {dias.map(({ shot, origineel, poster, preview }, i) => (
+        <a class="lb-dia" href={`/werk/${shot.slug}/`} data-slug={shot.slug}>
+          <span class="lb-dia__kader">
+            {preview ? (
+              <video
+                class="lb-dia__video"
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster={poster}
+                data-bron={preview}
+                aria-hidden="true"
+              ></video>
+            ) : origineel ? (
+              <Picture
+                src={origineel}
+                formats={['avif', 'webp']}
+                widths={[640, 960, 1280, 1600]}
+                sizes="(min-width: 1100px) 1040px, 82vw"
+                alt={shot.alt || shot.titel}
+                loading={i > 0 ? 'lazy' : 'eager'}
+                decoding="async"
+              />
+            ) : null}
+          </span>
+          <span class="lb-dia__onder">
+            <span class="lb-dia__naam">{shot.titel}</span>
+            <span class="lb-label">{shot.type === 'video' ? 'Video' : 'Foto'} · {toestelNaam(shot.toestel).replace('DJI ', '')}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <div class="lb-marge lb-galerij__voet">
+      <p class="lb-label lb-teller" id="lb-teller">01 / {String(dias.length).padStart(2, '0')}</p>
+      <div class="lb-pijlen">
+        <button type="button" id="lb-terug" aria-label="Vorige">&#8592;</button>
+        <button type="button" id="lb-verder" aria-label="Volgende">&#8594;</button>
+      </div>
+    </div>
+  </section>
+)}
+
+<script is:inline>
+  (() => {
+    const strook = document.getElementById('lb-strook');
+    if (!strook) return;
+    const dias = [...strook.querySelectorAll('.lb-dia')];
+    const teller = document.getElementById('lb-teller');
+    const terug = document.getElementById('lb-terug');
+    const verder = document.getElementById('lb-verder');
+
+    const huidige = () => {
+      let beste = 0, kleinst = Infinity;
+      dias.forEach((d, i) => {
+        const v = Math.abs(d.offsetLeft - strook.offsetLeft - strook.scrollLeft);
+        if (v < kleinst) { kleinst = v; beste = i; }
+      });
+      return beste;
+    };
+    const ververs = () => {
+      const i = huidige();
+      teller.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(dias.length).padStart(2, '0');
+      terug.disabled = i === 0;
+      verder.disabled = i === dias.length - 1;
+    };
+    const ga = (stap) => {
+      const doel = dias[Math.max(0, Math.min(dias.length - 1, huidige() + stap))];
+      strook.scrollTo({ left: doel.offsetLeft - strook.offsetLeft, behavior: 'smooth' });
+    };
+    terug.addEventListener('click', () => ga(-1));
+    verder.addEventListener('click', () => ga(1));
+    strook.addEventListener('scroll', () => requestAnimationFrame(ververs), { passive: true });
+    strook.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); ga(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); ga(-1); }
+    });
+    ververs();
+
+    /* Alleen de video in beeld haalt zijn bestand op en speelt. Wie geen
+       beweging wil of op databesparing zit, houdt het posterbeeld. */
+    const rustig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const zuinig = navigator.connection && navigator.connection.saveData;
+    if (rustig || zuinig || !window.IntersectionObserver) return;
+
+    const kijker = new IntersectionObserver((rijen) => {
+      rijen.forEach((r) => {
+        const v = r.target.querySelector('.lb-dia__video');
+        if (!v) return;
+        if (r.isIntersecting) {
+          if (!v.src) v.src = v.dataset.bron;
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { root: strook, threshold: 0.55 });
+    dias.forEach((d) => kijker.observe(d));
+  })();
+</script>

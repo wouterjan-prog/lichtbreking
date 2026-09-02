@@ -34,7 +34,8 @@ export const toestelNaam = (id) => toestellen.find((t) => t.id === id)?.naam ?? 
 
 /* Hoofdmenu. Volgorde = volgorde in de glas-pil rechtsboven. */
 export const menu = [
-  { label: 'Beeld',   href: '/' },
+  /* Het logo linksboven gaat naar de homepage, dus die staat niet in het menu. */
+  { label: 'Beeld',   href: '/werk/' },
   { label: 'Films',   href: '/films/' },
   { label: 'Over',    href: '/over/' },
   { label: 'Contact', href: '/contact/' },
@@ -44,9 +45,10 @@ export const menu = [
    nieuwe serie of hero-video is. De video zelf hoort in public/video/hero.mp4
    (met public/video/poster.jpg als stilstaand beeld). */
 export const hero = {
-  badge: 'Nieuwste serie',
-  titel: 'Coral Estate',
-  meta: 'DJI Mini 5 Pro · Curaçao',
+  /* De hero draagt niet de naam van de clip maar waar de site over gaat. */
+  badge: null,
+  titel: 'Wat er te zien was',
+  meta: 'Beeldarchief van boven · Curaçao en verder',
   /* De hero-video speelt altijd zonder geluid. Zet dit op true zodra er een
      hero-video met een écht geluidsspoor staat, dan verschijnt de geluidsknop. */
   videoHeeftGeluid: false,

@@ -16,8 +16,9 @@
                  '9/16' komt automatisch in de Verticaal-scroller
    - bestand     pad in /public, of null
    - alt         beschrijving voor schermlezers en zoekmachines
-   - verhaal     optioneel, een paar zinnen over de plek. Komt naast het
-                 kaartje te staan onder het beeld.
+   - verhaal     optioneel, een paar zinnen over de plek. Komt onder het beeld.
+   - weetje      optioneel, één feit dat je van boven niet ziet. Krijgt een
+                 eigen kadertje. Alleen wat je zeker weet.
    - opname      hoogte is altijd de hoogte boven zeeniveau (abs_alt in de
                  telemetrie), niet boven het startpunt. Anders is het niet
                  vergelijkbaar: bij Santa Martha steeg de drone op vanaf een
@@ -48,6 +49,9 @@ export const shots = [
       'Vissers noemen deze plek Playa Piskadó. Ze maken er hun vangst schoon en gooien de resten ' +
       'overboord, en daar komen de zeeschildpadden op af. Vanaf achttien meter hoogte zie je vooral ' +
       'het patroon: het vlot, de rode boot, en de schaduwen die scherp op de zandbodem vallen.',
+    weetje:
+      'Vissers noemen deze plek Playa Piskadó. Ze maken er hun vangst schoon en gooien de resten ' +
+      'overboord, en daar komen de zeeschildpadden op af.',
     opname: {
       datum: '2026-08-06', tijd: '15:38', plek: 'Playa Grandi, Curaçao',
       lat: 12.369358, lon: -69.154348,
@@ -65,6 +69,9 @@ export const shots = [
       'Daarachter ligt het Spaanse Water vol zeilboten. Het fort is begin achttiende eeuw gebouwd ' +
       'door de West-Indische Compagnie om de baai te bewaken. Vanaf eenennegentig meter zie je in ' +
       'één beeld waarom het daar staat: wie de baai in wil, moet erlangs.',
+    weetje:
+      'Het fort is begin achttiende eeuw gebouwd door de West-Indische Compagnie. Wie de baai in ' +
+      'wilde, moest erlangs.',
     opname: {
       datum: '2026-08-13', tijd: '14:40', plek: 'Caracasbaai, Curaçao',
       lat: 12.072006, lon: -68.863401,
@@ -74,14 +81,16 @@ export const shots = [
   {
     slug: 'daaibooi', titel: 'Daaibooibaai',
     element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
-    bestand: 'baai.jpg',
+    bestand: 'daaibooi.jpg',
     alt: 'Kleine baai met wit strand, parasols en helder turkoois water, van boven gezien',
-    video: { hevc: '/video/werk/baai.hevc.mp4', h264: '/video/werk/baai.mp4' },
+    video: { hevc: '/video/werk/daaibooi.hevc.mp4', h264: '/video/werk/daaibooi.mp4' },
     verhaal:
       'Daaibooi ligt in een inham tussen twee rotswanden, bij Sint Willibrordus aan de westkust. ' +
       'Van boven zie je vooral hoe ver de lichte zandbodem de baai in loopt voordat het water ' +
       'dieper wordt. De parasols staan op een strook van hooguit honderd meter, en daarachter ' +
       'begint meteen de begroeiing op de rotsen.',
+    weetje:
+      'De weg ernaartoe heet simpelweg Weg naar Daaibooi. Veel meer aanwijzing heb je niet nodig.',
     opname: {
       datum: '2026-08-14', tijd: '11:30', plek: 'Daaibooi, Sint Willibrordus',
       lat: 12.211680, lon: -69.085389,
@@ -99,6 +108,9 @@ export const shots = [
       'vlakbij is. Daar liggen de boten dan ook. Het licht is hier heel anders dan aan de westkust: ' +
       'bewolkt, en daardoor gedempt groen in plaats van turkoois. Opgestegen vanaf de klifrand, ' +
       'want de drone vloog veertien meter lager dan het startpunt.',
+    weetje:
+      'De baai ligt zo beschut dat het water er stil is terwijl de open zee om de hoek ligt. ' +
+      'Daarom liggen de boten juist hier.',
     opname: {
       datum: '2026-08-15', tijd: '12:24', plek: 'Santa Martha Baai, Soto',
       lat: 12.270628, lon: -69.124215,
@@ -116,6 +128,8 @@ export const shots = [
       'Knip. Van boven zie je hoe klein het strand eigenlijk is: een sikkel zand met twee rijen ' +
       'parasols, en daarachter meteen de parkeerplaats. Het water loopt in een paar meter van wit ' +
       'naar diep turkoois.',
+    weetje:
+      'Er is ook een Grote Knip, precies één kilometer noordelijker. Deze is de kleine van de twee.',
     opname: {
       datum: '2026-08-17', tijd: '13:04', plek: 'Kleine Knip, Curaçao',
       lat: 12.341837, lon: -69.153128,
@@ -133,6 +147,8 @@ export const shots = [
       'kleine buur. De drone staat hier vrijwel stil en klimt alleen, waardoor de baai zich van ' +
       'onderaf opent. Rechts zie je meteen waarom het er druk is: de parkeerplaats ligt er pal ' +
       'naast.',
+    weetje:
+      'Er is ook een Kleine Knip, een kilometer zuidelijker. Deze is de grote.',
     opname: {
       datum: '2026-08-17', tijd: '13:54', plek: 'Grote Knip, Curaçao',
       lat: 12.350928, lon: -69.152246,
