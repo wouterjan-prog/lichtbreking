@@ -68,14 +68,18 @@ export const shots = [
     },
   },
   {
-    slug: 'baai', titel: 'Baai',
+    slug: 'daaibooi', titel: 'Daaibooibaai',
     element: 'water', toestel: 'mini', type: 'video', verhouding: '16/9',
     bestand: 'baai.jpg',
     alt: 'Kleine baai met wit strand, parasols en helder turkoois water, van boven gezien',
     video: { hevc: '/video/werk/baai.hevc.mp4', h264: '/video/werk/baai.mp4' },
+    verhaal:
+      'Daaibooi ligt in een inham tussen twee rotswanden, bij Sint Willibrordus aan de westkust. ' +
+      'Van boven zie je vooral hoe ver de lichte zandbodem de baai in loopt voordat het water ' +
+      'dieper wordt. De parasols staan op een strook van hooguit honderd meter, en daarachter ' +
+      'begint meteen de begroeiing op de rotsen.',
     opname: {
-      /* Plek nog te bepalen: dit is de westkust, tussen Coral Estate en Porto Marie. */
-      datum: '2026-08-14', tijd: '11:30', plek: 'Westkust, Curaçao',
+      datum: '2026-08-14', tijd: '11:30', plek: 'Daaibooi, Sint Willibrordus',
       lat: 12.211680, lon: -69.085389,
       hoogte: 119, iso: '100', sluiter: '1/8000', diafragma: 'f/1.8', profiel: 'dlog_m',
     },

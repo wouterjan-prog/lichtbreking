@@ -3,6 +3,8 @@
   "buildCommand": "astro build",
   "outputDirectory": "dist",
   "redirects": [
+    { "source": "/werk/baai", "destination": "/werk/daaibooi/", "permanent": true },
+    { "source": "/werk/baai/", "destination": "/werk/daaibooi/", "permanent": true },
     { "source": "/showreel", "destination": "/werk/", "permanent": true },
     { "source": "/showreel/", "destination": "/werk/", "permanent": true }
   ]
