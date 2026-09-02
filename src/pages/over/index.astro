@@ -1,63 +1,85 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Overband from '../../components/Overband.astro';
-import { elementen } from '../../data/site.js';
+import { toestelNaam } from '../../data/site.js';
 import { shots } from '../../data/shots.js';
 
-const perElement = elementen.map((el) => ({
-  ...el,
-  aantal: shots.filter((s) => s.element === el.id).length,
-}));
+/* Alleen tellen wat er écht staat. Een over-pagina die vier toestellen en vier
+   elementen belooft terwijl er één toestel en één eiland in het archief zit,
+   klopt niet. Deze cijfers komen dus uit de beelden zelf. */
+const gevuld = shots.filter((s) => Boolean(s.bestand));
+const toestellen = [...new Set(gevuld.map((s) => s.toestel))];
+const plekken = [...new Set(gevuld.map((s) => s.opname?.plek).filter(Boolean))];
+const eilanden = [...new Set(plekken.map((p) => p.split(',').pop().trim()))];
+const jaren = [...new Set(gevuld.map((s) => s.opname?.datum?.slice(0, 4)).filter(Boolean))];
 ---
 <Base
   titel="Over"
-  beschrijving="Waar Lichtbreking over gaat, en met welke toestellen het beeld gemaakt wordt."
+  beschrijving="Waar Lichtbreking over gaat: dezelfde natuurkunde als achter een brillenglas, nu gericht op een sensor in plaats van op een oog."
 >
   <div class="lb-paginakop lb-marge">
     <h1>Over</h1>
     <div class="lb-rule lb-rule--kort"></div>
-    <p>Een archief van licht, verdeeld over vier elementen en vier lenzen.</p>
+    <p>Waar de naam vandaan komt, en hoe deze beelden gemaakt worden.</p>
   </div>
 
   <div class="lb-proza lb-marge">
     <div>
-      <h2>Wat dit is</h2>
+      <h2>Wat lichtbreking is</h2>
       <p>
-        Lichtbreking is de naam voor het beeld dat ik maak boven, op en onder de grond. Geen
-        vlogs en geen praatvideo's, maar rustige beelden van een plek zoals die op dat moment
-        is. Soms is dat een kustlijn van bovenaf, soms een halve meter onder water.
+        Licht dat van de ene doorzichtige stof in de andere komt, gaat verder in een andere
+        richting. Van lucht in glas, van lucht in water. De straal breekt. Daar is een lepel in
+        een glas water genoeg voor: het deel onder de waterlijn lijkt te zijn verschoven.
       </p>
       <p>
-        Het werk is verdeeld in vier elementen: lucht, land, water en nacht. Die verdeling
-        bepaalt ook de kleuren op deze site. Elk element heeft zijn eigen licht, en dat licht
-        vraagt telkens om een andere aanpak.
+        Diezelfde knik zit in alles wat op deze site staat. Een rif dat vanaf de kant recht onder
+        je lijkt te liggen, ligt er van bovenaf net naast. Het water heeft de straal gebogen
+        voordat hij bij je oog was.
       </p>
+
+      <h2>Waarom deze naam</h2>
+      <p>
+        Op mijn werk breek ik licht. Een brillenglas of een contactlens buigt de straal precies
+        zoveel dat hij op de goede plek in het oog valt. Dan ziet iemand weer scherp. Dat is elke
+        dag hetzelfde principe, en het luistert nauw.
+      </p>
+      <p>
+        Hier gebruik ik dezelfde natuurkunde, alleen breek ik het licht niet maar vang ik het.
+        Hetzelfde geslepen glas, alleen zit de lens nu aan een drone en komt het licht niet in
+        een oog terecht maar op een sensor. Op mijn werk bepaal ik hoe iemand kijkt. Hier alleen
+        wat er te zien was.
+      </p>
+
       <h2>Hoe het gemaakt wordt</h2>
       <p>
-        Vier toestellen, elk met een duidelijke rol. Ze zijn niet uitwisselbaar: wat de drone
-        ziet krijgt een camera in de hand nooit, en andersom. Beelden worden zoveel mogelijk
-        in de camera goed gezet, zodat de nabewerking licht kan blijven.
+        Rustige beelden van een plek zoals die op dat moment was. Geen vlogs, geen praatvideo's,
+        geen muziek eroverheen. Zoveel mogelijk goed gezet in de camera, zodat de nabewerking
+        licht kan blijven. Niet alles wat gefilmd wordt haalt het archief, en dat is de bedoeling.
       </p>
       <p>
-        Wat hier staat is een selectie. Niet alles wat gefilmd wordt haalt het archief, en dat
-        is precies de bedoeling.
+        Bij elk beeld staat waar het gemaakt is, hoe hoog en met welke instellingen. Die gegevens
+        komen uit het toestel zelf, niet uit mijn geheugen.
+      </p>
+
+      <h2>Wat er nog komt</h2>
+      <p>
+        {eilanden[0] ?? 'Curaçao'} is het begin. Wat hierna komt hoeft niet op hetzelfde eiland te
+        liggen, en het hoeft ook niet uit de lucht te komen. Onder de waterlijn en op ooghoogte
+        staan allebei op de lijst.
       </p>
     </div>
 
     <div class="lb-kaart">
-      <h2>Vier elementen</h2>
+      <h2>Het archief nu</h2>
       <ul class="lb-lijst">
-        {perElement.map((el) => (
-          <li>
-            <span class="lb-toestel__dot" style={`background:${el.kleur}`}></span>
-            <b>{el.naam}</b>
-            <span>{el.aantal} {el.aantal === 1 ? 'beeld' : 'beelden'}</span>
-          </li>
-        ))}
+        <li><b>Beelden</b><span>{gevuld.length}</span></li>
+        <li><b>Plekken</b><span>{plekken.length}</span></li>
+        <li><b>Opgenomen met</b><span>{toestellen.map(toestelNaam).join(', ')}</span></li>
+        {jaren.length > 0 && <li><b>Jaar</b><span>{jaren.join(', ')}</span></li>}
       </ul>
       <p style="margin-top:22px">
-        Filteren op element kan op de <a href="/werk/">werkpagina</a>. Vragen over een beeld of
-        over een opname? <a href="/contact/">Stuur gerust een bericht</a>.
+        Alles staat bij elkaar op de <a href="/werk/">beeldpagina</a>. Vragen over een beeld of
+        over een plek? <a href="/contact/">Stuur gerust een bericht</a>.
       </p>
     </div>
   </div>
